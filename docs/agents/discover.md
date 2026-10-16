@@ -132,7 +132,9 @@ Hand off to [contribute.md](contribute.md) and, for a first add,
 new, append a row to [intblock-sources.md](../intblock-sources.md). Update
 `CHANGELOG.md` under `[Unreleased]`.
 
-Do not hand-edit `data/datasets/`. Maintainers rebuild exports.
+Run the full build and commit regenerated `data/datasets/` artifacts with source
+changes; never edit exports by hand. Follow [contribute.md](contribute.md) for the
+artifact, documentation-count, and query-expectation checks required before PR.
 
 ## Related
 

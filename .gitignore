@@ -208,3 +208,9 @@ __marimo__/
 
 # macOS / editor artifacts
 .DS_Store
+
+# CI/release staging bundles (committed data stays under data/datasets/).
+.ci-datasets/
+.release-datasets/
+.release-quality/
+.hf-release/

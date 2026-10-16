@@ -3,6 +3,7 @@ name: Regional Center for the Promotion of Books in Latin America and Caribbean
 blocktype:
 - cultural
 status: formal
+scope_category: igo
 founded: '1971-04-23'
 active_period:
   start: '1971-04-23'
@@ -173,6 +174,10 @@ other_names:
 - id: zh
   name: 拉丁美洲和加勒比区域图书推广中心
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-12'

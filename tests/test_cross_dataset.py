@@ -2,6 +2,8 @@
 
 import validate_countries as vc
 
+from internacia_builder.validate import cross_rules
+
 
 def _setup(tmp_path, intblock_yaml: str):
     countries_dir = tmp_path / "data" / "countries"
@@ -21,6 +23,21 @@ def test_resolved_country_include_passes(tmp_path):
     errors, warnings = vc.validate_intblock_refs(countries_dir, intblocks_dir, {})
     assert errors == []
     assert warnings == []
+
+
+def test_historical_registry_and_territory_references(tmp_path):
+    countries_dir = tmp_path / "countries"
+    countries_dir.mkdir()
+    (countries_dir / "US.yaml").write_text("code: US\n")
+    record = {"id": "ORG", "includes": [
+        {"id": "SU", "type": "historical-country", "status": "former_member"},
+        {"id": "US", "type": "territory", "status": "member"},
+    ]}
+    assert cross_rules.validate_intblock_refs(countries_dir, [record], ["org.yaml"], {"historical_entities": {"SU": {}}}) == []
+    issues = cross_rules.validate_intblock_refs(countries_dir, [record], ["org.yaml"], {})
+    assert [x["issue_type"] for x in issues] == ["UNRESOLVED_HISTORICAL_INCLUDE"]
+    record["includes"][0]["type"] = "country"
+    assert cross_rules.validate_intblock_refs(countries_dir, [record], ["org.yaml"], {"historical_entities": {"SU": {}}})
 
 
 def test_unresolved_country_include_warns_by_default(tmp_path):

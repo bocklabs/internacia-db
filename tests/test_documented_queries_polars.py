@@ -1,10 +1,10 @@
 """Smoke tests for Polars examples documented in docs/query-examples-polars.md."""
 
-from pathlib import Path
-
 import pytest
 
-DATASETS = Path(__file__).resolve().parents[1] / "data" / "datasets"
+from internacia_builder.paths import datasets_dir
+
+DATASETS = datasets_dir()
 COUNTRIES_PARQUET = DATASETS / "countries.parquet"
 INTBLOCKS_PARQUET = DATASETS / "intblocks.parquet"
 MEMBERSHIPS_PARQUET = DATASETS / "memberships.parquet"

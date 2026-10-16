@@ -39,6 +39,7 @@ ISSUE_PRIORITY_MAP = {
         "UNKNOWN_BLOCKTYPE",
         "ALIAS_INTEGRITY_ERROR",
         "UNRESOLVED_COUNTRY_INCLUDE",
+        "UNRESOLVED_HISTORICAL_INCLUDE",
         "COMPLETENESS_ERROR",
         "MISSING_MANDATORY_FIELD",
         "MISSING_INCLUDES_APPLICABILITY",
@@ -90,10 +91,13 @@ ISSUE_PRIORITY_MAP = {
         "SUCCESSOR_RECIPROCITY",
         "PARTOF_SUBORG_RECIPROCITY",
         "DUPLICATE_ACRONYM",
+        "MISSING_SCOPE_CATEGORY",
     ],
 }
 
 RULE_DESCRIPTIONS = {
+    "MISSING_SCOPE_CATEGORY": "Formal record lacks a supported scope classification; reviewed NGO taxonomy exceptions remain visible.",
+    "UNRESOLVED_HISTORICAL_INCLUDE": "Historical membership identifier is absent from both countries and the explicit historical registry.",
     "SCHEMA_ERROR": "YAML source does not validate against its JSON Schema definition.",
     "DUPLICATE_IDENTIFIER": "Multiple countries share the same code, ISO3 code, or numeric code.",
     "DUPLICATE_INTBLOCK_ID": "Multiple intblocks share the same ID.",
@@ -229,7 +233,7 @@ def generate_full_report(issues: list[dict[str, Any]], records_with_issues: dict
             report_lines.append(f"Country: {issue.get('country_code', 'UNKNOWN')}")
             report_lines.append(f"Issue: {issue_type}")
             report_lines.append(f"Field: {issue.get('field', 'unknown')}")
-            report_lines.append(f"Current Value: {issue.get('current_value')}")
+            report_lines.append(f"Current Value: {issue.get('current_value')}".rstrip())
             report_lines.append(f"Suggested Action: {issue.get('suggested_action')}")
             report_lines.append("")
 
@@ -328,7 +332,7 @@ def generate_country_reports(issues_by_country: dict[str, list[dict[str, Any]]],
                 report_lines.append(f"Record ID: {issue.get('record_id', 'unknown')}")
                 report_lines.append(f"Issue: {issue_type}")
                 report_lines.append(f"Field: {issue.get('field', 'unknown')}")
-                report_lines.append(f"Current Value: {issue.get('current_value')}")
+                report_lines.append(f"Current Value: {issue.get('current_value')}".rstrip())
                 report_lines.append(f"Suggested Action: {issue.get('suggested_action')}")
                 report_lines.append("")
 
@@ -410,7 +414,7 @@ def generate_priority_reports(issues_by_priority: dict[str, list[dict[str, Any]]
                 report_lines.append(f"Country: {issue.get('country_code', 'UNKNOWN')}")
                 report_lines.append(f"Issue: {issue_type}")
                 report_lines.append(f"Field: {issue.get('field', 'unknown')}")
-                report_lines.append(f"Current Value: {issue.get('current_value')}")
+                report_lines.append(f"Current Value: {issue.get('current_value')}".rstrip())
                 report_lines.append(f"Suggested Action: {issue.get('suggested_action')}")
                 report_lines.append("")
 
@@ -483,7 +487,7 @@ def generate_rule_reports(issues_by_type: dict[str, list[dict[str, Any]]], outpu
             report_lines.append(f"Record ID: {issue.get('record_id', 'unknown')}")
             report_lines.append(f"Country: {issue.get('country_code', 'UNKNOWN')}")
             report_lines.append(f"Field: {issue.get('field', 'unknown')}")
-            report_lines.append(f"Current Value: {issue.get('current_value')}")
+            report_lines.append(f"Current Value: {issue.get('current_value')}".rstrip())
             report_lines.append(f"Suggested Action: {issue.get('suggested_action')}")
             report_lines.append("")
 

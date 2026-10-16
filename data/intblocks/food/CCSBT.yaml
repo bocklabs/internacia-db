@@ -3,6 +3,7 @@ name: Commission for the Conservation of Southern Bluefin Tuna
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1994-05-20'
 active_period:
@@ -123,6 +124,10 @@ wikidata_id: Q22032253
 notes: The Convention was signed on 10 May 1993 and entered into force on 20 May 1994, formalising voluntary quota arrangements among Australia, Japan, and New Zealand from 1985. Taiwan joined the Extended Commission on 30 August 2002; the European Union was a Cooperating Non-Member from 13 October 2006 before becoming an Extended Commission member on 13 October 2015; South Africa followed a similar path, joining as Cooperating Non-Member on 24 August 2006 and acceding to full Commission membership on 15 February 2016. The Philippines held Cooperating Non-Member status from 2 August 2004 until 12 October 2017.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: CCSBT official sources
   retrieved_at: '2026-07-29'

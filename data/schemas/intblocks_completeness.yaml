@@ -127,12 +127,9 @@ references:
     - Q243630   # BRICS: BRIC predecessor grouping has no separate item
     - Q458      # European Union: EUU is the World Bank grouping mirror of EU
     - Q771405   # South Asia: SAS is the World Bank grouping mirror of SOUTHASIA
-    - Q4230     # UNASUR/USAN: duplicate records pending maintainer merge
     - Q1197115  # UKUSA Agreement: NINEEYES extension has no separate item
     - Q7122288  # Pacific Alliance: PACALL trade roster vs PACIFICALLIANCE fta/economic record
     - Q816706   # SADC: SADCFTA free trade area has no separate item
-    - Q5153892  # Commonwealth of Learning: COMMLEARN/COL pending maintainer merge
-    - Q2863003  # ABCANZ Armies: ABCANZ/ABCZNZ pending maintainer merge
   # English acronyms legitimately shared by distinct same-blocktype records
   # (real-world collisions, currency codes, convention/secretariat pairs).
   # Suppresses DUPLICATE_ACRONYM.
@@ -151,10 +148,7 @@ references:
     - NPO      # Wikidata-imported alias noise on UN agencies pending cleanup
     - NPI      # Wikidata-imported alias noise on UN agencies pending cleanup
     - IGF      # Wikidata-imported alias noise on IMF pending cleanup
-    - COL      # Commonwealth of Learning: COL/COMMLEARN pending maintainer merge
     - IAF      # International Accreditation Forum vs International Astronautical Federation
-    - ABCANZ   # ABCANZ Armies: ABCANZ/ABCZNZ pending maintainer merge
-    - ABCA     # historical ABCA acronym shared by ABCANZ/ABCZNZ
     - G5       # G5 Sahel vs G8 Outreach Five (Group of Five)
 
 # Content-quality gates (not simple null-rate checks).
@@ -178,3 +172,10 @@ geography:
     area_multiplier: 2.5
     default_km: 1500
     allowlist: []
+
+# Ratchet: two NGO records need an explicit future taxonomy decision, not an IGO guess.
+scope_category:
+  max_missing_formal: 2
+  pending_taxonomy:
+    MSF: International medical NGO; none of the four current scopes accurately denotes an NGO.
+    CANTO: Non-profit industry association; do not classify as intergovernmental.

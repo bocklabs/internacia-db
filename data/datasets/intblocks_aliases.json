@@ -26,5 +26,26 @@
     "reason": "disambiguated",
     "since": "1.10.0",
     "note": "Entity-resolution guidance: the International Criminal Court is stored under id ICW (court/), while the id ICC refers to the International Cricket Council (sports/). Consumers resolving the acronym \"ICC\" for the criminal court should remap to ICW."
+  },
+  {
+    "alias": "COMMLEARN",
+    "target": "COL",
+    "reason": "merged",
+    "since": "3.0.0",
+    "note": "Duplicate entity consolidated in COL; retain this mapping for existing consumers."
+  },
+  {
+    "alias": "ABCZNZ",
+    "target": "ABCANZ",
+    "reason": "merged",
+    "since": "3.0.0",
+    "note": "Duplicate entity consolidated in ABCANZ; retain this mapping for existing consumers."
+  },
+  {
+    "alias": "USAN",
+    "target": "UNASUR",
+    "reason": "merged",
+    "since": "3.0.0",
+    "note": "Duplicate entity consolidated in UNASUR; retain this mapping for existing consumers."
   }
 ]

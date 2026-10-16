@@ -2,6 +2,7 @@ id: IPSOS
 blocktype:
 - project
 status: formal
+scope_category: policy_forum
 predecessor: EPSOS
 founded: '2015'
 geographic_scope: global
@@ -208,6 +209,10 @@ notes: IPS is a standards ecosystem rather than a treaty-based organization; inc
   TS 17288. Major EHR vendors including Epic and MEDITECH announced IPS support from 2024.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: official sources
   retrieved_at: '2026-07-29'

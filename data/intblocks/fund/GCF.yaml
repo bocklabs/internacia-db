@@ -3,6 +3,7 @@ name: Green Climate Fund
 blocktype:
 - fund
 status: formal
+scope_category: igo
 partof: UNFCCC
 founded: '2010'
 active_period:
@@ -166,6 +167,10 @@ other_names:
 - id: zh
   name: 綠色氣候基金
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-12'

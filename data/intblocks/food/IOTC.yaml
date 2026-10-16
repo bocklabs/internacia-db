@@ -4,6 +4,7 @@ blocktype:
 - food
 - ocean
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1993-11-25'
 active_period:
@@ -285,6 +286,10 @@ wikidata_id: Q12613354
 notes: The ten original acceptances that brought the Agreement into force were Sri Lanka, Eritrea, Mauritius, India, the United Kingdom, Pakistan, Seychelles, the European Community, Madagascar, and the Republic of Korea (Korea deposited the tenth instrument on 27 March 1996). France participates as France (OT) in respect of its Indian Ocean overseas territories. The United Kingdom originally accepted in 1995 (including for British Indian Ocean Territory) and deposited a successor instrument as the United Kingdom of Great Britain and Northern Ireland on 22 December 2020 following Brexit-related membership changes. Former Contracting Parties are Belize (left end-2016), Vanuatu (left end-2015), Guinea (left end-2017), Sierra Leone (left early 2021), and founding member Eritrea (left end-2023). Liberia (since 2015) and Panama (since 2025) hold Cooperating Non-Contracting Party status. The Secretariat has operated in Victoria, Seychelles, since January 1998.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: IOTC Structure of the Commission; UN Treaty Collection
   retrieved_at: '2026-07-29'

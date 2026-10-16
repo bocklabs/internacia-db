@@ -14,6 +14,9 @@ set sizes, timelines, and centroid maps.
 
 For scope, join keys, and field semantics see [ai-consumers.md](ai-consumers.md).
 
+Expected results describe the current repository artifacts, including unreleased
+corrections. Refresh them when rebuilding changed data.
+
 ## Setup
 
 Ship or attach these build artifacts (do not parse source YAML):
@@ -248,7 +251,7 @@ const laosOrgs = await db.query(`
 `);
 ```
 
-**Expected:** 191 rows.
+**Expected:** 249 rows.
 
 ---
 
@@ -479,7 +482,7 @@ Plot.plot({
 })
 ```
 
-**Expected:** on the order of ~29 rows (counts move with enrichment). Inspect `blocktype` /
+**Expected:** 56 rows. Inspect `blocktype` /
 `status` before treating informal groupings as formal organizations.
 
 ---
@@ -507,7 +510,7 @@ Plot.plot({
 })
 ```
 
-**Expected:** Geneva/CH 39, New York/US 19, Vienna/AT 16.
+**Expected:** Geneva/CH 104, Vienna/AT 32, New York/US 19.
 
 ### Former members with departure dates (timeline)
 

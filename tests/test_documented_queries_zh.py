@@ -1,11 +1,11 @@
 """Smoke tests for SQL examples in docs/query-examples.zh.md."""
 
-from pathlib import Path
-
 import duckdb
 import pytest
 
-DUCKDB_PATH = Path(__file__).resolve().parents[1] / "data" / "datasets" / "internacia.duckdb"
+from internacia_builder.paths import datasets_dir
+
+DUCKDB_PATH = datasets_dir() / "internacia.duckdb"
 
 pytestmark = pytest.mark.skipif(
     not DUCKDB_PATH.is_file(),

@@ -4,6 +4,7 @@ blocktype:
 - cultural
 - education
 status: formal
+scope_category: policy_forum
 founded: '2004'
 active_period:
   start: '2004'
@@ -119,6 +120,10 @@ official_documents:
 - url: https://rechtschreibrat.ids-mannheim.de/regeln-und-woerterverzeichnis3/arbeitsgrundlagen/
   type: founding_document
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'

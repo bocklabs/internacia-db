@@ -37,18 +37,20 @@ Downstream consumers should enrich from separate datasets. See
 | Dataset | Records | Primary key | Manifest |
 |---------|--------:|-------------|----------|
 | `countries` | 256 | `code` (alpha-2) | `data/datasets/countries.manifest.json` |
-| `intblocks` | 1272 | `id` | `data/datasets/intblocks.manifest.json` |
+| `intblocks` | 1269 | `id` | `data/datasets/intblocks.manifest.json` |
 | `blocktypes` | 78 | `id` | `data/datasets/blocktypes.manifest.json` |
 
 All three are bundled in `data/datasets/internacia.duckdb`. Prefer DuckDB or Parquet
 over reading individual YAML source files under `data/countries/` and `data/intblocks/`.
 
-**Consistency guarantee.** CI (`scripts/check_generated_artifacts.py`) enforces that
-every export format (JSONL, YAML, Parquet, DuckDB) exposes the same primary-key set
-and row count per dataset, that these match the YAML source, and that all manifests,
-`*.meta.json` sidecars, and the DuckDB `_meta` table share one build identity
-(`version`, `git_commit`, `build_date`). You can rely on any format being complete
-and interchangeable.
+**Consistency guarantee.** `scripts/check_generated_artifacts.py` compares cleaned
+source content with the full JSON/YAML exports and their declared columnar/CSV
+projections. It rejects changed values, duplicate primary keys, changed membership
+edges, missing metadata, and incorrect schema hashes. CI checks committed exports
+before rebuilding, then tests the staged build. Within a bundle, manifests,
+sidecars, and DuckDB metadata share one build identity. Source-only curation
+fields are deliberately absent from columnar exports; consult the generated
+[data dictionary](data-dictionary.md) for field availability.
 
 ### Tabular and lite exports
 
@@ -69,7 +71,7 @@ Lite variants share primary keys with full exports — join on `code` or `id` to
 Every build writes a manifest with:
 
 - `version` — semver (matches git tag on releases)
-- `schema_hash` — changes on breaking schema migrations
+- `schema_hash` — changes whenever the declared export schema changes; inspect the migration report to assess compatibility
 - `build_date`, `git_commit`, `row_count`, `data_license`
 
 Query version from DuckDB:
@@ -156,8 +158,38 @@ Canonical catalog: [`data/schemas/includes_status.yaml`](../data/schemas/include
 | `recipient` / `contributor` / `funder` | Program / funding roles |
 | `represented` / `validation` / `extension` | Special coverage statuses |
 
-Filter current members with `status NOT IN ('former_member')` (and usually exclude
-observers unless the question asks for them).
+### Current full membership
+
+Use an explicit status set for full membership:
+
+```sql
+SELECT intblock_id, country_code
+FROM memberships
+WHERE status IN ('member', 'founding_member');
+```
+
+Partners, observers, participants, and funding relationships are broader
+participation, not full membership. Include those statuses explicitly when that
+is the question. Historical organizations still have historical rosters; edge
+status alone does not establish that an organization is currently active.
+
+### Historical membership joins
+
+Country and territory edges join to `countries.code`. Historical-country edges
+can instead reference the explicit `historical_entities` registry in
+[`countries_completeness.yaml`](../data/schemas/countries_completeness.yaml).
+For example, `SU` denotes the Soviet Union and is absent from the current-country
+dimension. Preserve it with a left join; never remap it to `RU`:
+
+```sql
+SELECT m.*, c.name AS current_country_name
+FROM memberships m
+LEFT JOIN countries c ON c.code = m.country_code;
+```
+
+A missing country row on a known historical edge is expected. Unknown historical
+identifiers fail validation. Full JSON/YAML retains curation notes and applicability
+markers omitted from Parquet/DuckDB; the data dictionary lists that availability.
 
 ### Intblock `scope_category`
 
@@ -425,3 +457,21 @@ upstream sources per [ATTRIBUTION.md](../ATTRIBUTION.md).
 - [CHANGELOG.md](../CHANGELOG.md) — breaking changes and migration notes
 - [data/schemas/countries.schema.json](../data/schemas/countries.schema.json) — field descriptions for countries
 - [data/schemas/intblocks.schema.json](../data/schemas/intblocks.schema.json) — field descriptions for intblocks
+
+## Migration evidence and distribution resources
+
+Release migrations compare nested source JSON Schemas and exported Arrow contracts
+against an explicitly identified previous release tag. `baseline.status` records
+`available`, `partial`, or `unavailable`; `schema_changed: null` means no usable
+baseline, so it does not establish compatibility. Changes include nested field
+paths, array items, required fields, enums, and other constraints in
+`constraints_changed`, plus a separate `exports` section for columnar contracts.
+
+Data package resource names identify a physical table and format, such as
+`countries-parquet`, `countries-csv`, or `countries-lite-parquet`; `table` retains
+the logical table name. GitHub releases include every descriptor path. Partial
+mirrors have their own descriptor and may place tables in subdirectories.
+
+The retired IDs `COMMLEARN`, `ABCZNZ`, and `USAN` resolve to `COL`, `ABCANZ`, and
+`UNASUR` through the alias artifact. The current catalogue has 1269 records after
+these duplicate consolidations; aliases preserve joins from older releases.

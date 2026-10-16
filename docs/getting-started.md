@@ -1,7 +1,7 @@
 # Getting started
 
 Internacia is reference data for **countries** (256 records) and **international
-organizations / groups** (“intblocks”, 1272 records; **78** blocktypes). It is part of
+organizations / groups** (“intblocks”, 1269 records; **78** blocktypes). It is part of
 the [Dateno](https://dateno.io) open-source project. Data and documentation are licensed
 [CC-BY-4.0](../DATA_LICENSE); code is MIT.
 
@@ -80,7 +80,7 @@ Version: read `data/datasets/countries.manifest.json` or
 | Join keys & gotchas | [ai-consumers.md](ai-consumers.md) |
 | Verified SQL recipes | [query-examples.md](query-examples.md) |
 | Verified Polars recipes | [query-examples-polars.md](query-examples-polars.md) |
-| Verified R / dplyr recipes | [query-examples-r.md](query-examples-r.md) |
+| R / dplyr recipes | [query-examples-r.md](query-examples-r.md) |
 | Observable / Plot recipes | [query-examples-observable.md](query-examples-observable.md) |
 | Edit YAML | [CONTRIBUTING.md](../CONTRIBUTING.md), [agents/contribute.md](agents/contribute.md) |
 | Find missing intblocks / improve records | [discovery.md](discovery.md), [agents/discover.md](agents/discover.md) |

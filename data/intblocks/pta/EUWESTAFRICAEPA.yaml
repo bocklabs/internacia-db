@@ -2,6 +2,7 @@ id: EUWESTAFRICAEPA
 blocktype:
 - pta
 status: formal
+scope_category: treaty_body
 founded: '2014-06-30'
 active_period:
   start: '2016-12-15'
@@ -135,6 +136,10 @@ notes: Regional EPA configuration covers Benin, Burkina Faso, Cape Verde, Côte 
   to trade with the EU under Everything but Arms until the regional EPA enters force.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: official sources
   retrieved_at: '2026-07-29'

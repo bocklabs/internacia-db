@@ -1,0 +1,24 @@
+DATA QUALITY REPORT - RULE: MISSING_SCOPE_CATEGORY
+================================================================================
+Generated: 2026-10-16 15:18:51
+Issue Type: MISSING_SCOPE_CATEGORY
+Priority: LOW
+Total Issues Found: 2
+
+Description: Formal record lacks a supported scope classification; reviewed NGO taxonomy exceptions remain visible.
+
+=== AFFECTED RECORDS ===
+
+File: data/intblocks/humanitarian/MSF.yaml
+Record ID: MSF
+Country: CH
+Field: scope_category
+Current Value:
+Suggested Action: formal record missing scope_category (see docs/intblock-inclusion-policy.md)
+
+File: data/intblocks/telecom/CANTO.yaml
+Record ID: CANTO
+Country: TT
+Field: scope_category
+Current Value:
+Suggested Action: formal record missing scope_category (see docs/intblock-inclusion-policy.md)

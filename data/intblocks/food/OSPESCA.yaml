@@ -3,6 +3,7 @@ name: Central America Fisheries and Aquaculture Organization
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: SICA
 founded: '1995-12-18'
 active_period:
@@ -118,6 +119,10 @@ wikidata_id: Q134724592
 notes: The six Central American isthmus states founded OSPESCA through the 1995 Act of San Salvador; Belize acceded after joining SICA (1998), and the Dominican Republic became a full SICA and OSPESCA member in 2013. OSPESCA was attached to the SICA General Secretariat in 2000 and reorganized as a specialized regional directorate in 2015. Work is guided by the Fisheries and Aquaculture Integration Policy 2015–2025.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO; SICA; GCFI proceedings
   retrieved_at: '2026-07-29'

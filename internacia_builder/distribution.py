@@ -1,0 +1,60 @@
+"""Validate published bundles and prepare the intentionally partial HF mirror."""
+from __future__ import annotations
+
+import json
+import shutil
+import tomllib
+from pathlib import Path
+
+from internacia_builder import __version__
+from internacia_builder.manifest import get_dataset_version
+from internacia_builder.paths import project_root
+
+
+def validate_package(root: Path, package: dict | None = None) -> None:
+    package = package if package is not None else json.loads((root / "datapackage.json").read_text())
+    resources = package.get("resources") or []
+    names = [r["name"] for r in resources]
+    if not names or len(names) != len(set(names)):
+        raise ValueError("Data package must have resources with unique names")
+    for resource in resources:
+        path = root / resource["path"]
+        if not path.resolve().is_relative_to(root.resolve()) or not path.is_file():
+            raise ValueError(f"Unresolvable data package path: {resource['path']}")
+
+
+def check_release_version(version: str, datasets: Path) -> None:
+    expected = version.removeprefix("v")
+    package_version = tomllib.loads((project_root() / "pyproject.toml").read_text())["project"]["version"]
+    values = {"CHANGELOG": get_dataset_version(), "package": __version__, "pyproject": package_version}
+    for path in datasets.glob("*.manifest.json"):
+        values[path.name] = json.loads(path.read_text())["version"]
+    if not list(datasets.glob("*.manifest.json")) or any(value != expected for value in values.values()):
+        raise ValueError(f"Release {version} disagrees with source/artifact versions: {values}")
+
+
+def prepare_huggingface_bundle(source: Path, destination: Path) -> None:
+    validate_package(source)
+    if destination.exists() and any(destination.iterdir()):
+        raise ValueError("Hugging Face staging destination must be empty")
+    destination.mkdir(parents=True, exist_ok=True)
+    package = json.loads((source / "datapackage.json").read_text())
+    selected = []
+    for resource in package["resources"]:
+        table = resource.get("table")
+        if table not in ("countries", "intblocks", "blocktypes", "memberships") or resource["format"] != "parquet":
+            continue
+        target = Path(table) / Path(resource["path"]).name
+        (destination / target).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source / resource["path"], destination / target)
+        selected.append({**resource, "path": target.as_posix()})
+        for suffix in ("manifest.json", "meta.json"):
+            path = source / f"{table}.{suffix}"
+            shutil.copy2(path, destination / path.name)
+    if len(selected) != 4:
+        raise ValueError("Hugging Face bundle requires all four primary tables")
+    package["resources"] = selected
+    (destination / "datapackage.json").write_text(json.dumps(package, indent=2) + "\n")
+    if (source / "README.md").is_file():
+        shutil.copy2(source / "README.md", destination / "README.md")
+    validate_package(destination)

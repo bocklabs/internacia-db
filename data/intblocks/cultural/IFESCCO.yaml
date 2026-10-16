@@ -5,6 +5,7 @@ blocktype:
 - education
 - scientific
 status: formal
+scope_category: igo
 partof: CIS
 founded: '2006-05-25'
 active_period:
@@ -139,6 +140,10 @@ official_documents:
 - url: https://mfgs-sng.org/mfgs/ustav/
   type: charter
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: other_names
   source: official sources
   retrieved_at: '2026-07-12'

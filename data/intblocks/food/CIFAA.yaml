@@ -3,6 +3,7 @@ name: Committee for Inland Fisheries and Aquaculture of Africa
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1971-06'
 active_period:
@@ -233,6 +234,10 @@ wikidata_id: Q134723795
 notes: Created by FAO Council Resolution 1/56 (56th session, June 1971); first session held November/December 1972. The 14th session (Accra, November 2006) unanimously recommended adding aquaculture to the title; the FAO Council endorsed the rename to CIFAA at its 133rd session in November 2007. Membership is open to African FAO member nations selected for active interest in inland fishery development. Ordinary sessions are normally biennial (e.g. 17th session Banjul 2017; 18th Bamako 2019; 20th Dakar 2024).
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO Fisheries and Aquaculture technical paper / RFB directory
   retrieved_at: '2026-07-29'

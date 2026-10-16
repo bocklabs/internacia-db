@@ -22,7 +22,7 @@ Works with Cursor, Claude Code, Copilot, Codex, and any coding agent in this rep
 
 - Required: `code`, `name`, `iso3code`, `numeric_code`, `entity_type`, `code_status`
 - Non-ISO codes (`user_assigned`, `obsolete`): document in [country-code-policy.md](../country-code-policy.md); add `recognition_status` when needed
-- `population` / `area` / `gini`: struct `{value, year, source, source_id}` — use `year: null` if unknown, **never `year: 0`**; values must be plausible (no negative population, gini in 0–100, no future years)
+- `population` / `area` / `gini`: struct `{value, year, source, source_id}` — omit `year` in source YAML if unknown (exports use null), **never `year: 0`**; values must be plausible (no negative population, gini in 0–100, no future years)
 - `borders`: ISO **alpha-3** neighbor codes (e.g. `CAN`, `MEX`); each must resolve to an existing country's `iso3code` and should be reciprocal (neighbor lists you back) — exceptions go in `borders.reciprocity_allowlist` of `countries_completeness.yaml`
 - `un_member`/`independent` must not be `true` on dependent territories, SARs, or statistical areas
 - `tld` is `.xx`-style lowercase; `calling_codes` are `+digits`; `timezones` must be IANA tz names; `flag_emoji` must match the code's regional-indicator pair; `landlocked: true` requires non-empty `borders`
@@ -62,12 +62,21 @@ python scripts/validate_intblocks.py
 python scripts/validate_countries.py --json   # structured output for agents; exit 0 = no errors, 1 = errors
 python scripts/validate_intblocks.py --json
 # --fail-on-warning: treat warnings as errors (exit 1). Warnings alone do not fail.
+python scripts/builder.py build             # regenerate every committed format
+python scripts/check_generated_artifacts.py
 pytest tests/
 ruff check internacia_builder/ scripts/ tests/
-python scripts/builder.py build --formats parquet,duckdb
+python scripts/generate_data_dictionary.py --check
+python scripts/check_doc_counts.py
+python scripts/check_markdown_links.py
 ```
 
-CI mirrors `.github/workflows/validate.yml`.
+Commit regenerated `data/datasets/` artifacts with source changes. A partial build
+does not refresh JSONL/YAML and cannot replace this full build. Update current
+counts and affected cookbook expectations when adding or removing records.
+
+CI checks committed exports before rebuilding into `.ci-datasets` and testing that
+staging directory (`.github/workflows/validate.yml`).
 
 ## Schema or breaking changes
 

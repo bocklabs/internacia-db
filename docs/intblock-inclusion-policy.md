@@ -117,7 +117,10 @@ Retired intblock ids map via `data/attribute_intblock_migrations.yaml`
 | `reference_enumeration` | Named geographic or set grouping (not attribute partitions) |
 
 Optional field; high-visibility and `status: formal` records should set it.
-Validation warns (non-blocking) when `status: formal` and `scope_category` is missing.
+Validation and quality analysis share the same missing-scope advisory. The
+`max_missing_formal` ratchet in `intblocks_completeness.yaml` prevents regressions.
+Two existing records, `MSF` (medical NGO) and `CANTO` (industry association), remain
+visible exceptions pending a taxonomy decision; they are not labeled as IGOs.
 
 ## Boundaries vs treaties in `partof`
 

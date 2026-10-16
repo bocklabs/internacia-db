@@ -3,6 +3,7 @@ name: Southern Common Market
 blocktype:
 - customs
 status: formal
+scope_category: igo
 founded: '1991-03-26'
 active_period:
   start: '1995-01-01'
@@ -138,6 +139,10 @@ other_names:
 - id: zh
   name: 南方共同市場
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'

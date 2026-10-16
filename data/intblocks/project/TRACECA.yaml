@@ -3,6 +3,7 @@ blocktype:
 - project
 - transport
 status: formal
+scope_category: igo
 partof: EU
 founded: '1993-05'
 geographic_scope: regional
@@ -174,6 +175,10 @@ notes: Fourteen states are parties to the MLA TRACECA; Bulgaria and Romania rema
   Baku has been hosted by Azerbaijan since its inauguration in February 2001.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: official sources
   retrieved_at: '2026-07-29'

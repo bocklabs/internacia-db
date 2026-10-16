@@ -348,7 +348,7 @@ ORDER BY i.id;
 ## 21. Entity-linking coverage: only records with `wikidata_id`
 
 ```sql
-SELECT id, name
+SELECT code, name
 FROM countries
 WHERE wikidata_id IS NOT NULL
 ORDER BY name

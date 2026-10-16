@@ -38,7 +38,10 @@ python scripts/validate_intblocks.py --json
 python scripts/validate_countries.py --json
 ```
 
-8. If the catalogue walk is new, append a row to [docs/intblock-sources.md](../../docs/intblock-sources.md). Update `CHANGELOG.md` under `[Unreleased]`.
+8. Run the full build and artifact/documentation checks in
+   [docs/agents/contribute.md](../../docs/agents/contribute.md). Commit regenerated
+   exports with source changes and refresh affected counts/query expectations.
+9. If the catalogue walk is new, append a row to [docs/intblock-sources.md](../../docs/intblock-sources.md). Update `CHANGELOG.md` under `[Unreleased]`.
 
 **Reference**
 - Roster authorities: [docs/intblock-sources.md](../../docs/intblock-sources.md)

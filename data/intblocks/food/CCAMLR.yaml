@@ -3,6 +3,7 @@ name: Commission for the Conservation of Antarctic Marine Living Resources
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1982-04-07'
 active_period:
@@ -250,6 +251,10 @@ wikidata_id: Q97382426
 notes: The CAMLR Convention was adopted in Canberra on 20 May 1980 and opened for signature from 1 August to 31 December 1980 by States participating in the Canberra conference; original signatories (founding Members) include Argentina, Australia, Belgium, Chile, France, Germany (FRG and GDR), Japan, New Zealand, Norway, Poland, South Africa, the Soviet Union (succeeded by the Russian Federation), the United Kingdom, and the United States. Acceding States (Bulgaria, Canada, Cook Islands, Finland, Greece, Mauritius, Pakistan, Panama, Peru, and Vanuatu) have acceded to the Convention but are not Commission Members. Ecuador became a Commission Member on 19 October 2022. The Netherlands previously held Acceding State status before becoming a Member.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: CCAMLR Members and Acceding States pages
   retrieved_at: '2026-07-29'

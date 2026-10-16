@@ -3,7 +3,7 @@
 Internacia is a **data-as-code** pipeline: curated YAML is validated, then exported
 to interchangeable artifacts. Do not hand-edit `data/datasets/`.
 
-Current source scale (must match manifests): **256** countries, **1272** intblocks,
+Current source scale (must match manifests): **256** countries, **1269** intblocks,
 **78** blocktypes.
 
 ```mermaid
@@ -63,8 +63,10 @@ Nested membership is available on every consumer path:
 Prefer `memberships` for roster analytics (no `UNNEST`). Lite Parquet/CSV omit nested
 rosters — join back to full tables on `code` / `id`.
 
-Schema field add/remove is recorded in `migration.vX.Y.Z.json` when `schema_hash`
-changes. See [versioning-policy.md](versioning-policy.md).
+Every release writes `migration.vX.Y.Z.json`, comparing recursive source and
+export contracts with the identified previous release. `schema_hash` describes
+the exported Arrow schema; source-only constraint changes can leave it unchanged.
+See [versioning-policy.md](versioning-policy.md).
 
 ## Enrichment
 

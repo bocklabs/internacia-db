@@ -3,6 +3,7 @@ blocktype:
 - project
 - space
 status: formal
+scope_category: treaty_body
 founded: '1998-01-29'
 active_period:
   start: '1998-01-29'
@@ -188,6 +189,10 @@ notes: The fifteen IGA signatories are the authoritative partner roster. Europea
   own right. Brazil participated in early programme planning via a bilateral NASA agreement but was never an IGA signatory
   and withdrew from ISS cooperation in 2015.
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-30'

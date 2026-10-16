@@ -2,6 +2,7 @@ id: EUCENTRALAFRICAEPA
 blocktype:
 - pta
 status: formal
+scope_category: treaty_body
 founded: '2009-01-15'
 active_period:
   start: '2014-08-04'
@@ -100,6 +101,10 @@ notes: Regional EPA negotiations cover Cameroon, Central African Republic, Chad,
   but Arms; Congo (Brazzaville) under the GSP; Gabon and Equatorial Guinea are ineligible for GSP as upper-middle-income countries.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: official sources
   retrieved_at: '2026-07-29'

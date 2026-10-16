@@ -2,6 +2,7 @@ id: APEC
 blocktype:
 - economic
 status: formal
+scope_category: policy_forum
 languages:
 - en
 links:
@@ -138,6 +139,10 @@ other_names:
   name: 亚太经合组织
 wikidata_id: Q170481
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-15'

@@ -7,6 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-16
+
+Data integrity and release validation: **256** countries, **1269** intblocks,
+**78** blocktypes, and **58694** membership edges.
+
+### Breaking
+
+- Three duplicate intblock IDs are retired: `COMMLEARN` → `COL`, `ABCZNZ` →
+  `ABCANZ`, and `USAN` → `UNASUR`. Normalize stored keys through
+  `intblocks_aliases.json` or `intblocks_aliases.parquet` before joining the new
+  exports. Alias mappings are retained indefinitely. Country identifiers and
+  columnar schemas are unchanged.
+- Frictionless resource names now identify both table and format (for example,
+  `countries-parquet`); consumers selecting resources by name must update their
+  selectors. Resource paths and table names are unchanged.
+
+For a downstream table with an `intblock_id` column:
+
+```sql
+SELECT d.* EXCLUDE (intblock_id),
+       coalesce(a.target, d.intblock_id) AS intblock_id
+FROM downstream AS d
+LEFT JOIN read_parquet('data/datasets/intblocks_aliases.parquet') AS a
+  ON d.intblock_id = a.alias AND a.reason = 'merged' AND a.since = '3.0.0';
+```
+
+### Fixed
+
+- Documentation query examples now use valid DuckDB struct aliases and quoted
+  departure-date columns, country `code` keys, and Polars fields available in the
+  selected export. Cookbook expectations match the current repository snapshot;
+  UN full-member comparisons explicitly exclude observer seats.
+- Contributor guides now require a full export rebuild with source changes before
+  CI's committed-artifact check. README and release guides describe current
+  staging, metadata, tag-version, and recursive schema-migration checks.
+- Manual Hugging Face publishing uses the same validated Parquet bundle as CI,
+  including rewritten descriptor paths and all four tables' metadata. Zenodo
+  guidance now describes draft creation and upload before maintainer publication.
+- Artifact validation now checks complete source projections, values, duplicate keys,
+  membership edges, schema hashes, and required metadata before CI rebuilds exports.
+- Enrichment refreshes usable provider-backed observations without renewing untouched
+  provenance; unknown years and partial inception dates retain honest precision.
+- ECOWAS retains Mali, Burkina Faso, and Niger as former members from 2025-01-29,
+  with 12 current members. Duplicate IDs `COMMLEARN`, `ABCZNZ`, and `USAN` are merged
+  into `COL`, `ABCANZ`, and `UNASUR`; use the alias map for existing consumer keys.
+  The catalogue now contains 1269 canonical intblock records. Columnar schemas are unchanged.
+- Release tests inspect final staging artifacts and enforce quality/version checks.
+  Migration diffs compare recursive source/export contracts with the prior release.
+- Frictionless resources now have unique table/format names (`countries-parquet`,
+  `countries-csv`, etc.) and each distribution descriptor resolves within its bundle.
+- Full-membership queries use member/founding_member explicitly; historical joins
+  preserve known identifiers such as `SU`. Formal scope omissions fell from 114
+  to two documented NGO taxonomy exceptions; validator/analyzer warnings agree.
+- Documentation builds and typechecks run on PRs; repository-external docs links
+  are resolved before rendering and broken links fail the site build.
+
+## [2.2.0] - 2026-09-16
+
 ### Changed
 
 - `WAICO` roster aligned to the [Wikipedia membership list](https://en.wikipedia.org/wiki/World_Artificial_Intelligence_Cooperation_Organization) (retrieved 2026-09-14): 37 members (adds Dominica on 30 July 2026 and Brunei, Georgia, Iran, Sudan, Tanzania, Togo, and Vietnam on 31 July 2026) plus Bangladesh as an observer from 1 August 2026.

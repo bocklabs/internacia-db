@@ -32,12 +32,18 @@ python scripts/validate_intblocks.py --json
 ```bash
 python scripts/validate_countries.py --json
 python scripts/validate_intblocks.py --json
+python scripts/builder.py build
+python scripts/check_generated_artifacts.py
 pytest tests/
 ruff check internacia_builder/ scripts/ tests/
-python scripts/builder.py build --formats parquet,duckdb
+python scripts/check_doc_counts.py
+python scripts/check_markdown_links.py
 ```
 
-7. Update `CHANGELOG.md` under `[Unreleased]` for consumer-visible changes.
+7. Commit the regenerated exports with source changes; CI checks committed
+   freshness before rebuilding. Update current counts and cookbook expectations
+   when record counts or query results change. Update `CHANGELOG.md` under
+   `[Unreleased]` for consumer-visible changes.
 
 **Reference**
 - Worked add example: [docs/agents/add-intblock-example.md](../../docs/agents/add-intblock-example.md)

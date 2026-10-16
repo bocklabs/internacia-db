@@ -21,6 +21,7 @@ from typing import Any
 import typer
 import yaml
 
+from internacia_builder.enrichment import write_enriched_yaml
 from internacia_builder.http import fetch_json as _fetch_json
 
 app = typer.Typer(help="Enrich intblock records from Wikidata")
@@ -288,24 +289,29 @@ def enrich_acronyms(record: dict[str, Any], entity: dict[str, Any]) -> bool:
 
 
 def wikidata_inception_date(entity: dict[str, Any]) -> str | None:
-    claims = entity.get("claims") or {}
-    for prop in ("P571", "P580", "P1619"):  # inception, start time, date of official opening
-        for stmt in claims.get(prop) or []:
+    """Preserve Wikidata precision; zero calendar components are not dates."""
+    for prop in ("P571", "P580", "P1619"):
+        for stmt in (entity.get("claims") or {}).get(prop) or []:
+            if stmt.get("rank") == "deprecated":
+                continue
             try:
-                time_val = str(stmt["mainsnak"]["datavalue"]["value"]["time"])
+                value = stmt["mainsnak"]["datavalue"]["value"]
+                match = re.fullmatch(r"\+?(\d{4})-(\d{2})-(\d{2})T.*", value["time"])
+                if not match:
+                    continue
+                year, month, day = map(int, match.groups())
+                precision = int(value.get("precision", 11 if day else 10 if month else 9))
+                if precision < 9:
+                    continue
+                if precision == 9:
+                    date(year, 1, 1)
+                    return f"{year:04d}"
+                if precision == 10:
+                    date(year, month, 1)
+                    return f"{year:04d}-{month:02d}"
+                return date(year, month, day).isoformat()
             except (KeyError, TypeError, ValueError):
                 continue
-            match = re.match(r"([+-]?)(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", time_val)
-            if not match:
-                continue
-            year = match.group(2)
-            month = match.group(3)
-            day = match.group(4)
-            if month and day:
-                return f"{year}-{month}-{day}"
-            if month:
-                return f"{year}-{month}"
-            return year
     return None
 
 
@@ -328,7 +334,7 @@ def enrich_founded(record: dict[str, Any], entity: dict[str, Any]) -> bool:
 
 
 def stamp_last_verified(record: dict[str, Any]) -> None:
-    """Record the date this record was last touched by enrichment/verification."""
+    """Stamp an explicitly verified roster; metadata-only enrichers do not call this."""
     record["last_verified"] = date.today().isoformat()
 
 
@@ -436,16 +442,12 @@ def backfill_structural(
         changed |= enrich_founded(data, entity)
         if not changed:
             continue
-        stamp_last_verified(data)
         updated += 1
         rel = path.relative_to(ROOT)
         if dry_run:
             typer.echo(f"would update {rel} -> hq={data.get('headquarters')} founded={data.get('founded')}")
         else:
-            path.write_text(
-                yaml.dump(data, sort_keys=False, allow_unicode=True, default_flow_style=False),
-                encoding="utf-8",
-            )
+            write_enriched_yaml(path, data, "intblocks")
             typer.echo(f"updated {rel}")
     typer.echo(f"done: {updated} record(s) {'would be ' if dry_run else ''}updated")
 
@@ -478,15 +480,11 @@ def backfill_founded(
         entity = entities.get(str(data.get("wikidata_id") or ""), {})
         if not enrich_founded(data, entity):
             continue
-        stamp_last_verified(data)
         updated += 1
         if dry_run:
             typer.echo(f"would update {path.relative_to(ROOT)} -> founded={data['founded']}")
         else:
-            path.write_text(
-                yaml.dump(data, sort_keys=False, allow_unicode=True, default_flow_style=False),
-                encoding="utf-8",
-            )
+            write_enriched_yaml(path, data, "intblocks")
     typer.echo(f"done: {updated} founded field(s) {'would be ' if dry_run else ''}updated")
 
 
@@ -567,16 +565,12 @@ def enrich(
         after = yaml.dump(data, sort_keys=True, allow_unicode=True)
         if after == originals[path]:
             continue
-        stamp_last_verified(data)
         updated += 1
         rel = path.relative_to(ROOT)
         if dry_run:
             typer.echo(f"would update {rel}")
         else:
-            path.write_text(
-                yaml.dump(data, sort_keys=False, allow_unicode=True, default_flow_style=False),
-                encoding="utf-8",
-            )
+            write_enriched_yaml(path, data, "intblocks")
             typer.echo(f"updated {rel}")
 
     typer.echo(f"done: {updated} record(s) {'would be ' if dry_run else ''}updated; {resolved} wikidata_id(s) resolved")

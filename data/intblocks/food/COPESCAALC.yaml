@@ -3,6 +3,7 @@ name: Commission for Inland Fisheries and Aquaculture of Latin America and the C
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1976'
 active_period:
@@ -160,6 +161,10 @@ other_names:
 notes: Originally established as the Commission for Inland Fisheries of Latin America (COPESCAL) in 1976; statutes and branding now emphasize small-scale and artisanal fisheries and aquaculture (COPPESAALC). The commission holds biennial ordinary sessions; the XIX session met in Panama City, 25–27 June 2025. Membership is open to FAO member and associate member countries served by the Regional Office for Latin America and the Caribbean that notify the Director-General of their wish to participate.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO Regional Office for Latin America and the Caribbean
   retrieved_at: '2026-07-29'

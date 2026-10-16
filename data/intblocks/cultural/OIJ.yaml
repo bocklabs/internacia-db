@@ -4,6 +4,7 @@ blocktype:
 - cultural
 - youth
 status: formal
+scope_category: igo
 founded: '1992'
 active_period:
   start: '1992'
@@ -167,6 +168,10 @@ previous_names:
   name: Organización Iberoamericana de Juventud
   period: 1992–1996
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: official sources
   retrieved_at: '2026-07-12'

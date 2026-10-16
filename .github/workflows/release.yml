@@ -10,6 +10,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      INTERNACIA_DATASETS_DIR: ${{ github.workspace }}/.release-datasets
     steps:
       - uses: actions/checkout@v7
         with:
@@ -27,35 +29,38 @@ jobs:
       - name: Lint
         run: ruff check internacia_builder/ scripts/ tests/
 
-      - name: Run tests
-        run: pytest tests/ -q
-
-      - name: Validate countries
-        run: python scripts/validate_countries.py
-
-      - name: Validate intblocks
-        run: python scripts/validate_intblocks.py
-
-      - name: Build all dataset formats
-        run: python scripts/builder.py build
-
-      - name: Emit schema migration diff
-        run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          BASELINE="data/datasets/schema_baseline"
-          mkdir -p "$BASELINE"
-          python scripts/generate_schema_migration.py \
-            --previous "$BASELINE" \
-            --current data/schemas \
-            --version "$VERSION" \
-            --output "data/datasets/migration.v${VERSION}.json"
-          # Refresh baseline schemas for the next release comparison (committed in tag tree via build artifacts only when present).
-          for f in countries intblocks; do
-            cp "data/schemas/${f}.schema.json" "$BASELINE/" 2>/dev/null || true
-          done
-
-      - name: Check artifact consistency
+      - name: Check committed snapshot before rebuilding
         run: python scripts/check_generated_artifacts.py
+
+      - name: Build final release artifacts
+        run: |
+          python scripts/builder.py build --output-dir .release-datasets
+
+      - name: Run tests against the final release build
+        run: pytest tests/ --cov=internacia_builder --cov-report=term-missing
+
+      - name: Validate release content, version, and documentation
+        run: |
+          python scripts/check_generated_artifacts.py --datasets-dir .release-datasets
+          python scripts/check_release_bundle.py .release-datasets --version "$GITHUB_REF_NAME"
+          python scripts/generate_data_dictionary.py --check
+          python scripts/check_doc_counts.py
+          python scripts/check_markdown_links.py
+          python scripts/builder.py analyze-quality --output .release-quality
+          python scripts/check_quality_report.py .release-quality/full_report.jsonl
+
+      - name: Emit schema migration against the previous release
+        run: |
+          baseline_ref=$(git describe --tags --abbrev=0 "${GITHUB_SHA}^" 2>/dev/null || true)
+          migration_args=()
+          if [ -n "$baseline_ref" ]; then
+            migration_args+=(--previous-ref "$baseline_ref")
+          fi
+          python scripts/generate_schema_migration.py \
+            "${migration_args[@]}" \
+            --current-datasets .release-datasets \
+            --version "${GITHUB_REF_NAME#v}" \
+            --output ".release-datasets/migration.${GITHUB_REF_NAME}.json"
 
       - name: Push to Hugging Face (optional)
         env:
@@ -74,21 +79,23 @@ jobs:
           api = HfApi(token=os.environ["HF_TOKEN"])
           repo_id = os.environ.get("HF_DATASET_REPO") or "datenoio/internacia"
           api.create_repo(repo_id=repo_id, repo_type="dataset", exist_ok=True)
-          root = Path("data/datasets")
-          for name in (
-              "countries.parquet", "intblocks.parquet", "blocktypes.parquet",
-              "memberships.parquet", "datapackage.json", "countries.manifest.json",
-              "intblocks.manifest.json", "README.md",
-          ):
-              path = root / name
-              if path.exists():
-                  api.upload_file(
-                      path_or_fileobj=str(path),
-                      path_in_repo=name,
-                      repo_id=repo_id,
-                      repo_type="dataset",
-                  )
+          from internacia_builder.distribution import prepare_huggingface_bundle
+          root = Path(".hf-release")
+          prepare_huggingface_bundle(Path(".release-datasets"), root)
+          tables = ("countries", "intblocks", "blocktypes", "memberships")
+          for path in sorted(root.rglob("*")):
+              if path.is_file():
+                  name = path.relative_to(root).as_posix()
+                  api.upload_file(path_or_fileobj=str(path), path_in_repo=name,
+                                  repo_id=repo_id, repo_type="dataset")
                   print("uploaded", name)
+          # One-time cleanup of the legacy flat layout; missing files are fine.
+          for name in (f"{t}.parquet" for t in tables):
+              try:
+                  api.delete_file(path_in_repo=name, repo_id=repo_id, repo_type="dataset")
+                  print("deleted legacy", name)
+              except Exception:
+                  pass
           print("HF push complete:", repo_id)
           PY
 
@@ -139,11 +146,8 @@ jobs:
           dep_id = dep["id"]
           bucket = dep["links"]["bucket"]
           print("created deposition", dep_id, "bucket", bucket)
-          assets = sorted(Path("data/datasets").glob("*.parquet")) + [
-              Path("data/datasets/datapackage.json"),
-              Path("data/datasets/countries.manifest.json"),
-              Path("data/datasets/intblocks.manifest.json"),
-          ]
+          # Zenodo publishes the complete descriptor bundle, just like GitHub.
+          assets = sorted(path for path in Path(".release-datasets").iterdir() if path.is_file())
           for path in assets:
               if not path.exists():
                   continue
@@ -167,29 +171,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          files: |
-            data/datasets/countries.jsonl.zst
-            data/datasets/countries.yaml.zst
-            data/datasets/countries.parquet
-            data/datasets/countries.manifest.json
-            data/datasets/countries.meta.json
-            data/datasets/countries_aliases.json
-            data/datasets/intblocks.jsonl.zst
-            data/datasets/intblocks.yaml.zst
-            data/datasets/intblocks.parquet
-            data/datasets/intblocks.manifest.json
-            data/datasets/intblocks.meta.json
-            data/datasets/intblocks_aliases.json
-            data/datasets/intblocks_aliases.parquet
-            data/datasets/attribute_intblock_migrations.json
-            data/datasets/attribute_intblock_migrations.parquet
-            data/datasets/blocktypes.jsonl.zst
-            data/datasets/blocktypes.yaml.zst
-            data/datasets/blocktypes.parquet
-            data/datasets/blocktypes.manifest.json
-            data/datasets/blocktypes.meta.json
-            data/datasets/datapackage.json
-            data/datasets/internacia.duckdb
-            data/datasets/memberships.parquet
-            data/datasets/memberships.csv.zst
-            data/datasets/migration.${{ github.ref_name }}.json
+          fail_on_unmatched_files: true
+          files: .release-datasets/*

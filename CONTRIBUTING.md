@@ -56,15 +56,24 @@ Run before opening a PR:
 python scripts/validate_countries.py     # 0 = no errors (warnings OK); 1 = errors
 python scripts/validate_intblocks.py     # add --fail-on-warning to treat warnings as errors
 python scripts/validate_countries.py --json   # structured output for agents
-pytest tests/                            # unit and integration tests
-ruff check scripts/ tests/               # lint
-python scripts/builder.py build --formats parquet,duckdb   # full build check
+python scripts/builder.py build          # regenerate every committed format after source edits
 python scripts/check_generated_artifacts.py                # committed exports match source + each other
+pytest tests/                            # unit and integration tests against updated exports
+ruff check internacia_builder/ scripts/ tests/             # lint
+python scripts/generate_data_dictionary.py --check         # generated field reference
 python scripts/check_markdown_links.py                     # internal doc links
 python scripts/check_doc_counts.py                         # README/llms/AGENTS vs manifests
 ```
 
-CI runs the same checks on every pull request (`.github/workflows/validate.yml`).
+Commit regenerated `data/datasets/` artifacts with source changes; never edit them
+by hand. Partial builds are useful for local analysis but do not refresh every
+committed format. New records also require updated current-count documentation
+and any affected cookbook expectations.
+
+CI checks committed artifact freshness before rebuilding into `.ci-datasets`,
+then runs tests against that staging directory. It also checks the quality gate
+and release descriptor (`.github/workflows/validate.yml`); the documentation
+workflow builds and typechecks the website on PRs.
 
 ### Data-quality gate and reports
 
@@ -89,6 +98,7 @@ reason comment per entry.
 
 - [ ] Validation passes with 0 errors (`validate_countries.py`, `validate_intblocks.py`)
 - [ ] Tests pass (`pytest tests/`)
+- [ ] Full build outputs are committed with source changes; artifact and documentation checks pass
 - [ ] New/changed enriched fields have `provenance` entries (countries)
 - [ ] Sources for membership or status changes are cited in the PR description
 - [ ] `CHANGELOG.md` updated under `[Unreleased]` for schema or semantic changes

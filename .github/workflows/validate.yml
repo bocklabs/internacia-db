@@ -14,20 +14,25 @@ on:
       - 'CLAUDE.md'
       - '.kimi/**'
       - '.lingma/**'
+      - 'templates/**'
       - 'scripts/**'
       - 'internacia_builder/**'
       - 'tests/**'
       - 'requirements.txt'
       - 'requirements-dev.txt'
       - 'pyproject.toml'
-      - '.github/workflows/validate.yml'
+      - '.github/workflows/**'
+      - 'uv.lock'
+      - '.pre-commit-config.yaml'
   push:
     branches: [main]
     paths:
-      - 'data/countries/**'
-      - 'data/intblocks/**'
-      - 'data/blocktypes/**'
-      - 'data/schemas/**'
+      - 'data/**'
+      - 'pyproject.toml'
+      - '.github/workflows/**'
+      - 'uv.lock'
+      - '.pre-commit-config.yaml'
+      - 'templates/**'
       - 'scripts/**'
       - 'internacia_builder/**'
       - 'tests/**'
@@ -41,6 +46,8 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      INTERNACIA_DATASETS_DIR: ${{ github.workspace }}/.ci-datasets
     strategy:
       fail-fast: false
       matrix:
@@ -69,8 +76,11 @@ jobs:
           pip install pip-audit
           pip-audit --requirement requirements.txt
 
+      - name: Check committed dataset freshness before rebuilding
+        run: python scripts/check_generated_artifacts.py
+
       - name: Build datasets (fresh artifacts for tests)
-        run: python scripts/builder.py build
+        run: python scripts/builder.py build --output-dir .ci-datasets
 
       - name: Run tests against freshly built artifacts
         run: pytest tests/ --cov=internacia_builder --cov-report=term-missing
@@ -90,8 +100,10 @@ jobs:
       - name: Check internal Markdown links
         run: python scripts/check_markdown_links.py
 
-      - name: Check committed dataset artifacts (freshness + cross-format parity)
-        run: python scripts/check_generated_artifacts.py
+      - name: Check final staged artifacts and distribution descriptor
+        run: |
+          python scripts/check_generated_artifacts.py --datasets-dir .ci-datasets
+          python scripts/check_release_bundle.py .ci-datasets
 
       - name: Upload validation reports
         uses: actions/upload-artifact@v4
@@ -109,20 +121,7 @@ jobs:
         run: python scripts/builder.py analyze-quality --output dataquality
 
       - name: Fail on high-priority quality issues
-        run: |
-          python - <<'PY'
-          import json, sys
-          from pathlib import Path
-          report = Path("dataquality/full_report.jsonl")
-          high = [json.loads(l) for l in report.read_text().splitlines()
-                  if l.strip() and json.loads(l).get("priority") in ("CRITICAL", "IMPORTANT")]
-          if high:
-              print(f"{len(high)} CRITICAL/IMPORTANT quality issue(s):")
-              for h in high[:20]:
-                  print(f"  [{h['priority']}] {h['issue_type']} {h.get('file_path')}")
-              sys.exit(1)
-          print("No CRITICAL/IMPORTANT quality issues.")
-          PY
+        run: python scripts/check_quality_report.py dataquality/full_report.jsonl
 
       - name: Upload quality report
         uses: actions/upload-artifact@v4

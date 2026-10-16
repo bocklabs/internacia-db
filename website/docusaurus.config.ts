@@ -1,6 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import remarkRepositoryLinks from './plugins/remark-repository-links.cjs';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -26,9 +27,7 @@ const config: Config = {
   organizationName: 'datenoio', // Usually your GitHub org/user name
   projectName: 'internacia-db', // Usually your repo name.
 
-  // Your markdown references repo-root files (e.g. ../llms.txt, ../ATTRIBUTION.md).
-  // Those aren’t always present in Docusaurus’ content pipeline, so start lenient.
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if you are writing a site
@@ -48,6 +47,7 @@ const config: Config = {
       'classic',
       {
         docs: {
+          beforeDefaultRemarkPlugins: [remarkRepositoryLinks],
           sidebarPath: './sidebars.ts',
           // Use the repo’s existing Markdown docs as the Docusaurus content source.
           // (We keep the scaffold’s default website/docs unused.)

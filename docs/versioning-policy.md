@@ -18,8 +18,11 @@ for a typical software library.
 Row-count changes alone are **not** MAJOR. A new intblock is MINOR; correcting
 NATO’s roster is PATCH.
 
-`schema_hash` in the manifest changes when JSON Schema properties change. A
-PATCH that only edits YAML values keeps the same `schema_hash`.
+`schema_hash` in the manifest is a hash of the declared exported Arrow schema.
+Changing an exported field or nested type changes the hash; changing YAML values
+or source-only JSON Schema constraints does not. Read the migration report for
+source and export contract changes, including constraints not represented by the
+hash. An unchanged hash alone does not establish source-schema compatibility.
 
 ## Identifier stability
 
@@ -37,7 +40,7 @@ PATCH that only edits YAML values keeps the same `schema_hash`.
 |----------|---------|
 | [CHANGELOG.md](../CHANGELOG.md) | Human-readable added/fixed/breaking notes and migration SQL |
 | `data/datasets/*.manifest.json` | `version`, `schema_hash`, `row_count`, `git_commit` |
-| `data/datasets/migration.vX.Y.Z.json` | Field-level JSON Schema add/remove/type-change (when `schema_hash` changes) |
+| `migration.vX.Y.Z.json` (Release asset) | Recursive source JSON Schema and exported Arrow differences against the identified previous release, generated on every release |
 | Alias JSON / Parquet | Id remaps across releases |
 | GitHub Release assets | Frozen Parquet/JSONL/DuckDB/CSV for that tag |
 
@@ -45,6 +48,11 @@ There is **no** record-level `diff-vX.Y.Z.json` of added/removed ids yet. Until
 that ships, combine CHANGELOG + alias maps + `row_count`. CI compares manifests
 to `main` via `scripts/diff_countries_baseline.py` (internal; not a release
 asset).
+
+Migration reports include nested fields, array items, required fields, enums,
+and other constraints. `baseline.status` is `available`, `partial`, or
+`unavailable`; a missing baseline yields `schema_changed: null`, not a claim of
+compatibility. Review `baseline.missing_contracts` for partial comparisons.
 
 ## Discoverability
 
@@ -71,3 +79,7 @@ and no MCP server in this repository. Prefer:
 Maintainers tag `vX.Y.Z`. `.github/workflows/release.yml` rebuilds exports and
 attaches them as Release assets. The manifest `version` on a tagged build MUST
 match the git tag without the `v` prefix.
+
+Before tagging, update the dated release entry in `CHANGELOG.md`, the version in
+`pyproject.toml`, and `internacia_builder/__init__.py`; rebuild and commit all
+exports. The release gate checks these versions against the tag and manifests.

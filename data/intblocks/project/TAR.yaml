@@ -3,6 +3,7 @@ blocktype:
 - project
 - transport
 status: formal
+scope_category: treaty_body
 founded: '2006-04'
 active_period:
   start: '1992'
@@ -230,6 +231,10 @@ notes: Twenty-eight ESCAP member states are designated as Trans-Asian Railway ne
   alongside the Asian Highway Network and dry ports of international significance.
 last_verified: '2026-07-30'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: official sources
   retrieved_at: '2026-07-30'

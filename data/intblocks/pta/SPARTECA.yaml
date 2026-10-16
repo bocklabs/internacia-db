@@ -2,6 +2,7 @@ id: SPARTECA
 blocktype:
 - pta
 status: formal
+scope_category: treaty_body
 founded: '1980-07-14'
 active_period:
   start: '1981-01-01'
@@ -156,6 +157,10 @@ other_names:
 notes: Fiji acceded in December 1980; Nauru acceded in August 1982; Vanuatu joined after independence in November 1981. The Federated States of Micronesia and the Marshall Islands ratified in 1988 and 1989 respectively. Australia ratified in 1982, later than several island parties. SPARTECA predates the 2001 PACER framework agreement and the 2017 PACER Plus free trade agreement but has not been superseded; PACER Plus preserves existing SPARTECA duty-free access while providing modernised rules of origin.
 last_verified: '2026-07-30'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: official sources
   retrieved_at: '2026-07-30'

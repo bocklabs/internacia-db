@@ -2,6 +2,7 @@ id: INDIAMERCOSURPTA
 blocktype:
 - pta
 status: formal
+scope_category: treaty_body
 founded: '2004-01-25'
 active_period:
   start: '2009-06-01'
@@ -96,6 +97,10 @@ notes: A Framework Agreement was signed on 17 June 2003. Annexes I–V (tariff o
   a party to this agreement. Expansion negotiations to broaden product coverage have been under discussion since 2009.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: official sources
   retrieved_at: '2026-07-29'

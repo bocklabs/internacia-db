@@ -4,6 +4,7 @@ blocktype:
 - travel
 - migration
 status: formal
+scope_category: reference_enumeration
 founded: '1986'
 geographic_scope: global
 regions:
@@ -305,6 +306,10 @@ notes: Taiwan eligibility applies only to individuals with unrestricted right of
   was rescinded in May 2025 before implementation.
 last_verified: '2026-07-30'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: official sources
   retrieved_at: '2026-07-30'

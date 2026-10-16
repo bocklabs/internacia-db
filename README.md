@@ -7,9 +7,9 @@ Comprehensive reference datasets of countries, intergovernmental organizations, 
 
 ## Distribution
 
-- **GitHub Releases** — primary Parquet/JSONL/DuckDB assets on each `v*` tag
-- **Zenodo** — concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328)
-- **Hugging Face Datasets** — optional mirror `datenoio/internacia` when `HF_TOKEN` is set ([docs/release-distribution.md](docs/release-distribution.md))
+- **GitHub Releases** — complete dataset bundle on each `v*` tag, including CSV, metadata, aliases, and schema migration reports
+- **Zenodo** — concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328); configured releases create and upload a draft deposition for maintainer publication
+- **Hugging Face Datasets** — optional Parquet mirror `datenoio/internacia` with one config per table, a matching descriptor, and all four tables' metadata ([publishing guide](docs/publishing-huggingface.md))
 
 ## Features
 
@@ -18,9 +18,9 @@ Comprehensive reference datasets of countries, intergovernmental organizations, 
 - **Intblocks quality pipeline**: schema validation, blocktype taxonomy checks, duplicate detection, and completeness gates
 - **Profile enrichment**: population, area, gini, timezones, and native names from World Bank, Wikidata, and IANA tzdata
 - **Data-quality analyzer**: 50+ rules (referential integrity, temporal consistency, geographic plausibility, provenance depth, naming) reported under `dataquality/`; runs in CI and fails on CRITICAL/IMPORTANT findings
-- **Build metadata**: `countries.manifest.json`, `intblocks.manifest.json`, and `blocktypes.manifest.json` with version, commit, row count, and schema hash — all sharing a single frozen build identity
-- **Artifact consistency guard**: `check_generated_artifacts.py` verifies committed exports agree across formats and match YAML sources (runs in CI and release)
-- **CI validation**: pull-request checks, tests, and lint via `.github/workflows/validate.yml`; weekly link validation; tagged releases with dataset assets
+- **Build metadata**: manifests and `.meta.json` sidecars for countries, intblocks, blocktypes, and memberships, with version, commit, row count, and export schema hash — all sharing a single frozen build identity
+- **Artifact consistency guard**: `check_generated_artifacts.py` checks source projections, values, keys, membership edges, schemas, and metadata before CI rebuilds exports
+- **CI validation**: tests and lint on Python 3.11–3.13, documentation checks, website build/typecheck, weekly link validation, and validation of the final tagged-release bundle
 - **CLI tools**: Typer-based scripts with tqdm progress bars; console entry points `internacia-build`, `internacia-analyze-quality`, `internacia-validate-countries`, `internacia-validate-intblocks`
 
 ## AI agents and LLMs
@@ -49,7 +49,7 @@ Comprehensive reference datasets of countries, intergovernmental organizations, 
 - [docs/query-examples.md](docs/query-examples.md) — verified DuckDB and Pandas query cookbook (UN membership, borders, org density, former members, hierarchy)
 - [docs/llm-scenarios.md](docs/llm-scenarios.md) — intent-based copy/paste scenarios for LLM code generation
 - [docs/query-examples-polars.md](docs/query-examples-polars.md) — verified Polars / Parquet query cookbook
-- [docs/query-examples-r.md](docs/query-examples-r.md) — verified R / dplyr / Parquet query cookbook
+- [docs/query-examples-r.md](docs/query-examples-r.md) — R / dplyr / Parquet query cookbook
 - [docs/query-examples-observable.md](docs/query-examples-observable.md) — Observable Framework / Plot cookbook (DuckDB-Wasm)
 - [CLAUDE.md](CLAUDE.md) / [.github/copilot-instructions.md](.github/copilot-instructions.md) — Claude / Copilot shims
 - [.kimi/AGENTS.md](.kimi/AGENTS.md) — Kimi Code
@@ -59,7 +59,7 @@ Comprehensive reference datasets of countries, intergovernmental organizations, 
 
 ## Installation
 
-Requires Python 3.11+ (CI runs 3.11). Dependencies are pinned for reproducible builds.
+Requires Python 3.11+ (CI runs 3.11, 3.12, and 3.13). Dependencies are pinned for reproducible builds.
 
 ```bash
 pip install -r requirements.txt        # runtime
@@ -83,9 +83,13 @@ python3 scripts/validate_intblocks.py
 # Build all datasets
 python3 scripts/builder.py build
 
-# Build specific formats only
-python3 scripts/builder.py build --formats parquet,duckdb
+# Build specific formats for local analysis in a separate directory
+python3 scripts/builder.py build --formats parquet,duckdb --output-dir .local-datasets
 ```
+
+After editing source data, run the full build and commit the regenerated
+`data/datasets/` artifacts with the source changes. A partial build leaves other
+formats stale; CI checks committed exports before building its own staging copy.
 
 ## Output files
 
@@ -129,7 +133,12 @@ Each build writes to `data/datasets/`:
 | `memberships.meta.json` | Version metadata sidecar for Parquet consumers |
 | `internacia.duckdb` | DuckDB database (`countries`, `intblocks`, `blocktypes`, `memberships`, and `_meta` tables) |
 
-Current row counts: **256** countries, **1272** intblocks, **78** blocktypes.
+Current row counts: **256** countries, **1269** intblocks, **78** blocktypes.
+
+The retired IDs `COMMLEARN`, `ABCZNZ`, and `USAN` resolve to `COL`, `ABCANZ`, and
+`UNASUR` through `intblocks_aliases.json`. Use `status IN ('member', 'founding_member')`
+for full membership; retain `former_member` edges and `left` dates for history.
+For example, ECOWAS has 12 current members and retains the three 2025 departures.
 
 Format policy: JSONL is shipped both plain and zstd-compressed; YAML exports are
 zstd-only (the plain `blocktypes.yaml` is a regenerated copy of the small source
@@ -145,7 +154,7 @@ The builder runs both `validate_countries.py` and `validate_intblocks.py` before
 - Completeness thresholds (`data/schemas/countries_completeness.yaml`, `data/schemas/intblocks_completeness.yaml`)
 - Entity status policy (`entity_type`, `code_status`)
 - Blocktype taxonomy and `partof` reference checks for intblocks
-- Intblock cross-references (country `includes` resolve to country sources; `includes[].status` values come from `data/schemas/includes_status.yaml`)
+- Intblock cross-references (current-country `includes` resolve to country sources; known historical identifiers such as `SU` use the explicit historical-entity registry; `includes[].status` values come from `data/schemas/includes_status.yaml`)
 - Referential integrity (borders, `predecessor`/`successor`/`suborganizations`, headquarters countries, duplicate `wikidata_id`) plus temporal, geographic-plausibility, provenance depth, and naming rules — shared between the validators and the quality analyzer (`internacia_builder/validate/*_rules.py`)
 
 ```bash
@@ -154,12 +163,12 @@ python3 scripts/validate_countries.py --report completeness-report.json
 python3 scripts/validate_intblocks.py --report intblocks-report.json
 
 # Enrich profile fields from external sources
-python3 scripts/enrich_countries.py
+python3 scripts/enrich_countries.py enrich
 python3 scripts/enrich_countries.py backfill-provenance
 
 # Enrich intblocks from Wikidata (wikidata_id, descriptions, multilingual names)
-python3 scripts/enrich_intblocks.py --dry-run
-python3 scripts/enrich_intblocks.py
+python3 scripts/enrich_intblocks.py enrich --dry-run
+python3 scripts/enrich_intblocks.py enrich
 python3 scripts/enrich_intblocks.py backfill-structural   # headquarters + founded
 
 # Generate the data-quality report (dataquality/ — by rule, priority, country)
@@ -343,8 +352,12 @@ Seven non-standard codes are retained with explicit status (see [docs/country-co
 | `founded` | String | Foundation date |
 | `geographic_scope` | String | Scope |
 | `regions` | List[String] | Regions covered |
-| `includes` | List[Struct] | Members `{id, name, type, status, joined, role, note}` — **`id` is authoritative**; `name` is a source label |
+| `includes` | List[Struct] | Members `{id, name, type, status, joined, left, role, note}` — **`id` is authoritative**; `name` is a source label |
 | `membership_count` | Integer | Member count |
+| `membership_count_type` | String | Unit of the reported headcount, when non-country-based |
+| `scope_category` | String | Inclusion taxonomy |
+| `active_period` | Struct | `{start, end}` |
+| `last_verified` | String | Explicit roster verification date |
 | `wikidata_id` | String | Wikidata item ID |
 | `legal_status` | String | Legal status |
 | `description` | String | Description |
@@ -358,9 +371,10 @@ Seven non-standard codes are retained with explicit status (see [docs/country-co
 | `successor` | String | Successor |
 
 The table above lists exported columns. Source YAML may carry additional curation fields that are
-validated but not exported (`membership_applicability`, `founding_members`, `suborganizations`,
-`secretariat`, `last_verified`, `previous_names`, `official_documents`, `social_media`,
-`recognition_status`); see `data/schemas/intblocks.schema.json` for the full source contract.
+validated but omitted from columnar exports (`membership_applicability`, `founding_members`, `suborganizations`,
+`secretariat`, `notes`, `previous_names`, `official_documents`, `social_media`,
+`recognition_status`); these remain available in full JSON/YAML exports. The generated
+[data dictionary](docs/data-dictionary.md) lists columnar field availability; see `data/schemas/intblocks.schema.json` for the full source contract.
 Valid `includes[].status` values are cataloged in `data/schemas/includes_status.yaml`.
 
 ## Data sources
@@ -391,10 +405,13 @@ Intblock catalogues searched (UN Treaty Collection, WTO RTA-IS / PTA, UNCTAD IIA
 | `scripts/enrich_intblocks.py` | Enrich intblocks from Wikidata (wikidata_id, descriptions, multilingual names); `backfill-structural` fills headquarters and founded dates |
 | `scripts/annotate_entity_status.py` | Set `entity_type` and `code_status` |
 | `scripts/diff_countries_baseline.py` | Manifest diff vs git baseline (countries, intblocks, blocktypes) |
-| `scripts/check_generated_artifacts.py` | Cross-format primary-key parity, source/export parity, build-identity guard |
+| `scripts/check_generated_artifacts.py` | Source/export values, projections, keys, membership edges, schema hashes, and build metadata |
 | `scripts/check_markdown_links.py` | Internal Markdown link checker |
 | `scripts/check_doc_counts.py` | Consumer-facing docs vs manifest `row_count` |
 | `scripts/generate_data_dictionary.py` | Regenerate `docs/data-dictionary.md` from JSON Schemas |
+| `scripts/generate_schema_migration.py` | Compare recursive source/export contracts against a named previous release |
+| `scripts/check_release_bundle.py` | Validate descriptor paths and optional release tag/version consistency |
+| `scripts/check_quality_report.py` | Apply the shared CRITICAL/IMPORTANT quality gate |
 
 One-off migration scripts currently live under `scripts/` (for example
 `apply_manus_roadmap.py`) and are not part of the maintained pipeline. `dev/scripts/`
@@ -402,7 +419,17 @@ is the intended archive (see `dev/scripts/README.md`). Research notes: `dev/rese
 
 ## Releases
 
-Tagged releases (`vX.Y.Z`) automatically rebuild all formats and attach them as GitHub Release assets (`.github/workflows/release.yml`). Consumers can either clone the repository (datasets are committed under `data/datasets/`) or download versioned assets from the Releases page.
+Tagged releases (`vX.Y.Z`) check committed exports, build into `.release-datasets`,
+test and validate that final bundle, compare source/export contracts with the
+previous release, and attach the bundle as GitHub Release assets. The tag must
+match the version in `CHANGELOG.md`, `pyproject.toml`, `internacia_builder/__init__.py`,
+and the generated manifests. `schema_hash` identifies the exported Arrow schema;
+source-only constraints are covered by the migration report.
+
+Consumers can clone the repository or download versioned Release assets. See
+[release distribution](docs/release-distribution.md), the
+[Hugging Face publishing guide](docs/publishing-huggingface.md), and
+[versioning policy](docs/versioning-policy.md) for publication and upgrade details.
 
 ## Notes
 

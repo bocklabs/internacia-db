@@ -3,6 +3,7 @@ name: Latin American Organization for Fisheries Development
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1982-10-29'
 active_period:
@@ -152,6 +153,10 @@ other_names:
 notes: UN treaty registration (no. 24116) records ratifications and denunciations for Belize, Bolivia, Costa Rica, Ecuador, El Salvador, Guatemala, Guyana, Mexico, Nicaragua, Panama, Peru, Uruguay, and Venezuela. Cuba and Honduras are listed as founding participants by FAO and in organizational sources but do not appear in the UN depositary participant table. Costa Rica, Guatemala, Panama, and Uruguay have formally denounced the agreement; eleven states remain active members as of 2026-07.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: UN Treaty Collection; FAO
   retrieved_at: '2026-07-29'

@@ -6,6 +6,9 @@ DuckDB / SQL twin: [query-examples.md](query-examples.md).
 R / dplyr twin: [query-examples-r.md](query-examples-r.md).
 Observable / Plot twin: [query-examples-observable.md](query-examples-observable.md).
 
+Expected results describe the current repository artifacts, including unreleased
+corrections. Refresh them when rebuilding changed data.
+
 **Polars struct and list fields:** use `.struct.field("…")` on struct columns and
 `.list.contains` / `.list.len` / `.explode(..., empty_as_null=True)` on lists.
 
@@ -52,9 +55,9 @@ for name in ("countries", "intblocks", "blocktypes", "memberships"):
 
 **Expected:** 193 rows.
 
-**Gotcha:** `un_member` is a country-level boolean. The `UN` intblock roster can differ
-slightly — use the flag for a simple filter, or filter `memberships` on `intblock_id ==
-"UN"` when you need roster metadata (`status`, `joined`).
+**Gotcha:** `un_member` is a country-level boolean. The `UN` intblock has 193 full
+members and two observer seats. Filter `memberships` by `intblock_id == "UN"`
+and status `member` / `founding_member` for full-member roster metadata.
 
 ### Current ISO countries only (249)
 
@@ -302,9 +305,9 @@ Land neighbors are **ISO 3166-1 alpha-3** codes in `borders`. Join on
 (
     countries
     .filter(pl.col("code") == "TH")
-    .select("borders")
-    .explode("borders", empty_as_null=True)
-    .join(countries, left_on="borders", right_on="iso3code")
+    .select(pl.col("borders").alias("iso3code"))
+    .explode("iso3code", empty_as_null=True)
+    .join(countries, on="iso3code")
     .select("code", "name", "iso3code")
     .sort("name")
 )
@@ -406,7 +409,7 @@ memberships  # intblock_id, country_code, include_type, status, joined, left
 )
 ```
 
-**Expected:** 191 rows.
+**Expected:** 249 rows.
 
 ASEAN roster:
 
@@ -471,7 +474,7 @@ ASEAN roster:
 )
 ```
 
-**Expected:** 11 rows.
+**Expected:** 19 rows.
 
 Or join the taxonomy table after exploding `blocktype`:
 
@@ -501,7 +504,7 @@ Or join the taxonomy table after exploding `blocktype`:
 )
 ```
 
-**Expected:** 58 rows.
+**Expected:** 123 rows.
 
 ### Child organizations of the UN
 
@@ -514,7 +517,7 @@ Or join the taxonomy table after exploding `blocktype`:
 )
 ```
 
-**Expected:** 37 rows.
+**Expected:** 42 rows.
 
 ### Multilingual intblock names
 
@@ -593,10 +596,14 @@ eu = memberships.filter(pl.col("intblock_id") == "EU").select("country_code")
 ```python
 flag_n = countries.filter(pl.col("un_member")).height
 roster_n = memberships.filter(
-    (pl.col("intblock_id") == "UN") & (pl.col("include_type") == "country")
+    (pl.col("intblock_id") == "UN")
+    & (pl.col("include_type") == "country")
+    & pl.col("status").is_in(["member", "founding_member"])
 ).height
 print(flag_n, roster_n)  # both 193
 ```
+
+Without the status filter, the UN roster has 195 entries, including two observers.
 
 ### Organizations a country belongs to
 
@@ -621,8 +628,8 @@ print(flag_n, roster_n)  # both 193
 )
 ```
 
-**Expected:** 11 rows (`BEACST`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`,
-`ICES`, `JCPOA`, `NSS`, `OPENSKY`, `RAMSAR`).
+**Expected:** 12 rows (`BEACST`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`,
+`ICES`, `ISTC`, `JCPOA`, `NSS`, `OPENSKY`, `RAMSAR`).
 
 **Gotcha:** DuckDB, Parquet, and `memberships` all export `left`. Use
 `memberships` when you want a flat edge table without `UNNEST`.
@@ -760,7 +767,7 @@ jaccard = round(len(nato & eu) / len(nato | eu), 2)
 )
 ```
 
-**Expected:** 24 rows.
+**Expected:** 25 rows.
 
 ### Former members with join and departure dates
 
@@ -825,10 +832,13 @@ lite = pl.read_parquet("data/datasets/intblocks-lite.parquet")
 rows = (
     lite
     .filter((pl.col("status") == "formal") & (pl.col("scope_category") == "igo"))
-    .select("id", "name", pl.col("description").fill_null(""))
+    .join(intblocks.select("id", "description"), on="id")
+    .select("id", "name", pl.col("description").fill_null("").alias("text"))
 )
 # Embed f"{id}: {name}. {text[:500]}" then retrieve; join full row on id.
 ```
+
+Lite exports omit `description`; the join above hydrates it from the full table.
 
 Countries lite path for entity linking:
 

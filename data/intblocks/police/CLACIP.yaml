@@ -2,6 +2,7 @@ id: CLACIP
 blocktype:
 - police
 status: formal
+scope_category: policy_forum
 languages:
 - es
 - en
@@ -138,6 +139,10 @@ other_names:
   name: Comunidad Latinoamericana y del Caribe de Inteligencia Policial
 last_verified: '2026-07-14'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: official sources
   retrieved_at: '2026-07-14'

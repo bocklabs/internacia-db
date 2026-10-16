@@ -3,6 +3,7 @@ name: Organisation of Eastern Caribbean States
 blocktype:
 - eccurr
 status: formal
+scope_category: igo
 founded: '1981-06-18'
 active_period:
   start: '1981-06-18'
@@ -172,6 +173,10 @@ other_names:
 - id: zh
   name: 東加勒比國家組織
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'

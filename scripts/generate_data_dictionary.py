@@ -11,6 +11,10 @@ import argparse
 import json
 from pathlib import Path
 
+from internacia_builder.schemas import get_blocktypes_schema, get_countries_schema, get_intblocks_schema
+
+EXPORT_SCHEMAS = {"countries": get_countries_schema, "intblocks": get_intblocks_schema, "blocktypes": get_blocktypes_schema}
+
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMAS = {
     "countries": ROOT / "data" / "schemas" / "countries.schema.json",
@@ -61,15 +65,17 @@ def render_properties(title: str, schema: dict) -> list[str]:
     lines = [f"## {title}", ""]
     required = set(schema.get("required") or [])
     props = schema.get("properties") or {}
-    lines.append("| Field | Type | Required | Description |")
-    lines.append("|-------|------|----------|-------------|")
+    exported = set(EXPORT_SCHEMAS[title]().names)
+    lines.append("| Field | Type | Required | Columnar export | Description |")
+    lines.append("|-------|------|----------|-----------------|-------------|")
     for name, prop in props.items():
         if not isinstance(prop, dict):
             continue
         desc = _mdx_escape((prop.get("description") or "").replace("\n", " ").strip())
         desc += _enum_note(prop)
+        type_label = _type_label(prop).replace("|", "\\|")
         lines.append(
-            f"| `{name}` | {_type_label(prop)} | {'yes' if name in required else ''} | {desc} |"
+            f"| `{name}` | {type_label} | {'yes' if name in required else ''} | {'yes' if name in exported else 'full JSON/YAML only'} | {desc} |"
         )
     lines.append("")
     return lines

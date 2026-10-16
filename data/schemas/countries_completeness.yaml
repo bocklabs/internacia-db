@@ -101,3 +101,10 @@ provenance:
   max_age_months: 12
   min_count: 4
   mode: warn
+
+# Historical membership references absent from the current-country dimension.
+# These are valid only for includes.type: historical-country; never remap SU to RU.
+historical_entities:
+  SU:
+    name: Soviet Union
+    dissolved: '1991-12-26'

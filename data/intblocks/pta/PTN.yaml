@@ -2,6 +2,7 @@ id: PTN
 blocktype:
 - pta
 status: formal
+scope_category: treaty_body
 founded: '1971-12-08'
 active_period:
   start: '1973-02-11'
@@ -172,6 +173,10 @@ other_names:
 notes: Serbia continues application as successor to the Socialist Federal Republic of Yugoslavia, an original signatory. Bangladesh acceded in 1976; Romania acceded in 1978 and withdrew in 2006. Greece withdrew effective 28 June 1980 upon accession to the European Economic Community. Spain ratified on 12 January 1973 and withdrew effective 6 February 1987. India notified withdrawal effective 29 March 1993.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: WTO GATT documents; Wikipedia
   retrieved_at: '2026-07-29'

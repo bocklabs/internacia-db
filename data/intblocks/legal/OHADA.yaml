@@ -2,6 +2,7 @@ id: OHADA
 blocktype:
 - legal
 status: formal
+scope_category: igo
 languages:
 - en
 - es
@@ -119,6 +120,10 @@ other_names:
   name: Организация по гармонизации коммерческого права в Африке
 wikidata_id: Q2029901
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-14'

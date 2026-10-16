@@ -43,11 +43,17 @@ python scripts/enrich_countries.py enrich
 python scripts/enrich_countries.py backfill-classifications
 python scripts/enrich_countries.py backfill-gini
 
-# Sync provenance from existing indicator structs
+# Preserve existing provenance; unknown historical retrieval dates are not invented
 python scripts/enrich_countries.py backfill-provenance
 ```
 
 Use `--code XX` on `enrich` for a single country. Use `--dry-run` to preview YAML diffs.
+Usable World Bank responses refresh existing World Bank observations without
+regressing their observation year. Other curated sources remain unchanged unless
+`--force` is used. Failed, unused, and unchanged observations retain their retrieval
+dates. New Wikidata fallback values omit unknown years; they never write zero.
+Sources are schema/date-validated before atomic replacement. Metadata enrichment
+on intblocks does not advance `last_verified`, which denotes roster verification.
 
 ### 3. Validate and build
 
@@ -61,7 +67,8 @@ python scripts/builder.py build
 
 - Confirm `year` values are positive integers (never `year: 0` for World Bank indicators).
 - Confirm each updated field has a matching `provenance` entry with today's `retrieved_at`.
-- Expect `gini` to remain null for ~82 territories where World Bank publishes no observation.
+- Expect `gini` to remain null for 86 records in the current snapshot; missing
+  observations are expected for many territories and other uncovered entities.
 
 ## Gini completeness ratcheting
 
@@ -77,7 +84,7 @@ Socioeconomic profile fields (HDI, GDP per capita, government type, internet pen
 
 1. Freshness `check` + validation report (artifact always uploaded)
 2. `enrich_countries.py enrich` and `enrich_intblocks.py enrich`
-3. If YAML under `data/countries` / `data/intblocks` changed, opens a PR labeled
+3. If YAML changes, validates and rebuilds exports and quality reports before opening a PR labeled
    `enrichment` on branch `chore/monthly-enrichment`
 
 **Maintainer review expectations:** spot-check provenance dates and unexpected

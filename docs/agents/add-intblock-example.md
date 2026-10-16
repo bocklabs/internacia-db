@@ -60,15 +60,23 @@ Also run:
 
 ```bash
 python scripts/validate_countries.py --json
+python scripts/builder.py build
+python scripts/check_generated_artifacts.py
 pytest tests/
 ruff check internacia_builder/ scripts/ tests/
+python scripts/check_doc_counts.py
+python scripts/check_markdown_links.py
 ```
+
+Update current-count documentation and affected cookbook expectations for the
+new record so those checks pass.
 
 ## 4. Changelog and PR
 
 Add a line under `[Unreleased]` in `CHANGELOG.md` (new intblock = MINOR when
 released). In the PR: cite the official membership source, do not hand-edit
-`data/datasets/`. Maintainers rebuild exports.
+`data/datasets/`, and include the full build's regenerated exports with the YAML.
+CI checks the committed exports before rebuilding its own staging directory.
 
 If the change needs a new `blocktype`, a schema field, or an id rename, stop and
 open an OpenSpec proposal first ([openspec-quickstart.md](openspec-quickstart.md)).

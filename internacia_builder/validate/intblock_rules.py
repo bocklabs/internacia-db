@@ -42,6 +42,31 @@ MEMBER_CLASS_STATUSES = frozenset(
 ACTIVE_CLASS_STATUSES = MEMBER_CLASS_STATUSES | {"participant"}
 
 
+def check_intblock_scope_category(record: dict[str, Any]) -> list[dict[str, Any]]:
+    category = record.get("scope_category")
+    allowed = {"igo", "treaty_body", "policy_forum", "reference_enumeration"}
+    if category and category not in allowed:
+        message = f"unknown scope_category '{category}'"
+    elif record.get("status") == "formal" and not category:
+        message = "formal record missing scope_category (see docs/intblock-inclusion-policy.md)"
+    else:
+        return []
+    return [{"issue_type": "MISSING_SCOPE_CATEGORY", "field": "scope_category",
+             "current_value": str(category or ""), "suggested_action": message}]
+
+
+def check_scope_coverage(records: list[dict], config: dict) -> list[dict]:
+    scope = config.get("scope_category") or {}
+    limit = scope.get("max_missing_formal")
+    missing_records = [r for r in records if r.get("status") == "formal" and not r.get("scope_category")]
+    missing = len(missing_records)
+    unexpected = {r.get("id", "unknown") for r in missing_records} - set(scope.get("pending_taxonomy") or {})
+    if limit is None or (missing <= limit and ("pending_taxonomy" not in scope or not unexpected)):
+        return []
+    return [{"issue_type": "COMPLETENESS_ERROR", "field": "scope_category", "current_value": str(missing),
+             "suggested_action": f"Missing formal scope_category count {missing}; ratchet {limit}; unexpected IDs: {sorted(unexpected)}"}]
+
+
 def check_intblock_schema(record: dict[str, Any], schema: dict[str, Any]) -> list[dict[str, Any]]:
     errors = []
     validator = jsonschema.Draft7Validator(schema)

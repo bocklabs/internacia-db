@@ -1,18 +1,40 @@
 DATA QUALITY ANALYSIS REPORT
 ================================================================================
-Generated: 2026-09-16 12:21:55
-Total Records Analyzed: 1528
-Total Issues Found: 0
-Records with Issues: 0
+Generated: 2026-10-16 15:18:51
+Total Records Analyzed: 1525
+Total Issues Found: 2
+Records with Issues: 2
 
 === ISSUES BY TYPE ===
+
+[MISSING_SCOPE_CATEGORY]
+Count: 2
+Priority: LOW
+
+File: data/intblocks/humanitarian/MSF.yaml
+Record ID: MSF
+Country: CH
+Issue: MISSING_SCOPE_CATEGORY
+Field: scope_category
+Current Value:
+Suggested Action: formal record missing scope_category (see docs/intblock-inclusion-policy.md)
+
+File: data/intblocks/telecom/CANTO.yaml
+Record ID: CANTO
+Country: TT
+Issue: MISSING_SCOPE_CATEGORY
+Field: scope_category
+Current Value:
+Suggested Action: formal record missing scope_category (see docs/intblock-inclusion-policy.md)
 
 
 === SUMMARY BY ISSUE TYPE ===
 
+MISSING_SCOPE_CATEGORY (LOW): 2 issues
 
 === SUMMARY BY PRIORITY ===
 
+LOW: 2 issues
 
 === RECORDS WITH MULTIPLE ISSUES (3+) ===
 

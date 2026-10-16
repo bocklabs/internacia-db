@@ -2,6 +2,7 @@ id: EUROPOL
 blocktype:
 - police
 status: formal
+scope_category: igo
 partof: EU
 languages:
 - en
@@ -163,6 +164,10 @@ other_names:
   name: 欧洲刑警组织
 wikidata_id: Q207203
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

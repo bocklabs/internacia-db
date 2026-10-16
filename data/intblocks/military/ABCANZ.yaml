@@ -38,9 +38,10 @@ membership_count: 5
 legal_status: intergovernmental
 regions:
 - worldwide
-description: Formal program of the American, British, Canadian, Australian, and New Zealand
-  armies (plus the United States Marine Corps and Royal Marines) that optimizes coalition
-  interoperability and standardization of training and equipment among Five Eyes land forces.
+description: Formal program of the American, British, Canadian, Australian, and New
+  Zealand armies (plus the United States Marine Corps and Royal Marines) that optimizes
+  coalition interoperability and standardization of training and equipment among Five
+  Eyes land forces.
 acronyms:
 - lang: en
   value: ABCANZ
@@ -53,6 +54,7 @@ tags:
 - interoperability
 - military
 - security
+- ABCZNZ
 topics:
 - key: military
   name: Military
@@ -73,8 +75,8 @@ other_names:
 - id: ru
   name: Программа ABCA
 notes: Established in 1947 among the United States, United Kingdom, and Canada; Australia
-  joined in 1963; New Zealand was an observer from 1965 and became a full member in 2006.
-  The United States Army hosts the permanent Program Office.
+  joined in 1963; New Zealand was an observer from 1965 and became a full member in
+  2006. The United States Army hosts the permanent Program Office.
 last_verified: '2026-07-16'
 provenance:
 - field: description

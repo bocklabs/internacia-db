@@ -6,6 +6,10 @@ Polars / Parquet twin: [query-examples-polars.md](query-examples-polars.md).
 R / dplyr twin: [query-examples-r.md](query-examples-r.md).
 Observable / Plot twin: [query-examples-observable.md](query-examples-observable.md).
 
+Expected results describe the current repository artifacts, including unreleased
+corrections. Check manifests for the dataset version and refresh expectations
+when rebuilding changed data.
+
 **DuckDB struct lists:** use `UNNEST(column) AS t(row)` and reference `row.field` (e.g.
 `UNNEST(i.includes) AS t(m)` then `m.id`, `m.type`).
 
@@ -26,9 +30,10 @@ ORDER BY name;
 
 **Expected:** 193 rows.
 
-**Gotcha:** `un_member` is a country-level boolean. The `UN` intblock roster (193 country
-entries via `includes`) can differ slightly — use the flag for a simple filter, or unnest
-the `UN` intblock when you need roster metadata (`status`, `joined`).
+**Gotcha:** `un_member` is a country-level boolean. The `UN` intblock has 193 full
+members and two observer seats. Use the flag for a simple filter; when querying
+roster metadata (`status`, `joined`), select `member` / `founding_member` explicitly
+for full membership.
 
 ### Current ISO countries only (249)
 
@@ -268,7 +273,7 @@ WHERE len(borders) = 0
 ORDER BY name;
 ```
 
-**Expected:** 93 rows. Empty list, not `NULL`.
+**Expected:** 92 rows. Empty list, not `NULL`.
 
 ## Intblocks and membership
 
@@ -284,7 +289,7 @@ WHERE m.id = 'LA' AND m.type = 'country'
 ORDER BY i.name;
 ```
 
-**Expected:** 187 rows (ASEAN, UN agencies, trade agreements, sports federations, etc.).
+**Expected:** 249 rows (ASEAN, UN agencies, trade agreements, sports federations, etc.).
 
 Filter to a bloc:
 
@@ -340,7 +345,7 @@ WHERE bt.id = 'trade'
 ORDER BY i.name;
 ```
 
-**Expected:** 8 rows.
+**Expected:** 19 rows.
 
 ### Formal organizations headquartered in Switzerland
 
@@ -351,7 +356,7 @@ WHERE headquarters.country = 'CH' AND status = 'formal'
 ORDER BY name;
 ```
 
-**Expected:** 51 rows (~46% of intblocks have headquarters populated).
+**Expected:** 123 rows.
 
 ### Child organizations of the UN
 
@@ -362,15 +367,15 @@ WHERE list_contains(partof, 'UN')
 ORDER BY name;
 ```
 
-**Expected:** 30 rows.
+**Expected:** 42 rows.
 
 ### Multilingual intblock names
 
 ```sql
-SELECT id, name, onm.name AS translated_name, onm.id AS lang
-FROM intblocks, UNNEST(other_names) AS onm
+SELECT i.id, i.name, onm.name AS translated_name, onm.id AS lang
+FROM intblocks i, UNNEST(i.other_names) AS t(onm)
 WHERE onm.id = 'fr'
-ORDER BY id
+ORDER BY i.id
 LIMIT 20;
 ```
 
@@ -390,7 +395,7 @@ WHERE c.un_member = true
 ORDER BY c.name;
 ```
 
-**Expected:** 165 rows.
+**Expected:** 166 rows.
 
 ### Countries in both NATO and EU
 
@@ -421,11 +426,12 @@ SELECT
   (SELECT COUNT(*) FROM countries WHERE un_member = true) AS un_member_flag,
   (SELECT COUNT(*)
    FROM intblocks i, UNNEST(i.includes) AS t(m)
-   WHERE i.id = 'UN' AND m.type = 'country') AS un_intblock_roster;
+   WHERE i.id = 'UN' AND m.type = 'country'
+     AND m.status IN ('member', 'founding_member')) AS un_intblock_roster;
 ```
 
-**Expected:** 193 vs 193 — both surfaces should agree; if they diverge, pick one and
-document your choice.
+**Expected:** 193 vs 193 full members. Omitting the status filter returns 195 roster
+entries because the UN also records two observer seats.
 
 ### Near-universal UN coverage without China, the US, or both
 
@@ -963,7 +969,7 @@ ORDER BY ABS(membership_count - len(includes)) DESC, id
 LIMIT 20;
 ```
 
-**Expected:** 174 mismatches total; largest positive deltas are non-country memberships
+**Expected:** 20 displayed rows out of 175 mismatches total; largest positive deltas are non-country memberships
 counted in `membership_count` (e.g. `IGA`, `WNA`). Records where the count measures
 institutions, companies, or individuals rather than countries declare it via
 `membership_count_type` and are exempt from the roster-comparison validation rule.
@@ -989,7 +995,7 @@ ORDER BY i.id, m.id
 LIMIT 20;
 ```
 
-**Expected:** 1560 mismatches total (advisory); examples include `CD` labeled
+**Expected:** 20 displayed rows out of 1555 mismatches total (advisory); examples include `CD` labeled
 "Congo, The Democratic Republic of the" vs canonical "Congo, Dem. Rep.".
 
 **Gotcha:** Mismatches are **not errors** — always join on `includes[].id`, never on
@@ -1020,7 +1026,7 @@ GROUP BY headquarters.city, headquarters.country
 ORDER BY org_count DESC;
 ```
 
-**Expected:** Geneva/CH (39), New York/US (19), Vienna/AT (16).
+**Expected:** Geneva/CH (104), Vienna/AT (32), New York/US (19).
 
 ### Organizations by topic
 
@@ -1169,10 +1175,10 @@ ORDER BY 1;
 ### Former members with departure year
 
 ```sql
-SELECT intblock_id, country_code, joined, left
+SELECT intblock_id, country_code, joined, "left"
 FROM memberships
-WHERE status = 'former_member' AND left IS NOT NULL
-ORDER BY left DESC, intblock_id
+WHERE status = 'former_member' AND "left" IS NOT NULL
+ORDER BY "left" DESC, intblock_id
 LIMIT 20;
 ```
 
@@ -1197,15 +1203,19 @@ WHERE predecessor IS NOT NULL OR successor IS NOT NULL
 ORDER BY id;
 ```
 
-**Expected:** 24 rows.
+**Expected:** 25 rows.
 
 ## Cookbook coverage (parity policy)
 
-- **DuckDB** ([query-examples.md](query-examples.md)) is canonical. Every recipe with an
-  **Expected:** count is executed in `tests/test_documented_queries.py`.
+- **DuckDB** ([query-examples.md](query-examples.md)) is canonical. Core SQL scenarios
+  and expected values are covered by `tests/test_documented_queries.py`; the tests
+  do not execute every fenced Markdown example. Run edited snippets directly and
+  refresh their expectations when documentation or data changes.
 - **Polars / R** cover the same core scenarios (country filters, borders, membership,
-  former members, overlap). They are not required to clone every advanced DuckDB recipe.
-- **Observable** covers visualization of that core set.
+  former members, overlap). Selected Polars scenarios run in
+  `tests/test_documented_queries_polars.py`; R snippets are not run by Python CI.
+- **Observable** covers visualization of that core set. Embedded SQL can be checked
+  against DuckDB; browser rendering is not exercised by Python CI.
 - **Chinese** ([query-examples.zh.md](query-examples.zh.md)) covers Chinese-name lookups
   plus the core scenarios; it is a maintained subset, not a full translation.
   `ai-consumers.md` and the data dictionary remain English-canonical.

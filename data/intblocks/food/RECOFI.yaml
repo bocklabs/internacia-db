@@ -3,6 +3,7 @@ name: Regional Commission for Fisheries
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1999-11-11'
 active_period:
@@ -126,6 +127,10 @@ wikidata_id: Q134724812
 notes: All eight Gulf and Sea of Oman coastal states signed the 1999 agreement; acceptance instruments were deposited between July 2000 and October 2008, with Qatar, Saudi Arabia, and the United Arab Emirates triggering entry into force on 26 February 2001. Bahrain and Iraq were the last to accept; Kuwait participated in the first session in October 2001 before depositing acceptance in 2006. Subsidiary bodies include the Working Group on Fisheries Management and the Working Group on Aquaculture.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO; ECOLEX treaty status
   retrieved_at: '2026-07-29'

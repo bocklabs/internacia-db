@@ -4,6 +4,7 @@ blocktype:
 - scientific
 - space
 status: formal
+scope_category: igo
 languages:
 - en
 links:
@@ -178,6 +179,10 @@ other_names:
 - id: zh
   name: 欧洲空间局
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

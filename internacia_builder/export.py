@@ -321,7 +321,8 @@ def write_datapackage(output_dir: Path, version: str) -> None:
             continue
         resources.append(
             {
-                "name": name,
+                "name": f"{name}-{fmt}",
+                "table": name,
                 "path": path,
                 "format": fmt,
                 "mediatype": {
@@ -345,6 +346,15 @@ def write_datapackage(output_dir: Path, version: str) -> None:
     out = output_dir / "datapackage.json"
     out.write_text(json.dumps(package, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     typer.echo(f"✓ Saved datapackage: {out}")
+
+
+def write_dataset_card(output_dir: Path, counts: dict[str, int]) -> None:
+    """Render the maintained distribution-card template with current counts."""
+    template = project_root() / "templates" / "dataset-card.md"
+    text = template.read_text(encoding="utf-8")
+    for dataset, count in counts.items():
+        text = text.replace("{{" + dataset + "_count}}", str(count))
+    (output_dir / "README.md").write_text(text, encoding="utf-8")
 
 def load_yaml_files(directory: Path, desc: str = "Loading files") -> list[dict[str, Any]]:
     """Load all YAML files from a directory (including subdirectories).
@@ -404,8 +414,9 @@ def build_membership_rows(intblocks_data: list[dict[str, Any]]) -> list[dict[str
     """Flatten country-coded includes entries into one membership edge per row.
 
     Organization-type entries are excluded: their ids reference intblocks,
-    not countries. country / territory / historical-country entries all join
-    against ``countries.code``.
+    not countries. Country/territory entries join against ``countries.code``;
+    historical-country entries may use the explicit historical registry instead.
+    Use a left join when preserving historical membership edges.
     """
     rows: list[dict[str, Any]] = []
     for record in intblocks_data:

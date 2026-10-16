@@ -1,12 +1,13 @@
 """Smoke tests for SQL examples documented in docs/query-examples.md."""
 
 import re
-from pathlib import Path
 
 import duckdb
 import pytest
 
-DUCKDB_PATH = Path(__file__).resolve().parents[1] / "data" / "datasets" / "internacia.duckdb"
+from internacia_builder.paths import datasets_dir, project_root
+
+DUCKDB_PATH = datasets_dir() / "internacia.duckdb"
 
 pytestmark = pytest.mark.skipif(
     not DUCKDB_PATH.is_file(),
@@ -447,7 +448,7 @@ ADDITIONAL_RECIPES = [
         SELECT COUNT(*) FROM intblocks
         WHERE membership_count IS NOT NULL AND len(includes) > 0 AND membership_count != len(includes)
         """,
-        174,
+        175,
         set(),
     ),
     (
@@ -457,7 +458,7 @@ ADDITIONAL_RECIPES = [
         WHERE m.type='country' AND m.name IS NOT NULL AND m.name != c.name
           AND NOT list_contains(c.common_names, m.name)
         """,
-        1560,
+        1555,
         set(),
     ),
     (
@@ -644,7 +645,7 @@ def test_schema_property_descriptions_complete():
     """llms.txt claims every schema property has a description; enforce it."""
     import json
 
-    schemas_dir = DUCKDB_PATH.parents[1] / "schemas"
+    schemas_dir = project_root() / "data" / "schemas"
     for name in ("countries.schema.json", "intblocks.schema.json"):
         schema = json.loads((schemas_dir / name).read_text(encoding="utf-8"))
         missing = [

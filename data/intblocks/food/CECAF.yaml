@@ -3,6 +3,7 @@ name: Fishery Committee for the Eastern Central Atlantic
 blocktype:
 - food
 status: formal
+scope_category: igo
 partof: FAO
 founded: '1967-06'
 active_period:
@@ -219,6 +220,10 @@ wikidata_id: Q12617572
 notes: CECAF replaced the inactive Regional Fisheries Commission for Western Africa. A Scientific Sub-Committee was established in 1998 to provide science-based advice; working groups cover small pelagic, demersal, and artisanal fisheries. Ordinary sessions are normally biennial (22nd session, Libreville, September 2019). Membership is by Director-General selection rather than open accession; Angola later joined the coastal roster after independence-era exclusion from the original southern limit at the Congo mouth.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO CECAF; FAO regional fishery bodies overview
   retrieved_at: '2026-07-29'

@@ -1,11 +1,15 @@
 # Query examples (R / dplyr)
 
-Verified [dplyr](https://dplyr.tidyverse.org/) recipes against Parquet exports under
+[dplyr](https://dplyr.tidyverse.org/) recipes against Parquet exports under
 `data/datasets/`, using [arrow](https://arrow.apache.org/docs/r/) for I/O.
 For scope, join keys, and field semantics see [ai-consumers.md](ai-consumers.md).
 DuckDB / SQL twin: [query-examples.md](query-examples.md).
 Polars twin: [query-examples-polars.md](query-examples-polars.md).
 Observable / Plot twin: [query-examples-observable.md](query-examples-observable.md).
+
+Expected results match the current repository data and corresponding SQL/Polars
+scenarios, including unreleased corrections. R snippets are not run by Python CI;
+see the [cookbook coverage policy](query-examples.md#cookbook-coverage-parity-policy).
 
 **Arrow struct and list fields:** after `collect()`, struct columns are data frames
 (access with `$`); list columns work with `tidyr::unnest_longer` / `lengths()` /
@@ -58,9 +62,9 @@ countries |>
 
 **Expected:** 193 rows.
 
-**Gotcha:** `un_member` is a country-level boolean. The `UN` intblock roster can differ
-slightly — use the flag for a simple filter, or filter `memberships` on
-`intblock_id == "UN"` when you need roster metadata (`status`, `joined`).
+**Gotcha:** `un_member` is a country-level boolean. The `UN` intblock has 193 full
+members and two observer seats. Filter `memberships` by `intblock_id == "UN"`
+and status `member` / `founding_member` for full-member roster metadata.
 
 ### Current ISO countries only (249)
 
@@ -403,7 +407,7 @@ memberships |>
   collect()
 ```
 
-**Expected:** 191 rows.
+**Expected:** 249 rows.
 
 ASEAN roster:
 
@@ -462,7 +466,7 @@ intblocks |>
   arrange(name)
 ```
 
-**Expected:** 11 rows.
+**Expected:** 19 rows.
 
 Or join the taxonomy table after unnesting `blocktype`:
 
@@ -490,7 +494,7 @@ intblocks |>
   collect()
 ```
 
-**Expected:** 58 rows.
+**Expected:** 123 rows.
 
 ### Child organizations of the UN
 
@@ -502,7 +506,7 @@ intblocks |>
   arrange(name)
 ```
 
-**Expected:** 37 rows.
+**Expected:** 42 rows.
 
 ### Multilingual intblock names
 
@@ -578,11 +582,14 @@ countries |>
 ```r
 flag_n <- countries |> filter(un_member) |> collect() |> nrow()
 roster_n <- memberships |>
-  filter(intblock_id == "UN", include_type == "country") |>
+  filter(intblock_id == "UN", include_type == "country",
+         status %in% c("member", "founding_member")) |>
   collect() |>
   nrow()
 c(flag_n, roster_n)  # both 193
 ```
+
+Without the status filter, the UN roster has 195 entries, including two observers.
 
 ### Organizations a country belongs to
 
@@ -818,10 +825,13 @@ Prefer **lite** exports for retrieval corpora; hydrate full records by primary k
 lite <- read_parquet("data/datasets/intblocks-lite.parquet")
 rows <- lite |>
   filter(status == "formal", scope_category == "igo") |>
+  left_join(intblocks |> select(id, description), by = "id") |>
   transmute(id, name, text = coalesce(description, "")) |>
   collect()
 # Embed paste0(id, ": ", name, ". ", substr(text, 1, 500)) then retrieve; join full row on id.
 ```
+
+Lite exports omit `description`; the join above hydrates it from the full table.
 
 Countries lite path for entity linking:
 

@@ -4,6 +4,7 @@ blocktype:
 - customs
 - cuscurr
 status: formal
+scope_category: igo
 founded: '1994-03-16'
 active_period:
   start: '1999-06-25'
@@ -134,6 +135,10 @@ other_names:
 - id: zh
   name: 中部非洲经济与货币共同体
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'

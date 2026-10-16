@@ -883,28 +883,34 @@ def validate_intblock_refs(
 ) -> list[dict[str, Any]]:
     errors = []
     allowlist = set(completeness_cfg.get("special_entity_allowlist") or [])
+    historical_ids = set(completeness_cfg.get("historical_entities") or {})
     issue_type = "UNRESOLVED_COUNTRY_INCLUDE"
 
     for path, data in zip(intblocks_paths, intblocks_records, strict=False):
         record_id = data.get("id", "unknown")
         for inc in data.get("includes") or []:
-            if not isinstance(inc, dict) or inc.get("type") != "country":
+            if not isinstance(inc, dict) or inc.get("type") not in {"country", "territory", "historical-country"}:
                 continue
             raw_id = inc.get("id", "")
             if isinstance(raw_id, bool):
                 continue
             cid = str(raw_id).strip()
-            if not ALPHA2_RE.match(cid):
-                continue
             country_file = countries_dir / f"{cid}.yaml"
-            if country_file.exists() or cid in allowlist:
+            historical = inc.get("type") == "historical-country"
+            if country_file.exists() or (cid in historical_ids if historical else cid in allowlist):
+                if historical and data.get("status") != "historical" and inc.get("status") in {
+                    "member", "founding_member", "associate_member", "associate", "associated", "participant"
+                }:
+                    errors.append({"issue_type": "HISTORICAL_ENTITY_ACTIVE_MEMBER", "field": "includes.status",
+                                   "current_value": cid, "file_path": path, "record_id": record_id,
+                                   "suggested_action": f"Historical-country '{cid}' must not have an active membership status"})
                 continue
 
             errors.append({
-                "issue_type": issue_type,
+                "issue_type": "UNRESOLVED_HISTORICAL_INCLUDE" if historical else issue_type,
                 "field": "includes",
                 "current_value": cid,
-                "suggested_action": f"Country include '{cid}' does not match any valid country file",
+                "suggested_action": f"{'Historical-country' if historical else 'Country/territory'} include '{cid}' does not resolve to a country or the explicit historical registry",
                 "file_path": path,
                 "record_id": record_id
             })

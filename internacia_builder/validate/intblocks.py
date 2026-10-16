@@ -242,19 +242,8 @@ def validate_scope_category(
     records: list[tuple[str, dict[str, Any]]],
 ) -> list[str]:
     """Warn when formal records lack scope_category (non-blocking)."""
-    warnings: list[str] = []
-    allowed = {"igo", "treaty_body", "policy_forum", "reference_enumeration"}
-    for rel, rec in records:
-        cat = rec.get("scope_category")
-        if cat and str(cat) not in allowed:
-            warnings.append(f"{rel}: unknown scope_category '{cat}'")
-            continue
-        if rec.get("status") == "formal" and not cat:
-            warnings.append(
-                f"{rel}: formal record missing scope_category "
-                "(see docs/intblock-inclusion-policy.md)"
-            )
-    return warnings
+    return [f"{rel}: {issue['suggested_action']}" for rel, rec in records
+            for issue in intblock_rules.check_intblock_scope_category(rec)]
 
 
 def validate_last_verified(
@@ -416,6 +405,9 @@ def run_validation(
     warnings.extend(validate_membership_consistency(records, completeness_cfg))
     warnings.extend(validate_last_verified(records, completeness_cfg))
     warnings.extend(validate_scope_category(records))
+    errors.extend(issue["suggested_action"] for issue in intblock_rules.check_scope_coverage(
+        [rec for _, rec in records], completeness_cfg
+    ))
     warnings.extend(validate_text_encoding(records))
 
     rel_paths_all = [rel for rel, _ in records]
@@ -467,6 +459,8 @@ def run_validation(
                 countries_by_code[str(country["code"])] = country
         rel_paths = [rel for rel, _ in records]
         recs = [rec for _, rec in records]
+        errors.extend(f"{issue['file_path']}: {issue['suggested_action']}"
+                      for issue in cross_rules.validate_intblock_refs(countries_dir, recs, rel_paths, countries_cfg))
         warnings.extend(
             f"{issue['file_path']}: {issue['suggested_action']}"
             for issue in cross_rules.check_hq_country(

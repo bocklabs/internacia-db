@@ -3,6 +3,7 @@ name: Pacific Alliance
 blocktype:
 - trade
 status: formal
+scope_category: igo
 founded: '2011-04-28'
 active_period:
   start: '2012-06-06'
@@ -363,6 +364,10 @@ other_names:
 - id: zh
   name: 太平洋联盟
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -2,6 +2,7 @@ id: AMERIPOL
 blocktype:
 - police
 status: formal
+scope_category: igo
 languages:
 - es
 - en
@@ -164,6 +165,10 @@ other_names:
   name: Ameripol
 wikidata_id: Q2087942
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

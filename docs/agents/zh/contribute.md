@@ -22,7 +22,7 @@ English: [../contribute.md](../contribute.md)
 
 - 必填：`code`, `name`, `iso3code`, `numeric_code`, `entity_type`, `code_status`
 - 非 ISO code：需明确 `code_status`（`user_assigned`、`obsolete`）及 `recognition_status`
-- `population`/`area`/`gini`：结构体 `{value, year, source, source_id}` — 未知年份用 `null`，**禁止 `year: 0`**
+- `population`/`area`/`gini`：结构体 `{value, year, source, source_id}` — 源 YAML 中未知年份省略 `year`，导出数据中用 `null`，**禁止 `year: 0`**
 - `borders`：**alpha-3** 邻国代码（如 `CAN`、`MEX`），非 alpha-2
 - 富化字段需添加 `provenance`（建议每条记录至少 4 条；不足时校验器会报 `INSUFFICIENT_PROVENANCE`，阈值见 `data/schemas/*_completeness.yaml`）
 - 挪威代码 `'NO'`、挪威语 `'no'` 在 YAML 中须加引号，否则被解析为布尔值
@@ -41,17 +41,26 @@ English: [../contribute.md](../contribute.md)
 - 已解散组织：`status: historical` + `dissolved` 日期；不要编造成员列表
 - `last_verified`：对照官方名录核对当天的 `YYYY-MM-DD`（12 个月顾问 SLA）
 - 新 blocktype 须先加入 `data/blocktypes/blocktypes.yaml`
-- 完整逐步示例：[add-intblock-example.md](../add-intblock-example.md)`
+- 完整逐步示例：[add-intblock-example.md](../add-intblock-example.md)
 
 ## 提交 PR 前校验
 
 ```bash
 python scripts/validate_countries.py --json   # 退出码 0 = 无错误；1 = 有错误（警告默认不失败）
 python scripts/validate_intblocks.py --json
+python scripts/builder.py build             # 重新生成全部格式
+python scripts/check_generated_artifacts.py
 pytest tests/
 ruff check internacia_builder/ scripts/ tests/
-python scripts/builder.py build --formats parquet,duckdb
+python scripts/generate_data_dictionary.py --check
+python scripts/check_doc_counts.py
+python scripts/check_markdown_links.py
 ```
+
+源数据变更须连同重新生成的 `data/datasets/` 一起提交，禁止手改导出文件。
+部分格式构建不会更新 JSONL/YAML，不能替代完整构建。新增或删除记录时，
+同步更新文档中的当前记录数和受影响的查询预期结果。CI 先检查已提交的导出数据，
+再构建 `.ci-datasets` 并对该目录运行测试。
 
 ## Schema 或破坏性变更
 

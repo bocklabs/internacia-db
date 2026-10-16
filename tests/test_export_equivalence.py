@@ -15,10 +15,10 @@ import yaml
 import zstandard
 
 from internacia_builder import build as builder
-from internacia_builder.paths import project_root
+from internacia_builder.paths import datasets_dir
 
 DATASETS = {"countries": "code", "intblocks": "id", "blocktypes": "id"}
-DATASETS_DIR = project_root() / "data" / "datasets"
+DATASETS_DIR = datasets_dir()
 
 
 def _read_jsonl_zst(path):

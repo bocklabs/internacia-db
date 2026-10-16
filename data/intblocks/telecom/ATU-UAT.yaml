@@ -3,6 +3,7 @@ name: African Telecommunications Union
 blocktype:
 - telecom
 status: formal
+scope_category: igo
 partof: AFUNION
 founded: '1999-12-07'
 active_period:
@@ -290,6 +291,10 @@ notes: Member states are African governments that have signed, ratified, or acce
   the Union also has associate members from the private ICT sector, which are not listed here.
 last_verified: '2026-07-30'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: official sources
   retrieved_at: '2026-07-30'

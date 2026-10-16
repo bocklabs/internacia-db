@@ -8,7 +8,7 @@ Works with Cursor, Claude Code, Copilot, Codex, and any agent with file or API a
 1. Read [llms.txt](../../llms.txt) for join keys and gotchas (compact index).
 2. Use exported datasets — **do not parse** `data/countries/*.yaml` or `data/intblocks/**/*.yaml` unless authoring.
 3. Full consumption contract: [ai-consumers.md](../ai-consumers.md).
-4. Verified recipes: [query-examples.md](../query-examples.md) (DuckDB),
+4. Query recipes: [query-examples.md](../query-examples.md) (DuckDB),
    [query-examples-polars.md](../query-examples-polars.md) (Polars / Parquet),
    [query-examples-r.md](../query-examples-r.md) (R / dplyr),
    [query-examples-observable.md](../query-examples-observable.md) (Observable / Plot).

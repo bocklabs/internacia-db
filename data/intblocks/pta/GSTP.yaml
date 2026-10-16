@@ -2,6 +2,7 @@ id: GSTP
 blocktype:
 - pta
 status: formal
+scope_category: treaty_body
 founded: '1988-04-13'
 active_period:
   start: '1989-04-19'
@@ -256,6 +257,10 @@ other_names:
 notes: Former participants include Colombia (withdrew 2017), Romania (withdrew upon EU accession in 2007), and Yugoslavia (until dissolution). Mercosur participates as a single contracting party alongside its member states Argentina, Brazil, Paraguay, and Uruguay. The São Paulo Round Protocol of December 2010 envisaged an across-the-board 20% tariff reduction but requires ratification by at least four signatories before entering into force; as of 2026 Argentina, Brazil, Cuba, India, Malaysia, and Uruguay have ratified.
 last_verified: '2026-07-30'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: official sources
   retrieved_at: '2026-07-30'

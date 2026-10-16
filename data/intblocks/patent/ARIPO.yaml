@@ -3,6 +3,7 @@ name: African Regional Intellectual Property Organization
 blocktype:
 - patent
 status: formal
+scope_category: igo
 founded: '1976-12-09'
 geographic_scope: regional
 regions:
@@ -185,6 +186,10 @@ other_names:
   name: 非洲区域知识产权组织
 last_verified: '2026-07-30'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: WIPO Lex
   retrieved_at: '2026-07-30'

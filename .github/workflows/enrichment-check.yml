@@ -36,8 +36,8 @@ jobs:
         id: enrich
         run: |
           set -e
-          python scripts/enrich_countries.py enrich 2>&1 | tee -a enrichment-check-report.txt || true
-          python scripts/enrich_intblocks.py enrich 2>&1 | tee -a enrichment-check-report.txt || true
+          python scripts/enrich_countries.py enrich 2>&1 | tee -a enrichment-check-report.txt
+          python scripts/enrich_intblocks.py enrich 2>&1 | tee -a enrichment-check-report.txt
           if git diff --quiet -- data/countries data/intblocks; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No enrichment diffs" | tee -a enrichment-check-report.txt
@@ -47,7 +47,16 @@ jobs:
             git diff --stat -- data/countries data/intblocks | tee -a enrichment-check-report.txt
           fi
 
+      - name: Validate and rebuild changed sources
+        if: steps.enrich.outputs.changed == 'true'
+        run: |
+          python scripts/builder.py build
+          python scripts/check_generated_artifacts.py
+          python scripts/builder.py analyze-quality --output dataquality
+          python scripts/check_quality_report.py dataquality/full_report.jsonl
+
       - name: Upload report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: enrichment-check-report
@@ -64,6 +73,11 @@ jobs:
           branch: chore/monthly-enrichment
           title: "chore(data): monthly enrichment refresh"
           labels: enrichment
+          add-paths: |
+            data/countries
+            data/intblocks
+            data/datasets
+            dataquality
           body: |
             Automated monthly enrichment from `enrichment-check.yml`.
 

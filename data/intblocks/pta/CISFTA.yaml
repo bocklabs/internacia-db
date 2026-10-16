@@ -2,6 +2,7 @@ id: CISFTA
 blocktype:
 - pta
 status: formal
+scope_category: treaty_body
 founded: '2011-10-18'
 active_period:
   start: '2012-09-20'
@@ -124,6 +125,10 @@ other_names:
 notes: Russia suspended application of the CIS FTA with respect to Ukraine from 1 January 2016; Ukraine responded with reciprocal trade restrictions on Russia from 2 January 2016, but bilateral FTA provisions with other CIS FTA parties remain in effect. Uzbekistan applies the agreement under a separate protocol and, as of 2024, had not yet acceded to the 2009 rules of origin, continuing to apply the 1993 rules instead. A draft bill to denounce the treaty was introduced in the Verkhovna Rada in November 2022 but had not completed the denunciation process as of mid-2026. Azerbaijan is the only full CIS member that is not a party to the agreement. Services, establishment, and investment among a subset of CIS states are a later instrument recorded as `CISFTASERVICES`.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: official sources
   retrieved_at: '2026-07-29'

@@ -50,6 +50,7 @@ from internacia_builder.export import (
     save_parquet,
     save_yaml_zst,
     write_datapackage,
+    write_dataset_card,
 )
 from internacia_builder.manifest import (
     begin_build_context,
@@ -138,8 +139,10 @@ from internacia_builder.validate.intblock_rules import (
     check_intblock_links,
     check_intblock_membership_consistency,
     check_intblock_schema,
+    check_intblock_scope_category,
     check_intblock_text_encoding,
     check_intblock_topics,
+    check_scope_coverage,
 )
 from internacia_builder.validate.intblocks import load_topic_aliases, load_topic_catalog
 from internacia_builder.validate.intblocks import run_validation as run_intblocks_validation
@@ -367,6 +370,7 @@ def build(
     )
 
     write_datapackage(output_dir, get_dataset_version())
+    write_dataset_card(output_dir, {"countries": len(countries_data), "intblocks": len(intblocks_data), "blocktypes": len(blocktypes_data)})
 
     typer.echo("\n✅ All datasets generated successfully!")
     typer.echo(f"📂 Output location: {output_dir}")
@@ -608,6 +612,7 @@ def analyze_quality(
             record_issues = []
 
             record_issues.extend(check_intblock_schema(record, schema_intblocks))
+            record_issues.extend(check_intblock_scope_category(record))
             record_issues.extend(check_intblock_blocktypes(record, taxonomy))
             record_issues.extend(check_intblock_filename(record, rel_path))
             record_issues.extend(check_intblock_directory_alignment(record, rel_path))
@@ -778,6 +783,7 @@ def analyze_quality(
     ]
 
     cross_issues = []
+    cross_issues.extend(check_scope_coverage(intblock_records, completeness_cfg_intblocks))
     with tqdm(cross_checks, desc="Cross-record checks", unit="check") as bar:
         for label, check in bar:
             bar.set_postfix_str(label)

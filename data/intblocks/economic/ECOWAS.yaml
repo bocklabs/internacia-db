@@ -21,7 +21,8 @@ includes:
 - id: ML
   name: Mali
   type: country
-  status: member
+  status: former_member
+  left: '2025-01-29'
 - id: TG
   name: Togo
   type: country
@@ -33,7 +34,8 @@ includes:
 - id: BF
   name: Burkina Faso
   type: country
-  status: member
+  status: former_member
+  left: '2025-01-29'
 - id: GM
   name: Gambia
   type: country
@@ -61,7 +63,8 @@ includes:
 - id: NE
   name: Niger
   type: country
-  status: member
+  status: former_member
+  left: '2025-01-29'
 - id: NG
   name: Nigeria
   type: country
@@ -124,7 +127,7 @@ acronyms:
   value: CEDEAO
 - lang: pt
   value: ECOWAS
-membership_count: 15
+membership_count: 12
 wikidata_id: Q193272
 legal_status: intergovernmental
 official_documents:
@@ -135,7 +138,10 @@ social_media:
   facebook: https://www.facebook.com/Ecowas.Cedeao
   youtube: https://www.youtube.com/channel/UCJBEr-975-PKlVtgoms9Qvw
 description: Intergovernmental economic union.
-notes: Supplementary Act A/SA.3/12/08 (Community Rules on Investment) is annexed to the ECOWAS Treaty, entered into force on publication (19 January 2009), and binds ECOWAS member states as community legislation. It is not a separate intblock; join on `ECOWAS`.
+notes: Supplementary Act A/SA.3/12/08 (Community Rules on Investment) is annexed to
+  the ECOWAS Treaty, entered into force on publication (19 January 2009), and binds
+  ECOWAS member states as community legislation. It is not a separate intblock; join
+  on `ECOWAS`.
 tags:
 - CEDEAO
 - ECOWAS
@@ -209,3 +215,13 @@ provenance:
   source: official sources
   retrieved_at: '2026-06-15'
   url: https://www.ecowas.int/
+- field: includes
+  source: ECOWAS official withdrawal statement and current roster
+  retrieved_at: '2026-10-16'
+  url: https://www.ecowas.int/press-statement-2/
+- field: membership_count
+  source: ECOWAS official withdrawal statement and current roster
+  retrieved_at: '2026-10-16'
+  url: https://www.ecowas.int/press-statement-2/
+scope_category: igo
+last_verified: '2026-10-16'

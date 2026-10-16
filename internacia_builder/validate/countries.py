@@ -214,31 +214,25 @@ def validate_intblock_refs(
 ) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
-    allowlist = set(config.get("special_entity_allowlist") or [])
     mode = (config.get("unresolved_country_includes") or {}).get("mode", "warn")
 
     unresolved: dict[str, list[str]] = defaultdict(list)
 
+    records, paths = [], []
     for yaml_path in sorted(intblocks_dir.rglob("*.yaml")):
-        data = load_yaml(yaml_path)
         rel = str(yaml_path.relative_to(intblocks_dir.parent.parent))
-        for inc in data.get("includes") or []:
-            if not isinstance(inc, dict):
-                continue
-            if inc.get("type") != "country":
-                continue
-            raw_id = inc.get("id", "")
-            if isinstance(raw_id, bool):
-                continue
-            cid = str(raw_id).strip()
-            if not ALPHA2.match(cid):
-                continue
-            country_file = countries_dir / f"{cid}.yaml"
-            if country_file.exists():
-                continue
-            if cid in allowlist:
-                continue
-            unresolved[cid].append(rel)
+        try:
+            data = load_yaml(yaml_path)
+        except yaml.YAMLError as exc:
+            errors.append(f"{rel}: invalid intblock YAML: {exc}")
+            continue
+        records.append(data)
+        paths.append(rel)
+    for issue in cross_rules.validate_intblock_refs(countries_dir, records, paths, config):
+        if issue["issue_type"] != "UNRESOLVED_COUNTRY_INCLUDE":
+            errors.append(f"{issue['file_path']}: {issue['suggested_action']}")
+        else:
+            unresolved[issue["current_value"]].append(issue["file_path"])
 
     deferred = {k: v for k, v in unresolved.items() if k in DEFERRED_COUNTRY_IDS}
     other = {k: v for k, v in unresolved.items() if k not in DEFERRED_COUNTRY_IDS}

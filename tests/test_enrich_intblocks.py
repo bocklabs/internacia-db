@@ -1,6 +1,7 @@
 """Unit tests for enrich_intblocks pure logic (no network)."""
 
 import enrich_intblocks as ei
+import pytest
 
 
 def test_normalize_strips_punctuation_and_diacritics():
@@ -114,3 +115,27 @@ def test_stamp_last_verified_sets_iso_date():
     record = {}
     ei.stamp_last_verified(record)
     assert len(record["last_verified"]) == 10 and record["last_verified"][4] == "-"
+
+
+@pytest.mark.parametrize(("timestamp", "precision", "expected"), [
+    ("+1950-00-00T00:00:00Z", 9, "1950"),
+    ("+1950-01-01T00:00:00Z", 9, "1950"),
+    ("+1950-02-00T00:00:00Z", 10, "1950-02"),
+    ("+1950-02-28T00:00:00Z", 11, "1950-02-28"),
+    ("+1950-02-30T00:00:00Z", 11, None),
+    ("-0458-00-00T00:00:00Z", 9, None),
+])
+def test_inception_preserves_precision_and_rejects_invalid_calendar_dates(timestamp, precision, expected):
+    entity = {"claims": {"P571": [{"mainsnak": {"datavalue": {"value": {
+        "time": timestamp, "precision": precision,
+    }}}}]}}
+    assert ei.wikidata_inception_date(entity) == expected
+
+
+def test_metadata_enrichment_does_not_claim_roster_verification():
+    record = {"last_verified": "2020-01-01"}
+    entity = {"claims": {"P571": [{"mainsnak": {"datavalue": {"value": {
+        "time": "+1950-00-00T00:00:00Z", "precision": 9,
+    }}}}]}}
+    assert ei.enrich_founded(record, entity)
+    assert record["last_verified"] == "2020-01-01"

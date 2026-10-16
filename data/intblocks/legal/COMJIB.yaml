@@ -2,6 +2,7 @@ id: COMJIB
 blocktype:
 - legal
 status: formal
+scope_category: igo
 languages:
 - en
 - es
@@ -118,6 +119,10 @@ topics:
   name: Law
 wikidata_id: Q115799917
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-14'

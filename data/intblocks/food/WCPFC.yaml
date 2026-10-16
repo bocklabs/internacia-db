@@ -4,6 +4,7 @@ blocktype:
 - food
 - ocean
 status: formal
+scope_category: igo
 partof: FAO
 founded: '2004-06-19'
 active_period:
@@ -296,6 +297,10 @@ wikidata_id: Q2565027
 notes: The Convention was opened for signature at Honolulu on 5 September 2000; New Zealand is depositary. Chinese Taipei participates as a Member fishing entity under the Arrangement for the Participation of Fishing Entities (bound from 2 November 2004). Participating Territories (American Samoa, French Polynesia, Guam, New Caledonia, Northern Mariana Islands, Tokelau, Wallis and Futuna) lack full voting rights. Cooperating Non-Member status is granted annually; the 2026 official roster lists Bahamas, Curaçao, Ecuador, El Salvador, Liberia, Panama, Thailand, and Vietnam. State observers include Brunei Darussalam, Mexico, Nicaragua, and the United Kingdom. The Commission’s first regular session was held in December 2004; the permanent secretariat in Pohnpei became operational in 2005.
 last_verified: '2026-07-29'
 provenance:
+- field: scope_category
+  source: Internacia inclusion policy; classification from existing record evidence
+  retrieved_at: '2026-10-16'
+  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: WCPFC official sources
   retrieved_at: '2026-07-29'

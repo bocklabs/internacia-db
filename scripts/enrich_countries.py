@@ -13,6 +13,7 @@ from typing import Any
 import typer
 import yaml
 
+from internacia_builder.enrichment import write_enriched_yaml
 from internacia_builder.http import fetch_json as _fetch_json
 
 app = typer.Typer(help="Enrich country profile fields from World Bank and Wikidata")
@@ -144,8 +145,8 @@ def _fetch_world_bank_paginated(indicator_id: str) -> dict[str, dict[str, Any]]:
             url += f"&page={page}"
         try:
             payload = fetch_json(url)
-        except Exception:
-            break
+        except Exception as exc:
+            raise RuntimeError(f"Incomplete World Bank response for {indicator_id}, page {page}") from exc
         rows = payload[1] if len(payload) > 1 and payload[1] else []
         if not rows:
             break
@@ -360,7 +361,7 @@ def indicator_from_wb(
         val = float(val)
     return {
         "value": val,
-        "year": wb_row["year"],
+        **({"year": int(wb_row["year"])} if wb_row.get("year") else {}),
         "source": source,
         "source_id": source_id,
     }
@@ -390,11 +391,13 @@ def upsert_provenance(
     record["provenance"] = provenance
 
 
-def sync_provenance_from_record(record: dict[str, Any]) -> None:
+def sync_provenance_from_record(record: dict[str, Any], *, retrieved_fields: set[str] | None = None) -> None:
+    """Stamp only fields actually retrieved/applied in this run; never infer retrieval dates."""
+    retrieved_fields = retrieved_fields or set()
     today = date.today().isoformat()
     for field in ("population", "area", "gini"):
         ind = record.get(field)
-        if not isinstance(ind, dict) or not ind.get("source"):
+        if field not in retrieved_fields or not isinstance(ind, dict) or not ind.get("source"):
             continue
         src = str(ind["source"])
         sid = str(ind.get("source_id") or "")
@@ -403,7 +406,7 @@ def sync_provenance_from_record(record: dict[str, Any]) -> None:
             url = "https://www.wikidata.org/"
         upsert_provenance(record, field, src, url=url, retrieved_at=today)
 
-    if record.get("timezones") is not None:
+    if "timezones" in retrieved_fields and record.get("timezones") is not None:
         if record.get("timezone_status") == "not_applicable":
             upsert_provenance(record, "timezones", "not_applicable", retrieved_at=today)
         elif record.get("timezones"):
@@ -416,7 +419,7 @@ def sync_provenance_from_record(record: dict[str, Any]) -> None:
                 retrieved_at=today,
             )
 
-    if record.get("native_names"):
+    if "native_names" in retrieved_fields and record.get("native_names"):
         upsert_provenance(
             record,
             "native_names",
@@ -443,57 +446,30 @@ def enrich_record(
     if not record.get("wikidata_id") and qid:
         record["wikidata_id"] = qid
 
-    if force or not record.get("population"):
-        pop = indicator_from_wb(
-            wb["population"].get(iso3),
-            "World Bank",
-            "SP.POP.TOTL",
-        )
-        if not pop and code in UNINHABITED:
-            pop = {
-                "value": 0,
-                "year": 0,
-                "source": "uninhabited",
-                "source_id": "",
-            }
-        if not pop and entity:
-            wd_pop = wikidata_numeric_claim(entity, "P1082")
-            if wd_pop:
-                pop = {
-                    "value": int(wd_pop),
-                    "year": 0,
-                    "source": "Wikidata",
-                    "source_id": "P1082",
+    retrieved_fields: set[str] = set()
+    for field, (indicator_id, _) in WB_INDICATORS.items():
+        existing = record.get(field)
+        candidate = indicator_from_wb(wb.get(field, {}).get(iso3), "World Bank", indicator_id)
+        # Scheduled refreshes preserve curated sources and never regress observation years.
+        eligible = force or not existing or existing.get("source") == "World Bank"
+        if candidate and existing and not force:
+            eligible = eligible and (candidate.get("year") or 0) >= (existing.get("year") or 0)
+        if candidate and eligible:
+            if candidate != existing:
+                record[field] = candidate
+                retrieved_fields.add(field)
+        elif not existing:
+            prop = {"population": "P1082", "area": "P2046"}.get(field)
+            value = wikidata_numeric_claim(entity, prop) if prop and entity else None
+            if field == "population" and code in UNINHABITED:
+                record[field] = {"value": 0, "source": "uninhabited", "source_id": ""}
+                retrieved_fields.add(field)
+            elif value is not None:
+                record[field] = {
+                    "value": int(value) if field == "population" else value,
+                    "source": "Wikidata", "source_id": prop,
                 }
-        if pop:
-            record["population"] = pop
-
-    if force or not record.get("area"):
-        area = indicator_from_wb(
-            wb["area"].get(iso3),
-            "World Bank",
-            "AG.LND.TOTL.K2",
-        )
-        if not area and entity:
-            wd_area = wikidata_numeric_claim(entity, "P2046")
-            if wd_area:
-                area = {
-                    "value": wd_area,
-                    "year": 0,
-                    "source": "Wikidata",
-                    "source_id": "P2046",
-                }
-        if area:
-            record["area"] = area
-
-    if force or not record.get("gini"):
-        gini = indicator_from_wb(
-            wb["gini"].get(iso3),
-            "World Bank",
-            "SI.POV.GINI",
-        )
-        if gini:
-            record["gini"] = gini
+                retrieved_fields.add(field)
 
     if not record.get("region"):
         inferred = infer_wb_classification(record)
@@ -513,22 +489,30 @@ def enrich_record(
 
     ensure_classification_provenance(record)
 
-    if force or not record.get("timezones"):
+    old_timezones = record.get("timezones")
+    if force or not old_timezones:
         if code in TIMEZONE_NOT_APPLICABLE:
             record["timezones"] = []
             record["timezone_status"] = "not_applicable"
         elif code in MANUAL_TIMEZONES:
             record["timezones"] = MANUAL_TIMEZONES[code]
         else:
-            zones = tz_map.get(code, [])
-            record["timezones"] = zones
+            zones = tz_map.get(code)
+            if zones:
+                record["timezones"] = zones
             if "timezone_status" in record and record["timezone_status"] == "not_applicable":
                 del record["timezone_status"]
+
+    if record.get("timezones") != old_timezones:
+        retrieved_fields.add("timezones")
 
     if force or not record.get("native_names"):
         langs = lang_codes_for_record(record)
         if entity:
-            record["native_names"] = build_native_names(entity, langs)
+            names = build_native_names(entity, langs)
+            if names and names != record.get("native_names"):
+                record["native_names"] = names
+                retrieved_fields.add("native_names")
 
     if not record.get("common_names"):
         names: list[str] = []
@@ -550,7 +534,7 @@ def enrich_record(
         cc.setdefault("lat", 38.8895)
         cc.setdefault("lng", -77.032)
 
-    sync_provenance_from_record(record)
+    sync_provenance_from_record(record, retrieved_fields=retrieved_fields)
     return record
 
 
@@ -613,10 +597,7 @@ def enrich(
         if dry_run:
             typer.echo(f"would update {rel}")
         else:
-            path.write_text(
-                yaml.dump(data, sort_keys=False, allow_unicode=True, default_flow_style=False),
-                encoding="utf-8",
-            )
+            write_enriched_yaml(path, data, "countries")
             typer.echo(f"updated {rel}")
 
     typer.echo(f"done: {updated} record(s) {'would be ' if dry_run else ''}updated")
@@ -652,15 +633,12 @@ def backfill_gini(
         if not gini:
             continue
         record["gini"] = gini
-        sync_provenance_from_record(record)
+        sync_provenance_from_record(record, retrieved_fields={"gini"})
         updated += 1
         if dry_run:
             typer.echo(f"would update {path.relative_to(ROOT)}")
         else:
-            path.write_text(
-                yaml.dump(record, sort_keys=False, allow_unicode=True, default_flow_style=False),
-                encoding="utf-8",
-            )
+            write_enriched_yaml(path, record, "countries")
     typer.echo(f"done: {updated} gini record(s) {'would be ' if dry_run else ''}updated")
 
 
@@ -694,10 +672,7 @@ def backfill_classifications(
         if dry_run:
             typer.echo(f"would update {path.relative_to(ROOT)}")
         else:
-            path.write_text(
-                yaml.dump(record, sort_keys=False, allow_unicode=True, default_flow_style=False),
-                encoding="utf-8",
-            )
+            write_enriched_yaml(path, record, "countries")
     typer.echo(f"done: {updated} classification record(s) {'would be ' if dry_run else ''}updated")
 
 
@@ -718,10 +693,7 @@ def backfill_provenance(
         if dry_run:
             typer.echo(f"would update {path.relative_to(ROOT)}")
         else:
-            path.write_text(
-                yaml.dump(data, sort_keys=False, allow_unicode=True, default_flow_style=False),
-                encoding="utf-8",
-            )
+            write_enriched_yaml(path, data, "countries")
     typer.echo(f"done: {updated} provenance record(s) updated")
 
 
