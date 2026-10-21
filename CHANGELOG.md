@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Weekly roster watch (`.github/workflows/roster-watch.yml`, `scripts/roster_watch.py`,
+  `docs/roster-watch.md`): compares tier-1 rosters with Wikidata current memberships and keeps one
+  `roster-drift` issue per organization (opened, updated on change, closed when resolved). It
+  never edits data. The first run reports 19 of 29 organizations with differences, including a wrong
+  WTO `wikidata_id` (Q215524 is a village; WTO is Q7825).
 - `last_verified` KPI: never-verified and overdue intblocks overall (12-month window) and for the
   29 tier-1 organizations in the new `data/watch/rosters.yaml` (6-month window), written to
   `dataquality/last_verified_kpi.json`, printed by `scripts/last_verified_report.py` and added to

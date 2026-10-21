@@ -1,6 +1,6 @@
 # Tier-1 organizations: the most-used rosters. They get a stricter last_verified window
 # (quality.last_verified_tier1_max_age_months in data/schemas/intblocks_completeness.yaml)
-# and are compared with external sources by the roster watch.
+# and are compared with Wikidata every week by the roster watch (docs/roster-watch.md).
 #
 # Fields:
 #   id - intblock id (must exist in data/intblocks)
