@@ -40,7 +40,6 @@ Check version before upgrading: `SELECT dataset, version, schema_hash FROM _meta
 - Add socioeconomic profile fields to countries (HDI, GDP, government type, internet penetration, etc.)
 - Treat all 256 country codes as official ISO — filter on `code_status`
 - Assume missing World Bank `region` / `incomeLevel` is an error (8 entities are unclassified; `adminregion` is absent for 39 high-income economies by design)
-- Read `data/_legacy/` — obsolete pre-1.0 snapshots kept for historical reference only
 
 ## Validation (contributors)
 

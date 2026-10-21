@@ -61,7 +61,7 @@ def test_content_change_and_missing_descriptor_are_reported(dirs):
 def test_committed_patterns_match_gitignore():
     lines = (project_root() / ".gitignore").read_text().splitlines()
     negated = {line.removeprefix("!/data/datasets/") for line in lines if line.startswith("!/data/datasets/")}
-    assert negated - {"schema_baseline/"} == set(COMMITTED_PATTERNS)
+    assert negated == set(COMMITTED_PATTERNS)
     assert is_committed("intblocks.manifest.json")
     assert not is_committed("internacia.duckdb")
     assert not is_committed("countries.meta.json")

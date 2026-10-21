@@ -72,7 +72,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Historical planning',
-      items: ['improvement-plan', 'strategy-and-user-needs'],
+      items: ['strategy-and-user-needs'],
     },
   ],
 

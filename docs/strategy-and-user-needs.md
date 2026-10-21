@@ -6,7 +6,7 @@
 > **Consumers:** Dateno search engine, [internacia-api](https://github.com/datenoio/internacia-api), [internacia-python](https://github.com/datenoio/internacia-python)
 
 This document is a **product / user-needs strategy**, complementary to the engineering-focused
-[docs/improvement-plan.md](improvement-plan.md). The engineering plan (tests, validation parity,
+[docs/history/improvement-plan.md](history/improvement-plan.md). The engineering plan (tests, validation parity,
 pinned deps, release workflow, CONTRIBUTING) is largely **shipped in v1.3.0**; the remaining
 internal-quality backlog lives in `openspec/changes/`. This plan instead asks: **who uses this data,
 what do they actually need, and how should the project evolve to serve them.**
@@ -32,7 +32,7 @@ crosswalks, and distribution.
 
 **Normative companion docs:** [intblock-inclusion-policy.md](intblock-inclusion-policy.md),
 [entity-classification-policy.md](entity-classification-policy.md),
-[getting-started.md](getting-started.md). Do not use `data/_legacy/` (see its README).
+[getting-started.md](getting-started.md).
 
 ---
 

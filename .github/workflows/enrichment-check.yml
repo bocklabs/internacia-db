@@ -77,7 +77,6 @@ jobs:
             data/countries
             data/intblocks
             data/datasets
-            dataquality
           body: |
             Automated monthly enrichment from `enrichment-check.yml`.
 

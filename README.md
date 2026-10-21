@@ -444,7 +444,7 @@ Consumers can clone the repository or download versioned Release assets. See
 - All text files use UTF-8 encoding; generated outputs overwrite existing files.
 - Decompress zstd files: `zstd -d data/datasets/countries.jsonl.zst`
 - Gap analysis research: `dev/research/countries_gaps_manus_20260528.md`
-- `data/_legacy/` contains pre-1.0 Airtable JSON exports kept for reference only; nothing in the pipeline consumes them.
+- Historical reviews and plans: `docs/history/`.
 
 ## License
 

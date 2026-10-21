@@ -73,10 +73,7 @@ Each value in an intblock's `partof` list SHALL reference an existing intblock `
 
 ### Requirement: Identifier stability policy
 
-Country `code` and intblock `id` SHALL be treated as stable join keys. When an intblock id must change
-(rename, merge, or acronym reassignment), the previous id SHALL be retained as an alias in the alias
-source (`data/intblocks_aliases.yaml`) with a `reason` of `renamed`, `merged`, or `disambiguated`,
-rather than removed without trace.
+Country `code` and intblock `id` SHALL be treated as stable join keys. When an intblock id must change (rename, merge, or acronym reassignment), the previous id SHALL be retained as an alias in the alias source (`data/intblocks_aliases.yaml`) with a `reason` of `renamed`, `merged`, or `disambiguated`, rather than removed without trace. When an intblock id is retired because its meaning moved to a country attribute field, the retirement SHALL be recorded in `data/attribute_intblock_migrations.yaml` instead of an intblock alias entry.
 
 #### Scenario: Rename records an alias
 
@@ -90,10 +87,13 @@ rather than removed without trace.
 
 #### Scenario: Acronym reassignment records a disambiguation alias
 
-- **WHEN** an entity vacates an id (e.g. `ASF`) which is then reused for a different entity, and the
-  original entity moves to a new id (e.g. `FSA`)
-- **THEN** an alias entry `ASF → FSA` with `reason: disambiguated` is recorded, even though `ASF`
-  remains a current id for the different entity
+- **WHEN** an entity vacates an id (e.g. `ASF`) which is then reused for a different entity, and the original entity moves to a new id (e.g. `FSA`)
+- **THEN** an alias entry `ASF → FSA` with `reason: disambiguated` is recorded, even though `ASF` remains a current id for the different entity
+
+#### Scenario: Attribute retirement records a field migration
+
+- **WHEN** intblock id `LHTRAFFIC` is removed because driving side lives on countries
+- **THEN** `data/attribute_intblock_migrations.yaml` contains a `LHTRAFFIC` entry mapping to `car_side: left` and no intblock alias target is required
 
 ### Requirement: Alias integrity validation
 
@@ -274,4 +274,88 @@ When an intblock YAML file is moved between category directories for blocktype a
 
 - **WHEN** only the file path changes and `id` is unchanged
 - **THEN** no alias entry is required for the move itself
+
+### Requirement: Generated artifact primary-key parity
+
+Every committed dataset export format (JSONL, YAML, Parquet, and DuckDB) SHALL contain the same primary-key set and row count for each dataset, and that set SHALL equal the set of ids in the corresponding YAML sources. A consistency checker SHALL verify this and exit non-zero on any difference.
+
+#### Scenario: All formats agree with source
+
+- **WHEN** `scripts/check_generated_artifacts.py` runs against a freshly built `data/datasets/`
+- **THEN** the countries, intblocks, and blocktypes id sets are identical across JSONL, YAML, Parquet, and DuckDB and match the YAML source id sets, and the checker exits 0
+
+#### Scenario: Format missing a record fails
+
+- **WHEN** one export format is missing an id that other formats and the YAML source contain
+- **THEN** the checker reports the missing id and dataset and exits non-zero
+
+### Requirement: Single build identity across generated artifacts
+
+All manifests, Parquet `*.meta.json` sidecars, and DuckDB `_meta` rows in `data/datasets/` SHALL agree on `version`, `git_commit`, and `build_date`, so consumers can confirm the artifacts came from one build.
+
+#### Scenario: Consistent build identity passes
+
+- **WHEN** the consistency checker compares build identity fields across all metadata artifacts
+- **THEN** it confirms a single `version`, `git_commit`, and `build_date` and exits 0
+
+#### Scenario: Mixed build commits fail
+
+- **WHEN** `countries.manifest.json` and `intblocks.manifest.json` report different `git_commit` values
+- **THEN** the checker reports the divergent build identity and exits non-zero
+
+### Requirement: Partof referential integrity
+
+Cross-dataset validation SHALL verify that every `partof.id` resolves to an existing intblock record and that the parent-child direction matches organizational hierarchy semantics enforced by the partof hierarchy rule.
+
+#### Scenario: Broken partof reference fails
+
+- **WHEN** an intblock references `partof.id: NONEXISTENT`
+- **THEN** cross-dataset validation reports an unresolved reference error
+
+### Requirement: Attribute intblock migration artifact
+
+The repository SHALL maintain `data/attribute_intblock_migrations.yaml` as the source of truth for retired attribute-partition intblock ids. Each entry SHALL include `retired_id`, `country_field`, a value locator (`country_value` for scalars or `country_value_id` for list-member ids), and `since` (semver). The build SHALL export `data/datasets/attribute_intblock_migrations.json`. These retirements SHALL NOT be recorded as ordinary intblock aliases whose `target` must resolve to a live intblock id.
+
+#### Scenario: RHTRAFFIC maps to car_side
+
+- **WHEN** a consumer looks up retired id `RHTRAFFIC` in the migration artifact
+- **THEN** the entry points at country field `car_side` with value `right`
+
+#### Scenario: DVD_1 maps to dvd_region
+
+- **WHEN** a consumer looks up retired id `DVD_1`
+- **THEN** the entry points at `dvd_region` with value `1`
+
+#### Scenario: Not mixed into intblock alias targets
+
+- **WHEN** alias integrity validation runs
+- **THEN** attribute retirements are validated via the migration artifact rules and are not required to appear as `intblocks_aliases.yaml` targets
+
+### Requirement: Attribute migration artifact integrity
+
+Validation SHALL verify that every `retired_id` in the migration artifact does not exist as a current intblock id, that `country_field` is one of the documented migrated fields (`car_side`, `writing_directions`, `writing_systems`, `dvd_region`, `broadcast_systems`, `legal_systems`, `rail_gauges`), and that scalar/list values are consistent with country schema and vocab catalogs.
+
+#### Scenario: Dangling retirement rejected
+
+- **WHEN** the migration artifact lists `retired_id: RHTRAFFIC` but `RHTRAFFIC.yaml` still exists under intblocks
+- **THEN** validation reports a migration integrity error
+
+#### Scenario: Unknown country field rejected
+
+- **WHEN** an entry sets `country_field: hdi`
+- **THEN** validation reports an unsupported-field error
+
+### Requirement: Country code alias map
+
+The build SHALL emit `data/datasets/countries_aliases.json` documenting retired or renamed country alpha-2 codes mapped to their current primary code, using the same structural pattern as `intblocks_aliases.json`.
+
+#### Scenario: Kosovo alias present after rename
+
+- **WHEN** a consumer reads `countries_aliases.json` after the KV→XK rename
+- **THEN** an entry maps `KV` to `XK` with a documented reason
+
+#### Scenario: Intblock includes use current country codes
+
+- **WHEN** validation runs after the rename
+- **THEN** no intblock `includes[].id` references a retired country code without a matching alias entry
 
