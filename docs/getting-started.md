@@ -33,31 +33,26 @@ con.execute("SELECT code, name FROM countries WHERE code = 'XK'").fetchall()
 
 ## Lookups (internacia-python SDK)
 
-This is the most convenient path for LLM-generated code: it handles database download/caching,
-then exposes small Python methods for the common lookup/join patterns.
+`internacia` 0.2.x (the current PyPI release) predates data v3: it cannot download
+current releases, `search.fuzzy` fails, and `get_by_member` also returns former
+memberships. See [SDK status](llm-scenarios.md#sdk-status) for the SQL equivalents;
+SDK 0.3.0 with v3 support is in progress. With `internacia.duckdb` downloaded from a
+[GitHub Release](https://github.com/datenoio/internacia-db/releases/latest), basic
+lookups still work:
 
 ```bash
 pip install internacia
 ```
 
 ```python
+from pathlib import Path
 from internacia import InternaciaClient
 
-client = InternaciaClient()
+client = InternaciaClient(db_path=Path("internacia.duckdb"))
 
 # Country lookup (ISO 3166-1 alpha-2)
 country = client.countries.get_by_code("US")
 print(country["name"])
-
-# Organizations/blocks containing a country (membership roster)
-blocks_for_us = client.intblocks.get_by_member("US")
-for b in blocks_for_us[:5]:
-    print(b["id"], b["name"])
-
-# Fuzzy search across countries and blocks (multilingual)
-results = client.search.fuzzy("United States", limit=5)
-for r in results:
-    print(r["type"], r["name"])
 ```
 
 Prefer DuckDB/Parquet over parsing YAML under `data/countries/` or `data/intblocks/`.

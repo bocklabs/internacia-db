@@ -457,10 +457,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the YAML authoring guide, validation 
 
 ## Related projects
 
-- [internacia-api](https://github.com/datenoio/internacia-api) — REST API (**self-host only**; no public hosted instance)
-- [internacia-python](https://github.com/datenoio/internacia-python) — Python SDK
+- [internacia-api](https://github.com/datenoio/internacia-api) — REST API (**in development**; self-host only, no public hosted instance, no installable release yet)
+- [internacia-python](https://github.com/datenoio/internacia-python) — Python SDK (`internacia` 0.2.x on PyPI predates data v3; see [SDK status](docs/llm-scenarios.md#sdk-status))
 
 ## Roadmap
 
-- [x] Python SDK — [internacia-python](https://github.com/datenoio/internacia-python)
-- [x] REST API — [internacia-api](https://github.com/datenoio/internacia-api) (self-host; not a hosted service)
+- [x] Python SDK — [internacia-python](https://github.com/datenoio/internacia-python) (0.3.0 with data v3 support in progress)
+- [ ] REST API — [internacia-api](https://github.com/datenoio/internacia-api) (in development; self-host only, not a hosted service)

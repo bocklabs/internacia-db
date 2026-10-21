@@ -66,13 +66,19 @@ compatibility. Review `baseline.missing_contracts` for partial comparisons.
 
 ## Access posture (API)
 
-[internacia-api](https://github.com/datenoio/internacia-api) is a **self-host
-reference implementation**. There is no hosted public Internacia HTTP endpoint
-and no MCP server in this repository. Prefer:
+[internacia-api](https://github.com/datenoio/internacia-api) is **experimental**
+and self-host only: it is in development and has no installable release yet.
+There is no hosted public Internacia HTTP endpoint and no MCP server in this
+repository. Prefer:
 
-1. Local `data/datasets/internacia.duckdb` (or GitHub Release assets)
-2. [internacia-python](https://github.com/datenoio/internacia-python) (downloads/caches DuckDB)
-3. Self-host internacia-api if you need HTTP in your own infrastructure
+1. `internacia.duckdb` from the GitHub Release assets (or a local build). The
+   Release assets on tag `vX.Y.Z` are the **bundle of record** for that version;
+   the committed `data/datasets/` snapshot is a development copy whose bytes and
+   build identity (`git_commit`, `build_date`) can differ from the release build
+2. [internacia-python](https://github.com/datenoio/internacia-python) — `internacia`
+   0.2.x on PyPI predates data v3 and cannot download current releases; see
+   [SDK status](llm-scenarios.md#sdk-status)
+3. Self-host internacia-api only for experiments until it has a release
 
 ## Git tags
 

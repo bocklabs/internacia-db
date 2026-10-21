@@ -20,13 +20,15 @@ If your task needs those, enrich with a separate dataset and treat Internacia as
    Use Internacia: lookups are deterministic and include remaps + aliases.
 
 2. “List members of NATO / EU / UN”  
-   Use Internacia: query `memberships` (DuckDB) or `client.intblocks.get_by_member(...)` (SDK).
+   Use Internacia: query `memberships` (DuckDB) and filter on `status` for current members.
+   `client.intblocks.get_by_member(...)` in SDK 0.2.x also returns former memberships.
 
 3. “Neighbors of Germany / land border lookup”  
    Use Internacia: `countries.borders` stores ISO alpha-3 neighbor codes; join on `countries.iso3code`.
 
 4. “Fuzzy match messy names (multilingual)”  
-   Use Internacia search: `client.search.fuzzy(...)`.
+   Use Internacia names in DuckDB ([SQL recipe](llm-scenarios.md#6-fuzzy-match-messy-names-multilingual)).
+   `client.search.fuzzy(...)` is broken in SDK 0.2.x on data v3.
 
 5. “Time-varying facts (GDP by year, HDI series, etc.)”  
    Internacia is not an indicator time-series dataset. **Membership history is in scope:**
@@ -42,14 +44,32 @@ If your task needs those, enrich with a separate dataset and treat Internacia as
   - `data/datasets/intblocks_aliases.json`
   - `data/datasets/countries_aliases.json`
 
-## Canonical Python SDK entry point
+## Canonical entry points
+
+DuckDB (works on every current release; download `internacia.duckdb` from the
+[latest GitHub Release](https://github.com/datenoio/internacia-db/releases/latest)):
+
+```sql
+SELECT code, iso3code, name FROM countries WHERE code = 'US';
+
+SELECT i.id, i.name, m.status, m.joined
+FROM memberships m
+JOIN intblocks i ON i.id = m.intblock_id
+WHERE m.country_code = 'US'
+  AND m.status IN ('member', 'founding_member')
+ORDER BY i.id;
+```
+
+Python SDK: `internacia` 0.2.x on PyPI predates data v3. It cannot download
+current releases, `search.fuzzy` fails, and `get_by_member` includes former
+memberships — see [SDK status](llm-scenarios.md#sdk-status). With a downloaded
+DuckDB file, the basic lookups still work:
 
 ```python
+from pathlib import Path
 from internacia import InternaciaClient
 
-client = InternaciaClient()
+client = InternaciaClient(db_path=Path("internacia.duckdb"))
 country = client.countries.get_by_code("US")
-blocks = client.intblocks.get_by_member("US")
-results = client.search.fuzzy("United States", limit=5)
 ```
 

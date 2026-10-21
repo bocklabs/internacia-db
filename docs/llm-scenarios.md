@@ -2,11 +2,34 @@
 
 These examples are written for code-generating agents:
 
-- Prefer the **Python SDK** (`pip install internacia`) when it covers the task.
-- Fall back to **DuckDB** when you need a multi-join or when you want membership/border details.
+- Prefer **DuckDB** (`internacia.duckdb` from the GitHub Release assets) — every
+  scenario below has a SQL form that works on the current data.
+- Use the **Python SDK** only after checking [SDK status](#sdk-status).
 - Remember join keys:
   - Intblock membership joins use `includes[].id` (country `code`) / `memberships.country_code`.
   - `countries.borders` contains **ISO alpha-3** neighbor codes; join on `countries.iso3code`.
+
+## SDK status
+
+`internacia` 0.2.x (the current PyPI release) predates data v3 and is **broken on
+current releases**. Verified with `internacia==0.2.0` against the v3.0.0 DuckDB:
+
+- `InternaciaClient()` cannot fetch data: it asks the GitHub API for the old
+  `commondataio/internacia-db` repository and gets 404. Download
+  `internacia.duckdb` from the [latest release](https://github.com/datenoio/internacia-db/releases/latest)
+  and pass `InternaciaClient(db_path=...)`.
+- `client.search.fuzzy(...)` raises errors (it queries the `translations` column
+  removed in v2). Use the SQL in [scenario 6](#6-fuzzy-match-messy-names-multilingual).
+- `client.intblocks.get_by_member(...)` also returns organizations the country
+  has **left** (for `US`: NAFTA, SEATO, TPP, and 6 more). Use the `memberships`
+  SQL in [scenario 4](#4-membership-roster-blocks-that-contain-a-country-eg-us-in-nato).
+- `client.intblocks.get_by_id(...)` does not resolve retired IDs (`USAN` returns
+  `None`). Use [scenario 28](#28-resolve-retired-intblock-ids).
+- The unreleased GitHub `main` build of the SDK also fails in
+  `get_by_acronym(...)`; use the SQL in [scenario 7](#7-blocks-by-acronym-eg-eu).
+
+SDK 0.3.0 with v3 support is in progress. Until it ships, treat the SDK snippets
+below as illustrations and run the DuckDB SQL next to them.
 
 ## 1. Country lookup by ISO alpha-2
 
@@ -18,6 +41,14 @@ country = client.countries.get_by_code("US")
 print(country["name"])
 ```
 
+DuckDB:
+
+```sql
+SELECT code, iso3code, name
+FROM countries
+WHERE code = 'US';
+```
+
 ## 2. Country lookup by ISO numeric code
 
 ```python
@@ -26,6 +57,14 @@ from internacia import InternaciaClient
 client = InternaciaClient()
 country = client.countries.get_by_numeric_code("840")  # United States
 print(country["code"], country["name"])
+```
+
+DuckDB:
+
+```sql
+SELECT code, name
+FROM countries
+WHERE numeric_code = '840';
 ```
 
 ## 3. All UN member countries
@@ -52,7 +91,8 @@ for c in countries[:5]:
 
 ## 4. Membership roster: blocks that contain a country (e.g., US in NATO)
 
-Python SDK (returns matching blocks; membership status fields may not be included):
+Python SDK (returns matching blocks without membership status; SDK 0.2.x also
+returns organizations the country has left — see [SDK status](#sdk-status)):
 
 ```python
 from internacia import InternaciaClient
@@ -63,7 +103,7 @@ for b in blocks[:5]:
     print(b["id"], b["name"])
 ```
 
-DuckDB (includes membership edge metadata):
+DuckDB (current members only, with membership edge metadata):
 
 ```sql
 SELECT i.id, i.name, m.status, m.joined
@@ -110,6 +150,29 @@ for r in results:
     print(r["type"], r["name"])
 ```
 
+DuckDB (exact and approximate matches over names, other-language names, and
+intblock acronyms; replace both search strings):
+
+```sql
+WITH names AS (
+  SELECT 'country' AS type, code AS id, name AS label, name AS alias FROM countries
+  UNION ALL
+  SELECT 'country', c.code, c.name, o.name FROM countries c, UNNEST(c.other_names) AS t(o)
+  UNION ALL
+  SELECT 'intblock', id, name, name FROM intblocks
+  UNION ALL
+  SELECT 'intblock', i.id, i.name, o.name FROM intblocks i, UNNEST(i.other_names) AS t(o)
+  UNION ALL
+  SELECT 'intblock', i.id, i.name, a.value FROM intblocks i, UNNEST(i.acronyms) AS t(a)
+)
+SELECT type, id, label,
+       max(jaro_winkler_similarity(lower(alias), lower('欧盟'))) AS score
+FROM names
+GROUP BY type, id, label
+ORDER BY score DESC, id
+LIMIT 5;
+```
+
 ## 7. Blocks by acronym (e.g., EU)
 
 ```python
@@ -121,6 +184,16 @@ for b in eu_blocks[:5]:
     print(b["id"], b["name"])
 ```
 
+DuckDB:
+
+```sql
+SELECT DISTINCT i.id, i.name
+FROM intblocks i,
+     UNNEST(i.acronyms) AS t(a)
+WHERE upper(a.value) = 'EU'
+ORDER BY i.id;
+```
+
 ## 8. Blocks by tag (e.g., trade)
 
 ```python
@@ -130,6 +203,16 @@ client = InternaciaClient()
 blocks = client.intblocks.get_by_tag("trade")
 for b in blocks[:5]:
     print(b["id"], b["name"])
+```
+
+DuckDB:
+
+```sql
+SELECT id, name
+FROM intblocks
+WHERE list_contains(tags, 'trade')
+ORDER BY id
+LIMIT 20;
 ```
 
 ## 9. Former membership roster (historical memberships)
@@ -271,7 +354,8 @@ Python:
 ```python
 import json
 
-aliases = json.load(open("data/datasets/countries_aliases.json"))
+with open("data/datasets/countries_aliases.json", encoding="utf-8") as f:
+    aliases = {a["alias"]: a["target"] for a in json.load(f)}
 
 def remap_country_code(code: str) -> str:
     return aliases.get(code, code)
@@ -448,3 +532,18 @@ WHERE code_status = 'official_iso3166_1'
 ORDER BY code;
 ```
 
+## 28. Resolve retired intblock IDs
+
+Retired, merged, and renamed intblock IDs (for example `USAN` → `UNASUR`) stay in `intblocks_aliases.json`
+(also `.parquet`). Resolve a stored ID before looking it up:
+
+```sql
+SELECT i.id, i.name
+FROM intblocks i
+WHERE i.id = coalesce(
+  (SELECT target
+   FROM read_json_auto('data/datasets/intblocks_aliases.json')
+   WHERE alias = 'USAN'),
+  'USAN'
+);
+```

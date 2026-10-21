@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import yaml
@@ -68,6 +69,13 @@ def test_migration_artifact_covers_retired_ids():
         assert rid in retired
     issues = validate_attribute_intblock_migrations(migrations, known_intblock_ids=set())
     assert issues == []
+
+
+def test_migration_since_is_a_released_version():
+    migrations = yaml.safe_load((ROOT / "data" / "attribute_intblock_migrations.yaml").read_text())
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    released = set(re.findall(r"^## \[(\d+\.\d+\.\d+)\] - \d{4}-\d{2}-\d{2}", changelog, re.MULTILINE))
+    assert {m["since"] for m in migrations} <= released
 
 
 def test_migration_rejects_live_intblock():

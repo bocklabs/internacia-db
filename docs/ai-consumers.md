@@ -404,8 +404,8 @@ blocks["id"] = blocks["id"].map(lambda x: aliases.get(x, x))
 | `internacia.duckdb` | SQL analytics, multi-table joins, version check via `_meta` |
 | Parquet | Pandas/Polars/Arrow pipelines |
 | JSONL.zst | Streaming, language-agnostic JSON consumers |
-| [internacia-python](https://github.com/datenoio/internacia-python) | Typed lookups, fuzzy search, filters |
-| [internacia-api](https://github.com/datenoio/internacia-api) | **Self-host only** — no public hosted Internacia HTTP API |
+| [internacia-python](https://github.com/datenoio/internacia-python) | Typed lookups and filters; 0.2.x predates data v3 and its fuzzy search fails — see [SDK status](llm-scenarios.md#sdk-status) |
+| [internacia-api](https://github.com/datenoio/internacia-api) | **In development**, self-host only — no installable release and no public hosted Internacia HTTP API |
 | Source YAML | **Maintainers only** — editing and validation |
 
 Decompress zstd: `zstd -d data/datasets/countries.jsonl.zst`

@@ -20,7 +20,7 @@ English: [AGENTS.md](AGENTS.md)
 
 - **DuckDB：** `data/datasets/internacia.duckdb`（表：`countries`、`intblocks`、`blocktypes`、`memberships`、`_meta`）
 - **Parquet：** `data/datasets/{countries,intblocks,blocktypes,memberships}.parquet`
-- **远程：** [internacia-python](https://github.com/datenoio/internacia-python)（SDK）。[internacia-api](https://github.com/datenoio/internacia-api) **仅自托管** — 无公开 HTTP 实例。
+- **远程：** [internacia-python](https://github.com/datenoio/internacia-python)（SDK；PyPI 上的 0.2.x 早于数据 v3，见 [SDK status](docs/llm-scenarios.md#sdk-status)）。[internacia-api](https://github.com/datenoio/internacia-api) **开发中**，仅自托管 — 无公开 HTTP 实例。
 
 升级前检查版本：`SELECT dataset, version, schema_hash FROM _meta;` 或读 `data/datasets/*.manifest.json`。
 
