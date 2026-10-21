@@ -48,7 +48,8 @@ keys, enum values and versioning rules are in `contract.json`; see
 
 ## Workflow
 
-The workflow builds the bundle, checks that the committed descriptors match it, then tests and
+The workflow builds the bundle, checks that the committed descriptors match it, runs the
+internacia SDK's `tests/contract` suite against it (`INTERNACIA_SDK_REF`), then tests and
 checks the final `.release-datasets` staging directory, enforces the shared quality
 gate and tag-version consistency, then publishes that exact bundle as listed
 above. Hugging Face gets a separate validated Parquet-only descriptor with
