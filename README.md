@@ -15,7 +15,7 @@ Comprehensive reference datasets of countries, intergovernmental organizations, 
 
 - **Multi-format export**: JSONL, YAML, Parquet, and DuckDB (Zstandard compression, level 22)
 - **Countries quality pipeline**: schema validation, completeness gates, entity status policy, and field-level provenance
-- **Intblocks quality pipeline**: schema validation, blocktype taxonomy checks, duplicate detection, and completeness gates
+- **Intblocks quality pipeline**: schema validation, blocktype and six-value `scope_category` taxonomy checks, duplicate detection, and completeness gates; formal records require a scope category
 - **Profile enrichment**: population, area, gini, timezones, and native names from World Bank, Wikidata, and IANA tzdata
 - **Data-quality analyzer**: 50+ rules (referential integrity, temporal consistency, geographic plausibility, provenance depth, naming) reported under `dataquality/`; runs in CI and fails on CRITICAL/IMPORTANT findings
 - **Build metadata**: manifests and `.meta.json` sidecars for countries, intblocks, blocktypes, and memberships, with version, commit, row count, and export schema hash — all sharing a single frozen build identity
@@ -130,18 +130,29 @@ Each build writes to `data/datasets/`:
 | `blocktypes.yaml.zst` | Block types (YAML, zstd) |
 | `blocktypes.parquet` | Block types (Parquet, zstd) |
 | `blocktypes.meta.json` | Version metadata sidecar for Parquet consumers |
-| `memberships.parquet` | Flattened country↔intblock membership edges (`intblock_id`, `country_code`, `include_type`, `status`, `joined`, `left`) |
-| `memberships.csv.zst` | Membership edge table (CSV, zstd) |
+| `memberships.parquet` | Flattened country↔intblock `includes` edges (`intblock_id`, `country_code`, `include_type`, `status`, `joined`, `left`); **not all edges are legal memberships** |
+| `memberships.csv.zst` | The same `includes` edge table (CSV, zstd) |
 | `memberships.manifest.json` | Build metadata (version, commit, row count, schema hash, data license) |
 | `memberships.meta.json` | Version metadata sidecar for Parquet consumers |
 | `internacia.duckdb` | DuckDB database (`countries`, `intblocks`, `blocktypes`, `memberships`, and `_meta` tables) |
 
-Current row counts: **256** countries, **1269** intblocks, **78** blocktypes.
+Current row counts: **256** countries, **1275** intblocks, **78** blocktypes.
 
 The retired IDs `COMMLEARN`, `ABCZNZ`, and `USAN` resolve to `COL`, `ABCANZ`, and
 `UNASUR` through `intblocks_aliases.json`. Use `status IN ('member', 'founding_member')`
 for full membership; retain `former_member` edges and `left` dates for history.
 For example, ECOWAS has 12 current members and retains the three 2025 departures.
+
+`scope_category` identifies **what an intblock is**, independently of its `blocktype`
+or lifecycle `status`: `igo`, `treaty_body`, `policy_forum`,
+`reference_enumeration`, `intergovernmental_body`, or `non_state_organization`.
+Every `status: formal` intblock must set it; 72 non-formal records remain unlabeled
+in the 2026-09-30 snapshot while their identity or eligibility is reviewed. A
+`reference_enumeration` is a named set, **not necessarily an organization**.
+Its `includes[].status: member` entries must not be interpreted as proof of
+legal membership without checking the entity and its source. See the
+[inclusion policy](docs/intblock-inclusion-policy.md) and
+[consumer contract](docs/ai-consumers.md).
 
 Format policy: JSONL is shipped both plain and zstd-compressed; YAML exports are
 zstd-only (the plain `blocktypes.yaml` is a regenerated copy of the small source
@@ -156,7 +167,7 @@ The builder runs both `validate_countries.py` and `validate_intblocks.py` before
 - ISO identifier formats and duplicate detection (country codes and intblock ids)
 - Completeness thresholds (`data/schemas/countries_completeness.yaml`, `data/schemas/intblocks_completeness.yaml`)
 - Entity status policy (`entity_type`, `code_status`)
-- Blocktype taxonomy and `partof` reference checks for intblocks
+- Blocktype and `scope_category` taxonomy, required formal scope, and `partof` reference checks for intblocks
 - Intblock cross-references (current-country `includes` resolve to country sources; known historical identifiers such as `SU` use the explicit historical-entity registry; `includes[].status` values come from `data/schemas/includes_status.yaml`)
 - Referential integrity (borders, `predecessor`/`successor`/`suborganizations`, headquarters countries, duplicate `wikidata_id`) plus temporal, geographic-plausibility, provenance depth, and naming rules — shared between the validators and the quality analyzer (`internacia_builder/validate/*_rules.py`)
 
@@ -194,7 +205,7 @@ Country code policy (ISO vs user-assigned, filtering examples): [docs/country-co
 
 ## Consumer migration
 
-Breaking and semantic changes in the latest countries schema (see [CHANGELOG.md](CHANGELOG.md)):
+Current schema and semantic changes (see [CHANGELOG.md](CHANGELOG.md)):
 
 - **Population / area / gini**: structured as `{value, year, source, source_id}` — use `.value` for the numeric field. `year` is **null** when the source year is unknown (never `0`).
 - **Borders**: land neighbors as ISO **alpha-3** codes (e.g. `CAN`, `MEX`), not alpha-2.
@@ -202,6 +213,8 @@ Breaking and semantic changes in the latest countries schema (see [CHANGELOG.md]
 - **Kosovo**: code is `XK` / `XKX` (not `KV` / `KSV`); remap via `countries_aliases.json`.
 - **Attribute partitions**: traffic hand, DVD region, scripts, etc. are country fields — not intblocks; see `attribute_intblock_migrations.json`.
 - **Country crosswalks**: `geonames_id`, `ioc_code`, `fifa_code`, and `fips_code` are optional external identifiers with field-level provenance. Coverage is source-specific (GeoNames: 249 current ISO records; IOC: 206 mapped NOCs; FIFA: 207 mapped associations); **FIPS is legacy-only**, not a current completeness gate.
+- **Intblock scope**: closed-enum parsers must recognize `intergovernmental_body` and `non_state_organization` in addition to the four earlier values. Formal records require `scope_category`; do not infer an IGO from `blocktype` or count all `status: member` edges as formal institutional membership, especially for World Bank and other reference enumerations.
+- **Entity/roster migration**: `AFDF` now represents the Fund's 29 State Participants rather than its former mixed 82-country list. `TAR` is the railway **network**; the 22-party treaty is `TARAGREEMENT`. `CIF` is a two-fund partnership without a country-member roster. `TELESUR` was retired with a `reason: retired` alias and a null `target` (no replacement); see [retired IDs](docs/retired-intblock-ids.md).
 - **Build metadata**: compare `countries.manifest.json` `schema_hash` when upgrading downstream pipelines.
 
 **Pandas example** (structured population — `.struct` requires the Arrow dtype backend):
@@ -308,7 +321,7 @@ country fields. Remap those ids with `attribute_intblock_migrations.json` (e.g. 
 | `numeric_code` | String | ISO 3166-1 numeric code |
 | `wikidata_id` | String | Wikidata item ID |
 | `official_name` | String | Official full name |
-| `languages` | List[Struct] | `{code, name, official}` |
+| `languages` | List[Struct] | `{code, name}`; `official` is optional in the schema but not populated in the current dataset — do not infer legal language status |
 | `currencies` | List[Struct] | `{code, name, symbol}` |
 | `un_member` | Boolean | UN member (**193** `true`; aligns with the `UN` intblock roster) |
 | `un_status` | String | `member`, `observer` (PS, VA), or `non_member` |
@@ -349,6 +362,7 @@ Seven non-standard codes are retained with explicit status (see [docs/country-co
 |-------|------|-------------|
 | `id` | String | Unique identifier |
 | `blocktype` | List[String] | Block types |
+| `scope_category` | String | Entity kind: `igo`, `treaty_body`, `policy_forum`, `reference_enumeration`, `intergovernmental_body`, or `non_state_organization` (required for formal records) |
 | `status` | String | Current status |
 | `name` | String | Name |
 | `languages` | List[String] | Official languages |
@@ -357,10 +371,9 @@ Seven non-standard codes are retained with explicit status (see [docs/country-co
 | `founded` | String | Foundation date |
 | `geographic_scope` | String | Scope |
 | `regions` | List[String] | Regions covered |
-| `includes` | List[Struct] | Members `{id, name, type, status, joined, left, role, note}` — **`id` is authoritative**; `name` is a source label |
-| `membership_count` | Integer | Member count |
+| `includes` | List[Struct] | Members `{id, name, type, status, joined, left, role, note}` — **`id` is authoritative**; `name` is a source label; not every link is legal membership |
+| `membership_count` | Integer | Reported or legacy count; on reference sets it may count elements, not institutional members |
 | `membership_count_type` | String | Unit of the reported headcount, when non-country-based |
-| `scope_category` | String | Inclusion taxonomy |
 | `active_period` | Struct | `{start, end}` |
 | `last_verified` | String | Explicit roster verification date |
 | `wikidata_id` | String | Wikidata item ID |
@@ -381,6 +394,10 @@ validated but omitted from columnar exports (`membership_applicability`, `foundi
 `recognition_status`); these remain available in full JSON/YAML exports. The generated
 [data dictionary](docs/data-dictionary.md) lists columnar field availability; see `data/schemas/intblocks.schema.json` for the full source contract.
 Valid `includes[].status` values are cataloged in `data/schemas/includes_status.yaml`.
+The exported `membership_count` and `includes` are retained on some reference
+sets for compatibility; their `member` value does **not** by itself establish
+institutional membership. Use `scope_category` and record-specific provenance
+when constructing membership queries.
 
 ## Data sources
 

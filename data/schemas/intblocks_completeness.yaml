@@ -175,9 +175,7 @@ geography:
     default_km: 1500
     allowlist: []
 
-# Ratchet: two NGO records need an explicit future taxonomy decision, not an IGO guess.
+# Ratchet: every formal record carries a scope_category (MSF and CANTO are
+# non_state_organization since the six-value taxonomy).
 scope_category:
-  max_missing_formal: 2
-  pending_taxonomy:
-    MSF: International medical NGO; none of the four current scopes accurately denotes an NGO.
-    CANTO: Non-profit industry association; do not classify as intergovernmental.
+  max_missing_formal: 0

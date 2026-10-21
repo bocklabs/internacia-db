@@ -76,7 +76,7 @@ membership_count: 6
 wikidata_id: Q847739
 description: Monetary union of six Central African states using the Central African CFA franc (XAF). Introduced on 26 December 1945 to replace the French Equatorial African franc; pegged to the French franc until 1999 and to the euro since then at €1 = F.CFA 655.957. Currency is issued by the Bank of Central African States (BEAC) for members of the Economic and Monetary Community of Central Africa (CEMAC).
 notes: CFA originally stood for Colonies françaises d'Afrique and now Communauté financière africaine. Equatorial Guinea adopted the franc in 1984, replacing the ekwele at 1 franc = 4 bipkwele. Of equal value to but not interchangeable with the West African CFA franc (XOF). Strong institutional overlap with CEMAC; notes and coins since 2006 bear the CEMAC legend. Bank of France prints CFA franc notes in Chamalières.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 tags:
 - BEAC
 - CFA
@@ -123,10 +123,6 @@ other_names:
 - id: zh
   name: 中非非洲金融共同体法郎
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'
@@ -176,3 +172,7 @@ provenance:
   source: official sources
   retrieved_at: '2026-07-12'
   url: https://www.beac.int/
+- field: scope_category
+  source: BEAC — Rôle de la BEAC
+  retrieved_at: '2026-09-30'
+  url: https://www.beac.int/billets-pieces/mission-de-beac/

@@ -2,6 +2,7 @@ id: MIDAMERICA
 blocktype:
 - acronym
 status: informal
+scope_category: reference_enumeration
 geographic_scope: sub-regional
 regions:
 - Americas
@@ -197,7 +198,7 @@ notes: Informal geographic label, not an organization. Wikipedia lists 21 sovere
   Navassa Island (US) is omitted here because it has no Internacia country code. Colombia, Venezuela, and The Guianas are
   sometimes included in broader definitions; Bermuda is often grouped with the Caribbean but is excluded from the standard
   Middle America definition.
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
 - field: includes
   source: Wikipedia
@@ -233,3 +234,7 @@ provenance:
   retrieved_at: '2026-06-13'
   url: https://www.wikidata.org/wiki/Q29876
   license: CC0
+- field: scope_category
+  source: "Encyclopaedia Britannica: Middle America as Mexico, Central America and West Indies"
+  retrieved_at: "2026-09-30"
+  url: "https://www.britannica.com/place/Americas"

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Snapshot: **256** countries, **1275** intblocks, **78** blocktypes. Planned as **3.1.0**:
+`scope_category` and alias `reason` are open enums, so new values are a MINOR change;
+consumers must accept unknown values.
+
 ### Removed
 
 - Unused Docusaurus blog templates (`website/blog/`; the site has `blog: false`).
@@ -14,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `data/datasets/schema_baseline/`.
 - `dataquality/` is no longer committed; the quality report is a CI artifact (`validate.yml`), and
   the enrichment workflow no longer commits it.
+- `TELESUR` (La Nueva Televisión del Sur C.A.) and its seven country rows: a Venezuelan commercial company, not an intergovernmental organization. The ID is kept in `intblocks_aliases` with `reason: retired` and a null `target`; do not remap it. See [retired intblock IDs](docs/retired-intblock-ids.md).
 
 ### Added
 
@@ -32,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `last_verified` KPI: never-verified and overdue intblocks overall (12-month window) and for the
   29 tier-1 organizations in the new `data/watch/rosters.yaml` (6-month window), written to
   `dataquality/last_verified_kpi.json`, printed by `scripts/last_verified_report.py` and added to
-  the CI job summary. Currently 307 of 1269 never verified; tier 1: 21 of 29.
+  the CI job summary. Currently 298 of 1275 never verified; tier 1: 21 of 29.
 - Validation error for intblocks that are new or changed since the pull request base without
   `last_verified`, and for `includes` changes that do not update it.
 - CI and the release workflow run the internacia SDK's portable `tests/contract` suite against
@@ -54,6 +59,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `migration.vX.Y.Z.json`). Manifests list `sha256`/`bytes` per file; `datapackage.json` resources
   carry `bytes`, `hash` and (Parquet) a Table Schema.
 - `contract_version` in manifests, `.meta.json` sidecars and DuckDB `_meta` (additive column).
+- `TARAGREEMENT`: the [Intergovernmental Agreement on the Trans-Asian Railway Network](https://treaties.un.org/pages/viewdetails.aspx?src=treaty&mtdsg_no=xi-c-5&chapter=11&clang=_en), with **22 treaty parties** as of 2026-09-30, separate from the `TAR` network and its 28-country reach. The `TAR` Wikidata ID stays on the network.
+- **6 major multilateral treaty intblocks** (official rosters verified 2026-09-30): Fourth Geneva Convention `GCIV` (196 parties, ICRC), Biological Weapons Convention `BWC` (189, UNODA), World Heritage Convention `WORLDHERITAGE` (196, UNESCO), SOLAS 1974 `SOLAS` (168 contracting states, IMO), MARPOL 73/78 `MARPOL` (162, IMO), and the 1954 Hague Convention `HAGUE1954` (138, UNESCO). Territorial applications are excluded from IMO rosters.
+- Alias `reason: retired` for IDs removed without a replacement. Retired aliases have no `target` in the source and a null `target` in `intblocks_aliases.json`.
 
 ### Changed
 
@@ -104,6 +112,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   freshness. On the current data neither output changes.
 - `validate_countries.py` and `validate_intblocks.py` run about 4–5 times faster (YAML is parsed
   with libyaml when available, and each file once).
+- Intblock `scope_category` accepts `intergovernmental_body` and `non_state_organization` in addition to the four existing values. **Closed-enum consumers must update their parsers.** Reviewed subsidiary commissions, offices, funds and NGOs are classified by legal entity rather than parent/beneficiary geography; invalid country-member rosters are removed instead of being exported as memberships.
+- Formal intblocks now **require** `scope_category`: the validator treats an omission or unknown value as an error and the quality analyzer as IMPORTANT, and the `max_missing_formal` ratchet is now 0 (`MSF` and `CANTO` are `non_state_organization`). The legacy directory heuristic in `scripts/oneoff/label_scope_category.py` is suggestion-only.
+- 22 formal records change category after source review, replacing the 3.0.0 classification and its generic provenance with the cited source: eight FAO commissions (`APFIC`, `CECAF`, `CIFAA`, `CODEX`, `COPESCAALC`, `EIFAAC`, `SWIOFC`, `WECAFC`), the funds `ADF`, `AF` and `CIF`, the GCC patent office `GCCPO`, and `RDR` become `intergovernmental_body`; `ACIL` becomes `non_state_organization`; `CACM`, `PETROCARIBE` and `TRACECA` become `treaty_body`; `AMERIPOL`, `CELSE`, `CKURAILWAY`, `PACALL` and `TAR` become `policy_forum`. `PACALL` cites the Alianza del Pacífico glossary, which describes a regional integration process constituted by the Framework Agreement, not an organization with separate juridical personality.
+- `CIF` now describes the standing CTF+SCF partnership, not its 15 dated contributors; `TAR` remains the ESCAP network platform, not a treaty-party roster. Neither exports country-membership edges, and CIF no longer claims `partof: WB`.
+- Six reviewed non-formal intblocks gain sourced `scope_category` values: `ARABW`, `BALTICSTATES`, `HISPAM`, `MIDAMERICA` and `SLAVISPHERE` are `reference_enumeration`; the Common Monetary Area (`CMA`) is `policy_forum`. Their country links are unchanged. **72 non-formal records remain unlabeled.**
+- The `wbgroup` display label is now "World Bank classification group" to distinguish statistical aggregates from World Bank institutions.
 
 ### Fixed
 
@@ -120,6 +134,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   migrations ship as `migration.vX.Y.Z.json` Release assets.
 - Corrected four crosswalk conflicts against official snapshots: Bahrain GeoNames id (`290291`), Latvia FIFA code (`LVA`), Singapore FIFA code (`SGP`), and Kosovo FIFA code (`KOS`).
 - Country validation now requires field-level provenance for every populated crosswalk and rejects duplicate external identifiers or incomplete eligibility policy.
+- `AFDF` is a legally independent `igo` with the **29 State Participants** in the African Development Fund voting statement dated 2025-09-30, instead of 82 mixed country links (53 removed). It no longer asserts `partof: AFDB`.
+- All 25 World Bank regional, income, lending and analytical groups use `scope_category: reference_enumeration` instead of `igo`; a validator rule keeps `wbgroup` records out of organization categories.
+- False country rosters were removed from dependent bodies and NGOs (for example `ACIL`, `MSF`, `CANTO`), which now set `membership_applicability: not_applicable`.
 
 ### Documentation
 

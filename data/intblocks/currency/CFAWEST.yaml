@@ -86,7 +86,7 @@ membership_count: 8
 wikidata_id: Q861690
 description: Monetary union of eight West African states using the West African CFA franc (XOF). Introduced in 1945 to replace the French West African franc; pegged to the French franc until 1999 and to the euro since then at €1 = F.CFA 655.957. Currency is issued by the Central Bank of West African States (BCEAO) for members of the West African Economic and Monetary Union (UEMOA), established under the West African Monetary Union treaty of 12 May 1962.
 notes: CFA originally stood for Colonies françaises d'Afrique and now Communauté financière africaine. Guinea-Bissau adopted the franc in 1997, replacing the peso at 1 franc = 65 pesos. Of equal value to but not interchangeable with the Central African CFA franc (XAF). Strong institutional overlap with UEMOA; notes and coins bear the UEMOA legend. Bank of France prints CFA franc notes in Chamalières. France ended reserve-deposit requirements for the West African CFA franc in 2019–2020. ECOWAS and UEMOA have announced plans to replace the CFA franc with a common eco currency, targeting 2027.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 tags:
 - BCEAO
 - CFA
@@ -133,10 +133,6 @@ other_names:
 - id: zh
   name: 西非非洲金融共同体法郎
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'
@@ -186,3 +182,7 @@ provenance:
   source: official sources
   retrieved_at: '2026-07-12'
   url: https://www.bceao.int/
+- field: scope_category
+  source: BCEAO — Traité de l'Union Monétaire Ouest Africaine, articles 2, 4 and 25–29
+  retrieved_at: '2026-09-30'
+  url: https://www.bceao.int/sites/default/files/inline-files/TraiteUMOA2010.pdf

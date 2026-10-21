@@ -118,9 +118,19 @@ def validate_lifecycle(
 def validate_scope_category(
     records: list[tuple[str, dict[str, Any]]],
 ) -> list[str]:
-    """Warn when formal records lack scope_category (non-blocking)."""
+    """Reject unknown categories and formal records without one."""
     return [f"{rel}: {issue['suggested_action']}" for rel, rec in records
-            for issue in intblock_rules.check_intblock_scope_category(rec)]
+            for issue in intblock_rules.check_intblock_scope_category(rec)
+            if issue["issue_type"] != "SCOPE_CATEGORY_SEMANTIC_MISMATCH"]
+
+
+def validate_scope_category_semantics(
+    records: list[tuple[str, dict[str, Any]]],
+) -> list[str]:
+    """Reject blocktype/scope combinations with a known semantic contradiction."""
+    return [f"{rel}: {issue['suggested_action']}" for rel, rec in records
+            for issue in intblock_rules.check_intblock_scope_category(rec)
+            if issue["issue_type"] == "SCOPE_CATEGORY_SEMANTIC_MISMATCH"]
 
 
 def validate_aliases(

@@ -42,17 +42,57 @@ MEMBER_CLASS_STATUSES = frozenset(
 ACTIVE_CLASS_STATUSES = MEMBER_CLASS_STATUSES | {"participant"}
 
 
+SCOPE_CATEGORIES = frozenset(
+    {
+        "igo",
+        "treaty_body",
+        "policy_forum",
+        "reference_enumeration",
+        "intergovernmental_body",
+        "non_state_organization",
+    }
+)
+
+
 def check_intblock_scope_category(record: dict[str, Any]) -> list[dict[str, Any]]:
+    """Validate scope_category syntax and known blocktype semantics."""
     category = record.get("scope_category")
-    allowed = {"igo", "treaty_body", "policy_forum", "reference_enumeration"}
-    if category and category not in allowed:
-        message = f"unknown scope_category '{category}'"
-    elif record.get("status") == "formal" and not category:
-        message = "formal record missing scope_category (see docs/intblock-inclusion-policy.md)"
-    else:
-        return []
-    return [{"issue_type": "MISSING_SCOPE_CATEGORY", "field": "scope_category",
-             "current_value": str(category or ""), "suggested_action": message}]
+    blocktypes = {str(value) for value in (record.get("blocktype") or [])}
+
+    if category and str(category) not in SCOPE_CATEGORIES:
+        return [{
+            "issue_type": "UNKNOWN_SCOPE_CATEGORY",
+            "field": "scope_category",
+            "current_value": str(category),
+            "suggested_action": (
+                f"scope_category '{category}' is unknown; use one of "
+                f"{sorted(SCOPE_CATEGORIES)}"
+            ),
+        }]
+
+    if "wbgroup" in blocktypes and category != "reference_enumeration":
+        return [{
+            "issue_type": "SCOPE_CATEGORY_SEMANTIC_MISMATCH",
+            "field": "scope_category",
+            "current_value": str(category or ""),
+            "suggested_action": (
+                "World Bank classification groups must use "
+                "scope_category 'reference_enumeration', not an organization category"
+            ),
+        }]
+
+    if record.get("status") == "formal" and not category:
+        return [{
+            "issue_type": "MISSING_SCOPE_CATEGORY",
+            "field": "scope_category",
+            "current_value": "",
+            "suggested_action": (
+                "formal record missing scope_category "
+                "(see docs/intblock-inclusion-policy.md)"
+            ),
+        }]
+
+    return []
 
 
 def check_scope_coverage(records: list[dict], config: dict) -> list[dict]:

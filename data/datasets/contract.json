@@ -1043,7 +1043,9 @@
         "igo",
         "treaty_body",
         "policy_forum",
-        "reference_enumeration"
+        "reference_enumeration",
+        "intergovernmental_body",
+        "non_state_organization"
       ],
       "open": true
     },

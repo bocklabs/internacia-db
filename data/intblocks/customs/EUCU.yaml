@@ -187,7 +187,7 @@ notes: Monaco and the British Sovereign Base Areas of Akrotiri and Dhekelia are 
   for agricultural goods in the Andorra and Türkiye arrangements. Some EU member state territories—including Büsingen am Hochrhein,
   Heligoland, Livigno, Ceuta and Melilla—do not participate. The United Kingdom and Gibraltar are outside the customs union;
   Northern Ireland has special post-Brexit trade arrangements under the Windsor Framework.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 tags:
 - EUCU
 - commerce
@@ -226,10 +226,6 @@ other_names:
 - id: zh
   name: 欧盟关税同盟
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'
@@ -290,3 +286,7 @@ provenance:
   retrieved_at: '2026-07-12'
   url: https://en.wikipedia.org/wiki/European_Union_Customs_Union
   license: CC BY-SA 4.0
+- field: scope_category
+  source: EUR-Lex — TFEU Article 28, Union customs territory
+  retrieved_at: '2026-09-30'
+  url: https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX%3A12008E028%3AEN%3AHTML

@@ -45,6 +45,9 @@ ISSUE_PRIORITY_MAP = {
         "COMPLETENESS_ERROR",
         "MISSING_MANDATORY_FIELD",
         "MISSING_INCLUDES_APPLICABILITY",
+        "MISSING_SCOPE_CATEGORY",
+        "UNKNOWN_SCOPE_CATEGORY",
+        "SCOPE_CATEGORY_SEMANTIC_MISMATCH",
         "INVALID_INCLUDE_STATUS",
         "UNRESOLVED_PARENT_ENTITY",
         "INVALID_PARTOF_TARGET",
@@ -102,12 +105,13 @@ ISSUE_PRIORITY_MAP = {
         "SUCCESSOR_RECIPROCITY",
         "PARTOF_SUBORG_RECIPROCITY",
         "DUPLICATE_ACRONYM",
-        "MISSING_SCOPE_CATEGORY",
     ],
 }
 
 RULE_DESCRIPTIONS = {
-    "MISSING_SCOPE_CATEGORY": "Formal record lacks a supported scope classification; reviewed NGO taxonomy exceptions remain visible.",
+    "MISSING_SCOPE_CATEGORY": "A formal intblock lacks its required entity-kind scope_category.",
+    "UNKNOWN_SCOPE_CATEGORY": "scope_category is not one of the six supported entity kinds.",
+    "SCOPE_CATEGORY_SEMANTIC_MISMATCH": "The category contradicts deterministic blocktype semantics.",
     "UNRESOLVED_HISTORICAL_INCLUDE": "Historical membership identifier is absent from both countries and the explicit historical registry.",
     "SCHEMA_ERROR": "YAML source does not validate against its JSON Schema definition.",
     "DUPLICATE_IDENTIFIER": "Multiple countries share the same code, ISO3 code, or numeric code.",

@@ -2,7 +2,9 @@
 
 from datetime import date
 
+from internacia_builder.quality_report import get_priority_level
 from internacia_builder.validate import country_rules, cross_rules, intblock_rules
+from internacia_builder.validate.intblocks import validate_scope_category
 
 
 def _types(issues):
@@ -64,6 +66,69 @@ def test_reciprocity_allowlist_parsing():
 
 def _intblocks(*recs):
     return list(recs), [f"data/intblocks/intorg/{r.get('id', 'X')}.yaml" for r in recs]
+
+
+def test_wbgroup_must_be_reference_enumeration():
+    issues = intblock_rules.check_intblock_scope_category({
+        "id": "WLD",
+        "blocktype": ["wbgroup"],
+        "status": "formal",
+        "scope_category": "igo",
+    })
+    assert _types(issues) == ["SCOPE_CATEGORY_SEMANTIC_MISMATCH"]
+
+
+def test_wbgroup_reference_enumeration_passes():
+    assert intblock_rules.check_intblock_scope_category({
+        "id": "WLD",
+        "blocktype": ["wbgroup"],
+        "status": "formal",
+        "scope_category": "reference_enumeration",
+    }) == []
+
+
+def test_formal_intblock_without_scope_is_important_error():
+    issues = intblock_rules.check_intblock_scope_category({
+        "id": "X",
+        "blocktype": ["intorg"],
+        "status": "formal",
+    })
+    assert _types(issues) == ["MISSING_SCOPE_CATEGORY"]
+    assert get_priority_level(issues[0]["issue_type"], issues[0]) == "IMPORTANT"
+
+
+def test_non_formal_missing_scope_is_not_a_gate_error():
+    assert intblock_rules.check_intblock_scope_category({
+        "id": "OLD", "blocktype": ["intorg"], "status": "historical"
+    }) == []
+
+
+def test_formal_scope_gate_is_consistent_between_cli_and_quality():
+    missing = {"id": "NEW", "status": "formal", "blocktype": ["intorg"]}
+    shared_issue = intblock_rules.check_intblock_scope_category(missing)[0]
+    assert shared_issue["issue_type"] == "MISSING_SCOPE_CATEGORY"
+    assert len(validate_scope_category([("NEW.yaml", missing)])) == 1
+    assert get_priority_level(shared_issue["issue_type"], shared_issue) == "IMPORTANT"
+
+
+def test_expanded_scope_categories_pass():
+    for category in ("intergovernmental_body", "non_state_organization"):
+        assert intblock_rules.check_intblock_scope_category({
+            "id": "X",
+            "blocktype": ["intorg"],
+            "status": "formal",
+            "scope_category": category,
+        }) == []
+
+
+def test_unknown_scope_category_is_rejected():
+    issues = intblock_rules.check_intblock_scope_category({
+        "id": "X",
+        "blocktype": ["intorg"],
+        "status": "formal",
+        "scope_category": "other",
+    })
+    assert _types(issues) == ["UNKNOWN_SCOPE_CATEGORY"]
 
 
 def test_valid_successor_reference_passes():

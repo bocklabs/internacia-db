@@ -3,7 +3,7 @@ name: Asia-Pacific Fishery Commission
 blocktype:
 - food
 status: formal
-scope_category: igo
+scope_category: intergovernmental_body
 partof: FAO
 founded: '1948-11-09'
 active_period:
@@ -224,12 +224,8 @@ official_documents:
   type: document
   name: Agreement for the Establishment of the Asia-Pacific Fishery Commission
 notes: Drawn up at Baguio City, Philippines, in February 1948 by accredited delegates of eight nations (Burma/Myanmar, China, France, India, the Netherlands, the Philippines, the United Kingdom, and the United States). The Agreement entered into force on 9 November 1948 upon receipt of the fifth instrument of acceptance and was approved by the FAO Conference at its Fourth Session. Acceptance dates for current and former parties are taken from the FAO Legal Office parties list; China's listed acceptance is the 1993 PRC deposit. The 37th Session resolved to suspend Commission activities until 2028 without altering membership.
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO APFIC membership; FAO Legal Office parties list
   retrieved_at: '2026-07-29'
@@ -289,3 +285,7 @@ provenance:
   source: FAO APFIC; FAO Legal Office
   retrieved_at: '2026-07-29'
   url: https://www.fao.org/apfic/about/en
+- field: scope_category
+  source: FAO — Text of the APFIC Agreement, Article I
+  retrieved_at: '2026-09-30'
+  url: https://www.fao.org/apfic/about/text-of-the--apfic-agreement/en

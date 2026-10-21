@@ -3,7 +3,7 @@ name: Western Central Atlantic Fishery Commission
 blocktype:
 - food
 status: formal
-scope_category: igo
+scope_category: intergovernmental_body
 partof: FAO
 founded: '1973'
 active_period:
@@ -222,12 +222,8 @@ other_names:
   name: 중서대서양 수산 위원회
 wikidata_id: Q16189708
 notes: Membership lists from FAO WECAFC session documents consistently report 34 members including Costa Rica, Nicaragua, and the European Union; Bolivia does not appear on official WECAFC rosters. Distant-water members include Guinea, Japan, the Republic of Korea, and Spain. France, the Netherlands, and the United Kingdom participate in respect of their Caribbean territories and dependencies. Statutes were last amended by the FAO Council in November 2006.
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO WECAFC session documents
   retrieved_at: '2026-07-29'
@@ -279,3 +275,7 @@ provenance:
   source: FAO WECAFC session documents
   retrieved_at: '2026-07-29'
   url: https://www.fao.org/fi/static-media/MeetingDocuments/WECAFC/WECAFC2019/17/2e.pdf
+- field: scope_category
+  source: FAO — WECAFC Governing and Statutory Bodies registry
+  retrieved_at: '2026-09-30'
+  url: https://www.fao.org/unfao/govbodies/gsb-subject-matter/statutory-bodies-details/en/c/179/?no_cache=1

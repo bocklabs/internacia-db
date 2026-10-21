@@ -127,6 +127,35 @@ def test_schema_validation_against_repo_schema():
     assert any("blocktype" in e for e in errors)
 
 
+def test_schema_accepts_expanded_scope_categories_and_rejects_unknown():
+    schema = vi.load_json(vi.project_root() / "data" / "schemas" / "intblocks.schema.json")
+    base = {
+        "id": "TESTORG",
+        "name": "Test Organization",
+        "blocktype": ["intorg"],
+        "status": "formal",
+    }
+    for category in ("intergovernmental_body", "non_state_organization"):
+        assert vi.validate_schema(
+            {**base, "scope_category": category}, schema, "good.yaml"
+        ) == []
+
+    errors = vi.validate_schema(
+        {**base, "scope_category": "other"}, schema, "bad.yaml"
+    )
+    assert any("scope_category" in error for error in errors)
+
+
+def test_missing_formal_scope_category_is_blocking_cli_error():
+    records = [("formal.yaml", {"id": "FORMAL", "status": "formal", "blocktype": ["intorg"]})]
+    errors = vi.validate_scope_category(records)
+    assert len(errors) == 1
+    assert "formal.yaml" in errors[0] and "missing scope_category" in errors[0]
+
+    non_formal = [("historic.yaml", {"id": "HIST", "status": "historical", "blocktype": ["intorg"]})]
+    assert vi.validate_scope_category(non_formal) == []
+
+
 def test_validate_aliases_accepts_valid_rename():
     aliases = [{"alias": "OLD", "target": "NEW", "reason": "renamed", "since": "1.4.0"}]
     assert vi.validate_aliases(aliases, {"NEW"}) == []
@@ -153,6 +182,23 @@ def test_validate_aliases_rejects_bad_reason():
     aliases = [{"alias": "OLD", "target": "NEW", "reason": "typo", "since": "1.4.0"}]
     errors = vi.validate_aliases(aliases, {"NEW"})
     assert any("invalid reason" in e for e in errors)
+
+
+def test_validate_aliases_allows_retired_without_target():
+    aliases = [{"alias": "GONE", "reason": "retired", "since": "3.1.0"}]
+    assert vi.validate_aliases(aliases, {"NEW"}) == []
+
+
+def test_validate_aliases_rejects_retired_with_target_or_live_id():
+    with_target = [{"alias": "GONE", "target": "NEW", "reason": "retired", "since": "3.1.0"}]
+    assert any("must not have a target" in e for e in vi.validate_aliases(with_target, {"NEW"}))
+    still_live = [{"alias": "GONE", "reason": "retired", "since": "3.1.0"}]
+    assert any("still a current" in e for e in vi.validate_aliases(still_live, {"GONE"}))
+
+
+def test_validate_aliases_rejects_missing_target_for_merge():
+    aliases = [{"alias": "OLD", "reason": "merged", "since": "3.1.0"}]
+    assert any("non-empty alias and target" in e for e in vi.validate_aliases(aliases, {"NEW"}))
 
 
 def test_description_quality_warns_over_threshold():
