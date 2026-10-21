@@ -6,6 +6,7 @@ description: >-
   data/blocktypes/, running validate_* scripts, enrich_*.py, or proposing schema changes
   in internacia-db.
 ---
+<!-- Generated from templates/agent-shims/.cursor/skills/internacia-contribute/SKILL.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 
 # Internacia data contribution (Cursor)
 

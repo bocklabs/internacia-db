@@ -1,0 +1,14 @@
+# One-off scripts
+
+Migrations that were run once and are kept for reference. They are not part of the build,
+CI or release pipeline and may not work on the current data model; read the code before
+running one.
+
+| Script | Purpose | Used for |
+|---|---|---|
+| `apply_manus_roadmap.py` | Topics, directory moves and centroids from the 2026-06-15 roadmap | 1.x |
+| `annotate_entity_status.py` | Set `entity_type` and `code_status` on countries | 1.x |
+| `invert_attribute_intblocks.py` | Turn attribute-partition intblocks into country fields and write `data/attribute_intblock_migrations.yaml` | 2.0.0 |
+| `label_scope_category.py` | Heuristic `scope_category` backfill for formal intblocks | 2.x |
+
+Maintained tools stay in `scripts/` (see the README's script table).

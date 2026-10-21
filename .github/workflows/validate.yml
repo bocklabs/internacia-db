@@ -121,6 +121,9 @@ jobs:
       - name: Check internal Markdown links
         run: python scripts/check_markdown_links.py
 
+      - name: Check generated agent files
+        run: python scripts/generate_agent_shims.py --check
+
       - name: Check final staged artifacts and distribution descriptor
         run: |
           python scripts/check_generated_artifacts.py --datasets-dir .ci-datasets

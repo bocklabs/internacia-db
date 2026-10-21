@@ -90,8 +90,8 @@ Socioeconomic profile fields (HDI, GDP per capita, government type, internet pen
 **Maintainer review expectations:** spot-check provenance dates and unexpected
 roster/value swings before merge. The workflow never pushes directly to `main`.
 
-Optional one-off seeds: `scripts/seed_country_crosswalks.py`,
-`scripts/label_scope_category.py`.
+Crosswalk seeding: `scripts/seed_country_crosswalks.py` (`--check` by default). The one-off
+`scope_category` backfill is in `scripts/oneoff/label_scope_category.py`.
 
 ## Intblock Wikidata completeness
 

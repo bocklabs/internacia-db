@@ -2,6 +2,7 @@
 import ast
 import re
 import subprocess
+import sys
 
 import pytest
 import yaml
@@ -50,3 +51,13 @@ def test_workflow_shell_and_embedded_python_parse():
                 assert result.returncode == 0, f"{path.name}: {result.stderr}"
                 for python in re.findall(r"python - <<'PY'\n(.*?)\nPY", step["run"], re.S):
                     ast.parse(python)
+
+
+def test_generated_agent_files_are_current():
+    result = subprocess.run(
+        [sys.executable, "scripts/generate_agent_shims.py", "--check"],
+        cwd=project_root(),
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout

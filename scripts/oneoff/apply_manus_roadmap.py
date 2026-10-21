@@ -15,7 +15,7 @@ import yaml
 
 app = typer.Typer(help="Apply Manus roadmap data migrations")
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 INTBLOCKS = ROOT / "data" / "intblocks"
 COUNTRIES = ROOT / "data" / "countries"
 TOPIC_ALIASES = ROOT / "data" / "schemas" / "topic_aliases.yaml"

@@ -1,10 +1,11 @@
+<!-- Generated from templates/agent-shims/.github/copilot-instructions.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 # Copilot instructions for internacia-db
 
 See [AGENTS.md](../AGENTS.md) for full agent routing.
 
 ## Data access
 
-- Prefer `data/datasets/internacia.duckdb` or Parquet exports over parsing source YAML.
+- Query `data/datasets/internacia.duckdb` or the Parquet exports, not the source YAML. They are generated, not committed: run `python scripts/builder.py build` once (or download them from the latest GitHub Release).
 - Python SDK: [internacia-python](https://github.com/datenoio/internacia-python).
 - internacia-api is **self-host only** ([internacia-api](https://github.com/datenoio/internacia-api)); no public hosted HTTP API.
 

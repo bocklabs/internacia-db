@@ -17,6 +17,8 @@ Licensed CC-BY-4.0 (data and documentation); code is MIT.
 | **Which catalogues were searched** | [docs/intblock-sources.md](docs/intblock-sources.md) | Treat a catalogue index card as the membership source of truth |
 | **Schema change, new capability, breaking export** | [docs/agents/openspec-quickstart.md](docs/agents/openspec-quickstart.md) → [openspec/AGENTS.md](openspec/AGENTS.md) | Implement before approval |
 
+Platform shims (`CLAUDE.md`, `.github/copilot-instructions.md`, `.cursor/skills/`, `.lingma/rules/`, `.kimi/`, `.agent/workflows/`) and `llms-full.txt` are generated from `templates/` by `python scripts/generate_agent_shims.py`; edit the templates, not the outputs.
+
 ## Preferred data access
 
 - **Build first:** exports are not committed; run `python scripts/builder.py build` (≈1 min) or download `internacia.duckdb` from the latest GitHub Release.

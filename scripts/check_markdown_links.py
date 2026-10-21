@@ -32,6 +32,8 @@ SKIP_DIR_NAMES = {
 SKIP_PATH_PREFIXES = {
     "dev",
     "docs/history",
+    # Templates: their relative links resolve at the generated location (checked there).
+    "templates/agent-shims",
     "openspec/changes/archive",
 }
 

@@ -11,7 +11,7 @@ import yaml
 
 app = typer.Typer(help="Annotate country entity status fields")
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 COUNTRIES_DIR = ROOT / "data" / "countries"
 
 SPECIAL_ADMIN = frozenset({"HK", "MO"})

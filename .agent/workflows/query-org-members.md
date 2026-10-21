@@ -1,18 +1,19 @@
 ---
 description: Look up organization membership via DuckDB or exported datasets.
 ---
+<!-- Generated from templates/agent-shims/.agent/workflows/query-org-members.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 <!-- AGENT:START -->
 **Goal:** Find members of an intblock (e.g. NATO, EU, ASEAN) or orgs that include a given country.
 
 **Read first:** [docs/agents/query.md](../../docs/agents/query.md) and [llms.txt](../../llms.txt).
 
 **Guardrails**
-- Use exported datasets (`data/datasets/internacia.duckdb`), not source YAML.
+- Query `data/datasets/internacia.duckdb` or the Parquet exports, not the source YAML. They are generated, not committed: run `python scripts/builder.py build` once (or download them from the latest GitHub Release).
 - Join on `includes[].id` (country alpha-2), never `includes[].name`.
 - Resolve intblock aliases from `data/datasets/intblocks_aliases.json` before joining on `id`.
 
 **Steps**
-1. Confirm DuckDB exists: `data/datasets/internacia.duckdb` (build with `python scripts/builder.py build --formats duckdb` if missing).
+1. Confirm `data/datasets/internacia.duckdb` exists (`python scripts/builder.py build` if missing).
 2. Check version: `SELECT dataset, version, schema_hash FROM _meta;`
 3. For org → members, run (replace `ORG_ID`):
 

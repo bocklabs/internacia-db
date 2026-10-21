@@ -18,7 +18,7 @@ from typing import Any
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 INTBLOCKS = ROOT / "data" / "intblocks"
 COUNTRIES = ROOT / "data" / "countries"
 VOCABS = ROOT / "data" / "vocabs"

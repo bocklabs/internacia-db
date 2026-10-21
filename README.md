@@ -177,8 +177,6 @@ python3 scripts/enrich_intblocks.py backfill-structural   # headquarters + found
 # Generate the data-quality report (dataquality/ — by rule, priority, country)
 python3 scripts/builder.py analyze-quality
 
-# Apply entity status annotations
-python3 scripts/annotate_entity_status.py
 
 # Compare manifests to main branch baseline
 python3 scripts/diff_countries_baseline.py
@@ -410,7 +408,6 @@ Intblock catalogues searched (UN Treaty Collection, WTO RTA-IS / PTA, UNCTAD IIA
 | `scripts/validate_links.py` | Intblock URL and Wikidata validation (run weekly in CI) |
 | `scripts/enrich_countries.py` | Enrich country profiles; `backfill-provenance` subcommand |
 | `scripts/enrich_intblocks.py` | Enrich intblocks from Wikidata (wikidata_id, descriptions, multilingual names); `backfill-structural` fills headquarters and founded dates |
-| `scripts/annotate_entity_status.py` | Set `entity_type` and `code_status` |
 | `scripts/diff_countries_baseline.py` | Manifest diff vs git baseline (countries, intblocks, blocktypes) |
 | `scripts/check_generated_artifacts.py` | Source/export values, projections, keys, membership edges, schema hashes, and build metadata |
 | `scripts/check_markdown_links.py` | Internal Markdown link checker |
@@ -420,9 +417,8 @@ Intblock catalogues searched (UN Treaty Collection, WTO RTA-IS / PTA, UNCTAD IIA
 | `scripts/check_release_bundle.py` | Validate descriptor paths and optional release tag/version consistency |
 | `scripts/check_quality_report.py` | Apply the shared CRITICAL/IMPORTANT quality gate |
 
-One-off migration scripts currently live under `scripts/` (for example
-`apply_manus_roadmap.py`) and are not part of the maintained pipeline. `dev/scripts/`
-is the intended archive (see `dev/scripts/README.md`). Research notes: `dev/research/`.
+One-off migration scripts live in `scripts/oneoff/` (see its README) and are not part of
+the maintained pipeline. Research notes: `dev/research/`.
 
 ## Releases
 

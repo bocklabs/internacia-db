@@ -1,6 +1,7 @@
 ---
 description: Edit an intblock YAML record safely with validation.
 ---
+<!-- Generated from templates/agent-shims/.agent/workflows/edit-intblock.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 <!-- AGENT:START -->
 **Goal:** Modify a record under `data/intblocks/<category>/*.yaml` without breaking validation or exports.
 
@@ -13,6 +14,7 @@ For catalogue hunts or completeness repairs, start at
 - Every `blocktype` value must exist in `data/blocktypes/blocktypes.yaml`.
 - Quote YAML boolean lookalikes: `'NO'` (Norway), `'no'` (Norwegian).
 - Do not hand-edit `data/datasets/`.
+- Set `last_verified` to the date you checked the roster against its `provenance` source; validation requires it on new or changed records.
 - Do not invent membership for dissolved orgs; use `status: historical` + `dissolved` date.
 - Records without `includes` need `membership_applicability: not_applicable` when membership is intentionally absent.
 
@@ -40,9 +42,8 @@ python scripts/check_doc_counts.py
 python scripts/check_markdown_links.py
 ```
 
-7. Commit the regenerated exports with source changes; CI checks committed
-   freshness before rebuilding. Update current counts and cookbook expectations
-   when record counts or query results change. Update `CHANGELOG.md` under
+7. Commit the regenerated `data/datasets/` descriptors (manifests, `contract.json`, `datapackage.json`) with the source changes; binary exports are not committed. CI rebuilds and checks that the descriptors match. Update current counts and cookbook expectations when
+   record counts or query results change. Update `CHANGELOG.md` under
    `[Unreleased]` for consumer-visible changes.
 
 **Reference**

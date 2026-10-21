@@ -1,0 +1,62 @@
+## Extended index (llms-full only)
+
+Everything above this line mirrors llms.txt; the sections below add detail for crawlers.
+
+### Agent entry points by platform
+
+- AGENTS.md — root routing hub (all platforms)
+- AGENTS.zh.md — 中文智能体路由（Kimi、GLM、通义灵码）
+- CLAUDE.md — Claude Code shim
+- .github/copilot-instructions.md — GitHub Copilot shim
+- .kimi/AGENTS.md — Kimi Code shim
+- .lingma/rules/ — 通义灵码 Project Rules
+- .cursor/skills/internacia-query/SKILL.md → docs/agents/query.md
+- .cursor/skills/internacia-discover/SKILL.md → docs/agents/discover.md
+- .cursor/skills/internacia-contribute/SKILL.md → docs/agents/contribute.md
+- `.agent/workflows/` — portable step-by-step workflows
+  (`query-org-members.md`, `edit-intblock.md`, `discover-intblock.md`, OpenSpec)
+
+### Additional data artifacts
+
+- data/datasets/memberships.parquet — flattened country↔intblock edge table
+- data/datasets/memberships.csv.zst — same edge table as CSV (zstd)
+- data/datasets/countries.csv.zst / intblocks.csv.zst — flattened full tables
+- data/datasets/countries-lite.parquet / intblocks-lite.parquet — identifier + classification columns
+- data/datasets/datapackage.json — Frictionless resource index
+- data/datasets/countries_aliases.json — country code remaps (KV→XK)
+- data/datasets/attribute_intblock_migrations.json — retired attribute intblock → country field
+- data/datasets/blocktypes.yaml — plain YAML copy of blocktypes (regenerated on build)
+- data/datasets/intblocks_aliases.parquet — alias map in Parquet
+- data/dataquality/ — data-quality analyzer reports
+
+### Validation and completeness schemas
+
+- data/schemas/countries.schema.json — countries JSON Schema
+- data/schemas/intblocks.schema.json — intblocks JSON Schema
+- data/schemas/countries_completeness.yaml — per-field null-rate gates (countries)
+- data/schemas/intblocks_completeness.yaml — per-field null-rate gates (intblocks)
+- data/schemas/wikidata_exclusions.yaml — allowed missing wikidata_id list
+- scripts/validate_countries.py --json / scripts/validate_intblocks.py --json — structured validation output
+
+### Maintainer documentation
+
+- CONTRIBUTING.md — setup and PR checklist
+- docs/enrichment.md — enrichment pipeline
+- docs/getting-started.md — spreadsheet / DuckDB quick start
+- docs/when-to-use-internacia.md — task-based routing guide for choosing Internacia
+- docs/data-dictionary.md — generated field reference
+- docs/architecture.md — pipeline diagram
+- docs/versioning-policy.md — dataset SemVer, alias retention, API posture
+- docs/agents/add-intblock-example.md — worked add-intblock walkthrough
+- docs/discovery.md — how to search catalogues and improve records
+- docs/intblock-inclusion-policy.md — scope_category taxonomy
+- docs/intblock-sources.md — catalogues searched and roster authorities
+- docs/entity-classification-policy.md — TW/PS/XK/EH edge cases
+- docs/agents/contribute.md — YAML editing workflow
+- docs/agents/discover.md — discovery checklist
+- docs/agents/openspec-quickstart.md — schema change proposals
+- openspec/AGENTS.md — full OpenSpec reference
+- ATTRIBUTION.md — upstream sources and citation formats
+- CITATION.cff — machine-readable citation + Zenodo DOI
+- CHANGELOG.md — release history and breaking changes
+- docs/country-code-policy.md — non-standard codes, entity_type, un_status, filtering
