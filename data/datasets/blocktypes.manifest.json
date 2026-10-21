@@ -1,9 +1,42 @@
 {
   "dataset": "blocktypes",
   "version": "3.0.0",
-  "build_date": "2026-10-21T17:08:23Z",
-  "git_commit": "cd96e13",
+  "build_date": "2026-10-21T21:24:52Z",
+  "git_commit": "0af1480",
   "row_count": 78,
-  "schema_hash": "f2bfb57e895a079e",
-  "data_license": "CC-BY-4.0"
+  "schema_hash": "746aaa1c260dba43d1bc12a885baae302d4e62fac11b95e921805a3b89e044fa",
+  "data_license": "CC-BY-4.0",
+  "contract_version": "3.0",
+  "files": [
+    {
+      "path": "blocktypes.jsonl",
+      "sha256": "337978163355aa6c4fb611933781882ed14c0624a7664cf7f29bde72410f40dc",
+      "bytes": 17518
+    },
+    {
+      "path": "blocktypes.jsonl.zst",
+      "sha256": "839ea332cf5c33627e48b185090cb5ccac6b118563d19ae6e21fbe168c32bf4a",
+      "bytes": 3475
+    },
+    {
+      "path": "blocktypes.meta.json",
+      "sha256": "59f1cd29a477c713de468a8ab368ca3a332efa8cb10fd236a60c62e5da42f848",
+      "bytes": 283
+    },
+    {
+      "path": "blocktypes.parquet",
+      "sha256": "22d585f1a01ca9ff79bbcec54a0d979e35c3791911718a0c1af46047cabd11c4",
+      "bytes": 5935
+    },
+    {
+      "path": "blocktypes.yaml",
+      "sha256": "85287f1e89ad3a2bb910e885a562d9c72a3d6ef9ebe529481c413b8d4e90932a",
+      "bytes": 15560
+    },
+    {
+      "path": "blocktypes.yaml.zst",
+      "sha256": "4e6ad051fd2934eb6bf0e64ea3c5961fa03476b594f5ea1e0584cf7b43cb785f",
+      "bytes": 3429
+    }
+  ]
 }

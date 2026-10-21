@@ -1,9 +1,27 @@
 {
   "dataset": "memberships",
   "version": "3.0.0",
-  "build_date": "2026-10-21T17:08:23Z",
-  "git_commit": "cd96e13",
+  "build_date": "2026-10-21T21:24:52Z",
+  "git_commit": "0af1480",
   "row_count": 58694,
-  "schema_hash": "5b55cf565d70fa81",
-  "data_license": "CC-BY-4.0"
+  "schema_hash": "1bdbd0d9427722d3ed3c23ee0a101ccc0e62c8eba9e65ae0000f441648b0d76c",
+  "data_license": "CC-BY-4.0",
+  "contract_version": "3.0",
+  "files": [
+    {
+      "path": "memberships.csv.zst",
+      "sha256": "0a83a21e97795cd6508e2f6b7a0d84cf1e45e0797f1faf7df542426a1ad7bf13",
+      "bytes": 150376
+    },
+    {
+      "path": "memberships.meta.json",
+      "sha256": "9e1fddaf1f63d7850f05496fee0ad2f8b9abc14784e3be7e8b81ec597f2e400f",
+      "bytes": 287
+    },
+    {
+      "path": "memberships.parquet",
+      "sha256": "18a36b2897cf0277b1e69a30a870f5ca58209fc334c553196636aaae9ea0865c",
+      "bytes": 94660
+    }
+  ]
 }

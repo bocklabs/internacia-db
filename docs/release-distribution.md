@@ -21,7 +21,8 @@ version. The committed `data/datasets/` snapshot is a development copy: its byte
 and build identity (`git_commit`, `build_date` in manifests and `_meta`) can
 differ from the release build, so pin and verify against Release assets.
 
-Each release attaches every file in `.release-datasets/` — 41 files for v3.0.0:
+Each release attaches every file in `.release-datasets/` (41 files for v3.0.0; 43 from
+the next release, which adds `contract.json` and `SHA256SUMS`):
 
 | Group | Files |
 |-------|-------|
@@ -31,11 +32,15 @@ Each release attaches every file in `.release-datasets/` — 41 files for v3.0.0
 | Blocktypes | `blocktypes.parquet`, `blocktypes.jsonl`, `blocktypes.jsonl.zst`, `blocktypes.yaml`, `blocktypes.yaml.zst`, `blocktypes.manifest.json`, `blocktypes.meta.json` |
 | Memberships | `memberships.parquet`, `memberships.csv.zst`, `memberships.manifest.json`, `memberships.meta.json` |
 | Aliases and migrations | `intblocks_aliases.json`, `intblocks_aliases.parquet`, `countries_aliases.json`, `countries_aliases.parquet`, `attribute_intblock_migrations.json`, `attribute_intblock_migrations.parquet` |
-| Descriptors | `datapackage.json`, `README.md` (dataset card) |
+| Descriptors | `datapackage.json`, `README.md` (dataset card), `contract.json` (consumer contract) |
+| Checksums | `SHA256SUMS` (every other asset, including the migration file) |
 | Schema migration | `migration.vX.Y.Z.json` (release only; not committed) |
 
-There is no checksum file yet; the `*.manifest.json` files carry `version`,
-`git_commit`, `row_count`, and `schema_hash` but no content hash.
+Verify a download with `sha256sum -c SHA256SUMS` (or `shasum -a 256 -c SHA256SUMS`
+on macOS). Each `*.manifest.json` also lists `sha256` and `bytes` for the files of its
+dataset, and `datapackage.json` resources carry `bytes` and `hash`. The table schemas,
+keys, enum values and versioning rules are in `contract.json`; see
+[data-contract.md](data-contract.md).
 
 ## Workflow
 

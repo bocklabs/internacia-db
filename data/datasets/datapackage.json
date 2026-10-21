@@ -15,7 +15,9 @@
       "path": "countries.csv.zst",
       "format": "csv",
       "mediatype": "text/csv",
-      "compression": "zstd"
+      "compression": "zstd",
+      "bytes": 27381,
+      "hash": "sha256:35cb7646a3a1c23efedef4a73a677f5fba5b4ef0a9759fa2aa73655389ce6158"
     },
     {
       "name": "countries-lite-csv",
@@ -23,21 +25,297 @@
       "path": "countries-lite.csv.zst",
       "format": "csv",
       "mediatype": "text/csv",
-      "compression": "zstd"
+      "compression": "zstd",
+      "bytes": 5852,
+      "hash": "sha256:1f3c562e88199e43fcb41f5cde8380e99a669f9bfed2a16a886d329ec41ea843"
     },
     {
       "name": "countries-parquet",
       "table": "countries",
       "path": "countries.parquet",
       "format": "parquet",
-      "mediatype": "application/vnd.apache.parquet"
+      "mediatype": "application/vnd.apache.parquet",
+      "bytes": 126403,
+      "hash": "sha256:996c30a999255b77de2f824a5e10a095ba2c4e873c7c67225471ada3c34f3877",
+      "schema": {
+        "fields": [
+          {
+            "name": "code",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "iso3code",
+            "type": "string"
+          },
+          {
+            "name": "capital_city",
+            "type": "object"
+          },
+          {
+            "name": "region",
+            "type": "object"
+          },
+          {
+            "name": "adminregion",
+            "type": "object"
+          },
+          {
+            "name": "incomeLevel",
+            "type": "object"
+          },
+          {
+            "name": "lendingType",
+            "type": "object"
+          },
+          {
+            "name": "numeric_code",
+            "type": "string"
+          },
+          {
+            "name": "wikidata_id",
+            "type": "string"
+          },
+          {
+            "name": "geonames_id",
+            "type": "string"
+          },
+          {
+            "name": "ioc_code",
+            "type": "string"
+          },
+          {
+            "name": "fifa_code",
+            "type": "string"
+          },
+          {
+            "name": "fips_code",
+            "type": "string"
+          },
+          {
+            "name": "bbox",
+            "type": "object"
+          },
+          {
+            "name": "official_name",
+            "type": "string"
+          },
+          {
+            "name": "languages",
+            "type": "array"
+          },
+          {
+            "name": "currencies",
+            "type": "array"
+          },
+          {
+            "name": "un_member",
+            "type": "boolean"
+          },
+          {
+            "name": "un_status",
+            "type": "string"
+          },
+          {
+            "name": "independent",
+            "type": "boolean"
+          },
+          {
+            "name": "entity_type",
+            "type": "string"
+          },
+          {
+            "name": "code_status",
+            "type": "string"
+          },
+          {
+            "name": "recognition_status",
+            "type": "object"
+          },
+          {
+            "name": "parent_entity",
+            "type": "object"
+          },
+          {
+            "name": "subregion",
+            "type": "string"
+          },
+          {
+            "name": "continents",
+            "type": "array"
+          },
+          {
+            "name": "borders",
+            "type": "array"
+          },
+          {
+            "name": "landlocked",
+            "type": "boolean"
+          },
+          {
+            "name": "tld",
+            "type": "string"
+          },
+          {
+            "name": "calling_codes",
+            "type": "array"
+          },
+          {
+            "name": "flag_emoji",
+            "type": "string"
+          },
+          {
+            "name": "car_side",
+            "type": "string"
+          },
+          {
+            "name": "writing_directions",
+            "type": "array"
+          },
+          {
+            "name": "writing_systems",
+            "type": "array"
+          },
+          {
+            "name": "dvd_region",
+            "type": "integer"
+          },
+          {
+            "name": "broadcast_systems",
+            "type": "array"
+          },
+          {
+            "name": "legal_systems",
+            "type": "array"
+          },
+          {
+            "name": "rail_gauges",
+            "type": "array"
+          },
+          {
+            "name": "start_of_week",
+            "type": "string"
+          },
+          {
+            "name": "demonyms",
+            "type": "object"
+          },
+          {
+            "name": "m49_code",
+            "type": "string"
+          },
+          {
+            "name": "population",
+            "type": "object"
+          },
+          {
+            "name": "area",
+            "type": "object"
+          },
+          {
+            "name": "gini",
+            "type": "object"
+          },
+          {
+            "name": "centroid",
+            "type": "object"
+          },
+          {
+            "name": "timezones",
+            "type": "array"
+          },
+          {
+            "name": "timezone_status",
+            "type": "string"
+          },
+          {
+            "name": "native_names",
+            "type": "object"
+          },
+          {
+            "name": "other_names",
+            "type": "array"
+          },
+          {
+            "name": "common_names",
+            "type": "array"
+          },
+          {
+            "name": "provenance",
+            "type": "array"
+          }
+        ],
+        "primaryKey": [
+          "code"
+        ]
+      }
     },
     {
       "name": "countries-lite-parquet",
       "table": "countries-lite",
       "path": "countries-lite.parquet",
       "format": "parquet",
-      "mediatype": "application/vnd.apache.parquet"
+      "mediatype": "application/vnd.apache.parquet",
+      "bytes": 10662,
+      "hash": "sha256:501f9af3c2c227479da9d1d614ddb9dd5dcd9a0ef94cd3346ba421a3aa7f4a6f",
+      "schema": {
+        "fields": [
+          {
+            "name": "code",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "iso3code",
+            "type": "string"
+          },
+          {
+            "name": "wikidata_id",
+            "type": "string"
+          },
+          {
+            "name": "entity_type",
+            "type": "string"
+          },
+          {
+            "name": "code_status",
+            "type": "string"
+          },
+          {
+            "name": "un_status",
+            "type": "string"
+          },
+          {
+            "name": "independent",
+            "type": "boolean"
+          },
+          {
+            "name": "region_id",
+            "type": "string"
+          },
+          {
+            "name": "subregion",
+            "type": "string"
+          },
+          {
+            "name": "ioc_code",
+            "type": "string"
+          },
+          {
+            "name": "fifa_code",
+            "type": "string"
+          }
+        ]
+      }
     },
     {
       "name": "countries-json",
@@ -45,14 +323,18 @@
       "path": "countries.json.zst",
       "format": "json",
       "mediatype": "application/json",
-      "compression": "zstd"
+      "compression": "zstd",
+      "bytes": 77608,
+      "hash": "sha256:bd963106a6bcb531aaf004666f9dced11585f9b4dc8c11364ea9d82ee4b16639"
     },
     {
       "name": "countries-jsonl",
       "table": "countries",
       "path": "countries.jsonl",
       "format": "jsonl",
-      "mediatype": "application/x-ndjson"
+      "mediatype": "application/x-ndjson",
+      "bytes": 1247053,
+      "hash": "sha256:0d63717f8244656567434d3606a4b127d5f0c72c3935dc3749c6752e9c8e4719"
     },
     {
       "name": "intblocks-csv",
@@ -60,7 +342,9 @@
       "path": "intblocks.csv.zst",
       "format": "csv",
       "mediatype": "text/csv",
-      "compression": "zstd"
+      "compression": "zstd",
+      "bytes": 177750,
+      "hash": "sha256:c628edbdf6c25e13590057eb9165c265a7e75765eb800ba4f1af3f6cd18ab622"
     },
     {
       "name": "intblocks-lite-csv",
@@ -68,21 +352,189 @@
       "path": "intblocks-lite.csv.zst",
       "format": "csv",
       "mediatype": "text/csv",
-      "compression": "zstd"
+      "compression": "zstd",
+      "bytes": 34275,
+      "hash": "sha256:9fef4be75ed6d5a85fd81baeb36673185f8dd67288e66a964bf8b61deda413b2"
     },
     {
       "name": "intblocks-parquet",
       "table": "intblocks",
       "path": "intblocks.parquet",
       "format": "parquet",
-      "mediatype": "application/vnd.apache.parquet"
+      "mediatype": "application/vnd.apache.parquet",
+      "bytes": 683469,
+      "hash": "sha256:32a521d31cf559d8723488fe9c3bc7bf6589fac4fbd240a877d74edb774eca53",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "blocktype",
+            "type": "array"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "languages",
+            "type": "array"
+          },
+          {
+            "name": "links",
+            "type": "array"
+          },
+          {
+            "name": "founded",
+            "type": "string"
+          },
+          {
+            "name": "geographic_scope",
+            "type": "string"
+          },
+          {
+            "name": "scope_category",
+            "type": "string"
+          },
+          {
+            "name": "regions",
+            "type": "array"
+          },
+          {
+            "name": "includes",
+            "type": "array"
+          },
+          {
+            "name": "membership_count",
+            "type": "integer"
+          },
+          {
+            "name": "membership_count_type",
+            "type": "string"
+          },
+          {
+            "name": "wikidata_id",
+            "type": "string"
+          },
+          {
+            "name": "legal_status",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "type": "array"
+          },
+          {
+            "name": "topics",
+            "type": "array"
+          },
+          {
+            "name": "headquarters",
+            "type": "object"
+          },
+          {
+            "name": "acronyms",
+            "type": "array"
+          },
+          {
+            "name": "partof",
+            "type": "array"
+          },
+          {
+            "name": "dissolved",
+            "type": "string"
+          },
+          {
+            "name": "predecessor",
+            "type": "string"
+          },
+          {
+            "name": "successor",
+            "type": "string"
+          },
+          {
+            "name": "active_period",
+            "type": "object"
+          },
+          {
+            "name": "last_verified",
+            "type": "string"
+          },
+          {
+            "name": "other_names",
+            "type": "array"
+          },
+          {
+            "name": "provenance",
+            "type": "array"
+          }
+        ],
+        "primaryKey": [
+          "id"
+        ]
+      }
     },
     {
       "name": "intblocks-lite-parquet",
       "table": "intblocks-lite",
       "path": "intblocks-lite.parquet",
       "format": "parquet",
-      "mediatype": "application/vnd.apache.parquet"
+      "mediatype": "application/vnd.apache.parquet",
+      "bytes": 41002,
+      "hash": "sha256:9c2afe10c60eb0cb50a0126feba2a7ad0a7a9d90da1a8782d97dd966139501e1",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "wikidata_id",
+            "type": "string"
+          },
+          {
+            "name": "geographic_scope",
+            "type": "string"
+          },
+          {
+            "name": "scope_category",
+            "type": "string"
+          },
+          {
+            "name": "blocktype",
+            "type": "string"
+          },
+          {
+            "name": "membership_count",
+            "type": "integer"
+          },
+          {
+            "name": "legal_status",
+            "type": "string"
+          }
+        ]
+      }
     },
     {
       "name": "intblocks-json",
@@ -90,21 +542,49 @@
       "path": "intblocks.json.zst",
       "format": "json",
       "mediatype": "application/json",
-      "compression": "zstd"
+      "compression": "zstd",
+      "bytes": 766080,
+      "hash": "sha256:0a5c77ed710f3f7c8c0a4b0beaecbcd240a227a8c7e3a52e2333543a644507cb"
     },
     {
       "name": "intblocks-jsonl",
       "table": "intblocks",
       "path": "intblocks.jsonl",
       "format": "jsonl",
-      "mediatype": "application/x-ndjson"
+      "mediatype": "application/x-ndjson",
+      "bytes": 9718063,
+      "hash": "sha256:e5de84b8e406d158b19a004b12179fac7390916a01e76db3b4a2e0c16b6170c8"
     },
     {
       "name": "blocktypes-parquet",
       "table": "blocktypes",
       "path": "blocktypes.parquet",
       "format": "parquet",
-      "mediatype": "application/vnd.apache.parquet"
+      "mediatype": "application/vnd.apache.parquet",
+      "bytes": 5935,
+      "hash": "sha256:22d585f1a01ca9ff79bbcec54a0d979e35c3791911718a0c1af46047cabd11c4",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "other_names",
+            "type": "array"
+          }
+        ],
+        "primaryKey": [
+          "id"
+        ]
+      }
     },
     {
       "name": "memberships-csv",
@@ -112,35 +592,83 @@
       "path": "memberships.csv.zst",
       "format": "csv",
       "mediatype": "text/csv",
-      "compression": "zstd"
+      "compression": "zstd",
+      "bytes": 150376,
+      "hash": "sha256:0a83a21e97795cd6508e2f6b7a0d84cf1e45e0797f1faf7df542426a1ad7bf13"
     },
     {
       "name": "memberships-parquet",
       "table": "memberships",
       "path": "memberships.parquet",
       "format": "parquet",
-      "mediatype": "application/vnd.apache.parquet"
+      "mediatype": "application/vnd.apache.parquet",
+      "bytes": 94660,
+      "hash": "sha256:18a36b2897cf0277b1e69a30a870f5ca58209fc334c553196636aaae9ea0865c",
+      "schema": {
+        "fields": [
+          {
+            "name": "intblock_id",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "include_type",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "joined",
+            "type": "string"
+          },
+          {
+            "name": "left",
+            "type": "string"
+          }
+        ],
+        "primaryKey": [
+          "intblock_id",
+          "country_code"
+        ]
+      }
     },
     {
       "name": "intblocks_aliases-json",
       "table": "intblocks_aliases",
       "path": "intblocks_aliases.json",
       "format": "json",
-      "mediatype": "application/json"
+      "mediatype": "application/json",
+      "bytes": 1757,
+      "hash": "sha256:9f0d321556900fff3c7aebb1169e1f8e8cbde26f86d0056e9f348938c5623c0f"
     },
     {
       "name": "countries_aliases-json",
       "table": "countries_aliases",
       "path": "countries_aliases.json",
       "format": "json",
-      "mediatype": "application/json"
+      "mediatype": "application/json",
+      "bytes": 361,
+      "hash": "sha256:ac8fed2ec19c7894de03b53fbd6b512db99623bcd6af230af123703169afe5a3"
     },
     {
       "name": "attribute_intblock_migrations-json",
       "table": "attribute_intblock_migrations",
       "path": "attribute_intblock_migrations.json",
       "format": "json",
-      "mediatype": "application/json"
+      "mediatype": "application/json",
+      "bytes": 10040,
+      "hash": "sha256:e9e4518244915df8f72fb29ccf8b830723bdb6d8e69a851d78c749ead4a2b23b"
     }
   ]
 }

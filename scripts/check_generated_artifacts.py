@@ -20,6 +20,7 @@ import yaml
 import zstandard
 
 from internacia_builder.clean import clean_data
+from internacia_builder.contract import CONTRACT_FILE, file_digest, render_contract, verify_checksums
 from internacia_builder.export import (
     COUNTRIES_LITE_FIELDS,
     INTBLOCKS_LITE_FIELDS,
@@ -30,6 +31,7 @@ from internacia_builder.export import (
     load_intblock_aliases,
     project_lite_rows,
 )
+from internacia_builder.manifest import dataset_files
 from internacia_builder.schemas import (
     get_blocktypes_schema,
     get_countries_schema,
@@ -124,6 +126,24 @@ def _arrow_rows(rows: list[dict], schema: pa.Schema) -> list[dict]:
     return pa.Table.from_pylist(rows, schema=schema).to_pylist()
 
 
+def _check_manifest_files(datasets_dir: Path, name: str, manifest: dict, problems: list[str]) -> None:
+    listed = {entry.get("path"): entry for entry in manifest.get("files") or []}
+    expected = {path.name for path in dataset_files(datasets_dir, name)}
+    if set(listed) != expected:
+        problems.append(f"{name}.manifest.json: files {sorted(listed)} != dataset files {sorted(expected)}")
+    for file_name in sorted(set(listed) & expected):
+        if {k: listed[file_name].get(k) for k in ("sha256", "bytes")} != file_digest(datasets_dir / file_name):
+            problems.append(f"{name}.manifest.json: checksum or size of {file_name} does not match the file")
+
+
+def _check_contract(datasets_dir: Path, version: str, problems: list[str]) -> None:
+    path = datasets_dir / CONTRACT_FILE
+    if not path.is_file():
+        problems.append(f"{CONTRACT_FILE}: missing")
+    elif path.read_text(encoding="utf-8") != render_contract(version):
+        problems.append(f"{CONTRACT_FILE}: differs from the contract generated from the current schemas")
+
+
 def check_artifacts(datasets_dir: Path, root: Path) -> list[str]:
     """Return actionable mismatches; the input bundle and sources are never changed."""
     problems: list[str] = []
@@ -163,11 +183,15 @@ def check_artifacts(datasets_dir: Path, root: Path) -> list[str]:
                 else:
                     metadata.append((path.name, json.loads(path.read_text(encoding="utf-8"))))
             metadata.extend((f"{name}._meta", row) for row in meta if row["dataset"] == name)
+            if metadata and metadata[0][0] == f"{name}.manifest.json":
+                _check_manifest_files(datasets_dir, name, metadata[0][1], problems)
             for label, record in metadata:
                 for field, value in (("dataset", name), ("row_count", len(expected)), ("schema_hash", schema_hash(schema))):
                     if record.get(field) != value:
                         problems.append(f"{label}: invalid {field}: {record.get(field)!r}, expected {value!r}")
-                identity = {k: record.get(k) for k in ("version", "git_commit", "build_date", "data_license")}
+                identity = {
+                    k: record.get(k) for k in ("version", "git_commit", "build_date", "data_license", "contract_version")
+                }
                 if any(not value for value in identity.values()):
                     problems.append(f"{label}: incomplete build identity")
                 identities[label] = identity
@@ -188,6 +212,10 @@ def check_artifacts(datasets_dir: Path, root: Path) -> list[str]:
             _compare(pq.read_table(datasets_dir / f"{name}.parquet").to_pylist(), expected, f"{name}.parquet", problems, "alias")
         if len({_canonical(i) for i in identities.values()}) != 1:
             problems.append("build identity differs across artifacts")
+        versions = {identity["version"] for identity in identities.values()}
+        if len(versions) == 1:
+            _check_contract(datasets_dir, versions.pop(), problems)
+        problems.extend(verify_checksums(datasets_dir))
     finally:
         con.close()
     return problems
@@ -207,7 +235,7 @@ def main(
         for problem in problems:
             typer.echo(f"  {problem}")
         raise typer.Exit(1)
-    typer.echo("Artifact consistency OK: all source projections, values, row counts, keys, schemas, and metadata agree")
+    typer.echo("Artifact consistency OK: all source projections, values, row counts, keys, schemas, metadata, contract, and checksums agree")
 
 
 if __name__ == "__main__":

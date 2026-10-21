@@ -71,8 +71,14 @@ Lite variants share primary keys with full exports — join on `code` or `id` to
 Every build writes a manifest with:
 
 - `version` — semver (matches git tag on releases)
-- `schema_hash` — changes whenever the declared export schema changes; inspect the migration report to assess compatibility
+- `schema_hash` — SHA-256 of the table's canonical column list; changes whenever the declared export schema changes; inspect the migration report to assess compatibility
+- `contract_version` — `MAJOR.MINOR` of the dataset version; pin the MAJOR
+- `files` — `sha256` and `bytes` of each file of the dataset
 - `build_date`, `git_commit`, `row_count`, `data_license`
+
+`contract.json` describes every table (columns, logical types, nullability, keys), the
+open enum values, and `min_duckdb`; `SHA256SUMS` covers every file. See
+[data-contract.md](data-contract.md).
 
 Query version from DuckDB:
 

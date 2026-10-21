@@ -3,25 +3,59 @@
 from __future__ import annotations
 
 import hashlib
+import json
 
 import pyarrow as pa
 
+# Version of the logical type grammar used by ``logical_type`` and ``schema_hash``;
+# documented in docs/data-contract.md.
+TYPE_GRAMMAR = "internacia-logical-types/1"
+
+_SCALAR_TYPES = {
+    pa.string(): "string",
+    pa.bool_(): "boolean",
+    pa.int32(): "int32",
+    pa.int64(): "int64",
+    pa.float64(): "float64",
+}
+
+
+def logical_type(data_type: pa.DataType) -> str:
+    """Render an Arrow type in the canonical, library-independent type grammar."""
+    if data_type in _SCALAR_TYPES:
+        return _SCALAR_TYPES[data_type]
+    if pa.types.is_map(data_type):
+        return f"map<{logical_type(data_type.key_type)},{logical_type(data_type.item_type)}>"
+    if pa.types.is_list(data_type):
+        return f"list<{logical_type(data_type.value_type)}>"
+    if pa.types.is_struct(data_type):
+        fields = ",".join(f"{f.name}:{logical_type(f.type)}" for f in data_type)
+        return f"struct<{fields}>"
+    raise ValueError(f"No logical type for Arrow type {data_type}")
+
+
+def schema_columns(schema: pa.Schema) -> list[list]:
+    """Return ``[[name, logical_type, nullable], ...]`` in column order."""
+    return [[f.name, logical_type(f.type), f.nullable] for f in schema]
+
 
 def schema_hash(schema: pa.Schema) -> str:
-    digest = hashlib.sha256(schema.serialize().to_pybytes()).hexdigest()
-    return digest[:16]
+    """SHA-256 of the canonical column list; independent of the pyarrow version."""
+    canonical = json.dumps(schema_columns(schema), separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 def get_meta_schema() -> pa.Schema:
     """Schema for the embedded DuckDB ``_meta`` table."""
     return pa.schema(
         [
-            ("dataset", pa.string()),
+            pa.field("dataset", pa.string(), nullable=False),
             ("version", pa.string()),
             ("build_date", pa.string()),
             ("git_commit", pa.string()),
             ("row_count", pa.int64()),
             ("schema_hash", pa.string()),
             ("data_license", pa.string()),
+            ("contract_version", pa.string()),
         ]
     )
 
@@ -39,7 +73,7 @@ def get_countries_schema() -> pa.Schema:
     """Define explicit PyArrow schema for countries."""
     return pa.schema(
         [
-            ("code", pa.string()),
+            pa.field("code", pa.string(), nullable=False),
             ("name", pa.string()),
             ("iso3code", pa.string()),
             ("capital_city", pa.struct([("name", pa.string()), ("lng", pa.float64()), ("lat", pa.float64())])),
@@ -167,7 +201,7 @@ def get_intblocks_schema() -> pa.Schema:
     """Define explicit PyArrow schema for intblocks."""
     return pa.schema(
         [
-            ("id", pa.string()),
+            pa.field("id", pa.string(), nullable=False),
             ("blocktype", pa.list_(pa.string())),
             ("status", pa.string()),
             ("name", pa.string()),
@@ -240,7 +274,7 @@ def get_blocktypes_schema() -> pa.Schema:
     """Define explicit PyArrow schema for blocktypes."""
     return pa.schema(
         [
-            ("id", pa.string()),
+            pa.field("id", pa.string(), nullable=False),
             ("name", pa.string()),
             ("other_names", pa.list_(pa.struct([("lang", pa.string()), ("name", pa.string())]))),
         ]
@@ -250,7 +284,7 @@ def get_aliases_schema() -> pa.Schema:
     """Schema for the intblock identifier alias artifact."""
     return pa.schema(
         [
-            ("alias", pa.string()),
+            pa.field("alias", pa.string(), nullable=False),
             ("target", pa.string()),
             ("reason", pa.string()),
             ("since", pa.string()),
@@ -262,7 +296,7 @@ def get_attribute_migration_schema() -> pa.Schema:
     """Schema for attribute-intblock → country-field migration artifact."""
     return pa.schema(
         [
-            ("retired_id", pa.string()),
+            pa.field("retired_id", pa.string(), nullable=False),
             ("country_field", pa.string()),
             ("country_value", pa.string()),
             ("country_value_id", pa.string()),
@@ -278,8 +312,8 @@ def get_memberships_schema() -> pa.Schema:
     """Define explicit PyArrow schema for the flattened membership edge table."""
     return pa.schema(
         [
-            ("intblock_id", pa.string()),
-            ("country_code", pa.string()),
+            pa.field("intblock_id", pa.string(), nullable=False),
+            pa.field("country_code", pa.string(), nullable=False),
             ("include_type", pa.string()),
             ("status", pa.string()),
             ("joined", pa.string()),

@@ -18,9 +18,19 @@ for a typical software library.
 Row-count changes alone are **not** MAJOR. A new intblock is MINOR; correcting
 NATO’s roster is PATCH.
 
-`schema_hash` in the manifest is a hash of the declared exported Arrow schema.
-Changing an exported field or nested type changes the hash; changing YAML values
-or source-only JSON Schema constraints does not. Read the migration report for
+Enum-like fields (`status`, `scope_category`, `geographic_scope`, …) are **open**:
+consumers must accept values they do not know, so a new value is MINOR. Removing or
+renaming a value, or narrowing an enum, is MAJOR. A field or resource is first marked
+`deprecated` in `contract.json` in a MINOR release and removed no earlier than the next
+MAJOR; MAJOR changes are batched, at most once or twice a year. The machine-readable
+form of these rules is [`contract.json`](data-contract.md).
+
+`schema_hash` (manifests, sidecars, `_meta`, `contract.json`) is the SHA-256 of the
+canonical column list of a table — name, logical type and nullability, in column order
+— and does not depend on the pyarrow or DuckDB version; see
+[data-contract.md](data-contract.md#schema_hash). Changing an exported field or nested
+type changes the hash; changing YAML values or source-only JSON Schema constraints does
+not. Read the migration report for
 source and export contract changes, including constraints not represented by the
 hash. An unchanged hash alone does not establish source-schema compatibility.
 
@@ -39,7 +49,9 @@ hash. An unchanged hash alone does not establish source-schema compatibility.
 | Artifact | Answers |
 |----------|---------|
 | [CHANGELOG.md](../CHANGELOG.md) | Human-readable added/fixed/breaking notes and migration SQL |
-| `data/datasets/*.manifest.json` | `version`, `schema_hash`, `row_count`, `git_commit` |
+| `contract.json` | Tables, columns, types, keys, open enums, `contract_version`, `min_duckdb` |
+| `SHA256SUMS` | Checksums of every release asset |
+| `data/datasets/*.manifest.json` | `version`, `contract_version`, `schema_hash`, `row_count`, `git_commit`, per-file `sha256`/`bytes` |
 | `migration.vX.Y.Z.json` (Release asset) | Recursive source JSON Schema and exported Arrow differences against the identified previous release, generated on every release |
 | Alias JSON / Parquet | Id remaps across releases |
 | GitHub Release assets | Frozen Parquet/JSONL/DuckDB/CSV for that tag |

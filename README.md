@@ -256,7 +256,9 @@ con.execute("""
 
 Datasets are **self-describing**. The DuckDB file carries a `_meta` table and each Parquet file has a
 `<dataset>.meta.json` sidecar, both mirroring the manifest fields (`version`, `build_date`,
-`git_commit`, `row_count`, `schema_hash`, `data_license`):
+`git_commit`, `row_count`, `schema_hash`, `data_license`, `contract_version`). Tables, keys, enum
+values and versioning rules are in `contract.json`, and `SHA256SUMS` lists checksums for every file
+([data contract](docs/data-contract.md)):
 
 ```python
 import duckdb
@@ -425,7 +427,8 @@ Tagged releases (`vX.Y.Z`) check committed exports, build into `.release-dataset
 test and validate that final bundle, compare source/export contracts with the
 previous release, and attach the bundle as GitHub Release assets. The tag must
 match the version in `CHANGELOG.md`, `pyproject.toml`, `internacia_builder/__init__.py`,
-and the generated manifests. `schema_hash` identifies the exported Arrow schema;
+and the generated manifests. `schema_hash` identifies a table's exported columns
+(name, logical type, nullability; see [data contract](docs/data-contract.md));
 source-only constraints are covered by the migration report.
 
 Consumers can clone the repository or download versioned Release assets. See

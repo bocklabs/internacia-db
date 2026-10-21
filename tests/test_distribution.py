@@ -1,16 +1,26 @@
 """Distribution descriptors must resolve inside the exact published bundle."""
 import json
 
+import pyarrow as pa
+import pyarrow.parquet as pq
 import pytest
 
 from internacia_builder import __version__, distribution
+from internacia_builder.contract import write_contract
 from internacia_builder.distribution import check_release_version, prepare_huggingface_bundle, validate_package
 from internacia_builder.export import write_datapackage
 
 
+def _fixture_file(path):
+    if path.suffix == ".parquet":
+        pq.write_table(pa.table({"id": ["a"]}), path)
+    else:
+        path.write_bytes(b"fixture")
+
+
 def test_descriptor_names_are_unique_per_table_and_format(tmp_path):
     for name in ("countries.parquet", "countries.csv.zst", "countries-lite.parquet"):
-        (tmp_path / name).write_bytes(b"fixture")
+        _fixture_file(tmp_path / name)
     write_datapackage(tmp_path, "2.1.0")
     validate_package(tmp_path)
     names = [r["name"] for r in json.loads((tmp_path / "datapackage.json").read_text())["resources"]]
@@ -30,7 +40,7 @@ def test_partial_huggingface_bundle_has_resolvable_nested_paths(tmp_path):
     source = tmp_path / "source"
     source.mkdir()
     for table in ("countries", "intblocks", "blocktypes", "memberships"):
-        (source / f"{table}.parquet").write_bytes(b"fixture")
+        _fixture_file(source / f"{table}.parquet")
         for suffix in ("manifest.json", "meta.json"):
             (source / f"{table}.{suffix}").write_text("{}")
     (source / "countries.jsonl").write_text("{}\n")
@@ -58,6 +68,7 @@ def _release_root(tmp_path, citation_version, citation_date, changelog_date="202
     datasets = tmp_path / "datasets"
     datasets.mkdir()
     (datasets / "countries.manifest.json").write_text(json.dumps({"version": __version__}))
+    write_contract(datasets, __version__)
     return root, datasets
 
 
@@ -83,4 +94,25 @@ def test_release_version_rejects_stale_citation_date(tmp_path, monkeypatch):
 
 def test_repository_citation_matches_current_release(tmp_path):
     (tmp_path / "countries.manifest.json").write_text(json.dumps({"version": __version__}))
+    write_contract(tmp_path, __version__)
     check_release_version(f"v{__version__}", tmp_path)
+
+
+def test_release_requires_matching_contract(tmp_path):
+    (tmp_path / "countries.manifest.json").write_text(json.dumps({"version": __version__}))
+    with pytest.raises(ValueError, match="contract.json"):
+        check_release_version(f"v{__version__}", tmp_path)
+    write_contract(tmp_path, "0.0.1")
+    with pytest.raises(ValueError, match="contract.json"):
+        check_release_version(f"v{__version__}", tmp_path)
+
+
+def test_package_hash_must_match_file(tmp_path):
+    _fixture_file(tmp_path / "countries.parquet")
+    write_datapackage(tmp_path, "2.1.0")
+    resource = json.loads((tmp_path / "datapackage.json").read_text())["resources"][0]
+    assert resource["hash"].startswith("sha256:") and resource["bytes"] > 0
+    assert resource["schema"]["fields"] == [{"name": "id", "type": "string"}]
+    (tmp_path / "countries.parquet").write_bytes(b"tampered")
+    with pytest.raises(ValueError, match="bytes/hash"):
+        validate_package(tmp_path)

@@ -12,6 +12,8 @@ from typer.testing import CliRunner
 
 from internacia_builder import build as builder
 from internacia_builder.clean import clean_data
+from internacia_builder.contract import write_checksums, write_contract
+from internacia_builder.manifest import get_dataset_version
 from internacia_builder.paths import datasets_dir
 
 
@@ -81,7 +83,6 @@ def artifact_fixture(tmp_path_factory):
     for name, rows in source.items():
         schema = cga.SCHEMAS[name]()
         builder.save_parquet(rows, out / f"{name}.parquet", schema)
-        builder.write_manifest(out, name, schema, len(rows))
         builder.write_meta_sidecar(out, name, schema, len(rows))
         if name in cga.DATASETS:
             builder.save_jsonl(rows, out / f"{name}.jsonl")
@@ -104,6 +105,10 @@ def artifact_fixture(tmp_path_factory):
         source["countries"], source["intblocks"], source["blocktypes"], out / "internacia.duckdb",
         cga.SCHEMAS["countries"](), cga.SCHEMAS["intblocks"](), cga.SCHEMAS["blocktypes"](), source["memberships"],
     )
+    for name, rows in source.items():
+        builder.write_manifest(out, name, cga.SCHEMAS[name](), len(rows))
+    write_contract(out, get_dataset_version())
+    write_checksums(out)
     return root
 
 
