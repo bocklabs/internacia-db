@@ -1,8 +1,8 @@
 {
   "dataset": "intblocks",
   "version": "3.0.0",
-  "build_date": "2026-10-21T21:29:25Z",
-  "git_commit": "90ec185",
+  "build_date": "2026-10-21T21:39:03Z",
+  "git_commit": "5328128",
   "row_count": 1269,
   "schema_hash": "aa66550599e0342fa0117232375f7428bb94431f8174000933e7ae483e70c4aa",
   "data_license": "CC-BY-4.0",
@@ -40,7 +40,7 @@
     },
     {
       "path": "intblocks.meta.json",
-      "sha256": "9eec1c73e8562928b4ce5ac6764527b08d38443384800cbc3ffd0fda70dedc8e",
+      "sha256": "bad952038086797ac1718f5726f6d2aba96d69306d794ea1a8c659d181bb0d16",
       "bytes": 284
     },
     {

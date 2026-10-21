@@ -15,7 +15,7 @@
 - [x] 2.4 Stop committing binary artifacts in `data/datasets/` (D3); keep text manifests, `contract.json`, `datapackage.json`, the dataset card and alias JSON
 
 ## 3. Aliases and canonical views in DuckDB (db-1.4)
-- [ ] 3.1 Tables `intblock_aliases`, `country_aliases`, `attribute_migrations`
-- [ ] 3.2 Views `current_memberships`, `country_currencies`, `country_languages`, `country_timezones`
-- [ ] 3.3 Validator: an intblock ID or country code removed since the previous release must have an alias
-- [ ] 3.4 Document the views and alias tables in `contract.json` and the cookbooks
+- [x] 3.1 Tables `intblocks_aliases`, `countries_aliases`, `attribute_intblock_migrations` (same names as the published files)
+- [x] 3.2 Views `current_memberships`, `country_currencies`, `country_languages`, `country_timezones`
+- [x] 3.3 Validator: an intblock ID or country code removed since the previous release must have an alias
+- [x] 3.4 Document the views and alias tables in `contract.json` and the cookbooks

@@ -14,7 +14,7 @@ import yaml
 import zstandard as zstd
 from tqdm import tqdm
 
-from internacia_builder.contract import DUCKDB_STORAGE_COMPATIBILITY, TABLES, file_digest
+from internacia_builder.contract import DUCKDB_STORAGE_COMPATIBILITY, TABLES, VIEWS, file_digest
 from internacia_builder.manifest import (
     dataset_metadata,
 )
@@ -507,8 +507,10 @@ def create_duckdb_database(
     intblocks_schema: pa.Schema,
     blocktypes_schema: pa.Schema,
     memberships_data: list[dict[str, Any]] | None = None,
+    reference_tables: list[tuple[str, list[dict[str, Any]], pa.Schema]] | None = None,
 ):
-    """Create DuckDB database with countries, intblocks, blocktypes, and memberships tables."""
+    """Create DuckDB database with countries, intblocks, blocktypes, and memberships tables,
+    the alias/migration reference tables, and the canonical views from the contract."""
     # Remove existing database if it exists
     if output_file.exists():
         output_file.unlink()
@@ -541,6 +543,16 @@ def create_duckdb_database(
         con.register("arrow_source", meta_table)
         con.execute("CREATE TABLE _meta AS SELECT * FROM arrow_source")
         con.unregister("arrow_source")
+
+        for name, data, schema in reference_tables or []:
+            con.register("arrow_source", pa.Table.from_pylist(data, schema=schema))
+            con.execute(f"CREATE TABLE {name} AS SELECT * FROM arrow_source")
+            con.unregister("arrow_source")
+
+        for view in VIEWS:
+            if view["name"] == "current_memberships" and memberships_data is None:
+                continue
+            con.execute(f"CREATE VIEW {view['name']} AS {view['sql']}")
 
         typer.echo(f"✓ Saved DuckDB: {output_file}")
         typer.echo(f"  - Countries: {counts['countries']} rows")

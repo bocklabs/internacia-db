@@ -1,8 +1,8 @@
 {
   "dataset": "blocktypes",
   "version": "3.0.0",
-  "build_date": "2026-10-21T21:29:25Z",
-  "git_commit": "90ec185",
+  "build_date": "2026-10-21T21:39:03Z",
+  "git_commit": "5328128",
   "row_count": 78,
   "schema_hash": "746aaa1c260dba43d1bc12a885baae302d4e62fac11b95e921805a3b89e044fa",
   "data_license": "CC-BY-4.0",
@@ -20,7 +20,7 @@
     },
     {
       "path": "blocktypes.meta.json",
-      "sha256": "4cb405905207ba2a1c2976c1ff0428d7b9e7c6724c9294f5799fdfaa04482753",
+      "sha256": "c67f85cf00ff51ad82c9aedec7af93698eaff170d6d112c95733fe03f4d3dd2a",
       "bytes": 283
     },
     {

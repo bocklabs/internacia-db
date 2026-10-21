@@ -23,10 +23,9 @@ generated one.
 | `enums[]` | Enum-like columns: `table`, `column` (nested paths use `field[].sub`), `values`, `open`. |
 | `deprecated[]` | Columns or resources scheduled for removal in the next MAJOR release. |
 
-Tables in `internacia.duckdb`: `countries`, `intblocks`, `blocktypes`, `memberships`, `_meta`.
-Tables shipped as separate files only: `intblocks_aliases`, `countries_aliases`,
-`attribute_intblock_migrations`. The `*-lite` projections and CSV files are derived
-convenience exports and are not part of the contract.
+Every entry in `tables[]` is present in `internacia.duckdb`; `kind` is `table` or `view`.
+The alias and migration tables are also published as JSON and Parquet files. The `*-lite`
+projections and CSV files are derived convenience exports and are not part of the contract.
 
 Foreign keys with known exceptions carry a `note`: `memberships.country_code` can reference
 historical codes such as `SU` that are not in `countries`.
@@ -36,6 +35,30 @@ historical codes such as `SU` that are not in `countries`.
 SELECT t.name, t.schema_hash
 FROM read_json('contract.json') AS c, UNNEST(c.tables) AS u(t);
 ```
+
+## Canonical views and reference tables
+
+| Name | Kind | Contents |
+|------|------|----------|
+| `countries`, `intblocks`, `blocktypes`, `memberships` | table | The datasets |
+| `_meta` | table | One row per dataset: version, build identity, `schema_hash`, `contract_version` |
+| `intblocks_aliases`, `countries_aliases` | table | Retired or renamed IDs (`alias` → `target`, `reason`, `since`) |
+| `attribute_intblock_migrations` | table | Retired attribute intblocks → country fields |
+| `current_memberships` | view | Membership edges that are current: not `former_member`, no `left` date, and the intblock is neither `historical` nor dissolved. All participation statuses are kept; filter `status` for full members. |
+| `country_currencies` | view | `country_code`, `currency_code`, `currency_name`, `currency_symbol` |
+| `country_languages` | view | `country_code`, `language_code`, `language_name`, `official` |
+| `country_timezones` | view | `country_code`, `timezone` |
+
+Views carry their SQL in `contract.json` (`definition`), so consumers without DuckDB can
+reproduce them. Countries with NULL `currencies`, `languages` or `timezones` have no rows in
+the corresponding view. `reason = disambiguated` aliases must not be followed blindly: the
+old ID now names a different entity.
+
+## Identifier stability
+
+Validation compares the record IDs with the latest release tag: an intblock ID or country
+code that existed in that release must still exist or have an entry in
+`data/intblocks_aliases.yaml` / `data/countries_aliases.yaml`.
 
 ## Logical types
 

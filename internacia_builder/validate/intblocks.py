@@ -25,6 +25,7 @@ from internacia_builder.validate.completeness import (
     validate_membership_applicability,
 )
 from internacia_builder.validate.country_rules import check_provenance_count
+from internacia_builder.validate.identifiers import release_identifier_errors
 from internacia_builder.validate.intblock_rules import TEMPLATED_DESC_RE as TEMPLATED_DESC
 from internacia_builder.validate.output import emit_validation_result
 
@@ -428,6 +429,17 @@ def run_validation(
         aliases = load_yaml(aliases_path) or []
         errors.extend(validate_aliases(aliases, known_ids))
         alias_names = {str(a.get("alias") or "") for a in aliases if isinstance(a, dict)} - {""}
+    if intblocks_dir.resolve() == (root / "data" / "intblocks").resolve():
+        errors.extend(
+            release_identifier_errors(
+                root,
+                "intblock",
+                "data/intblocks",
+                {str(rec.get("id")) for _, rec in records if rec.get("id")},
+                alias_names,
+                "data/intblocks_aliases.yaml",
+            )
+        )
 
     migration_path = root / "data" / "attribute_intblock_migrations.yaml"
     if migration_path.exists():

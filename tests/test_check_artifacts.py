@@ -104,6 +104,11 @@ def artifact_fixture(tmp_path_factory):
     builder.create_duckdb_database(
         source["countries"], source["intblocks"], source["blocktypes"], out / "internacia.duckdb",
         cga.SCHEMAS["countries"](), cga.SCHEMAS["intblocks"](), cga.SCHEMAS["blocktypes"](), source["memberships"],
+        reference_tables=[
+            ("intblocks_aliases", [], cga.get_aliases_schema()),
+            ("countries_aliases", [], cga.get_aliases_schema()),
+            ("attribute_intblock_migrations", [], cga.get_attribute_migration_schema()),
+        ],
     )
     for name, rows in source.items():
         builder.write_manifest(out, name, cga.SCHEMAS[name](), len(rows))
@@ -128,6 +133,7 @@ def test_complete_content_guard_accepts_declared_projections_and_multiline_csv(a
     ("csv_value", "countries.csv.zst: content"),
     ("lite", "countries-lite.parquet: content"),
     ("missing_file", "Missing, unreadable"),
+    ("view", "current_memberships view: content"),
 ])
 def test_content_guard_rejects_independent_corruption(artifact_fixture, tmp_path, mutation, expected):
     root = tmp_path / "copy"
@@ -138,6 +144,7 @@ def test_content_guard_rejects_independent_corruption(artifact_fixture, tmp_path
         "duplicate": "INSERT INTO countries SELECT * FROM countries",
         "edge": "UPDATE memberships SET status = 'INVALID'",
         "meta_row": "DELETE FROM _meta WHERE dataset = 'blocktypes'",
+        "view": "CREATE OR REPLACE VIEW current_memberships AS SELECT * FROM memberships WHERE false",
     }
     if mutation in queries:
         with duckdb.connect(str(out / "internacia.duckdb")) as con:

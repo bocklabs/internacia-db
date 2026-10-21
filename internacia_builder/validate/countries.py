@@ -26,6 +26,7 @@ from internacia_builder.validate.country_rules import (  # noqa: F401 (re-export
     NON_ISO_ALPHA2,
     is_null_field,
 )
+from internacia_builder.validate.identifiers import release_identifier_errors
 from internacia_builder.validate.output import emit_validation_result
 
 app = typer.Typer(help="Validate internacia-db country data")
@@ -405,6 +406,19 @@ def run_validation(
         xref_errors, xref_warnings = validate_intblock_refs(countries_dir, intblocks_dir, completeness_cfg)
         errors.extend(xref_errors)
         warnings.extend(xref_warnings)
+
+    if countries_dir.resolve() == (root / "data" / "countries").resolve():
+        aliases = load_yaml(root / "data" / "countries_aliases.yaml") if (root / "data" / "countries_aliases.yaml").exists() else []
+        errors.extend(
+            release_identifier_errors(
+                root,
+                "country",
+                "data/countries",
+                {str(record.get("code")) for record in all_records if record.get("code")},
+                {str(a.get("alias")) for a in aliases or [] if isinstance(a, dict) and a.get("alias")},
+                "data/countries_aliases.yaml",
+            )
+        )
 
     # Write the report only after every check (including cross-dataset
     # references) has contributed its findings.

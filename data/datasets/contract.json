@@ -8,6 +8,7 @@
   "tables": [
     {
       "name": "countries",
+      "kind": "table",
       "in_duckdb": true,
       "primary_key": [
         "code"
@@ -279,6 +280,7 @@
     },
     {
       "name": "intblocks",
+      "kind": "table",
       "in_duckdb": true,
       "primary_key": [
         "id"
@@ -442,6 +444,7 @@
     },
     {
       "name": "blocktypes",
+      "kind": "table",
       "in_duckdb": true,
       "primary_key": [
         "id"
@@ -468,6 +471,7 @@
     },
     {
       "name": "memberships",
+      "kind": "table",
       "in_duckdb": true,
       "primary_key": [
         "intblock_id",
@@ -534,6 +538,7 @@
     },
     {
       "name": "_meta",
+      "kind": "table",
       "in_duckdb": true,
       "primary_key": [
         "dataset"
@@ -585,7 +590,8 @@
     },
     {
       "name": "intblocks_aliases",
-      "in_duckdb": false,
+      "kind": "table",
+      "in_duckdb": true,
       "primary_key": [
         "alias"
       ],
@@ -621,7 +627,8 @@
     },
     {
       "name": "countries_aliases",
-      "in_duckdb": false,
+      "kind": "table",
+      "in_duckdb": true,
       "primary_key": [
         "alias"
       ],
@@ -657,7 +664,8 @@
     },
     {
       "name": "attribute_intblock_migrations",
-      "in_duckdb": false,
+      "kind": "table",
+      "in_duckdb": true,
       "primary_key": [
         "retired_id"
       ],
@@ -710,6 +718,146 @@
           "nullable": true
         }
       ]
+    },
+    {
+      "name": "current_memberships",
+      "kind": "view",
+      "in_duckdb": true,
+      "primary_key": [
+        "intblock_id",
+        "country_code"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "1bdbd0d9427722d3ed3c23ee0a101ccc0e62c8eba9e65ae0000f441648b0d76c",
+      "columns": [
+        {
+          "name": "intblock_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "include_type",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "joined",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "left",
+          "type": "string",
+          "nullable": true
+        }
+      ],
+      "description": "Membership edges that are current: not former_member, no left date, and the intblock is neither historical nor dissolved. Every participation status is kept.",
+      "definition": "SELECT m.* FROM memberships m JOIN intblocks i ON i.id = m.intblock_id WHERE m.status IS DISTINCT FROM 'former_member' AND m.\"left\" IS NULL AND i.status IS DISTINCT FROM 'historical' AND i.dissolved IS NULL ORDER BY m.intblock_id, m.country_code"
+    },
+    {
+      "name": "country_currencies",
+      "kind": "view",
+      "in_duckdb": true,
+      "primary_key": [
+        "country_code",
+        "currency_code"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "474b8fb6655122927cc2262ff67c135853076c431f9efc44760e45ff09317333",
+      "columns": [
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "currency_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "currency_name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "currency_symbol",
+          "type": "string",
+          "nullable": true
+        }
+      ],
+      "description": "One row per country and currency; countries without currencies have no rows.",
+      "definition": "SELECT c.code AS country_code, u.cur.code AS currency_code, u.cur.name AS currency_name, u.cur.symbol AS currency_symbol FROM countries c, UNNEST(c.currencies) AS u(cur) ORDER BY country_code, currency_code"
+    },
+    {
+      "name": "country_languages",
+      "kind": "view",
+      "in_duckdb": true,
+      "primary_key": [
+        "country_code",
+        "language_code"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "5ac6c8c3b6758929b9311078a97a0e12135be9ee21eb98842e68e35363362c9a",
+      "columns": [
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "language_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "language_name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "official",
+          "type": "boolean",
+          "nullable": true
+        }
+      ],
+      "description": "One row per country and language; countries without languages have no rows.",
+      "definition": "SELECT c.code AS country_code, u.lang.code AS language_code, u.lang.name AS language_name, u.lang.official AS official FROM countries c, UNNEST(c.languages) AS u(lang) ORDER BY country_code, language_code"
+    },
+    {
+      "name": "country_timezones",
+      "kind": "view",
+      "in_duckdb": true,
+      "primary_key": [
+        "country_code",
+        "timezone"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "f43cd49cb8d6188c1d1e83940b698fa0f5b1e4f94ec6a311c1abd47a26eaf282",
+      "columns": [
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timezone",
+          "type": "string",
+          "nullable": false
+        }
+      ],
+      "description": "One row per country and IANA time zone.",
+      "definition": "SELECT c.code AS country_code, u.tz AS timezone FROM countries c, UNNEST(c.timezones) AS u(tz) ORDER BY country_code, timezone"
     }
   ],
   "enums": [
@@ -782,6 +930,41 @@
         "renamed",
         "merged",
         "disambiguated"
+      ],
+      "open": true
+    },
+    {
+      "table": "current_memberships",
+      "column": "include_type",
+      "values": [
+        "country",
+        "organization",
+        "territory",
+        "historical-country"
+      ],
+      "open": true
+    },
+    {
+      "table": "current_memberships",
+      "column": "status",
+      "values": [
+        "member",
+        "observer",
+        "associated",
+        "associated_observer",
+        "associate",
+        "associate_member",
+        "founding_member",
+        "former_member",
+        "participant",
+        "recipient",
+        "contributor",
+        "represented",
+        "funder",
+        "cooperating",
+        "partner",
+        "validation",
+        "extension"
       ],
       "open": true
     },

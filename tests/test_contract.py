@@ -52,9 +52,11 @@ def test_contract_tables_keys_and_open_enums():
     assert contract["contract_version"] == "3.2"
     assert contract["dataset_version"] == "3.2.1"
     tables = {t["name"]: t for t in contract["tables"]}
-    assert {name for name, t in tables.items() if t["in_duckdb"]} == {
-        "countries", "intblocks", "blocktypes", "memberships", "_meta",
+    assert all(t["in_duckdb"] for t in tables.values())
+    assert {name for name, t in tables.items() if t["kind"] == "view"} == {
+        "current_memberships", "country_currencies", "country_languages", "country_timezones",
     }
+    assert "FROM memberships" in tables["current_memberships"]["definition"]
     assert tables["memberships"]["primary_key"] == ["intblock_id", "country_code"]
     assert tables["countries"]["schema_hash"] == schema_hash(get_countries_schema())
     for table in tables.values():
