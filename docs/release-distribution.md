@@ -14,11 +14,36 @@ Without `HF_TOKEN`, the Hugging Face step no-ops. GitHub Release assets still pu
 See [publishing-huggingface.md](publishing-huggingface.md) for the full
 Hugging Face setup, manual publish, and verification guide.
 
+## Release assets
+
+The GitHub Release assets on tag `vX.Y.Z` are the **bundle of record** for that
+version. The committed `data/datasets/` snapshot is a development copy: its bytes
+and build identity (`git_commit`, `build_date` in manifests and `_meta`) can
+differ from the release build, so pin and verify against Release assets.
+
+Each release attaches every file in `.release-datasets/` — 41 files for v3.0.0:
+
+| Group | Files |
+|-------|-------|
+| DuckDB | `internacia.duckdb` |
+| Countries | `countries.parquet`, `countries.jsonl`, `countries.jsonl.zst`, `countries.json.zst`, `countries.yaml.zst`, `countries.csv.zst`, `countries-lite.parquet`, `countries-lite.csv.zst`, `countries.manifest.json`, `countries.meta.json` |
+| Intblocks | `intblocks.parquet`, `intblocks.jsonl`, `intblocks.jsonl.zst`, `intblocks.json.zst`, `intblocks.yaml.zst`, `intblocks.csv.zst`, `intblocks-lite.parquet`, `intblocks-lite.csv.zst`, `intblocks.manifest.json`, `intblocks.meta.json` |
+| Blocktypes | `blocktypes.parquet`, `blocktypes.jsonl`, `blocktypes.jsonl.zst`, `blocktypes.yaml`, `blocktypes.yaml.zst`, `blocktypes.manifest.json`, `blocktypes.meta.json` |
+| Memberships | `memberships.parquet`, `memberships.csv.zst`, `memberships.manifest.json`, `memberships.meta.json` |
+| Aliases and migrations | `intblocks_aliases.json`, `intblocks_aliases.parquet`, `countries_aliases.json`, `countries_aliases.parquet`, `attribute_intblock_migrations.json`, `attribute_intblock_migrations.parquet` |
+| Descriptors | `datapackage.json`, `README.md` (dataset card) |
+| Schema migration | `migration.vX.Y.Z.json` (release only; not committed) |
+
+There is no checksum file yet; the `*.manifest.json` files carry `version`,
+`git_commit`, `row_count`, and `schema_hash` but no content hash.
+
+## Workflow
+
 The workflow checks committed snapshot freshness before rebuilding. It tests and
 checks the final `.release-datasets` staging directory, enforces the shared quality
-gate and tag-version consistency, then publishes that exact bundle. Every
-`datapackage.json` resource is attached. Hugging Face gets a separate validated
-Parquet-only descriptor with `table/table.parquet` paths and all four tables' metadata.
+gate and tag-version consistency, then publishes that exact bundle as listed
+above. Hugging Face gets a separate validated Parquet-only descriptor with
+`table/table.parquet` paths and all four tables' metadata.
 Migration files identify the prior release; a first release without a baseline
 reports compatibility as unknown rather than unchanged.
 

@@ -16,6 +16,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   GitHub integration is the only depositor, so each release gets one version.
 - The release version gate (`scripts/check_release_bundle.py --version`) also
   checks `CITATION.cff` `version` and `date-released` against `CHANGELOG.md`.
+- `attribute_intblock_migrations` `since` is `2.0.0` (the release that retired
+  these intblocks) instead of `Unreleased`.
+- Removed the stale committed `data/datasets/migration.vUnreleased.json`; schema
+  migrations ship as `migration.vX.Y.Z.json` Release assets.
+
+### Documentation
+
+- SDK status: `internacia` 0.2.x (PyPI) predates data v3 — it cannot download
+  current releases, `search.fuzzy` fails, `get_by_member` includes former
+  memberships, and `get_by_id` ignores aliases. `docs/llm-scenarios.md`,
+  `docs/when-to-use-internacia.md`, `docs/getting-started.md`, and `llms*.txt`
+  now say so and give DuckDB SQL equivalents (tested in `tests/test_release_docs.py`).
+- internacia-api is described as in development / experimental rather than a
+  shipped REST API or "reference implementation".
+- `docs/release-distribution.md` lists the exact Release assets and states that
+  the GitHub Release assets are the bundle of record for each version.
 
 ## [3.0.0] - 2026-10-16
 

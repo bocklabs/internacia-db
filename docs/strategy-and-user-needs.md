@@ -147,7 +147,7 @@ change proposals before implementation.
   schema_hash, row_count) into `internacia.duckdb`; emit the same as `*.meta.json` next to Parquet.
 - **A4. Machine-readable release diff** *(High)*: emit `diff-vX.Y.Z.json` (added/removed/renamed/changed)
   as a release asset; reuse `diff_countries_baseline.py` logic generalized to both datasets.
-  Partial: `migration.vUnreleased.json` covers schema field add/remove; full release-content diff still open.
+  Partial: the per-release `migration.vX.Y.Z.json` Release asset covers schema field add/remove; full release-content diff still open.
 
 ### Track B — Enrichment value (serves Dateno directly)
 - **B1. Wikidata backfill for intblocks** *(High)* — already scoped in `add-intblocks-gap-backlog`.

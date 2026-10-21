@@ -21,7 +21,7 @@ Licensed CC-BY-4.0 (data and documentation); code is MIT.
 
 - **DuckDB:** `data/datasets/internacia.duckdb` (tables: `countries`, `intblocks`, `blocktypes`, `memberships`, `_meta`)
 - **Parquet:** `data/datasets/{countries,intblocks,blocktypes,memberships}.parquet`
-- **Remote:** [internacia-python](https://github.com/datenoio/internacia-python) (SDK). [internacia-api](https://github.com/datenoio/internacia-api) is **self-host only** — no public hosted HTTP API.
+- **Remote:** [internacia-python](https://github.com/datenoio/internacia-python) (SDK; 0.2.x on PyPI predates data v3 — see [SDK status](docs/llm-scenarios.md#sdk-status)). [internacia-api](https://github.com/datenoio/internacia-api) is **in development** and self-host only — no public hosted HTTP API.
 
 Check version before upgrading: `SELECT dataset, version, schema_hash FROM _meta;` or read `data/datasets/*.manifest.json`.
 

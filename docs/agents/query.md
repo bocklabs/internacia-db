@@ -20,8 +20,8 @@ Works with Cursor, Claude Code, Copilot, Codex, and any agent with file or API a
 | DuckDB (preferred, in-repo) | `data/datasets/internacia.duckdb` |
 | Parquet | `data/datasets/countries.parquet`, `intblocks.parquet`, `blocktypes.parquet`, `memberships.parquet` |
 | Version check | `SELECT * FROM _meta;` or `data/datasets/*.manifest.json` |
-| Python SDK (no full checkout) | https://github.com/datenoio/internacia-python |
-| HTTP API | https://github.com/datenoio/internacia-api (**self-host only**; no public hosted instance) |
+| Python SDK (no full checkout) | https://github.com/datenoio/internacia-python (0.2.x predates data v3 — see [SDK status](../llm-scenarios.md#sdk-status)) |
+| HTTP API | https://github.com/datenoio/internacia-api (**in development**, self-host only; no public hosted instance) |
 
 ## Join keys
 
