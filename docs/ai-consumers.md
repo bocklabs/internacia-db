@@ -418,7 +418,7 @@ Internacia is part of the [Dateno](https://dateno.io) open-source project.
 - **Code:** MIT — see [LICENSE](../LICENSE)
 - **Upstream:** World Bank (CC BY 4.0), Wikidata (CC0), IANA tzdata (public domain),
   mledoze/countries (ODbL-1.0, `centroid` field only — see the compatibility note in ATTRIBUTION.md)
-- **DOI:** [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328) (Zenodo concept DOI,
+- **DOI:** [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176) (Zenodo concept DOI,
   always resolves to the latest version); machine-readable metadata in [CITATION.cff](../CITATION.cff)
 
 When redistributing or citing, cite the DOI plus the version from the manifest, and credit

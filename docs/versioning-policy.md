@@ -56,7 +56,7 @@ compatibility. Review `baseline.missing_contracts` for partial comparisons.
 
 ## Discoverability
 
-- **Zenodo** concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328)
+- **Zenodo** concept DOI [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176)
   always resolves to the latest deposited version. Cite it plus the manifest
   `version`.
 - **Frictionless** resource index: `data/datasets/datapackage.json`.
@@ -81,5 +81,6 @@ attaches them as Release assets. The manifest `version` on a tagged build MUST
 match the git tag without the `v` prefix.
 
 Before tagging, update the dated release entry in `CHANGELOG.md`, the version in
-`pyproject.toml`, and `internacia_builder/__init__.py`; rebuild and commit all
-exports. The release gate checks these versions against the tag and manifests.
+`pyproject.toml`, `internacia_builder/__init__.py`, and `CITATION.cff` (`version`,
+`date-released`); rebuild and commit all exports. The release gate checks these
+versions against the tag and manifests.

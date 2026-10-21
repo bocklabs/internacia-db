@@ -70,10 +70,10 @@ When redistributing or building on these datasets, include a credit such as:
 
 > Common Data Index / Dateno. *Internacia Datasets: reference data of countries,
 > intergovernmental organizations, and country groups.* Version <X.Y.Z>.
-> https://doi.org/10.5281/zenodo.21452328
+> https://doi.org/10.5281/zenodo.20706176
 
 Replace `<X.Y.Z>` with the release version you used (see the `version` field in
-`data/datasets/countries.manifest.json`). The DOI `10.5281/zenodo.21452328` is
+`data/datasets/countries.manifest.json`). The DOI `10.5281/zenodo.20706176` is
 the Zenodo concept DOI and always resolves to the latest deposited version.
 Machine-readable citation metadata is in [`CITATION.cff`](CITATION.cff).
 
@@ -82,5 +82,5 @@ Machine-readable citation metadata is in [`CITATION.cff`](CITATION.cff).
 | Channel | Notes |
 |---------|-------|
 | GitHub Releases | Primary; Parquet/JSONL/DuckDB assets on each `v*` tag |
-| Zenodo | Concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328) |
+| Zenodo | Concept DOI [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176) |
 | Hugging Face Datasets | Optional mirror when `HF_TOKEN` is configured (see [docs/release-distribution.md](docs/release-distribution.md)) |

@@ -227,7 +227,7 @@ table its own folder so it becomes its own HF config.
   files (`.../resolve/main/countries.parquet`); pin an older revision if you need
   that layout.
 - Long-term archival with a DOI goes through Zenodo (concept DOI
-  `10.5281/zenodo.21452328`), not Hugging Face — see
+  `10.5281/zenodo.20706176`), not Hugging Face — see
   [release-distribution.md](release-distribution.md).
 - Follow [versioning-policy.md](versioning-policy.md): schema-breaking
   changes bump the dataset version, and the generated

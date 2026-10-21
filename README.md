@@ -1,14 +1,14 @@
 # Internacia Datasets
 
 [![Validate datasets](https://github.com/datenoio/internacia-db/actions/workflows/validate.yml/badge.svg)](https://github.com/datenoio/internacia-db/actions/workflows/validate.yml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21452328.svg)](https://doi.org/10.5281/zenodo.21452328)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20706176.svg)](https://doi.org/10.5281/zenodo.20706176)
 
 Comprehensive reference datasets of countries, intergovernmental organizations, treaties, trade agreements, and country groups. Source YAML files in `data/countries/`, `data/intblocks/`, and `data/blocktypes/` are validated, enriched, and exported to multiple formats in `data/datasets/`. Internacia is part of the **[Dateno](https://dateno.io)** open-source project and a data source for the Dateno search engine.
 
 ## Distribution
 
 - **GitHub Releases** — complete dataset bundle on each `v*` tag, including CSV, metadata, aliases, and schema migration reports
-- **Zenodo** — concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328); configured releases create and upload a draft deposition for maintainer publication
+- **Zenodo** — concept DOI [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176); each GitHub Release is archived as a new version by the Zenodo GitHub integration
 - **Hugging Face Datasets** — optional Parquet mirror `datenoio/internacia` with one config per table, a matching descriptor, and all four tables' metadata ([publishing guide](docs/publishing-huggingface.md))
 
 ## Features
@@ -448,7 +448,7 @@ Internacia is part of the [Dateno](https://dateno.io) open-source project.
 
 Upstream sources (World Bank, Wikidata, IANA tzdata) and citation guidance are documented in
 [ATTRIBUTION.md](ATTRIBUTION.md). Machine-readable citation metadata is in [CITATION.cff](CITATION.cff);
-concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328). The data license
+concept DOI [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176). The data license
 SPDX identifier is recorded in each build manifest and in the `_meta`/`*.meta.json` metadata.
 
 ## Contributing

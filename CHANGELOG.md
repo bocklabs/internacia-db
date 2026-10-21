@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Citation metadata now uses the Zenodo concept DOI `10.5281/zenodo.20706176`
+  (`CITATION.cff`, README badge, `ATTRIBUTION.md`, docs, dataset card). The
+  previously cited `10.5281/zenodo.21452328` is the v1.7.0 version DOI.
+- The release workflow no longer has its own Zenodo deposit step; the Zenodo
+  GitHub integration is the only depositor, so each release gets one version.
+- The release version gate (`scripts/check_release_bundle.py --version`) also
+  checks `CITATION.cff` `version` and `date-released` against `CHANGELOG.md`.
+
 ## [3.0.0] - 2026-10-16
 
 Data integrity and release validation: **256** countries, **1269** intblocks,
