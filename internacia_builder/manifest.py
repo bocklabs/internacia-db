@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 from datetime import UTC, datetime
@@ -49,10 +50,27 @@ DATA_LICENSE_SPDX = "CC-BY-4.0"
 _BUILD_DATE: str | None = None
 _BUILD_COMMIT: str | None = None
 
+def get_build_timestamp() -> datetime:
+    """Reproducible build time: ``SOURCE_DATE_EPOCH`` if set, else the commit time of
+    ``HEAD``, else now (outside a git checkout)."""
+    epoch = os.environ.get("SOURCE_DATE_EPOCH")
+    if not epoch:
+        try:
+            epoch = subprocess.run(
+                ["git", "log", "-1", "--format=%ct", "HEAD"],
+                capture_output=True,
+                text=True,
+                cwd=project_root(),
+                check=True,
+            ).stdout.strip()
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            epoch = ""
+    return datetime.fromtimestamp(int(epoch), UTC) if epoch.isdigit() else datetime.now(UTC)
+
 def begin_build_context() -> None:
     """Freeze build_date and git_commit for the duration of one build."""
     global _BUILD_DATE, _BUILD_COMMIT
-    _BUILD_DATE = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    _BUILD_DATE = get_build_timestamp().strftime("%Y-%m-%dT%H:%M:%SZ")
     _BUILD_COMMIT = get_git_commit()
 
 def dataset_metadata(

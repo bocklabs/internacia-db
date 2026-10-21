@@ -17,9 +17,13 @@ Hugging Face setup, manual publish, and verification guide.
 ## Release assets
 
 The GitHub Release assets on tag `vX.Y.Z` are the **bundle of record** for that
-version. The committed `data/datasets/` snapshot is a development copy: its bytes
-and build identity (`git_commit`, `build_date` in manifests and `_meta`) can
-differ from the release build, so pin and verify against Release assets.
+version. The repository commits only the text descriptors in `data/datasets/`
+(manifests, `contract.json`, `datapackage.json`, dataset card, alias JSON); the
+binary and bulk exports exist only in Release assets and local builds.
+
+Builds are reproducible: `build_date` is the commit time (or `SOURCE_DATE_EPOCH`) and
+`git_commit` the built commit, so rebuilding a tag reproduces every asset byte for
+byte except `internacia.duckdb`, whose table contents are identical.
 
 Each release attaches every file in `.release-datasets/` (41 files for v3.0.0; 43 from
 the next release, which adds `contract.json` and `SHA256SUMS`):
@@ -44,7 +48,7 @@ keys, enum values and versioning rules are in `contract.json`; see
 
 ## Workflow
 
-The workflow checks committed snapshot freshness before rebuilding. It tests and
+The workflow builds the bundle, checks that the committed descriptors match it, then tests and
 checks the final `.release-datasets` staging directory, enforces the shared quality
 gate and tag-version consistency, then publishes that exact bundle as listed
 above. Hugging Face gets a separate validated Parquet-only descriptor with

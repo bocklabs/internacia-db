@@ -56,8 +56,8 @@ Run before opening a PR:
 python scripts/validate_countries.py     # 0 = no errors (warnings OK); 1 = errors
 python scripts/validate_intblocks.py     # add --fail-on-warning to treat warnings as errors
 python scripts/validate_countries.py --json   # structured output for agents
-python scripts/builder.py build          # regenerate every committed format after source edits
-python scripts/check_generated_artifacts.py                # committed exports match source + each other
+python scripts/builder.py build          # regenerate data/datasets after source edits
+python scripts/check_generated_artifacts.py                # local build matches source + each other
 pytest tests/                            # unit and integration tests against updated exports
 ruff check internacia_builder/ scripts/ tests/             # lint
 python scripts/generate_data_dictionary.py --check         # generated field reference
@@ -65,9 +65,10 @@ python scripts/check_markdown_links.py                     # internal doc links
 python scripts/check_doc_counts.py                         # README/llms/AGENTS vs manifests
 ```
 
-Commit regenerated `data/datasets/` artifacts with source changes; never edit them
-by hand. Partial builds are useful for local analysis but do not refresh every
-committed format. New records also require updated current-count documentation
+Commit the regenerated `data/datasets/` descriptors (manifests, `contract.json`,
+`datapackage.json`, dataset card, alias JSON) with source changes; git ignores the
+binary and bulk exports. Never edit them by hand. Partial builds are useful for local
+analysis but do not refresh every descriptor. New records also require updated current-count documentation
 and any affected cookbook expectations.
 
 CI checks committed artifact freshness before rebuilding into `.ci-datasets`,

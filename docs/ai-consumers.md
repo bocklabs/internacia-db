@@ -46,8 +46,9 @@ over reading individual YAML source files under `data/countries/` and `data/intb
 **Consistency guarantee.** `scripts/check_generated_artifacts.py` compares cleaned
 source content with the full JSON/YAML exports and their declared columnar/CSV
 projections. It rejects changed values, duplicate primary keys, changed membership
-edges, missing metadata, and incorrect schema hashes. CI checks committed exports
-before rebuilding, then tests the staged build. Within a bundle, manifests,
+edges, missing metadata, and incorrect schema hashes. CI rebuilds, checks that the
+committed descriptors match the build and that a second build is identical, then
+tests the staged build. Within a bundle, manifests,
 sidecars, and DuckDB metadata share one build identity. Source-only curation
 fields are deliberately absent from columnar exports; consult the generated
 [data dictionary](data-dictionary.md) for field availability.

@@ -85,8 +85,8 @@ repository. Prefer:
 
 1. `internacia.duckdb` from the GitHub Release assets (or a local build). The
    Release assets on tag `vX.Y.Z` are the **bundle of record** for that version;
-   the committed `data/datasets/` snapshot is a development copy whose bytes and
-   build identity (`git_commit`, `build_date`) can differ from the release build
+   the repository commits only the text descriptors (manifests, `contract.json`),
+   so query a Release asset or a local `python scripts/builder.py build`
 2. [internacia-python](https://github.com/datenoio/internacia-python) — `internacia`
    0.2.x on PyPI predates data v3 and cannot download current releases; see
    [SDK status](llm-scenarios.md#sdk-status)

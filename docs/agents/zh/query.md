@@ -14,7 +14,7 @@ English: [../query.md](../query.md)
 
 | 方式 | 路径 / URL |
 |------|------------|
-| DuckDB（推荐） | `data/datasets/internacia.duckdb` |
+| DuckDB（推荐） | 运行 `python scripts/builder.py build` 后的 `data/datasets/internacia.duckdb`，或最新 Release 资产（导出文件不提交到仓库） |
 | Parquet | `data/datasets/countries.parquet` 等 |
 | 版本检查 | `SELECT * FROM _meta;` 或 `data/datasets/*.manifest.json` |
 | Python SDK | https://github.com/datenoio/internacia-python |

@@ -1,8 +1,8 @@
 {
   "dataset": "countries",
   "version": "3.0.0",
-  "build_date": "2026-10-21T21:24:52Z",
-  "git_commit": "0af1480",
+  "build_date": "2026-10-21T21:29:25Z",
+  "git_commit": "90ec185",
   "row_count": 256,
   "schema_hash": "da17844fae76a32e2d72a7c8e0b7af24ced6ba73ef1415d88bf56d8ab7b8bb4f",
   "data_license": "CC-BY-4.0",
@@ -10,48 +10,48 @@
   "files": [
     {
       "path": "countries-lite.csv.zst",
-      "sha256": "1f3c562e88199e43fcb41f5cde8380e99a669f9bfed2a16a886d329ec41ea843",
-      "bytes": 5852
+      "sha256": "53039abeec385821540126448500d27a8a82acc11a21009c1f8cb274b5f3863b",
+      "bytes": 5606
     },
     {
       "path": "countries-lite.parquet",
-      "sha256": "501f9af3c2c227479da9d1d614ddb9dd5dcd9a0ef94cd3346ba421a3aa7f4a6f",
-      "bytes": 10662
+      "sha256": "633210d37878a30ed3bb2e2b64ee848dc74db39b6cecc8cf9fe655d25fd23253",
+      "bytes": 9611
     },
     {
       "path": "countries.csv.zst",
-      "sha256": "35cb7646a3a1c23efedef4a73a677f5fba5b4ef0a9759fa2aa73655389ce6158",
-      "bytes": 27381
+      "sha256": "5a475174b1337b89430e83d94a68e5f7b1678cabec88a239607930f1d1d928be",
+      "bytes": 27011
     },
     {
       "path": "countries.json.zst",
-      "sha256": "bd963106a6bcb531aaf004666f9dced11585f9b4dc8c11364ea9d82ee4b16639",
-      "bytes": 77608
+      "sha256": "c425d02bb695625a5b2c22097b4ea9c13949ae55dfda2b6d875fbc6093f4f0da",
+      "bytes": 76893
     },
     {
       "path": "countries.jsonl",
-      "sha256": "0d63717f8244656567434d3606a4b127d5f0c72c3935dc3749c6752e9c8e4719",
+      "sha256": "6b68102f3e017765c30563746d1ddd1435918b617dd945564e01eafc27c5780a",
       "bytes": 1247053
     },
     {
       "path": "countries.jsonl.zst",
-      "sha256": "555adbe919081d023c4f2fb8c0098a26ba50f5dfa19959a00af3afe284f9fa5d",
-      "bytes": 74324
+      "sha256": "4e44fd81c1fc561239d2d3cc89b7b25dcfd94bf398b10ff67b7d5eac31825a68",
+      "bytes": 73474
     },
     {
       "path": "countries.meta.json",
-      "sha256": "427c1ae519f8490199f629a44aac9a920d768418ef60cff908d3905adf906f48",
+      "sha256": "035ed0f24cc4c873a93a9a10f487583932d3b787dc796839b85013f0d1de145f",
       "bytes": 283
     },
     {
       "path": "countries.parquet",
-      "sha256": "996c30a999255b77de2f824a5e10a095ba2c4e873c7c67225471ada3c34f3877",
-      "bytes": 126403
+      "sha256": "9893bdd2b30a7b7e20a26dbb703451f781e79687abb0deca4e10b23c187bd978",
+      "bytes": 123358
     },
     {
       "path": "countries.yaml.zst",
-      "sha256": "595f2aa8d94baf360792e2a3e9e5d0077823152df483ef44b6333202496efed8",
-      "bytes": 73704
+      "sha256": "9d66db64df9d986bc96ed846a91e7eadb3f0f939685f46f08e7b80dcc2fe4c3c",
+      "bytes": 72904
     }
   ]
 }

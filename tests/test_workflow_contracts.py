@@ -14,13 +14,14 @@ def workflow(name):
 
 
 @pytest.mark.parametrize(("name", "job"), [("validate.yml", "validate"), ("release.yml", "release")])
-def test_committed_check_precedes_build_and_final_artifacts_are_tested(name, job):
+def test_committed_snapshot_is_checked_against_the_build_and_final_artifacts_are_tested(name, job):
     config = workflow(name)["jobs"][job]
     commands = [step.get("run", "") for step in config["steps"]]
-    committed = next(i for i, command in enumerate(commands) if command.strip() == "python scripts/check_generated_artifacts.py")
     build = next(i for i, command in enumerate(commands) if "scripts/builder.py build" in command)
+    committed = next(i for i, command in enumerate(commands) if "scripts/check_committed_snapshot.py --fresh" in command)
     tests = next(i for i, command in enumerate(commands) if "pytest tests/" in command)
-    assert committed < build < tests
+    assert build < committed and build < tests
+    assert any("check_generated_artifacts.py --datasets-dir" in command for command in commands)
     assert "INTERNACIA_DATASETS_DIR" in config["env"]
     assert any("check_quality_report.py" in command for command in commands)
     assert any("check_release_bundle.py" in command for command in commands)

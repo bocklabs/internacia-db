@@ -17,7 +17,7 @@ Do NOT expect HDI, GDP, government type, internet penetration, or similar indica
 
 ## Preferred access (do not parse source YAML unless editing)
 
-- DuckDB: data/datasets/internacia.duckdb
+- DuckDB: data/datasets/internacia.duckdb (generated, not committed: run `python scripts/builder.py build` or download from the latest GitHub Release)
   - Tables: countries, intblocks, blocktypes, memberships, _meta
 - Parquet: data/datasets/{countries,intblocks,blocktypes}.parquet
 - Membership edges (flattened): data/datasets/memberships.parquet / memberships.csv.zst / DuckDB table memberships

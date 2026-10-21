@@ -76,11 +76,17 @@ jobs:
           pip install pip-audit
           pip-audit --requirement requirements.txt
 
-      - name: Check committed dataset freshness before rebuilding
-        run: python scripts/check_generated_artifacts.py
-
       - name: Build datasets (fresh artifacts for tests)
         run: python scripts/builder.py build --output-dir .ci-datasets
+
+      - name: Check committed descriptors match the fresh build
+        run: python scripts/check_committed_snapshot.py --fresh .ci-datasets
+
+      - name: Check the build is reproducible
+        run: |
+          python scripts/builder.py build --output-dir .ci-datasets-repro > /dev/null
+          python scripts/check_reproducible_build.py .ci-datasets .ci-datasets-repro
+          rm -rf .ci-datasets-repro
 
       - name: Run tests against freshly built artifacts
         run: pytest tests/ --cov=internacia_builder --cov-report=term-missing
