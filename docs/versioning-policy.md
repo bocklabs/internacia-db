@@ -56,7 +56,7 @@ compatibility. Review `baseline.missing_contracts` for partial comparisons.
 
 ## Discoverability
 
-- **Zenodo** concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328)
+- **Zenodo** concept DOI [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176)
   always resolves to the latest deposited version. Cite it plus the manifest
   `version`.
 - **Frictionless** resource index: `data/datasets/datapackage.json`.

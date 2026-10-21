@@ -8,10 +8,10 @@ authors:
   - name: "Dateno (Common Data Index)"
     website: "https://dateno.io"
 repository-code: "https://github.com/datenoio/internacia-db"
-doi: 10.5281/zenodo.21452328
+doi: 10.5281/zenodo.20706176
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.21452328
+    value: 10.5281/zenodo.20706176
     description: "Zenodo concept DOI (resolves to the latest version)"
 license: CC-BY-4.0
 license-url: "https://creativecommons.org/licenses/by/4.0/"

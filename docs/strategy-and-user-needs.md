@@ -161,7 +161,7 @@ change proposals before implementation.
 ### Track C — Distribution & adoption (open-data growth)
 - **C1. ✅ Shipped — `datapackage.json` (Frictionless)** *(Medium)* + generated **data dictionary**
   (`docs/data-dictionary.md`) from JSON Schemas.
-- **C2. ✅ Shipped (DOI) — Publish to a data hub** *(Medium)*: Zenodo DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328) published and referenced in `CITATION.cff` / README badge. Hugging Face Datasets listing remains optional.
+- **C2. ✅ Shipped (DOI) — Publish to a data hub** *(Medium)*: Zenodo DOI [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176) published and referenced in `CITATION.cff` / README badge. Hugging Face Datasets listing remains optional.
 - **C3. README/marketing**: "How consumers depend on this" section — versioning, license, stability promise.
 
 ### Track D — Access surface (only if HTTP is a real path)

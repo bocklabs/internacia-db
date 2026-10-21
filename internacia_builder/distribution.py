@@ -2,9 +2,12 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import tomllib
 from pathlib import Path
+
+import yaml
 
 from internacia_builder import __version__
 from internacia_builder.manifest import get_dataset_version
@@ -25,12 +28,27 @@ def validate_package(root: Path, package: dict | None = None) -> None:
 
 def check_release_version(version: str, datasets: Path) -> None:
     expected = version.removeprefix("v")
-    package_version = tomllib.loads((project_root() / "pyproject.toml").read_text())["project"]["version"]
-    values = {"CHANGELOG": get_dataset_version(), "package": __version__, "pyproject": package_version}
+    root = project_root()
+    package_version = tomllib.loads((root / "pyproject.toml").read_text())["project"]["version"]
+    citation = yaml.safe_load((root / "CITATION.cff").read_text(encoding="utf-8")) or {}
+    values = {
+        "CHANGELOG": get_dataset_version(),
+        "package": __version__,
+        "pyproject": package_version,
+        "CITATION.cff": str(citation.get("version")),
+    }
     for path in datasets.glob("*.manifest.json"):
         values[path.name] = json.loads(path.read_text())["version"]
     if not list(datasets.glob("*.manifest.json")) or any(value != expected for value in values.values()):
         raise ValueError(f"Release {version} disagrees with source/artifact versions: {values}")
+    changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
+    dated = re.search(rf"^## \[{re.escape(expected)}\] - (\d{{4}}-\d{{2}}-\d{{2}})", changelog, re.MULTILINE)
+    released = str(citation.get("date-released"))
+    if not dated or dated.group(1) != released:
+        raise ValueError(
+            f"CITATION.cff date-released {released} disagrees with CHANGELOG date for {expected}: "
+            f"{dated.group(1) if dated else 'missing'}"
+        )
 
 
 def prepare_huggingface_bundle(source: Path, destination: Path) -> None:

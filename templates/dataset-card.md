@@ -69,5 +69,5 @@ display-only; the *Features* panel shows the real types.
 
 ## Citation
 
-See Zenodo concept DOI [10.5281/zenodo.21452328](https://doi.org/10.5281/zenodo.21452328)
+See Zenodo concept DOI [10.5281/zenodo.20706176](https://doi.org/10.5281/zenodo.20706176)
 and the repository [`ATTRIBUTION.md`](https://github.com/datenoio/internacia-db/blob/main/ATTRIBUTION.md).

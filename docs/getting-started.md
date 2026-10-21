@@ -66,7 +66,7 @@ Prefer DuckDB/Parquet over parsing YAML under `data/countries/` or `data/intbloc
 
 ```
 Internacia Datasets (Dateno). CC-BY-4.0.
-DOI: https://doi.org/10.5281/zenodo.21452328
+DOI: https://doi.org/10.5281/zenodo.20706176
 https://github.com/datenoio/internacia-db
 ```
 
