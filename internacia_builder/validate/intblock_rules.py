@@ -150,6 +150,18 @@ def check_intblock_directory_alignment(record: dict[str, Any], rel_path: str) ->
     return []
 
 
+def check_intblock_topics_present(record: dict[str, Any]) -> list[dict[str, Any]]:
+    """Flag records without topics."""
+    if record.get("topics"):
+        return []
+    return [{
+        "issue_type": "MISSING_TOPICS",
+        "field": "topics",
+        "current_value": None,
+        "suggested_action": "add at least one topic from data/schemas/topics.yaml",
+    }]
+
+
 def check_intblock_topics(
     record: dict[str, Any],
     topic_aliases: dict[str, str],

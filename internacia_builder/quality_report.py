@@ -1,9 +1,11 @@
 """Data-quality report generators used by the ``analyze-quality`` command.
 
-NOTE: several rules configured here intentionally mirror
-``internacia_builder.validate.*`` (known duplication tracked in the
-``refactor-builder-into-package`` OpenSpec change). Keep the two consistent
-when editing either side.
+The rules themselves, and which of them run, live in
+:mod:`internacia_builder.validate.registry`. This module classifies their issues
+(priority and description) and writes the reports. Every issue type a rule can
+emit must be listed in ``ISSUE_PRIORITY_MAP`` and ``RULE_DESCRIPTIONS``
+(``tests/test_rule_registry.py`` checks it); issue types of validator errors
+belong in CRITICAL or IMPORTANT so the quality gate fails on them too.
 """
 
 from __future__ import annotations
@@ -47,6 +49,14 @@ ISSUE_PRIORITY_MAP = {
         "UNRESOLVED_PARENT_ENTITY",
         "INVALID_PARTOF_TARGET",
         "MISSING_WIKIDATA_ID",
+        "INVALID_ATTRIBUTE_FIELD",
+        "ATTRIBUTE_MIGRATION_ERROR",
+        "MISSING_CROSSWALK_PROVENANCE",
+        "DUPLICATE_CROSSWALK_IDENTIFIER",
+        "MISSING_REQUIRED_CROSSWALK",
+        "INVALID_CROSSWALK_POLICY",
+        "INCOMPLETE_CROSSWALK_POLICY",
+        "STALE_CROSSWALK_EXCLUSION",
     ],
     "MEDIUM": [
         "UNRESOLVED_PARTOF_REF",
@@ -80,6 +90,7 @@ ISSUE_PRIORITY_MAP = {
         "HISTORICAL_ENTITY_ACTIVE_MEMBER",
         "UNKNOWN_TOPIC_KEY",
         "MOJIBAKE_TEXT",
+        "MISSING_TOPICS",
     ],
     "LOW": [
         "WHITESPACE_IN_CATEGORICAL_FIELD",
@@ -160,6 +171,17 @@ RULE_DESCRIPTIONS = {
     "SUCCESSOR_RECIPROCITY": "Advisory: a resolved predecessor/successor reference lacks its reverse link.",
     "PARTOF_SUBORG_RECIPROCITY": "Advisory: a record listed in a parent's suborganizations does not declare that parent in partof.",
     "DUPLICATE_ACRONYM": "Advisory: unrelated same-blocktype records share an English acronym (possible duplicate entity).",
+    "MISSING_WIKIDATA_ID": "An intblock has no wikidata_id and is not listed in data/schemas/wikidata_exclusions.yaml.",
+    "INVALID_PARTOF_TARGET": "partof points at a treaty or agreement record instead of an organization.",
+    "INVALID_ATTRIBUTE_FIELD": "A migrated attribute field has an unknown vocabulary id, a duplicate, or more than one primary entry.",
+    "ATTRIBUTE_MIGRATION_ERROR": "An entry in data/attribute_intblock_migrations.yaml is malformed or targets an unknown intblock.",
+    "MISSING_CROSSWALK_PROVENANCE": "A crosswalk identifier (geonames_id, ioc_code, fifa_code, fips_code, …) has no field-level provenance.",
+    "DUPLICATE_CROSSWALK_IDENTIFIER": "Two countries share the same crosswalk identifier.",
+    "MISSING_REQUIRED_CROSSWALK": "A crosswalk identifier the policy marks as required for this country is empty.",
+    "INVALID_CROSSWALK_POLICY": "The crosswalk policy references a country code that does not exist.",
+    "INCOMPLETE_CROSSWALK_POLICY": "A country is classified neither as required nor as excluded for a crosswalk field.",
+    "STALE_CROSSWALK_EXCLUSION": "A crosswalk field is excluded by policy but populated on the record.",
+    "MISSING_TOPICS": "An intblock has no topics.",
 }
 
 def get_priority_level(issue_type: str, issue: dict[str, Any] | None = None) -> str:

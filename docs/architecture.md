@@ -84,8 +84,10 @@ summary, and `scripts/last_verified_report.py`.
   ships, archive it (`openspec archive <id> --yes`) so `openspec list` stays
   current. Completed-but-unarchived folders under `openspec/changes/` are process
   debt, not open product work.
-- Quality analyzer (`builder.py analyze-quality`) uses the same rule modules as
-  the CLI validators; CI fails on CRITICAL/IMPORTANT.
+- Quality analyzer (`builder.py analyze-quality`) and the CLI validators run the
+  same rules from `internacia_builder/validate/registry.py`, which lists each rule
+  once with its validator severity; add new rules there. CI fails on
+  CRITICAL/IMPORTANT, and validator errors map to those priorities.
 - [docs/history/improvement-plan.md](history/improvement-plan.md) and
   [docs/strategy-and-user-needs.md](strategy-and-user-needs.md) are **historical**
   planning snapshots — do not treat their gap lists as current.
