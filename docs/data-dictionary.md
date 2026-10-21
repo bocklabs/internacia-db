@@ -19,10 +19,10 @@ For consumption contracts and join keys, see [ai-consumers.md](ai-consumers.md).
 | `incomeLevel` | object |  | yes | World Bank income classification as \{id, value\} (e.g. id 'HIC', value 'High income'). Absent for 8 unclassified entities. |
 | `lendingType` | object |  | yes | World Bank lending category as \{id, value\} (e.g. IBRD, IDA, Blend). Absent for 8 unclassified entities. |
 | `wikidata_id` | string |  | yes | Wikidata entity id (Q-number) for cross-referencing and entity linking. |
-| `geonames_id` | string |  | yes | GeoNames integer feature id for the country/territory (as string). |
-| `ioc_code` | string |  | yes | International Olympic Committee three-letter country code when assigned. |
-| `fifa_code` | string |  | yes | FIFA three-letter association code when assigned. |
-| `fips_code` | string |  | yes | Legacy FIPS 10-4 two-letter code when known (US government geospatial). |
+| `geonames_id` | string |  | yes | GeoNames integer feature id for the country/territory (as string). Expected for current official ISO 3166-1 records; source-specific exceptions are documented separately. |
+| `ioc_code` | string |  | yes | International Olympic Committee three-letter NOC code when assigned; not every ISO entity has an NOC. |
+| `fifa_code` | string |  | yes | FIFA three-letter Member Association code when assigned; FIFA association coverage is not identical to ISO country coverage. |
+| `fips_code` | string |  | yes | Legacy FIPS 10-4-compatible two-letter code when known. FIPS 10-4 was withdrawn in 2008 and replaced by GENC; retain only for legacy joins. |
 | `bbox` | object |  | yes | Optional geographic bounding box \{west, east, north, south\} in WGS84 degrees. |
 | `official_name` | string |  | yes | Official long-form state name (e.g. 'Arab Republic of Egypt'). |
 | `languages` | array |  | yes | Spoken/official languages as a list of \{code, name, official\} objects. |

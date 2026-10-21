@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Country crosswalks now use curated official-source snapshots with field-level provenance and machine-readable eligibility exceptions (`data/schemas/country_crosswalk_sources.yaml`, `data/schemas/country_crosswalk_exclusions.yaml`): GeoNames covers all 249 current ISO records, IOC covers 206 mapped NOCs, FIFA covers 207 mapped Member Associations, and FIPS remains explicitly legacy-only. Columnar schemas are unchanged; populated values grow from about 118 per field to 206–251.
+
 ### Fixed
 
 - Citation metadata now uses the Zenodo concept DOI `10.5281/zenodo.20706176`
@@ -20,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   these intblocks) instead of `Unreleased`.
 - Removed the stale committed `data/datasets/migration.vUnreleased.json`; schema
   migrations ship as `migration.vX.Y.Z.json` Release assets.
+- Corrected four crosswalk conflicts against official snapshots: Bahrain GeoNames id (`290291`), Latvia FIFA code (`LVA`), Singapore FIFA code (`SGP`), and Kosovo FIFA code (`KOS`).
+- Country validation now requires field-level provenance for every populated crosswalk and rejects duplicate external identifiers or incomplete eligibility policy.
 
 ### Documentation
 

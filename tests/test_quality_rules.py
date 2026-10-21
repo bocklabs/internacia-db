@@ -232,6 +232,68 @@ def test_provenance_count_at_minimum_passes():
     assert country_rules.check_provenance_count(record, min_count=4) == []
 
 
+def test_populated_crosswalk_requires_field_level_provenance():
+    issues = country_rules.check_country_crosswalk_provenance({
+        "code": "AA",
+        "geonames_id": "123",
+        "provenance": [{"field": "name", "source": "Example"}],
+    })
+    assert _types(issues) == ["MISSING_CROSSWALK_PROVENANCE"]
+
+
+def test_complete_crosswalk_provenance_passes():
+    record = {
+        "code": "AA",
+        "geonames_id": "123",
+        "provenance": [{
+            "field": "geonames_id",
+            "source": "GeoNames",
+            "url": "https://www.geonames.org/",
+            "retrieved_at": "2026-09-29",
+        }],
+    }
+    assert country_rules.check_country_crosswalk_provenance(record) == []
+
+
+def test_duplicate_crosswalk_identifier_reported():
+    records = [
+        {"code": "AA", "geonames_id": "123"},
+        {"code": "BB", "geonames_id": "123"},
+    ]
+    issues = country_rules.check_country_crosswalk_uniqueness(
+        records, ["data/countries/AA.yaml", "data/countries/BB.yaml"]
+    )
+    assert _types(issues) == ["DUPLICATE_CROSSWALK_IDENTIFIER"]
+
+
+def test_crosswalk_policy_requires_value_for_required_code():
+    records = [{"code": "AA"}, {"code": "BB"}]
+    paths = ["data/countries/AA.yaml", "data/countries/BB.yaml"]
+    policy = {"fields": {
+        field: {
+            "enforce_required": field == "geonames_id",
+            "required_codes": ["AA"] if field == "geonames_id" else [],
+            "exclusions": {
+                "BB": {
+                    "reason": "no_authoritative_mapping",
+                    "source": "https://example.test",
+                    "reviewed_at": "2026-09-29",
+                },
+                **({
+                    "AA": {
+                        "reason": "no_authoritative_mapping",
+                        "source": "https://example.test",
+                        "reviewed_at": "2026-09-29",
+                    }
+                } if field != "geonames_id" else {}),
+            },
+        }
+        for field in country_rules.CROSSWALK_FIELDS
+    }}
+    issues = country_rules.check_country_crosswalk_policy(records, paths, policy)
+    assert "MISSING_REQUIRED_CROSSWALK" in _types(issues)
+
+
 def test_provenance_count_disabled_when_min_zero():
     record = {"name": "X"}
     assert country_rules.check_provenance_count(record, min_count=0) == []

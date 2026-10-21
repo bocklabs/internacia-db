@@ -200,6 +200,7 @@ Breaking and semantic changes in the latest countries schema (see [CHANGELOG.md]
 - **Entity filter**: `code_status == 'official_iso3166_1'` returns **249** current ISO-style records.
 - **Kosovo**: code is `XK` / `XKX` (not `KV` / `KSV`); remap via `countries_aliases.json`.
 - **Attribute partitions**: traffic hand, DVD region, scripts, etc. are country fields — not intblocks; see `attribute_intblock_migrations.json`.
+- **Country crosswalks**: `geonames_id`, `ioc_code`, `fifa_code`, and `fips_code` are optional external identifiers with field-level provenance. Coverage is source-specific (GeoNames: 249 current ISO records; IOC: 206 mapped NOCs; FIFA: 207 mapped associations); **FIPS is legacy-only**, not a current completeness gate.
 - **Build metadata**: compare `countries.manifest.json` `schema_hash` when upgrading downstream pipelines.
 
 **Pandas example** (structured population — `.struct` requires the Arrow dtype backend):
@@ -334,6 +335,7 @@ country fields. Remap those ids with `attribute_intblock_migrations.json` (e.g. 
 | `native_names` | Map | Lang code → `{official, common}` |
 | `other_names` | List[Struct] | Translations `{id, name}` |
 | `common_names` | List[String] | Aliases and common names |
+| `geonames_id` / `ioc_code` / `fifa_code` / `fips_code` | String | Optional external crosswalk identifiers; FIPS is historical |
 | `provenance` | List[Struct] | Field sourcing `{field, source, retrieved_at, url, license}` |
 
 Seven non-standard codes are retained with explicit status (see [docs/country-code-policy.md](docs/country-code-policy.md)): `AN` (obsolete, Netherlands Antilles), `JG` (user-assigned grouping, Channel Islands), `XK` (user-assigned, Kosovo; former `KV` in `countries_aliases.json`), `XA` (user-assigned, Abkhazia), `XS` (user-assigned, South Ossetia), `XT` (user-assigned, Transnistria), `XN` (user-assigned, Nagorno-Karabakh). All carry explicit `un_member`, `un_status`, `independent`, and `landlocked` values.

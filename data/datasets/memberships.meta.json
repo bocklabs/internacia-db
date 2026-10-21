@@ -1,8 +1,8 @@
 {
   "dataset": "memberships",
   "version": "3.0.0",
-  "build_date": "2026-10-16T14:24:23Z",
-  "git_commit": "f047262",
+  "build_date": "2026-10-21T17:08:23Z",
+  "git_commit": "cd96e13",
   "row_count": 58694,
   "schema_hash": "5b55cf565d70fa81",
   "data_license": "CC-BY-4.0"
