@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `last_verified` KPI: never-verified and overdue intblocks overall (12-month window) and for the
+  29 tier-1 organizations in the new `data/watch/rosters.yaml` (6-month window), written to
+  `dataquality/last_verified_kpi.json`, printed by `scripts/last_verified_report.py` and added to
+  the CI job summary. Currently 307 of 1269 never verified; tier 1: 21 of 29.
+- Validation error for intblocks that are new or changed since the pull request base without
+  `last_verified`, and for `includes` changes that do not update it.
 - CI and the release workflow run the internacia SDK's portable `tests/contract` suite against
   the freshly built `internacia.duckdb` (`INTERNACIA_SDK_REF`), so a change that breaks the SDK
   fails here before it is released.

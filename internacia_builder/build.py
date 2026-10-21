@@ -53,6 +53,7 @@ from internacia_builder.export import (
     write_datapackage,
     write_dataset_card,
 )
+from internacia_builder.freshness import last_verified_kpi, load_tier1
 from internacia_builder.manifest import (
     begin_build_context,
     get_dataset_version,
@@ -893,6 +894,20 @@ def analyze_quality(
 
     typer.echo("📝 Writing reports...")
     generate_full_report(all_issues, records_with_issues, total_records, output_dir / "full_report.txt")
+
+    quality_cfg = completeness_cfg_intblocks.get("quality") or {}
+    kpi = last_verified_kpi(
+        intblock_records,
+        load_tier1(project_root),
+        max_age_months=int(quality_cfg.get("last_verified_max_age_months") or 12),
+        tier1_max_age_months=int(quality_cfg.get("last_verified_tier1_max_age_months") or 6),
+    )
+    (output_dir / "last_verified_kpi.json").write_text(json.dumps(kpi, indent=2) + "\n", encoding="utf-8")
+    typer.echo(
+        f"  last_verified: {kpi['all']['missing']} of {kpi['all']['total']} never verified, "
+        f"{kpi['all']['stale']} overdue; tier 1: {kpi['tier1']['missing']} never verified, "
+        f"{kpi['tier1']['stale']} overdue"
+    )
 
     full_jsonl = output_dir / "full_report.jsonl"
     with open(full_jsonl, "w", encoding="utf-8") as f:

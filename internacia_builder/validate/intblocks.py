@@ -16,6 +16,7 @@ from typing import Any
 import typer
 import yaml
 
+from internacia_builder import freshness
 from internacia_builder.paths import project_root
 from internacia_builder.validate import cross_rules, intblock_rules
 from internacia_builder.validate.completeness import (
@@ -430,6 +431,17 @@ def run_validation(
         errors.extend(validate_aliases(aliases, known_ids))
         alias_names = {str(a.get("alias") or "") for a in aliases if isinstance(a, dict)} - {""}
     if intblocks_dir.resolve() == (root / "data" / "intblocks").resolve():
+        known = {str(rec.get("id")) for _, rec in records if rec.get("id")}
+        errors.extend(
+            f"data/watch/rosters.yaml: tier-1 id '{tier1_id}' is not an intblock"
+            for tier1_id in freshness.load_tier1(root)
+            if tier1_id not in known
+        )
+        base_ref = freshness.comparison_base(root)
+        if base_ref:
+            errors.extend(
+                freshness.check_changed_records(records, freshness.changed_base_records(root, base_ref), base_ref)
+            )
         errors.extend(
             release_identifier_errors(
                 root,
