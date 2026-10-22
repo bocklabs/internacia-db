@@ -136,7 +136,7 @@ jobs:
 
       - name: Open the ${{ matrix.source }} PR
         id: cpr
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.app-token.outputs.token }}
           branch: enrichment/${{ matrix.source }}
