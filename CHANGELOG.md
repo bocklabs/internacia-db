@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-10-22
+
 Snapshot: **256** countries, **1275** intblocks, **78** blocktypes. Planned as **3.1.0**:
 `scope_category` and alias `reason` are open enums, so new values are a MINOR change;
 consumers must accept unknown values.
@@ -149,6 +151,19 @@ consumers must accept unknown values.
   shipped REST API or "reference implementation".
 - `docs/release-distribution.md` lists the exact Release assets and states that
   the GitHub Release assets are the bundle of record for each version.
+
+### Data changes since the previous release
+
+- Countries: 256 → 256 records; 251 changed
+- Intblocks: 1269 → 1275 records; added `BWC`, `GCIV`, `HAGUE1954`, `MARPOL`, `SOLAS`, `TARAGREEMENT`, `WORLDHERITAGE`; removed `TELESUR`; 64 changed
+- Blocktypes: 78 → 78 records; 1 changed
+- Membership edges: 58649 → 59466; 1071 added, 254 removed, 4 changed
+- New intblocks aliases: `TELESUR`
+- Schema (minor): table country_currencies added
+- Schema (minor): table country_languages added
+- Schema (minor): table country_timezones added
+- Schema (minor): table current_memberships added
+- Schema (minor): enum intblocks.scope_category values added: intergovernmental_body, non_state_organization
 
 ## [3.0.0] - 2026-10-16
 
