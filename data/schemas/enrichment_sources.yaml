@@ -1,0 +1,38 @@
+# Monthly enrichment pull requests, one per source (scripts/enrichment_split.py,
+# .github/workflows/enrichment-check.yml; see docs/enrichment.md).
+#
+# A field's changes go to the pull request of the source that lists it; changes to fields no
+# source lists go to "other", which always needs review. Provenance entries follow their field.
+#
+# A pull request merges without review when every change
+#   - fills an empty value, or only adds list items or mapping keys, or
+#   - stays within the field's threshold (numeric fields; indicators compare their `value`),
+# and the source is not marked `review: always`. Otherwise it is labelled needs-review.
+
+sources:
+  wb-indicators:
+    title: World Bank indicators
+    dataset: countries
+    fields: [population, area, gini]
+  wb-classifications:
+    title: World Bank classifications
+    dataset: countries
+    fields: [region, adminregion, incomeLevel, lendingType]
+    review: always
+  wikidata-countries:
+    title: Wikidata country names and ids
+    dataset: countries
+    fields: [wikidata_id, native_names, common_names]
+  iana-timezones:
+    title: IANA time zones
+    dataset: countries
+    fields: [timezones, timezone_status]
+  intblock-metadata:
+    title: Intblock metadata from Wikidata
+    dataset: intblocks
+    fields: [description, other_names, acronyms, founded, headquarters, wikidata_id]
+
+thresholds:
+  population: {relative: 0.10}
+  area: {relative: 0.02}
+  gini: {absolute: 5}

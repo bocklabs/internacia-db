@@ -82,13 +82,38 @@ Socioeconomic profile fields (HDI, GDP per capita, government type, internet pen
 
 `.github/workflows/enrichment-check.yml` runs monthly (and on `workflow_dispatch`):
 
-1. Freshness `check` + validation report (artifact always uploaded)
-2. `enrich_countries.py enrich` and `enrich_intblocks.py enrich`
-3. If YAML changes, validates and rebuilds exports and quality reports before opening a PR labeled
-   `enrichment` on branch `chore/monthly-enrichment`
+1. Freshness `check` and validation report.
+2. `enrich_countries.py enrich` and `enrich_intblocks.py enrich`.
+3. `scripts/enrichment_split.py snapshot` records the changed records and splits them by source,
+   following [`data/schemas/enrichment_sources.yaml`](../data/schemas/enrichment_sources.yaml):
 
-**Maintainer review expectations:** spot-check provenance dates and unexpected
-roster/value swings before merge. The workflow never pushes directly to `main`.
+   | Source | Fields |
+   |---|---|
+   | `wb-indicators` | `population`, `area`, `gini` |
+   | `wb-classifications` | `region`, `adminregion`, `incomeLevel`, `lendingType` (always reviewed) |
+   | `wikidata-countries` | `wikidata_id`, `native_names`, `common_names` |
+   | `iana-timezones` | `timezones`, `timezone_status` |
+   | `intblock-metadata` | intblock `description`, `other_names`, `acronyms`, `founded`, `headquarters`, `wikidata_id` |
+   | `other` | anything else (always reviewed) |
+
+   Provenance entries go with their field. The report and the snapshot are uploaded as the
+   `enrichment-check-report` artifact.
+4. For each source with changes, a job applies only that source's changes to `main`, validates,
+   rebuilds and runs the quality gate, then opens or refreshes a PR on `enrichment/<source>`.
+
+**Auto-merge.** A PR merges by itself once CI passes when every change fills an empty value, only
+adds list items or mapping keys, or stays within the field's threshold (population ±10%, area
+±2%, Gini ±5 points), and the source is not always reviewed. Otherwise it is labelled
+`needs-review` and assigned to the reviewer in the `ENRICHMENT_REVIEWER` repository variable.
+Enrichment never changes ids, `includes` or enum values: those fields belong to no source, so
+such a change would land in the reviewed `other` PR.
+
+Metadata-only intblock changes (the `intblock-metadata` fields and their provenance) do not need
+`last_verified`, which attests the roster; the validator's changed-record rule skips them.
+
+**Requirements:** the internacia-bot GitHub App secrets (`INTERNACIA_BOT_CLIENT_ID`,
+`INTERNACIA_BOT_PRIVATE_KEY`), "Allow auto-merge", and branch protection on `main` requiring the
+validation checks. The workflow never pushes to `main`.
 
 Crosswalk seeding: `scripts/seed_country_crosswalks.py` (`--check` by default). The one-off
 `scope_category` backfill is in `scripts/oneoff/label_scope_category.py`.

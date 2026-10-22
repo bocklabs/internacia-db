@@ -57,6 +57,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The monthly enrichment opens one pull request per source (World Bank indicators and
+  classifications, Wikidata country names, IANA time zones, intblock metadata) instead of one
+  `chore/monthly-enrichment` PR. PRs whose changes only fill values, add items or stay within
+  `data/schemas/enrichment_sources.yaml` thresholds merge automatically; others are labelled
+  `needs-review`. The changed-record rule no longer requires `last_verified` for metadata-only
+  intblock changes.
 - Per-platform agent files (`CLAUDE.md`, `.github/copilot-instructions.md`, `.cursor/skills/`,
   `.lingma/rules/`, `.kimi/AGENTS.md`, `.agent/workflows/` except the OpenSpec-managed ones) and
   `llms-full.txt` are generated from `templates/` by `scripts/generate_agent_shims.py`; CI runs it
