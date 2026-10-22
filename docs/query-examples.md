@@ -584,7 +584,7 @@ WHERE m.id = 'RU'
 ORDER BY m.joined NULLS LAST, i.name;
 ```
 
-**Expected:** 13 rows (`BEACST`, `COE`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`, `ICES`,
+**Expected:** 14 rows (`BEACST`, `CBSS`, `COE`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`, `ICES`,
 `ISTC`, `JCPOA`, `NSS`, `OPENSKY`, `RAMSAR`).
 
 **Gotcha:** Prefer `m.left` on DuckDB/Parquet `includes` or the `memberships.left` column.
@@ -1020,7 +1020,7 @@ ORDER BY ABS(membership_count - len(includes)) DESC, id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 177 mismatches total; largest positive deltas are non-country memberships
+**Expected:** 20 displayed rows out of 178 mismatches total; largest positive deltas are non-country memberships
 counted in `membership_count` (e.g. `IGA`, `WNA`). Records where the count measures
 institutions, companies, or individuals rather than countries declare it via
 `membership_count_type` and are exempt from the roster-comparison validation rule.

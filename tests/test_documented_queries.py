@@ -221,9 +221,10 @@ def test_ru_former_members_only(con):
         ORDER BY i.id
         """
     ).fetchall()
-    assert len(rows) == 13
+    assert len(rows) == 14
     assert {row[0] for row in rows} == {
         "BEACST",
+        "CBSS",
         "COE",
         "DANUBECOM",
         "EASTERNBLOC",
@@ -464,7 +465,7 @@ ADDITIONAL_RECIPES = [
         SELECT COUNT(*) FROM intblocks
         WHERE membership_count IS NOT NULL AND len(includes) > 0 AND membership_count != len(includes)
         """,
-        177,
+        178,
         set(),
     ),
     (

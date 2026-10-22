@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-22 for CERN (25 member states and 11 associate member states), ITER (7), the CBSS (Russia withdrew on 17 May 2022; 11 members remain), ESO (16), the EFTA–India TEPA (5), CAFTA-DR (7) and CONMEBOL (10).
 - `last_verified` set to 2026-10-22 for 24 rosters checked against an official list:
   APEC (21 economies), OIC (57, including Syria), BIMSTEC (7), ECO (10), CSTO (6),
   the European Defence Agency (the 27 EU member states), WHO (194; the United States

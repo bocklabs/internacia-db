@@ -116,6 +116,50 @@ includes:
   name: Slovakia
   type: country
   status: member
+- id: BR
+  name: Brazil
+  type: country
+  status: associate_member
+- id: CL
+  name: Chile
+  type: country
+  status: associate_member
+- id: HR
+  name: Croatia
+  type: country
+  status: associate_member
+- id: CY
+  name: Cyprus
+  type: country
+  status: associate_member
+- id: IN
+  name: India
+  type: country
+  status: associate_member
+- id: IE
+  name: Ireland
+  type: country
+  status: associate_member
+- id: LV
+  name: Latvia
+  type: country
+  status: associate_member
+- id: LT
+  name: Lithuania
+  type: country
+  status: associate_member
+- id: PK
+  name: Pakistan
+  type: country
+  status: associate_member
+- id: TR
+  name: Türkiye
+  type: country
+  status: associate_member
+- id: UA
+  name: Ukraine
+  type: country
+  status: associate_member
 founded: '1954'
 headquarters:
   city: Meyrin
@@ -146,7 +190,7 @@ acronyms:
   value: CEIN
 - lang: es
   value: CERN
-membership_count: 25
+membership_count: 36
 wikidata_id: Q42944
 description: International organization which operates the world's largest particle physics laboratory.
 tags:
@@ -185,7 +229,16 @@ other_names:
   name: ЦЕРН
 - id: zh
   name: 歐洲核子研究組織
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CERN
+  retrieved_at: '2026-10-22'
+  url: https://home.cern/about/who-we-are/member-states/
+- field: membership_count
+  source: CERN
+  retrieved_at: '2026-10-22'
+  url: https://home.cern/about/who-we-are/member-states/
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'
