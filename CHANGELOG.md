@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-22 for the Sava Commission (Bosnia and Herzegovina, Croatia, Serbia and Slovenia; Montenegro shares the basin and is not a party) and the SEECP (13 participants, including Kosovo).
 - `last_verified` set to 2026-10-22 for the ICPDR (14 contracting parties plus the EU) and CICOS (Cameroon, the Central African Republic, Congo, the Democratic Republic of the Congo, Gabon and Angola).
 - `last_verified` set to 2026-10-22 for the Niger Basin Authority (9), the Lake Chad Basin Commission (6 members and 3 observers), and the Australia FTAs with India, the United Kingdom and the United Arab Emirates.
 - `last_verified` set to 2026-10-22 for OKACOM (3), OMVS (4), OMVG (4), the Volta Basin Authority (6), the Nile Basin Initiative (10 members; Eritrea added as an observer), ZAMCOM (8) and the Organization of Turkic States (5 members; Turkmenistan and the Economic Cooperation Organization added as observers).
