@@ -71,12 +71,14 @@ python scripts/check_doc_counts.py
 python scripts/check_markdown_links.py
 ```
 
-Commit regenerated `data/datasets/` artifacts with source changes. A partial build
-does not refresh JSONL/YAML and cannot replace this full build. Update current
+Commit the regenerated `data/datasets/` descriptors with source changes (git ignores
+the binary and bulk exports). A partial build does not refresh every descriptor and
+cannot replace this full build. Update current
 counts and affected cookbook expectations when adding or removing records.
 
-CI checks committed exports before rebuilding into `.ci-datasets` and testing that
-staging directory (`.github/workflows/validate.yml`).
+CI rebuilds into `.ci-datasets`, checks the committed descriptors against it, checks
+that a second build is identical, and tests that staging directory
+(`.github/workflows/validate.yml`).
 
 ## Schema or breaking changes
 

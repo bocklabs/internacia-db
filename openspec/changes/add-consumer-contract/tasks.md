@@ -9,10 +9,10 @@
 - [x] 1.8 Docs: `docs/data-contract.md`, release asset list, CHANGELOG
 
 ## 2. Deterministic builds (db-1.3)
-- [ ] 2.1 Sorted inputs in `export.load_yaml_files`
-- [ ] 2.2 `build_date` from `SOURCE_DATE_EPOCH` or the commit time; `git_commit` is the built commit
-- [ ] 2.3 CI check: two builds produce identical text exports and identical DuckDB content
-- [ ] 2.4 Stop committing binary artifacts in `data/datasets/` (D3); keep text manifests, `contract.json`, `datapackage.json`, `SHA256SUMS`
+- [x] 2.1 Sorted inputs in `export.load_yaml_files`
+- [x] 2.2 `build_date` from `SOURCE_DATE_EPOCH` or the commit time; `git_commit` is the built commit
+- [x] 2.3 CI check: two builds produce identical text exports and identical DuckDB content
+- [x] 2.4 Stop committing binary artifacts in `data/datasets/` (D3); keep text manifests, `contract.json`, `datapackage.json`, the dataset card and alias JSON
 
 ## 3. Aliases and canonical views in DuckDB (db-1.4)
 - [ ] 3.1 Tables `intblock_aliases`, `country_aliases`, `attribute_migrations`

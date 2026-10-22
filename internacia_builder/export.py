@@ -399,7 +399,7 @@ def load_yaml_files(directory: Path, desc: str = "Loading files") -> list[dict[s
     Raises RuntimeError if any file fails to parse, so a build can never
     silently ship with missing records.
     """
-    yaml_files = list(directory.rglob("*.yaml"))
+    yaml_files = sorted(directory.rglob("*.yaml"))
     data = []
     failures: list[str] = []
 

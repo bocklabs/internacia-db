@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Verify committed export content, source freshness, uniqueness, and metadata.
+"""Verify a complete bundle's content, source freshness, uniqueness, and metadata.
 
 Full JSON/YAML records are compared with cleaned sources; columnar and tabular
-formats use their declared projections. Run before rebuilding committed exports.
+formats use their declared projections. The default directory is data/datasets
+after a local `scripts/builder.py build`; CI passes its staging directory.
 """
 from __future__ import annotations
 

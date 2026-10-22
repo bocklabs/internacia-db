@@ -29,12 +29,12 @@ jobs:
       - name: Lint
         run: ruff check internacia_builder/ scripts/ tests/
 
-      - name: Check committed snapshot before rebuilding
-        run: python scripts/check_generated_artifacts.py
-
       - name: Build final release artifacts
         run: |
           python scripts/builder.py build --output-dir .release-datasets
+
+      - name: Check committed descriptors match the release build
+        run: python scripts/check_committed_snapshot.py --fresh .release-datasets
 
       - name: Run tests against the final release build
         run: pytest tests/ --cov=internacia_builder --cov-report=term-missing

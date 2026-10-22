@@ -11,6 +11,8 @@ from typing import Any
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from internacia_builder.schemas import logical_type
+
 ROOT = Path(__file__).resolve().parents[1]
 DATASETS = ("countries", "intblocks", "blocktypes", "memberships")
 ANNOTATIONS = {"description", "title", "$comment", "examples"}
@@ -72,12 +74,54 @@ def arrow_contract(schema: pa.Schema) -> dict:
             return {"type": "array", "items": datatype(t.value_type)}
         if pa.types.is_map(t):
             return {"type": "map", "keys": datatype(t.key_type), "values": datatype(t.item_type)}
-        return {"type": str(t)}
+        try:
+            return {"type": logical_type(t)}
+        except ValueError:
+            return {"type": str(t)}
 
     def fields(fs):
         return {"type": "object", "properties": {f.name: {**datatype(f.type), "nullable": f.nullable} for f in fs}}
 
     return fields(schema)
+
+
+def _split_top_level(text: str) -> list[str]:
+    parts, depth, start = [], 0, 0
+    for i, char in enumerate(text):
+        depth += char == "<"
+        depth -= char == ">"
+        if char == "," and depth == 0:
+            parts.append(text[start:i])
+            start = i + 1
+    parts.append(text[start:])
+    return parts
+
+
+def logical_contract(type_: str) -> dict:
+    """Parse an ``internacia-logical-types/1`` string into the ``arrow_contract`` shape.
+    Nested struct fields are nullable, as in every export schema."""
+    if type_.startswith("list<"):
+        return {"type": "array", "items": logical_contract(type_[5:-1])}
+    if type_.startswith("map<"):
+        key, value = _split_top_level(type_[4:-1])
+        return {"type": "map", "keys": logical_contract(key), "values": logical_contract(value)}
+    if type_.startswith("struct<"):
+        props = {}
+        for part in _split_top_level(type_[7:-1]):
+            name, _, sub = part.partition(":")
+            props[name] = {**logical_contract(sub), "nullable": True}
+        return {"type": "object", "properties": props}
+    return {"type": type_}
+
+
+def contract_table(contract: dict, name: str) -> dict | None:
+    table = next((t for t in contract.get("tables", []) if t["name"] == name), None)
+    if table is None:
+        return None
+    return {
+        "type": "object",
+        "properties": {c["name"]: {**logical_contract(c["type"]), "nullable": c["nullable"]} for c in table["columns"]},
+    }
 
 
 def _git_bytes(ref: str, path: str) -> bytes | None:
@@ -107,9 +151,14 @@ def build_migration(previous_dir: Path | None, current_dir: Path, version: str, 
         if current_datasets and (current_datasets / f"{name}.parquet").exists():
             current = arrow_contract(pq.read_schema(current_datasets / f"{name}.parquet"))
             old_parquet = _git_bytes(previous_ref, f"data/datasets/{name}.parquet") if previous_ref else None
+            old_contract = _git_bytes(previous_ref, "data/datasets/contract.json") if previous_ref else None
             previous_parquet = previous_dir / f"{name}.parquet" if previous_dir else None
+            contract_before = contract_table(json.loads(old_contract), name) if old_contract else None
             if old_parquet:
                 before = arrow_contract(pq.read_schema(pa.BufferReader(old_parquet)))
+            elif contract_before is not None:
+                # Binary exports are not committed since db-1.3; the committed contract describes them.
+                before = contract_before
             elif previous_parquet and previous_parquet.exists():
                 before = arrow_contract(pq.read_schema(previous_parquet))
             else:

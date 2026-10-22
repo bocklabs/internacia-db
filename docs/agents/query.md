@@ -17,7 +17,7 @@ Works with Cursor, Claude Code, Copilot, Codex, and any agent with file or API a
 
 | Method | Path / URL |
 |--------|------------|
-| DuckDB (preferred, in-repo) | `data/datasets/internacia.duckdb` |
+| DuckDB (preferred) | `data/datasets/internacia.duckdb` after `python scripts/builder.py build`, or the latest Release asset (exports are not committed) |
 | Parquet | `data/datasets/countries.parquet`, `intblocks.parquet`, `blocktypes.parquet`, `memberships.parquet` |
 | Version check | `SELECT * FROM _meta;` or `data/datasets/*.manifest.json` |
 | Python SDK (no full checkout) | https://github.com/datenoio/internacia-python (0.2.x predates data v3 — see [SDK status](../llm-scenarios.md#sdk-status)) |

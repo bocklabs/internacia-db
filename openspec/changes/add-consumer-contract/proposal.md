@@ -25,8 +25,10 @@ explicit versioning and deprecation policy.
   MAJOR releases and a deprecation window of at least one MINOR release.
 - **Identifier stability.** Removing an intblock ID or country code without an alias entry is
   forbidden and fails validation.
-- **Deterministic builds.** Text exports are byte-reproducible for a given commit; `build_date` is
-  the commit time and `git_commit` the built commit.
+- **Deterministic builds.** Exports are byte-reproducible for a given commit (DuckDB by content);
+  `build_date` is the commit time and `git_commit` the built commit. Binary and bulk exports are
+  no longer committed; `data/datasets/` keeps manifests, `contract.json`, `datapackage.json`, the
+  dataset card and alias JSON (decision D3).
 - **Aliases and canonical views inside DuckDB** (`intblock_aliases`, `country_aliases`,
   `attribute_migrations`, `current_memberships`, `country_currencies`, `country_languages`,
   `country_timezones`), documented in the contract.

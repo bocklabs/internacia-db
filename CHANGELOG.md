@@ -20,6 +20,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Generated exports are no longer committed** (decision D3). `data/datasets/` keeps only the
+  manifests, `contract.json`, `datapackage.json`, the dataset card and the alias JSON; Parquet,
+  DuckDB, JSONL, YAML and CSV come from `python scripts/builder.py build` or the GitHub Release.
+  Release assets are unchanged. Tests build `data/datasets/` on first run if it is missing.
+- **Reproducible builds.** Source files are read in sorted order, `build_date` is the commit time
+  (or `SOURCE_DATE_EPOCH`) and `git_commit` the built commit. CI builds twice and requires
+  identical files (DuckDB: identical table contents) and committed descriptors that match the
+  build (`scripts/check_committed_snapshot.py`, `scripts/check_reproducible_build.py`).
+- `generate_schema_migration.py` reads the previous release's export schema from its committed
+  `contract.json` when its Parquet files are not in git.
 - `schema_hash` is now the SHA-256 (full 64-hex digest) of the canonical column list
   `[name, logical_type, nullable]`, independent of the pyarrow version. All hash values change
   once. Primary-key columns are declared non-nullable, so Parquet marks them `required`.

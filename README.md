@@ -88,10 +88,13 @@ python3 scripts/builder.py build --formats parquet,duckdb --output-dir .local-da
 ```
 
 After editing source data, run the full build and commit the regenerated
-`data/datasets/` artifacts with the source changes. A partial build leaves other
-formats stale; CI checks committed exports before building its own staging copy.
+`data/datasets/` descriptors with the source changes. Binary and bulk exports are
+build outputs that git ignores; CI rebuilds, checks that the committed descriptors
+match, and checks that two builds are identical.
 
 ## Output files
+
+Generated exports are **not committed** (only manifests, `contract.json`, `datapackage.json`, the dataset card and the alias JSON are). Run `python scripts/builder.py build` once to create `data/datasets/internacia.duckdb` and the other files locally, or download them from the [latest release](https://github.com/datenoio/internacia-db/releases/latest).
 
 Each build writes to `data/datasets/`:
 
@@ -180,7 +183,7 @@ python3 scripts/annotate_entity_status.py
 # Compare manifests to main branch baseline
 python3 scripts/diff_countries_baseline.py
 
-# Verify committed exports match sources and each other; check doc links
+# Verify a local build matches sources and each other; check doc links
 python3 scripts/check_generated_artifacts.py
 python3 scripts/check_markdown_links.py
 
@@ -423,7 +426,7 @@ is the intended archive (see `dev/scripts/README.md`). Research notes: `dev/rese
 
 ## Releases
 
-Tagged releases (`vX.Y.Z`) check committed exports, build into `.release-datasets`,
+Tagged releases (`vX.Y.Z`) build into `.release-datasets`, check the committed descriptors against it,
 test and validate that final bundle, compare source/export contracts with the
 previous release, and attach the bundle as GitHub Release assets. The tag must
 match the version in `CHANGELOG.md`, `pyproject.toml`, `internacia_builder/__init__.py`,

@@ -75,8 +75,8 @@ new record so those checks pass.
 
 Add a line under `[Unreleased]` in `CHANGELOG.md` (new intblock = MINOR when
 released). In the PR: cite the official membership source, do not hand-edit
-`data/datasets/`, and include the full build's regenerated exports with the YAML.
-CI checks the committed exports before rebuilding its own staging directory.
+`data/datasets/`, and include the full build's regenerated descriptors with the YAML.
+CI rebuilds and checks the committed descriptors against its own staging directory.
 
 If the change needs a new `blocktype`, a schema field, or an id rename, stop and
 open an OpenSpec proposal first ([openspec-quickstart.md](openspec-quickstart.md)).

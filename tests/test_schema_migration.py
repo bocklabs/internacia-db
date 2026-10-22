@@ -9,6 +9,8 @@ import generate_schema_migration as gsm
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from internacia_builder.contract import TABLES, build_contract
+
 
 def test_diff_props_detects_added_removed_and_type_change(tmp_path: Path):
     prev = {
@@ -77,3 +79,11 @@ def test_export_only_change_is_detected(tmp_path):
     result = gsm.build_migration(previous, current, "2.1.1", current_datasets=current)
     assert result["schema_changed"] is True
     assert result["exports"]["countries"]["type_changed"] == [{"field": "n", "from": "int32", "to": "int64"}]
+
+
+def test_committed_contract_describes_exports_like_parquet():
+    """Previous releases without committed Parquet are compared through contract.json."""
+    contract = build_contract("3.0.0")
+    for table in TABLES:
+        assert gsm.contract_table(contract, table["name"]) == gsm.arrow_contract(table["schema"]())
+    assert gsm.contract_table(contract, "missing") is None

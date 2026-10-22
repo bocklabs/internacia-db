@@ -7,11 +7,15 @@ the [Dateno](https://dateno.io) open-source project. Data and documentation are 
 
 ## Fastest path (spreadsheet)
 
-1. Decompress [`data/datasets/countries-lite.csv.zst`](../data/datasets/countries-lite.csv.zst)
-   (`zstd -d …`) or open [`countries-lite.parquet`](../data/datasets/countries-lite.parquet).
+Exports are not committed: download them from the
+[latest release](https://github.com/datenoio/internacia-db/releases/latest), or run
+`python scripts/builder.py build` in a clone to create them under `data/datasets/`.
+
+1. Decompress [`countries-lite.csv.zst`](https://github.com/datenoio/internacia-db/releases/latest/download/countries-lite.csv.zst)
+   (`zstd -d …`) or open [`countries-lite.parquet`](https://github.com/datenoio/internacia-db/releases/latest/download/countries-lite.parquet).
 2. Filter `code_status` = `official_iso3166_1` for the 249 current ISO countries.
-3. For organizations, use [`intblocks-lite.csv.zst`](../data/datasets/intblocks-lite.csv.zst)
-   or join memberships via [`memberships.csv.zst`](../data/datasets/memberships.csv.zst)
+3. For organizations, use [`intblocks-lite.csv.zst`](https://github.com/datenoio/internacia-db/releases/latest/download/intblocks-lite.csv.zst)
+   or join memberships via [`memberships.csv.zst`](https://github.com/datenoio/internacia-db/releases/latest/download/memberships.csv.zst)
    (`intblock_id` ↔ `country_code`). Full flattened tables are `countries.csv.zst` /
    `intblocks.csv.zst`.
 

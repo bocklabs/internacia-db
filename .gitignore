@@ -214,3 +214,16 @@ __marimo__/
 .release-datasets/
 .release-quality/
 .hf-release/
+
+# Generated exports: only the text descriptors are committed (decision D3; see
+# internacia_builder/snapshot.py COMMITTED_PATTERNS). Run `python scripts/builder.py build`
+# or download a GitHub Release for the full bundle.
+/data/datasets/*
+!/data/datasets/*.manifest.json
+!/data/datasets/contract.json
+!/data/datasets/datapackage.json
+!/data/datasets/README.md
+!/data/datasets/intblocks_aliases.json
+!/data/datasets/countries_aliases.json
+!/data/datasets/attribute_intblock_migrations.json
+!/data/datasets/schema_baseline/
