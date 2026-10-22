@@ -70,7 +70,16 @@ other_names:
   name: Australia-UAE CEPA
 - id: en
   name: A-UAE Comprehensive Economic Partnership Agreement
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Australian Department of Foreign Affairs and Trade
+  retrieved_at: '2026-10-22'
+  url: https://www.dfat.gov.au/trade/agreements/trade-agreements
+- field: membership_count
+  source: Australian Department of Foreign Affairs and Trade
+  retrieved_at: '2026-10-22'
+  url: https://www.dfat.gov.au/trade/agreements/trade-agreements
 - field: geographic_scope
   source: official sources
   retrieved_at: '2026-06-15'

@@ -88,7 +88,20 @@ other_names:
   name: Lake Chad Basin Commission
 - id: fr
   name: Commission du bassin du lac Tchad
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Lake Chad Basin Commission
+  retrieved_at: '2026-10-22'
+  url: https://cblt.org/member-countries/
+- field: membership_count
+  source: Lake Chad Basin Commission
+  retrieved_at: '2026-10-22'
+  url: https://cblt.org/member-countries/
+- field: includes
+  source: Lake Chad Basin Commission
+  retrieved_at: '2026-10-22'
+  url: https://cblt.org/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-15'

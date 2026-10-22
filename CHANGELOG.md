@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-22 for the Niger Basin Authority (9), the Lake Chad Basin Commission (6 members and 3 observers), and the Australia FTAs with India, the United Kingdom and the United Arab Emirates.
 - `last_verified` set to 2026-10-22 for OKACOM (3), OMVS (4), OMVG (4), the Volta Basin Authority (6), the Nile Basin Initiative (10 members; Eritrea added as an observer), ZAMCOM (8) and the Organization of Turkic States (5 members; Turkmenistan and the Economic Cooperation Organization added as observers).
 - `last_verified` set to 2026-10-22 for CERN (25 member states and 11 associate member states), ITER (7), the CBSS (Russia withdrew on 17 May 2022; 11 members remain), ESO (16), the EFTA–India TEPA (5), CAFTA-DR (7) and CONMEBOL (10).
 - `last_verified` set to 2026-10-22 for 24 rosters checked against an official list:
