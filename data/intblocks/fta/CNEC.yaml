@@ -73,7 +73,16 @@ other_names:
   name: 中国-厄瓜多尔自由贸易协定
 - id: es
   name: Tratado de Libre Comercio China-Ecuador
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Ministry of Commerce of the People's Republic of China
+  retrieved_at: '2026-10-22'
+  url: https://fta.mofcom.gov.cn/topic/enecuador.shtml
+- field: membership_count
+  source: Ministry of Commerce of the People's Republic of China
+  retrieved_at: '2026-10-22'
+  url: https://fta.mofcom.gov.cn/topic/enecuador.shtml
 - field: geographic_scope
   source: official sources
   retrieved_at: '2026-06-15'

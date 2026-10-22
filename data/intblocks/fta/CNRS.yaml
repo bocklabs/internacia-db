@@ -75,7 +75,20 @@ other_names:
   name: 中国-塞尔维亚自由贸易协定
 - id: sr
   name: Споразум о слободној трговини између Кине и Србије
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Ministry of Commerce of the People's Republic of China
+  retrieved_at: '2026-10-22'
+  url: https://fta.mofcom.gov.cn/english/fta_qianshu.shtml
+- field: membership_count
+  source: Ministry of Commerce of the People's Republic of China
+  retrieved_at: '2026-10-22'
+  url: https://fta.mofcom.gov.cn/english/fta_qianshu.shtml
+- field: includes
+  source: Ministry of Commerce of the People's Republic of China
+  retrieved_at: '2026-10-22'
+  url: http://12335.mofcom.gov.cn/articledwmy/zcxx/dwjjhz/202407/1940142_1.html
 - field: geographic_scope
   source: official sources
   retrieved_at: '2026-06-15'
