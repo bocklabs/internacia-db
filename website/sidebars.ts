@@ -31,6 +31,7 @@ const sidebars: SidebarsConfig = {
       label: 'Data contracts & policies',
       items: [
         'data-contract',
+        'roster-watch',
         'ai-consumers',
         'llm-scenarios',
         'data-dictionary',
