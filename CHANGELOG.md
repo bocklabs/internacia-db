@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-22 for AFRIPOL. Membership is the police institutions of the 55 African Union member states; Western Sahara is added and `membership_count` is 55.
 - `last_verified` set to 2026-10-22 for the China FTAs with Ecuador (in force 1 May 2024), Nicaragua (1 January 2024) and Serbia (1 July 2024).
 - `last_verified` set to 2026-10-22 for the NPT nuclear-weapon states (China, France, Russia, the United Kingdom and the United States).
 - `last_verified` set to 2026-10-22 for the Sava Commission (Bosnia and Herzegovina, Croatia, Serbia and Slovenia; Montenegro shares the basin and is not a party) and the SEECP (13 participants, including Kosovo).

@@ -251,7 +251,11 @@ includes:
   name: Eswatini
   type: country
   status: member
-membership_count: 54
+- id: EH
+  name: Western Sahara
+  type: country
+  status: member
+membership_count: 55
 description: Continental police cooperation mechanism of the African Union established to strengthen and harmonize the capacities
   of law enforcement agencies across member states to combat transnational organized crime, terrorism, cybercrime, and other
   emerging threats to continental security.
@@ -285,7 +289,20 @@ other_names:
 - id: ru
   name: АФРИПОЛ
 wikidata_id: Q22976638
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: AFRIPOL
+  retrieved_at: '2026-10-22'
+  url: https://afripol.africa-union.org/about/structure
+- field: membership_count
+  source: AFRIPOL
+  retrieved_at: '2026-10-22'
+  url: https://afripol.africa-union.org/about/member-states
+- field: includes
+  source: AFRIPOL
+  retrieved_at: '2026-10-22'
+  url: https://afripol.africa-union.org/about/member-states
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
