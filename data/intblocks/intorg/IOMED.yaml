@@ -28,11 +28,9 @@ headquarters:
   coordinates:
     lat: 22.2783
     lng: 114.1747
-membership_count: 8
+membership_count: 18
 legal_status: intergovernmental
-notes: As of October 2025, 37 countries have signed the Convention on the Establishment of IOMed, with 8 having ratified it.
-  The organization was initiated by China and 18 other countries. Full membership list should be verified from official IOMed
-  website.
+notes: The IOMed Convention lists 18 contracting states as of the secretariat's basic-documents page. Signatories that have not become contracting states are not members.
 description: Intergovernmental organization dedicated to facilitating the peaceful resolution of international disputes through
   mediation, including disputes between states and international investment and commercial disputes.
 tags:
@@ -90,6 +88,46 @@ includes:
   type: country
   status: member
   joined: '2025-10-20'
+- id: CF
+  name: Central African Republic
+  type: country
+  status: member
+- id: MM
+  name: Myanmar
+  type: country
+  status: member
+- id: KH
+  name: Cambodia
+  type: country
+  status: member
+- id: BY
+  name: Belarus
+  type: country
+  status: member
+- id: MR
+  name: Mauritania
+  type: country
+  status: member
+- id: RS
+  name: Serbia
+  type: country
+  status: member
+- id: CU
+  name: Cuba
+  type: country
+  status: member
+- id: SL
+  name: Sierra Leone
+  type: country
+  status: member
+- id: VU
+  name: Vanuatu
+  type: country
+  status: member
+- id: GQ
+  name: Equatorial Guinea
+  type: country
+  status: member
 wikidata_id: Q131876495
 other_names:
 - id: ar
@@ -104,7 +142,16 @@ other_names:
   name: Международной организации по медиации
 - id: es
   name: Organización Internacional para la Mediación
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: International Organization for Mediation
+  retrieved_at: '2026-10-22'
+  url: https://www.iomed.int/basic-documents/
+- field: membership_count
+  source: International Organization for Mediation
+  retrieved_at: '2026-10-22'
+  url: https://www.iomed.int/basic-documents/
 - field: acronyms
   source: Wikidata
   retrieved_at: '2026-06-13'

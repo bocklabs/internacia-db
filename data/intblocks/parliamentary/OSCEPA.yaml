@@ -295,7 +295,16 @@ other_names:
   name: Парламентская ассамблея ОБСЕ
 - id: zh
   name: 歐洲安全與合作組織議會大會
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OSCE Parliamentary Assembly
+  retrieved_at: '2026-10-22'
+  url: https://www.oscepa.org/en/members/member-countries
+- field: membership_count
+  source: OSCE Parliamentary Assembly
+  retrieved_at: '2026-10-22'
+  url: https://www.oscepa.org/en/members/member-countries
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

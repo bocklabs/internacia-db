@@ -178,6 +178,10 @@ includes:
   name: Lithuania
   type: country
   status: member
+- id: EU
+  name: European Union
+  type: organization
+  status: member
 founded: '1985'
 headquarters:
   city: Barton
@@ -192,7 +196,7 @@ acronyms:
   value: 澳洲集團
 - lang: zh
   value: 澳大利亞集團
-membership_count: 42
+membership_count: 43
 geographic_scope: global
 description: An informal forum of countries that seeks to ensure that exports do not contribute to the development of chemical
   or biological weapons.
@@ -228,7 +232,16 @@ other_names:
   name: Австралийская группа
 - id: zh
   name: 澳洲協定
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Australia Group
+  retrieved_at: '2026-10-22'
+  url: https://www.dfat.gov.au/publications/minisite/theaustraliagroupnet/site/en/participants.html
+- field: membership_count
+  source: Australia Group
+  retrieved_at: '2026-10-22'
+  url: https://www.dfat.gov.au/publications/minisite/theaustraliagroupnet/site/en/participants.html
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

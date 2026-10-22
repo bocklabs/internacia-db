@@ -156,7 +156,16 @@ other_names:
   name: Всеобъемлющее и прогрессивное соглашение о Транстихоокеанском партнёрстве
 - id: zh
   name: 跨太平洋夥伴全面進展協定
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: New Zealand Ministry of Foreign Affairs and Trade
+  retrieved_at: '2026-10-22'
+  url: https://www.mfat.govt.nz/en/trade/free-trade-agreements/free-trade-agreements-in-force/cptpp/cptpp-overview
+- field: membership_count
+  source: New Zealand Ministry of Foreign Affairs and Trade
+  retrieved_at: '2026-10-22'
+  url: https://www.mfat.govt.nz/en/trade/free-trade-agreements/free-trade-agreements-in-force/cptpp/cptpp-overview
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-07-29'

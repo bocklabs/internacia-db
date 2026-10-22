@@ -170,6 +170,10 @@ includes:
   name: United States
   type: country
   status: member
+- id: EU
+  name: European Union
+  type: organization
+  status: observer
 membership_count: 39
 founded: '1971'
 headquarters:
@@ -221,7 +225,16 @@ other_names:
   name: Comité Zangger
 - id: zh
   name: 桑戈委员会
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Zangger Committee
+  retrieved_at: '2026-10-22'
+  url: https://www.zanggercommittee.org/members.html
+- field: membership_count
+  source: Zangger Committee
+  retrieved_at: '2026-10-22'
+  url: https://www.zanggercommittee.org/members.html
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

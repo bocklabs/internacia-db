@@ -847,7 +847,16 @@ other_names:
   name: Конвенция о запрещении химического оружия
 - id: zh
   name: 禁止化学武器公约
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OPCW
+  retrieved_at: '2026-10-22'
+  url: https://www.opcw.org/about-us/member-states
+- field: membership_count
+  source: OPCW
+  retrieved_at: '2026-10-22'
+  url: https://www.opcw.org/about-us/member-states
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

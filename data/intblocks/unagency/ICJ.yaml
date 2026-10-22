@@ -864,7 +864,16 @@ other_names:
   name: Международный суд ООН
 - id: zh
   name: 国际法院
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: International Court of Justice
+  retrieved_at: '2026-10-22'
+  url: https://www.icj-cij.org/states-entitled-to-appear
+- field: membership_count
+  source: International Court of Justice
+  retrieved_at: '2026-10-22'
+  url: https://www.icj-cij.org/states-entitled-to-appear
 - field: includes
   source: UN Charter and ICJ Statute
   retrieved_at: '2026-07-30'

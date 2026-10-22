@@ -116,7 +116,16 @@ other_names:
   name: ASEAN Specialised Meteorological Centre
 - id: ms
   name: Pusat Meteorologi Khusus ASEAN
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: ASEAN
+  retrieved_at: '2026-10-22'
+  url: https://asean.org/wp-content/uploads/2025/11/CHAIRMANS-STATEMENT-47TH-ASEAN-SUMMIT.pdf
+- field: membership_count
+  source: ASEAN
+  retrieved_at: '2026-10-22'
+  url: https://asean.org/wp-content/uploads/2025/11/CHAIRMANS-STATEMENT-47TH-ASEAN-SUMMIT.pdf
 - field: headquarters
   source: official sources
   retrieved_at: '2026-06-15'

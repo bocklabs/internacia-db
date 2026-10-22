@@ -311,7 +311,16 @@ other_names:
   name: Парламентская ассамблея Совета Европы
 - id: zh
   name: 歐洲理事會議員大會
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Council of Europe
+  retrieved_at: '2026-10-22'
+  url: https://www.coe.int/en/web/about-us/our-member-states
+- field: membership_count
+  source: Council of Europe
+  retrieved_at: '2026-10-22'
+  url: https://www.coe.int/en/web/about-us/our-member-states
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -87,7 +87,16 @@ acronyms:
   value: CARICC
 - lang: ru
   value: ЦАРИКЦ
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CARICC
+  retrieved_at: '2026-10-22'
+  url: https://www.caricc.org/en/partners/MS/
+- field: membership_count
+  source: CARICC
+  retrieved_at: '2026-10-22'
+  url: https://www.caricc.org/en/partners/MS/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

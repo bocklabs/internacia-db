@@ -417,7 +417,7 @@ Plot.plot({
 })
 ```
 
-**Expected:** 20 rows — `MD` and `US` with 7 observer entries; `HU`, `IN`, `JP`, `MY`, `TH`, `UA` with 6 each.
+**Expected:** 23 rows — `US` with 8 observer entries; `JP`, `MD` and `MY` with 7; `CA`, `CH`, `FR`, `HU`, `ID`, `IN`, `TH` and `UA` with 6 each.
 
 ---
 

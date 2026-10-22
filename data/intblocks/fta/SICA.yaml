@@ -99,7 +99,16 @@ other_names:
   name: Система центральноамериканской интеграции
 - id: zh
   name: 中美洲統合體
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SICA
+  retrieved_at: '2026-10-22'
+  url: https://www.sica.int/estadosmiembros
+- field: membership_count
+  source: SICA
+  retrieved_at: '2026-10-22'
+  url: https://www.sica.int/estadosmiembros
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

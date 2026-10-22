@@ -824,8 +824,8 @@ HAVING observer_count >= 5
 ORDER BY observer_count DESC, c.name;
 ```
 
-**Expected:** 20 rows — `MD` and `US` with 7 observer entries; `HU`, `IN`, `JP`, `MY`, `TH`, `UA`
-with 6 each. `CA` is in the set at 5.
+**Expected:** 23 rows — `US` with 8 observer entries; `JP`, `MD` and `MY` with 7;
+`CA`, `CH`, `FR`, `HU`, `ID`, `IN`, `TH` and `UA` with 6 each.
 
 ## Geography and membership
 
@@ -1020,7 +1020,7 @@ ORDER BY ABS(membership_count - len(includes)) DESC, id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 179 mismatches total; largest positive deltas are non-country memberships
+**Expected:** 20 displayed rows out of 185 mismatches total; largest positive deltas are non-country memberships
 counted in `membership_count` (e.g. `IGA`, `WNA`). Records where the count measures
 institutions, companies, or individuals rather than countries declare it via
 `membership_count_type` and are exempt from the roster-comparison validation rule.

@@ -118,7 +118,16 @@ other_names:
   name: Conférence Internationale sur la Région des Grands Lacs
 - id: zh
   name: 大湖地区国际会议组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: ICGLR
+  retrieved_at: '2026-10-22'
+  url: https://icglr.org/the-icglr/
+- field: membership_count
+  source: ICGLR
+  retrieved_at: '2026-10-22'
+  url: https://icglr.org/the-icglr/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

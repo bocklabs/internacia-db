@@ -110,7 +110,16 @@ other_names:
 - id: en
   name: CARICOM Regional Organisation for Standards and Quality
 wikidata_id: Q5008817
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CROSQ
+  retrieved_at: '2026-10-22'
+  url: https://website.crosq.org/organisation/
+- field: membership_count
+  source: CROSQ
+  retrieved_at: '2026-10-22'
+  url: https://website.crosq.org/organisation/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -95,7 +95,16 @@ other_names:
   name: Acordo de Complementação Econômica n.º 33
 - id: zh
   name: G3自由贸易协议
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SICE OAS
+  retrieved_at: '2026-10-22'
+  url: https://sice.oas.org/TPD/G_3/G3_e.asp
+- field: membership_count
+  source: SICE OAS
+  retrieved_at: '2026-10-22'
+  url: https://sice.oas.org/TPD/G_3/G3_e.asp
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

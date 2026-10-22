@@ -271,7 +271,16 @@ other_names:
   name: Панафриканский парламент
 - id: zh
   name: 泛非议会
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: African Union
+  retrieved_at: '2026-10-22'
+  url: https://au.int/en/member_states/countryprofiles2
+- field: membership_count
+  source: African Union
+  retrieved_at: '2026-10-22'
+  url: https://au.int/en/member_states/countryprofiles2
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

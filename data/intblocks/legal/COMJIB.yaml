@@ -118,7 +118,16 @@ topics:
 - key: law
   name: Law
 wikidata_id: Q115799917
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: COMJIB
+  retrieved_at: '2026-10-22'
+  url: https://comjib.org/comjib/paises-miembros/
+- field: membership_count
+  source: COMJIB
+  retrieved_at: '2026-10-22'
+  url: https://comjib.org/comjib/paises-miembros/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

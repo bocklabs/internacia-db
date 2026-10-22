@@ -137,7 +137,16 @@ other_names:
 - id: en
   name: Caribbean Meteorological Organization
 wikidata_id: Q5039400
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Caribbean Meteorological Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.cmo.org.tt/members.html
+- field: membership_count
+  source: Caribbean Meteorological Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.cmo.org.tt/members.html
 - field: headquarters
   source: official sources
   retrieved_at: '2026-06-15'

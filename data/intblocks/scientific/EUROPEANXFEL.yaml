@@ -120,7 +120,16 @@ other_names:
 - id: zh
   name: 歐洲X射線自由電子雷射
 wikidata_id: Q462592
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European XFEL
+  retrieved_at: '2026-10-22'
+  url: https://www.xfel.eu/facility/overview/facts_amp_figures/index_eng.html
+- field: membership_count
+  source: European XFEL
+  retrieved_at: '2026-10-22'
+  url: https://www.xfel.eu/facility/overview/facts_amp_figures/index_eng.html
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
