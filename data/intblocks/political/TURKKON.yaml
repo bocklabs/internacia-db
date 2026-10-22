@@ -39,6 +39,14 @@ includes:
   name: Hungary
   type: country
   status: observer
+- id: TM
+  name: Turkmenistan
+  type: country
+  status: observer
+- id: ECO
+  name: Economic Cooperation Organization
+  type: organization
+  status: observer
 membership_count: 5
 description: International organization to which Turkic sovereign states are members.
 tags:
@@ -75,7 +83,17 @@ other_names:
 - id: zh
   name: 突厥国家组织
 wikidata_id: Q596850
+last_verified: '2026-10-22'
+notes: Turkmenistan and the Economic Cooperation Organization are observers. The Turkish Republic of Northern Cyprus has been an observer since November 2022 and is not recorded here because this dataset has no country code for it.
 provenance:
+- field: includes
+  source: Organization of Turkic States
+  retrieved_at: '2026-10-22'
+  url: https://turkicstates.org/en/organization-of-turkic-states
+- field: membership_count
+  source: Organization of Turkic States
+  retrieved_at: '2026-10-22'
+  url: https://turkicstates.org/en/organization-of-turkic-states
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

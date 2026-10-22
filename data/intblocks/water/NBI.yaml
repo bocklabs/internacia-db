@@ -64,6 +64,10 @@ includes:
   name: Uganda
   type: country
   status: member
+- id: ER
+  name: Eritrea
+  type: country
+  status: observer
 membership_count: 10
 wikidata_id: Q490388
 legal_status: intergovernmental
@@ -88,7 +92,16 @@ other_names:
   name: Nile Basin Initiative
 - id: en
   name: Nile Basin Initiative
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Nile Basin Initiative
+  retrieved_at: '2026-10-22'
+  url: https://nilebasin.org/center/nilesec
+- field: membership_count
+  source: Nile Basin Initiative
+  retrieved_at: '2026-10-22'
+  url: https://nilebasin.org/center/nilesec
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-15'
