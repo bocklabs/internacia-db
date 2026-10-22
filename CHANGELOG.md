@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Monthly release train (`docs/release-train.md`): `release-train.yml` opens a release PR when the
+  data changed since the last tag, choosing PATCH or MINOR from the versioning policy and stopping
+  on MAJOR changes; merging it tags the release (`release-tag.yml`), and `release.yml` notifies
+  internacia-python and internacia-api. `scripts/prepare_release.py` runs the same plan locally.
+  Needs the internacia-bot GitHub App.
+- `migration.vX.Y.Z.json` has a `data` section: record ids added, removed and changed, and
+  membership edges added, removed and changed since the previous release.
 - Weekly roster watch (`.github/workflows/roster-watch.yml`, `scripts/roster_watch.py`,
   `docs/roster-watch.md`): compares tier-1 rosters with Wikidata current memberships and keeps one
   `roster-drift` issue per organization (opened, updated on change, closed when resolved). It
