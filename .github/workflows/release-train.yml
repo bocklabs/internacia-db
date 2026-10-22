@@ -100,7 +100,7 @@ jobs:
       - name: Open the release PR
         id: cpr
         if: steps.plan.outputs.release == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.app-token.outputs.token }}
           branch: release/next
