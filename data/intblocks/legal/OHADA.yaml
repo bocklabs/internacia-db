@@ -119,7 +119,16 @@ other_names:
 - id: ru
   name: Организация по гармонизации коммерческого права в Африке
 wikidata_id: Q2029901
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OHADA
+  retrieved_at: '2026-10-22'
+  url: https://www.ohada.org/les-etats-membres-de-lohada/
+- field: membership_count
+  source: OHADA
+  retrieved_at: '2026-10-22'
+  url: https://www.ohada.org/les-etats-membres-de-lohada/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

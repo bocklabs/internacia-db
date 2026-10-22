@@ -76,7 +76,16 @@ other_names:
   name: Инициатива Бенгальского залива по Многоотраслевой Технико-Экономической Кооперации
 - id: zh
   name: 環孟加拉灣多領域技術暨經濟合作倡議
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: BIMSTEC
+  retrieved_at: '2026-10-22'
+  url: https://www.bimstec.org/member-states
+- field: membership_count
+  source: BIMSTEC
+  retrieved_at: '2026-10-22'
+  url: https://www.bimstec.org/member-states
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

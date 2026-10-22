@@ -812,7 +812,16 @@ other_names:
   name: Международная организация труда
 - id: zh
   name: 國際勞工組織
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: International Labour Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.ilo.org/about-ilo/ilo-member-states
+- field: membership_count
+  source: International Labour Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.ilo.org/about-ilo/ilo-member-states
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

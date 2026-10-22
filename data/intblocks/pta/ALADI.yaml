@@ -125,7 +125,16 @@ other_names:
   name: Латиноамериканская ассоциация интеграции
 - id: zh
   name: 拉丁美洲一體化協會
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: ALADI
+  retrieved_at: '2026-10-22'
+  url: https://www.aladi.org/sitioaladi/paises-miembros/
+- field: membership_count
+  source: ALADI
+  retrieved_at: '2026-10-22'
+  url: https://www.aladi.org/sitioaladi/paises-miembros/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

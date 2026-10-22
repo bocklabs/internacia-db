@@ -170,7 +170,16 @@ other_names:
   name: 巴黎俱樂部
 notes: >-
   South Africa has held prospective-member status since 8 July 2022. Ad hoc participants include China (since 2013), India (since 2019), and Hungary (since 2024), plus Argentina, Czech Republic, Kuwait, Mexico, Morocco, New Zealand, Portugal, Saudi Arabia, Trinidad and Tobago, Türkiye, and the United Arab Emirates on a case-by-case basis. Brazil and Korea became full permanent members in 2006 and 1997 respectively; Russia joined in 1997.
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Paris Club
+  retrieved_at: '2026-10-22'
+  url: https://clubdeparis.org/en/who-are-the-members-of-the-paris-club
+- field: membership_count
+  source: Paris Club
+  retrieved_at: '2026-10-22'
+  url: https://clubdeparis.org/en/who-are-the-members-of-the-paris-club
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-30'

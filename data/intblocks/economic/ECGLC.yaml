@@ -72,7 +72,16 @@ other_names:
   name: Экономическое сообщество стран Великих озёр
 - id: zh
   name: 五大湖国家经济共同体
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CEPGL
+  retrieved_at: '2026-10-22'
+  url: http://www.cepgl.org/
+- field: membership_count
+  source: CEPGL
+  retrieved_at: '2026-10-22'
+  url: http://www.cepgl.org/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

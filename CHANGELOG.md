@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-22 for 24 rosters checked against an official list:
+  APEC (21 economies), OIC (57, including Syria), BIMSTEC (7), ECO (10), CSTO (6),
+  the European Defence Agency (the 27 EU member states), WHO (194; the United States
+  remains listed while a withdrawal notification is pending before the governing bodies),
+  ILO (187), WIPO (194), ICAO (193), the Paris Club (22 permanent members), OAPI (17),
+  OHADA (17), ALADI (13), PICES (6 contracting parties), CEPGL (Burundi, the Democratic
+  Republic of the Congo and Rwanda), USMCA and the historical NAFTA parties, the EU–New
+  Zealand FTA, and the US FTAs with Australia, Chile, Korea and Singapore. D-8 adds
+  Azerbaijan, a full member since 19 March 2025 (`membership_count` 9).
 - Roster corrections checked against official lists on 2026-10-22: WTO `wikidata_id` is
   Q7825 (Q215524 is the village Riaville); Council of Europe records Russia as
   `former_member` from 1996-02-28 to 2022-03-16 (`CM/Res(2022)2`) and `membership_count`

@@ -108,7 +108,16 @@ other_names:
   name: Acordo Estados Unidos-México-Canadá
 - id: zh
   name: 美國-墨西哥-加拿大協定
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement
+- field: membership_count
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

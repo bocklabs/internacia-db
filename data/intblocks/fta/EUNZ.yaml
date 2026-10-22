@@ -71,7 +71,16 @@ other_names:
   name: EU-New Zealand FTA
 - id: en
   name: New Zealand-European Union Free Trade Agreement
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European Commission
+  retrieved_at: '2026-10-22'
+  url: https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/new-zealand_en
+- field: membership_count
+  source: European Commission
+  retrieved_at: '2026-10-22'
+  url: https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/new-zealand_en
 - field: geographic_scope
   source: official sources
   retrieved_at: '2026-06-15'

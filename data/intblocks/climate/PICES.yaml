@@ -107,7 +107,16 @@ other_names:
   name: North Pacific Marine Science Organization
 - id: en
   name: PICES
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: North Pacific Marine Science Organization
+  retrieved_at: '2026-10-22'
+  url: https://meetings.pices.int/about/convention
+- field: membership_count
+  source: North Pacific Marine Science Organization
+  retrieved_at: '2026-10-22'
+  url: https://meetings.pices.int/about/convention
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

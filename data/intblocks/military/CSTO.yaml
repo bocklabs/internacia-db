@@ -123,7 +123,16 @@ other_names:
   name: Организация Договора о коллективной безопасности
 - id: zh
   name: 集体安全条约组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CSTO
+  retrieved_at: '2026-10-22'
+  url: https://mkves.odkb-csto.org/en/states/
+- field: membership_count
+  source: CSTO
+  retrieved_at: '2026-10-22'
+  url: https://mkves.odkb-csto.org/en/states/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

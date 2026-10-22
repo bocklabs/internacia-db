@@ -128,7 +128,16 @@ other_names:
   name: Североамериканская зона свободной торговли
 - id: zh
   name: 北美自由贸易协议
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement
+- field: membership_count
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-07-29'

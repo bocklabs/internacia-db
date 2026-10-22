@@ -871,7 +871,16 @@ other_names:
   name: Международная организация гражданской авиации
 - id: zh
   name: 国际民用航空组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: ICAO
+  retrieved_at: '2026-10-22'
+  url: https://www.icao.int/about-icao/member-states
+- field: membership_count
+  source: ICAO
+  retrieved_at: '2026-10-22'
+  url: https://www.icao.int/about-icao/member-states
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
