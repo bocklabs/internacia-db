@@ -131,6 +131,10 @@ includes:
   name: Venezuela, RB
   type: country
   status: member
+- id: CN
+  name: China
+  type: country
+  status: observer
 membership_count: 28
 description: Protein-coding gene in the species Homo sapiens.
 tags:
@@ -173,7 +177,16 @@ other_names:
 - id: zh
   name: 24國集團
 wikidata_id: Q18048978
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: G-24
+  retrieved_at: '2026-10-22'
+  url: https://g24.org/members/
+- field: membership_count
+  source: G-24
+  retrieved_at: '2026-10-22'
+  url: https://g24.org/members/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

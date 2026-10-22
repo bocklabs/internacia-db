@@ -242,8 +242,21 @@ includes:
   name: U.S. Virgin Islands
   type: country
   status: member
+- id: GD
+  name: Grenada
+  type: country
+  status: member
 wikidata_id: Q160549
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CONCACAF
+  retrieved_at: '2026-10-22'
+  url: https://www.concacaf.com/inside-concacaf/member-associations
+- field: membership_count
+  source: CONCACAF
+  retrieved_at: '2026-10-22'
+  url: https://www.concacaf.com/inside-concacaf/member-associations
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -42,7 +42,7 @@ acronyms:
   value: (OPS)
 - lang: de
   value: PAHO
-membership_count: 35
+membership_count: 39
 legal_status: intergovernmental
 recognition_status: WHO Regional Office
 notes: PAHO is the world's oldest international health organization, established in
@@ -221,8 +221,62 @@ includes:
   name: Venezuela, Bolivarian Republic of
   type: country
   status: member
+- id: AW
+  name: Aruba
+  type: country
+  status: associate_member
+  joined: '2012-09'
+- id: CW
+  name: Curaçao
+  type: country
+  status: associate_member
+  joined: '2012-09'
+- id: PR
+  name: Puerto Rico
+  type: country
+  status: associate_member
+  joined: '1992-09'
+- id: SX
+  name: Sint Maarten
+  type: country
+  status: associate_member
+  joined: '2012-09'
+- id: FR
+  name: France
+  type: country
+  status: participant
+  joined: '1951-10'
+- id: NL
+  name: Netherlands
+  type: country
+  status: participant
+  joined: '1951-10'
+- id: GB
+  name: United Kingdom
+  type: country
+  status: participant
+  joined: '1951-10'
+- id: ES
+  name: Spain
+  type: country
+  status: observer
+  joined: '1980-09'
+- id: PT
+  name: Portugal
+  type: country
+  status: observer
+  joined: '1986-09'
 wikidata_id: Q1856835
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: PAHO
+  retrieved_at: '2026-10-22'
+  url: https://www.paho.org/en/planning-finance-and-accountability/member-states-pan-american-health-organization
+- field: membership_count
+  source: PAHO
+  retrieved_at: '2026-10-22'
+  url: https://www.paho.org/en/planning-finance-and-accountability/member-states-pan-american-health-organization
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -254,7 +254,16 @@ other_names:
   name: Межамериканский центр налоговой администрации
 - id: zh
   name: 美洲稅務管理中心
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CIAT
+  retrieved_at: '2026-10-22'
+  url: https://nto.tax/wp-content/uploads/2026/07/Factsheet-CIAT.pdf
+- field: membership_count
+  source: CIAT
+  retrieved_at: '2026-10-22'
+  url: https://nto.tax/wp-content/uploads/2026/07/Factsheet-CIAT.pdf
 - field: includes
   source: Wikipedia
   retrieved_at: '2026-06-15'

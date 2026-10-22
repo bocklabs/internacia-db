@@ -227,6 +227,10 @@ includes:
   name: Netherlands
   type: country
   status: member
+- id: EU
+  name: European Union
+  type: organization
+  status: observer
 membership_count: 48
 description: Multilateral export control regime through which 48 nuclear supplier countries coordinate national export policies
   on nuclear material, equipment, technology, and nuclear-related dual-use goods to prevent proliferation of nuclear weapons.
@@ -295,8 +299,16 @@ notes: No permanent secretariat; administrative support and the NSG point of con
   of Japan to the International Organizations in Vienna. The rotating NSG Chair is held by a participating government for one-year
   terms. Guidelines were first published in 1978 as IAEA INFCIRC/254; Part 2 dual-use controls were added in 1992.
 wikidata_id: Q1480793
-last_verified: '2026-07-13'
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Nuclear Suppliers Group
+  retrieved_at: '2026-10-22'
+  url: https://www.nuclearsuppliersgroup.org/en/about/participants
+- field: membership_count
+  source: Nuclear Suppliers Group
+  retrieved_at: '2026-10-22'
+  url: https://www.nuclearsuppliersgroup.org/en/about/participants
 - field: description
   source: official sources
   retrieved_at: '2026-07-13'

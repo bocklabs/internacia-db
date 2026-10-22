@@ -162,7 +162,16 @@ other_names:
 - id: zh
   name: 國際北極科學委員會
 wikidata_id: Q431876
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: International Arctic Science Committee
+  retrieved_at: '2026-10-22'
+  url: https://www.iasc.info/about/iasc-member-countries
+- field: membership_count
+  source: International Arctic Science Committee
+  retrieved_at: '2026-10-22'
+  url: https://www.iasc.info/about/iasc-member-countries
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

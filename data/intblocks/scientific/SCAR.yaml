@@ -167,11 +167,11 @@ includes:
 - id: CO
   name: Colombia
   type: country
-  status: associate
+  status: member
 - id: CZ
   name: Czechia
   type: country
-  status: associate
+  status: member
 - id: DK
   name: Denmark
   type: country
@@ -199,12 +199,28 @@ includes:
 - id: TR
   name: Türkiye
   type: country
-  status: associate
+  status: member
 - id: VE
   name: Venezuela, Bolivarian Republic of
   type: country
   status: associate
-membership_count: 44
+- id: LU
+  name: Luxembourg
+  type: country
+  status: associate
+- id: MX
+  name: Mexico
+  type: country
+  status: associate
+- id: AE
+  name: United Arab Emirates
+  type: country
+  status: associate
+- id: CR
+  name: Costa Rica
+  type: country
+  status: associate
+membership_count: 48
 geographic_scope: global
 regions:
 - worldwide
@@ -247,7 +263,16 @@ other_names:
 - id: zh
   name: 南極研究科學委員會
 wikidata_id: Q1510361
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SCAR
+  retrieved_at: '2026-10-22'
+  url: https://scar.org/about-us/governance/members
+- field: membership_count
+  source: SCAR
+  retrieved_at: '2026-10-22'
+  url: https://scar.org/about-us/governance/members
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

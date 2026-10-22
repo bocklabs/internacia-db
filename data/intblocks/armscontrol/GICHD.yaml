@@ -66,10 +66,6 @@ includes:
   name: Lebanon
   type: country
   status: member
-- id: 'NO'
-  name: Norway
-  type: country
-  status: member
 - id: SN
   name: Senegal
   type: country
@@ -106,7 +102,7 @@ includes:
   name: United Nations Mine Action Service
   type: organization
   status: member
-membership_count: 22
+membership_count: 21
 founded: '1998'
 headquarters:
   city: Geneva
@@ -154,7 +150,16 @@ other_names:
   name: Geneva International Centre for Humanitarian Demining
 - id: fr
   name: centre international de déminage humanitaire
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: GICHD
+  retrieved_at: '2026-10-22'
+  url: https://www.gichd.org/about/about-us/council-of-foundation/
+- field: membership_count
+  source: GICHD
+  retrieved_at: '2026-10-22'
+  url: https://www.gichd.org/about/about-us/council-of-foundation/
 - field: includes
   source: GICHD
   retrieved_at: '2026-06-14'

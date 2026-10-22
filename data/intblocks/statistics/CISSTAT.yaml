@@ -134,7 +134,16 @@ other_names:
   name: Межгосударственный статистический комитет Содружества Независимых Государств
 - id: uk
   name: Міждержавний статистичний комітет СНД
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CIS Statistical Committee
+  retrieved_at: '2026-10-22'
+  url: https://new.cisstat.org/web/eng/statistical-servises-of-the-cis
+- field: membership_count
+  source: CIS Statistical Committee
+  retrieved_at: '2026-10-22'
+  url: https://new.cisstat.org/web/eng/statistical-servises-of-the-cis
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

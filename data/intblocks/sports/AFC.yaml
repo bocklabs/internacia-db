@@ -145,10 +145,6 @@ includes:
   name: Iraq
   type: country
   status: member
-- id: IL
-  name: Israel
-  type: country
-  status: member
 - id: JP
   name: Japan
   type: country
@@ -278,7 +274,16 @@ includes:
   type: country
   status: member
 wikidata_id: Q83276
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Asian Football Confederation
+  retrieved_at: '2026-10-22'
+  url: https://assets.the-afc.com/downloads/mission-and-statutes/AFC-Statutes-Edition-2026-(ENG).pdf
+- field: membership_count
+  source: Asian Football Confederation
+  retrieved_at: '2026-10-22'
+  url: https://assets.the-afc.com/downloads/mission-and-statutes/AFC-Statutes-Edition-2026-(ENG).pdf
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

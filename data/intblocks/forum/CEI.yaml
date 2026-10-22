@@ -24,8 +24,8 @@ includes:
   name: Albania
   type: country
   status: member
-- id: AT
-  name: Austria
+- id: BY
+  name: Belarus
   type: country
   status: member
 - id: BA
@@ -90,7 +90,7 @@ includes:
   status: member
 membership_count: 17
 wikidata_id: Q392805
-description: Forum of regional cooperation in Central and Eastern Europe, counting 18 member states; formed in Budapest in
+description: Forum of regional cooperation in Central and Eastern Europe, counting 17 member states (Belarus suspended from participation on 25 March 2022); formed in Budapest in
   1989.
 tags:
 - CEI
@@ -122,7 +122,16 @@ other_names:
   name: Центральноевропейская инициатива
 - id: zh
   name: 中欧倡议国
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Central European Initiative
+  retrieved_at: '2026-10-22'
+  url: https://www.cei.int/member-states
+- field: membership_count
+  source: Central European Initiative
+  retrieved_at: '2026-10-22'
+  url: https://www.cei.int/member-states
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

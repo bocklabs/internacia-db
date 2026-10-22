@@ -322,7 +322,16 @@ founding_members:
 other_names:
 - id: en
   name: Methane to Markets Partnership
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Global Methane Initiative
+  retrieved_at: '2026-10-22'
+  url: https://www.globalmethane.org/partners/
+- field: membership_count
+  source: Global Methane Initiative
+  retrieved_at: '2026-10-22'
+  url: https://www.globalmethane.org/partners/
 - field: includes
   source: GMI official website
   retrieved_at: '2026-07-29'
