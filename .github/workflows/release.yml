@@ -13,8 +13,7 @@ jobs:
     env:
       INTERNACIA_DATASETS_DIR: ${{ github.workspace }}/.release-datasets
       # internacia-python ref whose tests/contract suite must pass before publishing.
-      # TEMPORARY: pinned to the py-1.1 branch until it is merged; switch back to main then.
-      INTERNACIA_SDK_REF: cursor/py-1-1-contract-download-7afe
+      INTERNACIA_SDK_REF: main
     steps:
       - uses: actions/checkout@v7
         with:
