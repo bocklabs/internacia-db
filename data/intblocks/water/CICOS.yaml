@@ -86,7 +86,16 @@ other_names:
   name: International Commission of the Congo-Oubangui-Sangha Basin
 - id: fr
   name: Commission Internationale du Bassin Congo-Oubangui-Sangha
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CICOS
+  retrieved_at: '2026-10-22'
+  url: https://www.cicos.int/la-cicos/etats-membres/
+- field: membership_count
+  source: CICOS
+  retrieved_at: '2026-10-22'
+  url: https://www.cicos.int/la-cicos/etats-membres/
 - field: includes
   source: CICOS member states page
   retrieved_at: '2026-07-29'
