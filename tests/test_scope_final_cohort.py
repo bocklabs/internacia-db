@@ -5,7 +5,7 @@ import json
 import duckdb
 import yaml
 
-from internacia_builder.paths import project_root
+from internacia_builder.paths import datasets_dir, project_root
 
 ROOT = project_root()
 COUNTRY_PARTICIPANTS = set(
@@ -81,7 +81,7 @@ def test_retired_telesur_has_retired_alias_without_target():
 
 
 def test_exported_memberships_match_the_new_entity_boundaries():
-    db = ROOT / "data" / "datasets" / "internacia.duckdb"
+    db = datasets_dir() / "internacia.duckdb"
     with duckdb.connect(str(db), read_only=True) as con:
         assert con.execute("SELECT count(*) FROM intblocks").fetchone()[0] == 1275
         assert con.execute("SELECT count(*) FROM memberships").fetchone()[0] == 59496
