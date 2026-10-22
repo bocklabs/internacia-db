@@ -1,0 +1,36 @@
+# Tier-1 organizations: the most-used rosters. They get a stricter last_verified window
+# (quality.last_verified_tier1_max_age_months in data/schemas/intblocks_completeness.yaml)
+# and are compared with external sources by the roster watch.
+#
+# Fields:
+#   id - intblock id (must exist in data/intblocks)
+tier1:
+  - id: UN
+  - id: EU
+  - id: NATO
+  - id: ASEAN
+  - id: AFUNION
+  - id: BRICS
+  - id: ECOWAS
+  - id: OECD
+  - id: WTO
+  - id: COMMONWEALTH
+  - id: OIC
+  - id: G-20
+  - id: G7
+  - id: SCO
+  - id: CIS
+  - id: MERCOSUR
+  - id: CCASG
+  - id: LAS
+  - id: CELAC
+  - id: SAARC
+  - id: APEC
+  - id: OAS
+  - id: CARICOM
+  - id: EAC
+  - id: SADC
+  - id: EAEU
+  - id: OPEC
+  - id: COE
+  - id: PIF

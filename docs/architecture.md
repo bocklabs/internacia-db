@@ -73,7 +73,10 @@ See [versioning-policy.md](versioning-policy.md).
 Optional Wikidata/World Bank enrichment lives in `scripts/enrich_*.py`. Scheduled
 freshness checks: `.github/workflows/enrichment-check.yml` (may open a review PR).
 Country provenance and intblock `last_verified` share a **12-month** advisory SLA
-([enrichment.md](enrichment.md)).
+([enrichment.md](enrichment.md)); tier-1 organizations (`data/watch/rosters.yaml`) have a 6-month
+window. New or changed intblocks must carry `last_verified`, and roster changes must refresh it.
+The never-verified and overdue counts are in `dataquality/last_verified_kpi.json`, the CI job
+summary, and `scripts/last_verified_report.py`.
 
 ## Governance
 

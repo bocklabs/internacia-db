@@ -162,6 +162,8 @@ quality:
   # STALE_LAST_VERIFIED advisory: records whose last_verified date is older
   # than this many months should be re-verified. 0 disables the rule.
   last_verified_max_age_months: 12
+  # Stricter window for tier-1 organizations listed in data/watch/rosters.yaml.
+  last_verified_tier1_max_age_months: 6
 
 # HQ_COORDINATES_OUTSIDE_COUNTRY: headquarters coordinates must lie within
 # max(min_km, area_multiplier * sqrt(area_km2)) of the HQ country's centroid
