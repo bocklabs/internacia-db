@@ -137,6 +137,20 @@ def changed_base_records(
     return records
 
 
+def _enrichment_metadata_fields() -> frozenset[str]:
+    """Intblock fields the metadata enricher fills from Wikidata, plus their provenance.
+
+    ``last_verified`` attests the roster, so changes limited to these fields do not need it.
+    """
+    from internacia_builder.enrichment_sources import load_policy  # noqa: PLC0415 (import cycle)
+
+    return load_policy().fields("intblocks") | {"provenance"}
+
+
+def _strip(record: dict[str, Any], names: frozenset[str]) -> dict[str, Any]:
+    return {k: v for k, v in record.items() if k not in names}
+
+
 def check_changed_records(
     records: list[tuple[str, dict[str, Any]]],
     changed: dict[str, dict[str, Any] | None],
@@ -145,14 +159,16 @@ def check_changed_records(
     """
     Errors for records that are new or changed since ``base_ref`` (``changed``, from
     ``changed_base_records``) and have no ``last_verified``, and for records whose
-    ``includes`` changed while ``last_verified`` stayed the same.
+    ``includes`` changed while ``last_verified`` stayed the same. Changes limited to the
+    enrichment metadata fields (data/schemas/enrichment_sources.yaml) are exempt.
     """
     errors: list[str] = []
+    metadata = _enrichment_metadata_fields()
     for rel, record in records:
         if rel not in changed:
             continue
         before = changed[rel]
-        if before == record:
+        if before == record or (before is not None and _strip(before, metadata) == _strip(record, metadata)):
             continue
         if not record.get("last_verified"):
             state = "new" if before is None else "changed"
