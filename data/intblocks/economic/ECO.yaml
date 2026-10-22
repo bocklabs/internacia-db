@@ -116,7 +116,16 @@ other_names:
   name: Организация экономического сотрудничества
 - id: zh
   name: 经济合作组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Economic Cooperation Organization
+  retrieved_at: '2026-10-22'
+  url: https://eco.int/member-states/
+- field: membership_count
+  source: Economic Cooperation Organization
+  retrieved_at: '2026-10-22'
+  url: https://eco.int/member-states/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

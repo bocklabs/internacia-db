@@ -894,7 +894,16 @@ other_names:
   name: Всемирная организация интеллектуальной собственности
 - id: zh
   name: 世界知识产权组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: World Intellectual Property Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.wipo.int/members/en/
+- field: membership_count
+  source: World Intellectual Property Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.wipo.int/members/en/
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-15'

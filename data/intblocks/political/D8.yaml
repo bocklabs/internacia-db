@@ -12,6 +12,11 @@ links:
   type: wikipedia
 name: Developing 8
 includes:
+- id: AZ
+  name: Azerbaijan
+  type: country
+  status: member
+  joined: '2025-03-19'
 - id: BD
   name: Bangladesh
   type: country
@@ -44,7 +49,7 @@ includes:
   name: Turkey
   type: country
   status: member
-membership_count: 8
+membership_count: 9
 description: International organization.
 tags:
 - D8
@@ -74,7 +79,20 @@ other_names:
 - id: zh
   name: 發展中八國組織
 wikidata_id: Q577526
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: D-8 Organization for Economic Cooperation
+  retrieved_at: '2026-10-22'
+  url: https://developing8.org/about-d-8/brief-history-of-d-8/
+- field: membership_count
+  source: D-8 Organization for Economic Cooperation
+  retrieved_at: '2026-10-22'
+  url: https://developing8.org/about-d-8/brief-history-of-d-8/
+- field: includes
+  source: D-8 Organization for Economic Cooperation
+  retrieved_at: '2026-10-22'
+  url: https://developing8.org/news/azerbaijan-submits-instruments-of-ratification-of-d-8-charter-thus-marking-its-full-membership-of-the-d-8-organization/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

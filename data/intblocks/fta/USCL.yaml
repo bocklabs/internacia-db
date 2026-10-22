@@ -69,7 +69,16 @@ other_names:
   name: US-Chile FTA
 - id: es
   name: Tratado de Libre Comercio entre Estados Unidos y Chile
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements
+- field: membership_count
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements
 - field: geographic_scope
   source: official sources
   retrieved_at: '2026-06-15'

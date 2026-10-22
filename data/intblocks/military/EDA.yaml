@@ -180,7 +180,16 @@ topics:
 - key: security
   name: Security
 wikidata_id: Q1134173
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European Defence Agency
+  retrieved_at: '2026-10-22'
+  url: https://eda.europa.eu/news-and-events/news/2023/03/23/denmark-joins-the-european-defence-agency
+- field: membership_count
+  source: European Defence Agency
+  retrieved_at: '2026-10-22'
+  url: https://eda.europa.eu/news-and-events/news/2023/03/23/denmark-joins-the-european-defence-agency
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-15'

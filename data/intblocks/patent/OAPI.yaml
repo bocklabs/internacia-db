@@ -123,7 +123,16 @@ other_names:
 - id: zh
   name: 非洲知识产权组织
 wikidata_id: Q1476775
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OAPI
+  retrieved_at: '2026-10-22'
+  url: https://www.oapi.int/index.php/fr/l-oapi/etats-membres
+- field: membership_count
+  source: OAPI
+  retrieved_at: '2026-10-22'
+  url: https://www.oapi.int/index.php/fr/l-oapi/etats-membres
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

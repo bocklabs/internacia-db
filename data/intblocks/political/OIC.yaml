@@ -279,7 +279,16 @@ other_names:
   name: Организация Исламского сотрудничества
 - id: zh
   name: 伊斯兰合作组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Republic of Türkiye Ministry of Foreign Affairs
+  retrieved_at: '2026-10-22'
+  url: https://www.mfa.gov.tr/OIC.en.mfa
+- field: membership_count
+  source: Republic of Türkiye Ministry of Foreign Affairs
+  retrieved_at: '2026-10-22'
+  url: https://www.mfa.gov.tr/OIC.en.mfa
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
