@@ -95,7 +95,16 @@ other_names:
   name: Volta Basin Authority
 - id: fr
   name: Autorité du Bassin de la Volta
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Volta Basin Authority
+  retrieved_at: '2026-10-22'
+  url: https://abv.int/wp-content/uploads/2018/04/Convention_ABV_English.pdf
+- field: membership_count
+  source: Volta Basin Authority
+  retrieved_at: '2026-10-22'
+  url: https://abv.int/wp-content/uploads/2018/04/Convention_ABV_English.pdf
 - field: includes
   source: VBA historical timeline
   retrieved_at: '2026-07-29'

@@ -81,7 +81,16 @@ other_names:
   name: Gambia River Development Organization
 - id: fr
   name: Organisation pour la mise en valeur du fleuve Gambie
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OMVG
+  retrieved_at: '2026-10-22'
+  url: https://www.omvg.org/actualites/forum-des-investisseurs-du-pddi-de-lomvg
+- field: membership_count
+  source: OMVG
+  retrieved_at: '2026-10-22'
+  url: https://www.omvg.org/actualites/forum-des-investisseurs-du-pddi-de-lomvg
 - field: includes
   source: OMVG Convention (1978)
   retrieved_at: '2026-07-29'

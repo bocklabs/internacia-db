@@ -82,7 +82,16 @@ other_names:
   name: Senegal River Basin Development Authority
 - id: fr
   name: Organisation pour la mise en valeur du fleuve Sénégal
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OMVS
+  retrieved_at: '2026-10-22'
+  url: https://www.omvs.org/a-propos/
+- field: membership_count
+  source: OMVS
+  retrieved_at: '2026-10-22'
+  url: https://www.omvs.org/a-propos/
 - field: includes
   source: OMVS about page
   retrieved_at: '2026-07-29'

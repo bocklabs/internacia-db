@@ -105,7 +105,16 @@ other_names:
   name: Zambezi Watercourse Commission
 - id: fr
   name: Zambezi Watercourse Commission
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Nile Basin Initiative and ZAMCOM
+  retrieved_at: '2026-10-22'
+  url: https://nilebasin.org/sites/default/files/2026-03/Joint%20news%20release%20NBI%20ZAMCOM.pdf
+- field: membership_count
+  source: Nile Basin Initiative and ZAMCOM
+  retrieved_at: '2026-10-22'
+  url: https://nilebasin.org/sites/default/files/2026-03/Joint%20news%20release%20NBI%20ZAMCOM.pdf
 - field: includes
   source: ZAMCOM Agreement (2004)
   retrieved_at: '2026-07-29'

@@ -76,7 +76,16 @@ other_names:
   name: Permanent Okavango River Basin Water Commission
 - id: pt
   name: Comissão Permanente da Água da Bacia Hidrográfica do Okavango
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OKACOM
+  retrieved_at: '2026-10-22'
+  url: https://www.okacom.org/permanent-okavango-river-basin-water-commission-okacom
+- field: membership_count
+  source: OKACOM
+  retrieved_at: '2026-10-22'
+  url: https://www.okacom.org/permanent-okavango-river-basin-water-commission-okacom
 - field: includes
   source: OKACOM Agreement (1994)
   retrieved_at: '2026-07-29'
