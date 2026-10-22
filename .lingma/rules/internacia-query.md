@@ -1,3 +1,4 @@
+<!-- Generated from templates/agent-shims/.lingma/rules/internacia-query.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 # Internacia 数据查询规则
 
 适用场景：用户询问某国信息、组织成员、陆地邻国、ISO 代码、中文国名关联等。
@@ -6,7 +7,7 @@
 
 ## 查询方式
 
-1. 使用 `data/datasets/internacia.duckdb`（或 Parquet），**不要** 读取 `data/countries/*.yaml`。
+1. 查询请使用 `data/datasets/internacia.duckdb` 或 Parquet 导出，不要解析源 YAML。导出文件不提交到仓库：先运行一次 `python scripts/builder.py build`（或从最新 GitHub Release 下载）。
 2. 版本：`SELECT dataset, version, schema_hash FROM _meta;`
 3. 中文国名：查 `other_names`（`id = 'zh'`），例如：
 

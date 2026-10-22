@@ -6,6 +6,7 @@ description: >-
   Use when searching for missing organizations, treaties, FTAs, geographic
   groups, or when updating record metadata and country enrichment.
 ---
+<!-- Generated from templates/agent-shims/.cursor/skills/internacia-discover/SKILL.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 
 # Internacia discovery and improvement (Cursor)
 

@@ -1,6 +1,7 @@
 ---
 description: Find missing intblocks or improve an existing country/intblock record.
 ---
+<!-- Generated from templates/agent-shims/.agent/workflows/discover-intblock.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 <!-- AGENT:START -->
 **Goal:** Locate a real-world organization, treaty, or named grouping that belongs
 in Internacia, or raise the quality of one existing YAML record, without inventing
@@ -39,8 +40,8 @@ python scripts/validate_countries.py --json
 ```
 
 8. Run the full build and artifact/documentation checks in
-   [docs/agents/contribute.md](../../docs/agents/contribute.md). Commit regenerated
-   exports with source changes and refresh affected counts/query expectations.
+   [docs/agents/contribute.md](../../docs/agents/contribute.md). Commit the regenerated `data/datasets/` descriptors (manifests, `contract.json`, `datapackage.json`) with the source changes; binary exports are not committed. CI rebuilds and checks that the descriptors match.
+   Refresh affected counts and query expectations.
 9. If the catalogue walk is new, append a row to [docs/intblock-sources.md](../../docs/intblock-sources.md). Update `CHANGELOG.md` under `[Unreleased]`.
 
 **Reference**

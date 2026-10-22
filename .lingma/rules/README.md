@@ -1,3 +1,4 @@
+<!-- Generated from templates/agent-shims/.lingma/rules/README.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 # 通义灵码 Project Rules
 
 本目录为 [通义灵码](https://help.aliyun.com/zh/lingma/user-guide/rules) 项目专属规则。

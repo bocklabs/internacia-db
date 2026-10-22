@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Unused Docusaurus blog templates (`website/blog/`; the site has `blog: false`).
 - `data/_legacy/` (pre-1.0 Airtable snapshots; history remains in git and Zenodo) and the unused
   `data/datasets/schema_baseline/`.
 - `dataquality/` is no longer committed; the quality report is a CI artifact (`validate.yml`), and
@@ -48,6 +49,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `contract_version` in manifests, `.meta.json` sidecars and DuckDB `_meta` (additive column).
 
 ### Changed
+
+- Per-platform agent files (`CLAUDE.md`, `.github/copilot-instructions.md`, `.cursor/skills/`,
+  `.lingma/rules/`, `.kimi/AGENTS.md`, `.agent/workflows/` except the OpenSpec-managed ones) and
+  `llms-full.txt` are generated from `templates/` by `scripts/generate_agent_shims.py`; CI runs it
+  with `--check`. Shared guardrails, data-access and validation text now live in one place and
+  reflect that exports must be built first. Hand-maintained: `AGENTS*.md`, `llms.txt`,
+  `llms.zh.txt`, `docs/agents/`.
+- One-off migration scripts moved to `scripts/oneoff/` (with a README).
 
 - LLM tool definitions now come from the internacia SDK (`internacia.tools`, SDK 0.4+).
   `data/schemas/{country,intblock}_lookup.openai.json` are deprecated and will be removed one

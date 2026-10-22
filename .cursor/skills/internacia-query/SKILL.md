@@ -6,6 +6,7 @@ description: >-
   border neighbors, Wikidata links, or joining on stable identifiers. Prefer DuckDB
   or Parquet over source YAML.
 ---
+<!-- Generated from templates/agent-shims/.cursor/skills/internacia-query/SKILL.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 
 # Internacia data queries (Cursor)
 

@@ -1,3 +1,4 @@
+<!-- Generated from templates/agent-shims/.lingma/rules/internacia-contribute.md by scripts/generate_agent_shims.py; edit the template and rerun. -->
 # Internacia 数据编辑规则
 
 编辑 `data/countries/`、`data/intblocks/` 或 `data/blocktypes/` 时生效。
