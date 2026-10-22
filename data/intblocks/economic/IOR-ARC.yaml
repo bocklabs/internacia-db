@@ -144,7 +144,16 @@ other_names:
   name: Association des États riverains de l'océan Indien
 - id: zh
   name: 环印度洋联盟
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Indian Ocean Rim Association
+  retrieved_at: '2026-10-22'
+  url: https://www.iora.int/member-states
+- field: membership_count
+  source: Indian Ocean Rim Association
+  retrieved_at: '2026-10-22'
+  url: https://www.iora.int/member-states
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

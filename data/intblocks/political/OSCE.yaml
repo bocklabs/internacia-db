@@ -443,7 +443,16 @@ other_names:
   name: Организация по безопасности и сотрудничеству в Европе
 - id: zh
   name: 歐洲安全與合作組織
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OSCE
+  retrieved_at: '2026-10-22'
+  url: https://news.osce.org/press/frequently-asked-questions
+- field: membership_count
+  source: OSCE
+  retrieved_at: '2026-10-22'
+  url: https://news.osce.org/press/frequently-asked-questions
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

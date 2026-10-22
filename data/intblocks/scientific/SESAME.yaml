@@ -46,6 +46,82 @@ includes:
   name: Türkiye
   type: country
   status: member
+- id: BR
+  name: Brazil
+  type: country
+  status: observer
+- id: CA
+  name: Canada
+  type: country
+  status: observer
+- id: CN
+  name: China
+  type: country
+  status: observer
+- id: FR
+  name: France
+  type: country
+  status: observer
+- id: DE
+  name: Germany
+  type: country
+  status: observer
+- id: GR
+  name: Greece
+  type: country
+  status: observer
+- id: IT
+  name: Italy
+  type: country
+  status: observer
+- id: JP
+  name: Japan
+  type: country
+  status: observer
+- id: KW
+  name: Kuwait
+  type: country
+  status: observer
+- id: PT
+  name: Portugal
+  type: country
+  status: observer
+- id: RU
+  name: Russian Federation
+  type: country
+  status: observer
+- id: ES
+  name: Spain
+  type: country
+  status: observer
+- id: SE
+  name: Sweden
+  type: country
+  status: observer
+- id: CH
+  name: Switzerland
+  type: country
+  status: observer
+- id: AE
+  name: United Arab Emirates
+  type: country
+  status: observer
+- id: GB
+  name: United Kingdom
+  type: country
+  status: observer
+- id: US
+  name: United States
+  type: country
+  status: observer
+- id: CERN
+  name: European Organization for Nuclear Research
+  type: organization
+  status: observer
+- id: EU
+  name: European Union
+  type: organization
+  status: observer
 headquarters:
   city: Allan
   country: JO
@@ -68,7 +144,7 @@ description: Intergovernmental organization operating the Middle East's first ma
   and archaeology.
 legal_status: intergovernmental
 notes: Established under the auspices of UNESCO. Fully powered by renewable energy since 2019, making it the world's first
-  carbon-neutral accelerator laboratory.
+  carbon-neutral accelerator laboratory. OIC-COMSTECH is an official observer and has no intblock id.
 tags:
 - SESAME
 - synchrotron
@@ -101,7 +177,16 @@ other_names:
 - id: ru
   name: SESAME
 wikidata_id: Q749440
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SESAME
+  retrieved_at: '2026-10-22'
+  url: https://www.sesame.org.jo/about-us/members-sesame
+- field: membership_count
+  source: SESAME
+  retrieved_at: '2026-10-22'
+  url: https://www.sesame.org.jo/about-us/members-sesame
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

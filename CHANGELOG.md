@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-22 for 45 rosters checked against an official list. Corrections: IMF replaces Monaco with Andorra (191); CILSS adds Benin, Côte d'Ivoire, Guinea and Togo (13; Sudan and the Central African Republic have not formally joined); GUAM records Uzbekistan as a former member from 2005 (4); SKAO adds France from 4 June 2026 (14); ESA adds four associate members (Cyprus, Latvia, Lithuania, Slovakia) and four cooperating states (Canada, Bulgaria, Croatia, Malta), `membership_count` 27; SESAME observers are recorded and `membership_count` stays 8; IOM is 174 members and 8 observers; IOMed contracting states are 18; Combined Maritime Forces is 47 nations; the Australia Group includes the European Union (43); the Zangger Committee records the EU as a permanent observer (39 members); SELA's current members are 25 (Jamaica is a former member).
 - `last_verified` set to 2026-10-22 for AFRIPOL. Membership is the police institutions of the 55 African Union member states; Western Sahara is added and `membership_count` is 55.
 - `last_verified` set to 2026-10-22 for the China FTAs with Ecuador (in force 1 May 2024), Nicaragua (1 January 2024) and Serbia (1 July 2024).
 - `last_verified` set to 2026-10-22 for the NPT nuclear-weapon states (China, France, Russia, the United Kingdom and the United States).

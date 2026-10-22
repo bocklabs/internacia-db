@@ -33,6 +33,11 @@ includes:
   name: Germany
   type: country
   status: member
+- id: FR
+  name: France
+  type: country
+  status: member
+  joined: '2026-06-04'
 - id: IN
   name: India
   type: country
@@ -80,7 +85,7 @@ acronyms:
   value: SKAO
 - lang: zh
   value: 平方千米阵天文台组织
-membership_count: 13
+membership_count: 14
 geographic_scope: global
 regions:
 - worldwide
@@ -114,7 +119,16 @@ other_names:
 - id: zh
   name: 平方公里阵列天文台
 wikidata_id: Q30296442
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SKA Observatory
+  retrieved_at: '2026-10-22'
+  url: https://www.skao.int/en/about-us/governance/100/skao-council
+- field: membership_count
+  source: SKA Observatory
+  retrieved_at: '2026-10-22'
+  url: https://www.skao.int/en/about-us/governance/100/skao-council
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

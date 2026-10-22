@@ -80,7 +80,16 @@ other_names:
   name: Asociación Mercosur de Normalización
 - id: pt
   name: Associação Mercosul de Normalização
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: AMN
+  retrieved_at: '2026-10-22'
+  url: https://amn.org.br/pagina/estrutura/10
+- field: membership_count
+  source: AMN
+  retrieved_at: '2026-10-22'
+  url: https://amn.org.br/pagina/estrutura/10
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

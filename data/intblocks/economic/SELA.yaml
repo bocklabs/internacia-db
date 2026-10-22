@@ -82,7 +82,7 @@ includes:
 - id: JM
   name: Jamaica
   type: country
-  status: member
+  status: former_member
 - id: MX
   name: Mexico
   type: country
@@ -137,7 +137,7 @@ acronyms:
   value: SELA
 - lang: pt
   value: SELA
-membership_count: 26
+membership_count: 25
 wikidata_id: Q605595
 description: Organization to promote economic cooperation and social development between Latin American and the Caribbean
   countries.
@@ -173,7 +173,16 @@ other_names:
   name: Sistema Econômico Latino-Americano e do Caribe
 - id: zh
   name: 拉丁美洲和加勒比经济体系
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SELA
+  retrieved_at: '2026-10-22'
+  url: https://www.sela.org/en/sela-en/
+- field: membership_count
+  source: SELA
+  retrieved_at: '2026-10-22'
+  url: https://www.sela.org/en/sela-en/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

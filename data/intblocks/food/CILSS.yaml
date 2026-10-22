@@ -59,7 +59,23 @@ includes:
   name: Senegal
   type: country
   status: member
-membership_count: 9
+- id: BJ
+  name: Benin
+  type: country
+  status: member
+- id: CI
+  name: Cote d'Ivoire
+  type: country
+  status: member
+- id: GN
+  name: Guinea
+  type: country
+  status: member
+- id: TG
+  name: Togo
+  type: country
+  status: member
+membership_count: 13
 wikidata_id: Q1419931
 legal_status: intergovernmental
 acronyms:
@@ -97,7 +113,16 @@ other_names:
   name: Болезнь Ниманна — Пика
 - id: zh
   name: 尼曼匹克症
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CILSS
+  retrieved_at: '2026-10-22'
+  url: https://www.cilss.int/partenaires/
+- field: membership_count
+  source: CILSS
+  retrieved_at: '2026-10-22'
+  url: https://www.cilss.int/partenaires/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -120,7 +120,16 @@ other_names:
   name: SADC Cooperation in Standardization
 - id: en
   name: SADC Cooperation in Standardisation
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SADC
+  retrieved_at: '2026-10-22'
+  url: https://www.sadc.int/member-states
+- field: membership_count
+  source: SADC
+  retrieved_at: '2026-10-22'
+  url: https://www.sadc.int/member-states
 - field: includes
   source: SADC Protocol on Trade TBT Annex
   retrieved_at: '2026-07-30'

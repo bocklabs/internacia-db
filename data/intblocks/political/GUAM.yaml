@@ -34,7 +34,8 @@ includes:
 - id: UZ
   name: Uzbekistan
   type: country
-  status: member
+  status: former_member
+  left: '2005'
 founded: '1997'
 headquarters:
   city: Kyiv
@@ -42,7 +43,7 @@ headquarters:
   coordinates:
     lat: 50.45
     lng: 30.523611111111
-membership_count: 5
+membership_count: 4
 wikidata_id: Q326816
 description: Organization.
 tags:
@@ -85,7 +86,20 @@ other_names:
   name: ГУАМ
 - id: zh
   name: 古阿姆民主和经济发展组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: GUAM
+  retrieved_at: '2026-10-22'
+  url: https://guam-organization.org/guam-member-states/
+- field: membership_count
+  source: GUAM
+  retrieved_at: '2026-10-22'
+  url: https://guam-organization.org/guam-member-states/
+- field: includes
+  source: GUAM
+  retrieved_at: '2026-10-22'
+  url: https://guam-organization.org/guam-history-and-institutional-formation/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

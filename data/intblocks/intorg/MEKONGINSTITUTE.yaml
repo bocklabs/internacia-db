@@ -81,7 +81,16 @@ other_names:
   name: Mekong Institut
 - id: en
   name: Mekong Institute
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Mekong Institute
+  retrieved_at: '2026-10-22'
+  url: https://mekonginstitute.org/about/
+- field: membership_count
+  source: Mekong Institute
+  retrieved_at: '2026-10-22'
+  url: https://mekonginstitute.org/about/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

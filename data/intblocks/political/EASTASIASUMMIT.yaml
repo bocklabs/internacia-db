@@ -124,7 +124,16 @@ other_names:
   name: Valsorey Glacier
 - id: es
   name: Glaciar Valsorey
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: East Asia Summit
+  retrieved_at: '2026-10-22'
+  url: https://eastasiasummit.asean.org/
+- field: membership_count
+  source: East Asia Summit
+  retrieved_at: '2026-10-22'
+  url: https://eastasiasummit.asean.org/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

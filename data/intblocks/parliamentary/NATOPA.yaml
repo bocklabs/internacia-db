@@ -178,7 +178,16 @@ other_names:
   name: Парламентская ассамблея НАТО
 - id: zh
   name: 北大西洋公約組織議會大會
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: NATO
+  retrieved_at: '2026-10-22'
+  url: https://www.nato.int/en/about-us/organization/nato-member-countries
+- field: membership_count
+  source: NATO
+  retrieved_at: '2026-10-22'
+  url: https://www.nato.int/en/about-us/organization/nato-member-countries
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

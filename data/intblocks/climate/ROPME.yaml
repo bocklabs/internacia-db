@@ -105,7 +105,16 @@ other_names:
     Areas
 - id: en
   name: ROPME
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: ROPME
+  retrieved_at: '2026-10-22'
+  url: https://ropme.org/about-ropme/member-states/
+- field: membership_count
+  source: ROPME
+  retrieved_at: '2026-10-22'
+  url: https://ropme.org/about-ropme/member-states/
 - field: description
   source: ROPME
   retrieved_at: '2026-06-14'

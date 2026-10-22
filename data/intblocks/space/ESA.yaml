@@ -108,6 +108,42 @@ includes:
   name: Slovenia
   type: country
   status: member
+- id: CY
+  name: Cyprus
+  type: country
+  status: associate_member
+  joined: '2026'
+- id: LV
+  name: Latvia
+  type: country
+  status: associate_member
+  joined: '2020'
+- id: LT
+  name: Lithuania
+  type: country
+  status: associate_member
+  joined: '2021'
+- id: SK
+  name: Slovakia
+  type: country
+  status: associate_member
+  joined: '2022'
+- id: CA
+  name: Canada
+  type: country
+  status: cooperating
+- id: BG
+  name: Bulgaria
+  type: country
+  status: cooperating
+- id: HR
+  name: Croatia
+  type: country
+  status: cooperating
+- id: MT
+  name: Malta
+  type: country
+  status: cooperating
 founded: '1975'
 headquarters:
   city: Paris
@@ -146,7 +182,7 @@ acronyms:
   value: ЕКА
 - lang: pt
   value: AEE
-membership_count: 23
+membership_count: 27
 wikidata_id: Q42262
 description: European organisation dedicated to space exploration.
 tags:
@@ -178,7 +214,16 @@ other_names:
   name: Европейское космическое агентство
 - id: zh
   name: 欧洲空间局
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European Space Agency
+  retrieved_at: '2026-10-22'
+  url: https://www.esa.int/About_Us/Corporate_news/Member_States_Cooperating_States
+- field: membership_count
+  source: European Space Agency
+  retrieved_at: '2026-10-22'
+  url: https://www.esa.int/About_Us/Corporate_news/Member_States_Cooperating_States
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

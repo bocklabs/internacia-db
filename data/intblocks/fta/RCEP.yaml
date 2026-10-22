@@ -165,7 +165,16 @@ other_names:
   name: Всестороннее региональное экономическое партнерство
 - id: zh
   name: 区域全面经济伙伴关系协定
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: RCEP Secretariat
+  retrieved_at: '2026-10-22'
+  url: https://rcepsec.org/wp-content/uploads/2026/07/R06-List-of-RCEP-Parties-Implementing-the-Agreement.pdf
+- field: membership_count
+  source: RCEP Secretariat
+  retrieved_at: '2026-10-22'
+  url: https://rcepsec.org/wp-content/uploads/2026/07/R06-List-of-RCEP-Parties-Implementing-the-Agreement.pdf
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-07-29'

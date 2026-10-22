@@ -141,7 +141,16 @@ other_names:
 - id: en
   name: Caribbean Meteorological Institute
 wikidata_id: Q5039397
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Caribbean Institute for Meteorology and Hydrology
+  retrieved_at: '2026-10-22'
+  url: https://cimh.edu.bb/lib/about.inc.php
+- field: membership_count
+  source: Caribbean Institute for Meteorology and Hydrology
+  retrieved_at: '2026-10-22'
+  url: https://cimh.edu.bb/lib/about.inc.php
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-29'

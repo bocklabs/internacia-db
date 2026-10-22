@@ -163,7 +163,16 @@ other_names:
 - id: zh
   name: 欧洲刑警组织
 wikidata_id: Q207203
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European Union
+  retrieved_at: '2026-10-22'
+  url: https://european-union.europa.eu/principles-countries-history/eu-countries_en
+- field: membership_count
+  source: European Union
+  retrieved_at: '2026-10-22'
+  url: https://european-union.europa.eu/principles-countries-history/eu-countries_en
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'
