@@ -38,6 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- LLM tool definitions now come from the internacia SDK (`internacia.tools`, SDK 0.4+).
+  `data/schemas/{country,intblock}_lookup.openai.json` are deprecated and will be removed one
+  MINOR release after that SDK release (OpenSpec change `deprecate-llm-tool-schema-files`).
 - Superseded reviews and plans (`REPOSITORY_REVIEW*.md`, `dev/internacia-db-review.md`,
   `outputs/*.md`, `docs/improvement-plan.md`) moved to `docs/history/`, which the documentation
   site does not publish.
