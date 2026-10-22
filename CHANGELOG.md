@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `internacia.duckdb` contains the alias and migration tables (`intblocks_aliases`,
+  `countries_aliases`, `attribute_intblock_migrations`) and canonical views:
+  `current_memberships` (not former, no `left` date, organization neither historical nor
+  dissolved), `country_currencies`, `country_languages`, `country_timezones`. They are listed in
+  `contract.json` with their SQL, checked against an independent computation in
+  `check_generated_artifacts.py`, and readable by DuckDB 1.1+. Cookbook section "Canonical views".
+- Identifier stability gate: the validators fail when an intblock ID or country code from the
+  latest release tag has neither a record nor an alias entry.
 - `contract.json`: machine-readable consumer contract (tables, columns, logical types,
   nullability, primary/foreign keys, open enum values, `contract_version`, `min_duckdb`, DuckDB
   storage compatibility). Generated from the schemas, committed, and attached to releases. See

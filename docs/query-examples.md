@@ -275,6 +275,57 @@ ORDER BY name;
 
 **Expected:** 92 rows. Empty list, not `NULL`.
 
+## Canonical views
+
+`internacia.duckdb` ships views whose semantics are part of the
+[data contract](data-contract.md#canonical-views-and-reference-tables), so DuckDB, R,
+Polars and the SDK give the same answers. Prefer them to hand-written `UNNEST` recipes.
+
+### Current members of an organization
+
+`current_memberships` drops former members, edges with a `left` date, and historical
+or dissolved organizations. Filter `status` for full members:
+
+```sql
+SELECT country_code, status, joined
+FROM current_memberships
+WHERE intblock_id = 'NATO' AND status IN ('member', 'founding_member')
+ORDER BY country_code;
+```
+
+**Expected:** 32 rows.
+
+### Countries using a currency
+
+```sql
+SELECT country_code, currency_name
+FROM country_currencies
+WHERE currency_code = 'EUR'
+ORDER BY country_code;
+```
+
+**Expected:** 35 rows. Countries whose `currencies` is NULL simply have no rows.
+
+### Languages and time zones
+
+```sql
+SELECT country_code FROM country_languages WHERE language_code = 'fra' ORDER BY 1;
+SELECT timezone FROM country_timezones WHERE country_code = 'RU' ORDER BY 1;
+```
+
+**Expected:** 46 and 27 rows.
+
+### Resolve retired intblock IDs before joining
+
+```sql
+SELECT x.id AS stored_id, COALESCE(a.target, x.id) AS current_id
+FROM (VALUES ('USAN'), ('EU')) AS x(id)
+LEFT JOIN intblocks_aliases a ON a.alias = x.id AND a.reason <> 'disambiguated';
+```
+
+**Expected:** `USAN` → `UNASUR`, `EU` → `EU`. Do not follow `disambiguated` aliases
+blindly: the old ID now names a different organization.
+
 ## Intblocks and membership
 
 Join on `includes[].id` (usually country alpha-2). **`includes[].name` is a display label

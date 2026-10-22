@@ -28,12 +28,15 @@ from internacia_builder.export import (
     build_membership_rows,
     flatten_country,
     flatten_intblock,
+    load_attribute_intblock_migrations,
     load_country_aliases,
     load_intblock_aliases,
     project_lite_rows,
 )
 from internacia_builder.manifest import dataset_files
 from internacia_builder.schemas import (
+    get_aliases_schema,
+    get_attribute_migration_schema,
     get_blocktypes_schema,
     get_countries_schema,
     get_intblocks_schema,
@@ -145,6 +148,30 @@ def _check_contract(datasets_dir: Path, version: str, problems: list[str]) -> No
         problems.append(f"{CONTRACT_FILE}: differs from the contract generated from the current schemas")
 
 
+def _expected_views(source: dict[str, list[dict]]) -> dict[str, list[dict]]:
+    """Rows each canonical view must return, computed independently of its SQL."""
+    countries = _arrow_rows(source["countries"], get_countries_schema())
+    ended = {
+        row["id"] for row in source["intblocks"] if row.get("status") == "historical" or row.get("dissolved") is not None
+    }
+    memberships = _arrow_rows(source["memberships"], get_memberships_schema())
+    return {
+        "current_memberships": [
+            m for m in memberships
+            if m["status"] != "former_member" and m["left"] is None and m["intblock_id"] not in ended
+        ],
+        "country_currencies": [
+            {"country_code": c["code"], "currency_code": x["code"], "currency_name": x["name"], "currency_symbol": x["symbol"]}
+            for c in countries for x in c["currencies"] or []
+        ],
+        "country_languages": [
+            {"country_code": c["code"], "language_code": x["code"], "language_name": x["name"], "official": x["official"]}
+            for c in countries for x in c["languages"] or []
+        ],
+        "country_timezones": [{"country_code": c["code"], "timezone": tz} for c in countries for tz in c["timezones"] or []],
+    }
+
+
 def check_artifacts(datasets_dir: Path, root: Path) -> list[str]:
     """Return actionable mismatches; the input bundle and sources are never changed."""
     problems: list[str] = []
@@ -211,6 +238,14 @@ def check_artifacts(datasets_dir: Path, root: Path) -> list[str]:
             expected = loader(root)
             _compare(json.loads((datasets_dir / f"{name}.json").read_text()), expected, f"{name}.json", problems, "alias")
             _compare(pq.read_table(datasets_dir / f"{name}.parquet").to_pylist(), expected, f"{name}.parquet", problems, "alias")
+            duck = con.execute(f"SELECT * FROM {name}").to_arrow_table().to_pylist()
+            _compare(duck, _arrow_rows(expected, get_aliases_schema()), f"{name}.duckdb", problems, "alias")
+        migrations = _arrow_rows(load_attribute_intblock_migrations(root), get_attribute_migration_schema())
+        duck = con.execute("SELECT * FROM attribute_intblock_migrations").to_arrow_table().to_pylist()
+        _compare(duck, migrations, "attribute_intblock_migrations.duckdb", problems, "retired_id")
+        for name, expected in _expected_views(source).items():
+            duck = con.execute(f"SELECT * FROM {name}").to_arrow_table().to_pylist()
+            _compare(duck, expected, f"{name} view", problems)
         if len({_canonical(i) for i in identities.values()}) != 1:
             problems.append("build identity differs across artifacts")
         versions = {identity["version"] for identity in identities.values()}

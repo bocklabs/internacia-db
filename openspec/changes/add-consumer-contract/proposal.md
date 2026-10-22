@@ -29,8 +29,8 @@ explicit versioning and deprecation policy.
   `build_date` is the commit time and `git_commit` the built commit. Binary and bulk exports are
   no longer committed; `data/datasets/` keeps manifests, `contract.json`, `datapackage.json`, the
   dataset card and alias JSON (decision D3).
-- **Aliases and canonical views inside DuckDB** (`intblock_aliases`, `country_aliases`,
-  `attribute_migrations`, `current_memberships`, `country_currencies`, `country_languages`,
+- **Aliases and canonical views inside DuckDB** (`intblocks_aliases`, `countries_aliases`,
+  `attribute_intblock_migrations`, `current_memberships`, `country_currencies`, `country_languages`,
   `country_timezones`), documented in the contract.
 
 ## Impact

@@ -19,6 +19,9 @@ from internacia_builder.schemas import (
     get_attribute_migration_schema,
     get_blocktypes_schema,
     get_countries_schema,
+    get_country_currencies_schema,
+    get_country_languages_schema,
+    get_country_timezones_schema,
     get_intblocks_schema,
     get_memberships_schema,
     get_meta_schema,
@@ -89,23 +92,78 @@ TABLES: list[dict[str, Any]] = [
     {
         "name": "intblocks_aliases",
         "schema": get_aliases_schema,
-        "in_duckdb": False,
+        "in_duckdb": True,
         "primary_key": ["alias"],
         "foreign_keys": [],
     },
     {
         "name": "countries_aliases",
         "schema": get_aliases_schema,
-        "in_duckdb": False,
+        "in_duckdb": True,
         "primary_key": ["alias"],
         "foreign_keys": [],
     },
     {
         "name": "attribute_intblock_migrations",
         "schema": get_attribute_migration_schema,
-        "in_duckdb": False,
+        "in_duckdb": True,
         "primary_key": ["retired_id"],
         "foreign_keys": [],
+    },
+]
+
+# Canonical views inside internacia.duckdb. Their semantics are part of the contract, so
+# DuckDB, R and Polars users get the same answers as the SDK.
+VIEWS: list[dict[str, Any]] = [
+    {
+        "name": "current_memberships",
+        "schema": get_memberships_schema,
+        "primary_key": ["intblock_id", "country_code"],
+        "description": (
+            "Membership edges that are current: not former_member, no left date, and the "
+            "intblock is neither historical nor dissolved. Every participation status is kept."
+        ),
+        "sql": (
+            "SELECT m.* FROM memberships m JOIN intblocks i ON i.id = m.intblock_id "
+            "WHERE m.status IS DISTINCT FROM 'former_member' AND m.\"left\" IS NULL "
+            "AND i.status IS DISTINCT FROM 'historical' AND i.dissolved IS NULL "
+            "ORDER BY m.intblock_id, m.country_code"
+        ),
+    },
+    {
+        "name": "country_currencies",
+        "schema": get_country_currencies_schema,
+        "primary_key": ["country_code", "currency_code"],
+        "description": "One row per country and currency; countries without currencies have no rows.",
+        "sql": (
+            "SELECT c.code AS country_code, u.cur.code AS currency_code, "
+            "u.cur.name AS currency_name, u.cur.symbol AS currency_symbol "
+            "FROM countries c, UNNEST(c.currencies) AS u(cur) "
+            "ORDER BY country_code, currency_code"
+        ),
+    },
+    {
+        "name": "country_languages",
+        "schema": get_country_languages_schema,
+        "primary_key": ["country_code", "language_code"],
+        "description": "One row per country and language; countries without languages have no rows.",
+        "sql": (
+            "SELECT c.code AS country_code, u.lang.code AS language_code, "
+            "u.lang.name AS language_name, u.lang.official AS official "
+            "FROM countries c, UNNEST(c.languages) AS u(lang) "
+            "ORDER BY country_code, language_code"
+        ),
+    },
+    {
+        "name": "country_timezones",
+        "schema": get_country_timezones_schema,
+        "primary_key": ["country_code", "timezone"],
+        "description": "One row per country and IANA time zone.",
+        "sql": (
+            "SELECT c.code AS country_code, u.tz AS timezone "
+            "FROM countries c, UNNEST(c.timezones) AS u(tz) "
+            "ORDER BY country_code, timezone"
+        ),
     },
 ]
 
@@ -113,6 +171,8 @@ TABLES: list[dict[str, Any]] = [
 DERIVED_ENUMS = [
     ("memberships", "include_type", "intblocks", "includes[].type"),
     ("memberships", "status", "intblocks", "includes[].status"),
+    ("current_memberships", "include_type", "intblocks", "includes[].type"),
+    ("current_memberships", "status", "intblocks", "includes[].status"),
 ]
 
 
@@ -171,6 +231,7 @@ def build_contract(dataset_version: str, root: Path | None = None) -> dict[str, 
         tables.append(
             {
                 "name": table["name"],
+                "kind": "table",
                 "in_duckdb": table["in_duckdb"],
                 "primary_key": table["primary_key"],
                 "foreign_keys": table["foreign_keys"],
@@ -179,6 +240,24 @@ def build_contract(dataset_version: str, root: Path | None = None) -> dict[str, 
                     {"name": name, "type": type_, "nullable": nullable}
                     for name, type_, nullable in schema_columns(schema)
                 ],
+            }
+        )
+    for view in VIEWS:
+        schema = view["schema"]()
+        tables.append(
+            {
+                "name": view["name"],
+                "kind": "view",
+                "in_duckdb": True,
+                "primary_key": view["primary_key"],
+                "foreign_keys": [],
+                "schema_hash": schema_hash(schema),
+                "columns": [
+                    {"name": name, "type": type_, "nullable": nullable}
+                    for name, type_, nullable in schema_columns(schema)
+                ],
+                "description": view["description"],
+                "definition": view["sql"],
             }
         )
     return {

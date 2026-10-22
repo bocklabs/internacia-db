@@ -671,3 +671,28 @@ def test_jaccard_value(con):
         """
     ).fetchone()[0]
     assert value == 0.64
+
+
+@pytest.mark.parametrize(
+    "sql,rows",
+    [
+        (
+            "SELECT country_code FROM current_memberships WHERE intblock_id = 'NATO' "
+            "AND status IN ('member', 'founding_member')",
+            32,
+        ),
+        ("SELECT country_code FROM country_currencies WHERE currency_code = 'EUR'", 35),
+        ("SELECT country_code FROM country_languages WHERE language_code = 'fra'", 46),
+        ("SELECT timezone FROM country_timezones WHERE country_code = 'RU'", 27),
+    ],
+)
+def test_canonical_view_recipes(con, sql, rows):
+    assert len(con.execute(sql).fetchall()) == rows
+
+
+def test_alias_resolution_recipe(con):
+    resolved = con.execute(
+        "SELECT x.id, COALESCE(a.target, x.id) FROM (VALUES ('USAN'), ('EU')) AS x(id) "
+        "LEFT JOIN intblocks_aliases a ON a.alias = x.id AND a.reason <> 'disambiguated' ORDER BY 1"
+    ).fetchall()
+    assert resolved == [("EU", "EU"), ("USAN", "UNASUR")]

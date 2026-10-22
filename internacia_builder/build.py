@@ -69,6 +69,8 @@ from internacia_builder.quality_report import (
     get_priority_level,
 )
 from internacia_builder.schemas import (
+    get_aliases_schema,
+    get_attribute_migration_schema,
     get_blocktypes_schema,
     get_countries_schema,
     get_intblocks_schema,
@@ -355,6 +357,11 @@ def build(
             intblocks_schema=intblocks_schema,
             blocktypes_schema=blocktypes_schema,
             memberships_data=memberships_data,
+            reference_tables=[
+                ("intblocks_aliases", intblock_aliases, get_aliases_schema()),
+                ("countries_aliases", country_aliases, get_aliases_schema()),
+                ("attribute_intblock_migrations", attribute_migrations, get_attribute_migration_schema()),
+            ],
         )
 
     # Always emit alias artifacts so consumers can remap retired ids/codes.

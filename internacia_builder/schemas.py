@@ -320,3 +320,34 @@ def get_memberships_schema() -> pa.Schema:
             ("left", pa.string()),
         ]
     )
+
+def get_country_currencies_schema() -> pa.Schema:
+    """Schema for the ``country_currencies`` view (one row per country and currency)."""
+    return pa.schema(
+        [
+            pa.field("country_code", pa.string(), nullable=False),
+            pa.field("currency_code", pa.string(), nullable=False),
+            ("currency_name", pa.string()),
+            ("currency_symbol", pa.string()),
+        ]
+    )
+
+def get_country_languages_schema() -> pa.Schema:
+    """Schema for the ``country_languages`` view (one row per country and language)."""
+    return pa.schema(
+        [
+            pa.field("country_code", pa.string(), nullable=False),
+            pa.field("language_code", pa.string(), nullable=False),
+            ("language_name", pa.string()),
+            ("official", pa.bool_()),
+        ]
+    )
+
+def get_country_timezones_schema() -> pa.Schema:
+    """Schema for the ``country_timezones`` view (one row per country and IANA zone)."""
+    return pa.schema(
+        [
+            pa.field("country_code", pa.string(), nullable=False),
+            pa.field("timezone", pa.string(), nullable=False),
+        ]
+    )
