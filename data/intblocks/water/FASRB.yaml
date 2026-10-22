@@ -92,7 +92,16 @@ other_names:
   name: Mednarodna komisija za savski bazen
 - id: sr
   name: Међународна комисија за слив реке Саве
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: International Sava River Basin Commission
+  retrieved_at: '2026-10-22'
+  url: https://www.savacommission.org/en/parties-to-the-fasrb/236
+- field: membership_count
+  source: International Sava River Basin Commission
+  retrieved_at: '2026-10-22'
+  url: https://www.savacommission.org/en/parties-to-the-fasrb/236
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
