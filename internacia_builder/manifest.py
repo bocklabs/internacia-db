@@ -12,6 +12,7 @@ from typing import Any
 import pyarrow as pa
 import typer
 
+from internacia_builder.contract import contract_version, file_digest
 from internacia_builder.paths import project_root
 from internacia_builder.schemas import schema_hash
 
@@ -61,15 +62,30 @@ def dataset_metadata(
 ) -> dict[str, Any]:
     """Build the canonical metadata record shared by manifests, the DuckDB
     ``_meta`` table, and Parquet ``.meta.json`` sidecars."""
+    version = get_dataset_version()
     return {
         "dataset": dataset,
-        "version": get_dataset_version(),
+        "version": version,
         "build_date": _BUILD_DATE or datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "git_commit": _BUILD_COMMIT or get_git_commit(),
         "row_count": row_count,
         "schema_hash": schema_hash(schema),
         "data_license": DATA_LICENSE_SPDX,
+        "contract_version": contract_version(version),
     }
+
+def dataset_files(output_dir: Path, dataset: str) -> list[Path]:
+    """Files of one dataset in a bundle (``<dataset>.*`` and ``<dataset>-lite.*``),
+    excluding its manifest."""
+    prefixes = (f"{dataset}.", f"{dataset}-lite.")
+    return sorted(
+        (
+            path
+            for path in output_dir.iterdir()
+            if path.is_file() and path.name.startswith(prefixes) and path.name != f"{dataset}.manifest.json"
+        ),
+        key=lambda path: path.name,
+    )
 
 def write_manifest(
     output_dir: Path,
@@ -77,7 +93,10 @@ def write_manifest(
     schema: pa.Schema,
     row_count: int,
 ) -> None:
+    """Write ``<dataset>.manifest.json``; call after every file of the dataset is written,
+    because the manifest lists their checksums."""
     manifest = dataset_metadata(dataset, schema, row_count)
+    manifest["files"] = [{"path": path.name, **file_digest(path)} for path in dataset_files(output_dir, dataset)]
     path = output_dir / f"{dataset}.manifest.json"
     path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     typer.echo(f"✓ Saved manifest: {path}")

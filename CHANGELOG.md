@@ -7,8 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `contract.json`: machine-readable consumer contract (tables, columns, logical types,
+  nullability, primary/foreign keys, open enum values, `contract_version`, `min_duckdb`, DuckDB
+  storage compatibility). Generated from the schemas, committed, and attached to releases. See
+  `docs/data-contract.md`.
+- `SHA256SUMS` covering every file of the bundle (rewritten after the release adds
+  `migration.vX.Y.Z.json`). Manifests list `sha256`/`bytes` per file; `datapackage.json` resources
+  carry `bytes`, `hash` and (Parquet) a Table Schema.
+- `contract_version` in manifests, `.meta.json` sidecars and DuckDB `_meta` (additive column).
+
 ### Changed
 
+- `schema_hash` is now the SHA-256 (full 64-hex digest) of the canonical column list
+  `[name, logical_type, nullable]`, independent of the pyarrow version. All hash values change
+  once. Primary-key columns are declared non-nullable, so Parquet marks them `required`.
+- `internacia.duckdb` is written with an explicit `storage_compatibility_version` (`v1.0.0`, the
+  format already in use).
 - Country crosswalks now use curated official-source snapshots with field-level provenance and machine-readable eligibility exceptions (`data/schemas/country_crosswalk_sources.yaml`, `data/schemas/country_crosswalk_exclusions.yaml`): GeoNames covers all 249 current ISO records, IOC covers 206 mapped NOCs, FIFA covers 207 mapped Member Associations, and FIPS remains explicitly legacy-only. Columnar schemas are unchanged; populated values grow from about 118 per field to 206–251.
 
 ### Fixed

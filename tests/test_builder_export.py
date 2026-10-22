@@ -102,11 +102,14 @@ def test_manifest_fields_and_schema_hash_stability(tmp_path):
         "row_count",
         "schema_hash",
         "data_license",
+        "contract_version",
+        "files",
     }
     assert manifest["data_license"] == "CC-BY-4.0"
     # schema_hash must be deterministic for an unchanged schema
     assert manifest["schema_hash"] == builder.schema_hash(builder.get_countries_schema())
-    assert len(manifest["schema_hash"]) == 16
+    assert len(manifest["schema_hash"]) == 64
+    assert manifest["contract_version"] == builder.get_dataset_version().rsplit(".", 1)[0]
 
 
 def test_intblocks_manifest(tmp_path):

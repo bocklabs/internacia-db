@@ -14,6 +14,7 @@ import yaml
 import zstandard as zstd
 from tqdm import tqdm
 
+from internacia_builder.contract import DUCKDB_STORAGE_COMPATIBILITY, TABLES, file_digest
 from internacia_builder.manifest import (
     dataset_metadata,
 )
@@ -293,8 +294,39 @@ def save_json_array(data: list[dict[str, Any]], output_file: Path) -> None:
     output_file.write_bytes(cctx.compress(payload))
     typer.echo(f"✓ Saved JSON array (zstd): {output_file}")
 
+def _table_schema_type(data_type: pa.DataType) -> str:
+    if pa.types.is_string(data_type):
+        return "string"
+    if pa.types.is_boolean(data_type):
+        return "boolean"
+    if pa.types.is_integer(data_type):
+        return "integer"
+    if pa.types.is_floating(data_type):
+        return "number"
+    if pa.types.is_list(data_type):
+        return "array"
+    return "object"
+
+
+def _parquet_table_schema(path: Path, table: str) -> dict[str, Any]:
+    """Frictionless Table Schema for a Parquet resource, read from the written file."""
+    fields = []
+    for field in pq.read_schema(path):
+        entry: dict[str, Any] = {"name": field.name, "type": _table_schema_type(field.type)}
+        if not field.nullable:
+            entry["constraints"] = {"required": True}
+        fields.append(entry)
+    table_schema: dict[str, Any] = {"fields": fields}
+    primary_key = next((t["primary_key"] for t in TABLES if t["name"] == table), None)
+    if primary_key and all(name in {f["name"] for f in fields} for name in primary_key):
+        table_schema["primaryKey"] = primary_key
+    return table_schema
+
+
 def write_datapackage(output_dir: Path, version: str) -> None:
-    """Emit a Frictionless Data Package descriptor for published resources."""
+    """Emit a Frictionless Data Package descriptor for published resources.
+
+    Call after every listed resource is written: resources carry their size and SHA-256."""
     resources: list[dict[str, Any]] = []
     for name, fmt, path in (
         ("countries", "csv", "countries.csv.zst"),
@@ -336,6 +368,11 @@ def write_datapackage(output_dir: Path, version: str) -> None:
         )
         if resources[-1]["compression"] is None:
             del resources[-1]["compression"]
+        digest = file_digest(file_path)
+        resources[-1]["bytes"] = digest["bytes"]
+        resources[-1]["hash"] = f"sha256:{digest['sha256']}"
+        if fmt == "parquet":
+            resources[-1]["schema"] = _parquet_table_schema(file_path, name)
     package = {
         "name": "internacia-datasets",
         "title": "Internacia reference datasets",
@@ -476,8 +513,7 @@ def create_duckdb_database(
     if output_file.exists():
         output_file.unlink()
 
-    # Connect to DuckDB
-    con = duckdb.connect(str(output_file))
+    con = duckdb.connect(str(output_file), config={"storage_compatibility_version": DUCKDB_STORAGE_COMPATIBILITY})
 
     try:
         tables = [

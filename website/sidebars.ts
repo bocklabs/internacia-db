@@ -30,6 +30,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Data contracts & policies',
       items: [
+        'data-contract',
         'ai-consumers',
         'llm-scenarios',
         'data-dictionary',

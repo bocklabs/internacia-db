@@ -28,6 +28,7 @@ from tqdm import tqdm
 from internacia_builder.clean import (
     clean_data,
 )
+from internacia_builder.contract import write_checksums, write_contract
 from internacia_builder.export import (
     COUNTRIES_LITE_FIELDS,
     INTBLOCKS_LITE_FIELDS,
@@ -339,10 +340,6 @@ def build(
         save_parquet(countries_lite_rows, output_dir / "countries-lite.parquet")
         save_parquet(intblocks_lite_rows, output_dir / "intblocks-lite.parquet")
         save_memberships_csv(memberships_data, output_dir / "memberships.csv.zst")
-        write_manifest(output_dir, "countries", countries_schema, len(countries_data))
-        write_manifest(output_dir, "intblocks", intblocks_schema, len(intblocks_data))
-        write_manifest(output_dir, "blocktypes", blocktypes_schema, len(blocktypes_data))
-        write_manifest(output_dir, "memberships", get_memberships_schema(), len(memberships_data))
         write_meta_sidecar(output_dir, "countries", countries_schema, len(countries_data))
         write_meta_sidecar(output_dir, "intblocks", intblocks_schema, len(intblocks_data))
         write_meta_sidecar(output_dir, "blocktypes", blocktypes_schema, len(blocktypes_data))
@@ -359,11 +356,6 @@ def build(
             blocktypes_schema=blocktypes_schema,
             memberships_data=memberships_data,
         )
-        if "parquet" not in requested_formats:
-            write_manifest(output_dir, "countries", countries_schema, len(countries_data))
-            write_manifest(output_dir, "intblocks", intblocks_schema, len(intblocks_data))
-            write_manifest(output_dir, "blocktypes", blocktypes_schema, len(blocktypes_data))
-            write_manifest(output_dir, "memberships", get_memberships_schema(), len(memberships_data))
 
     # Always emit alias artifacts so consumers can remap retired ids/codes.
     save_aliases(intblock_aliases, output_dir, basename="intblocks_aliases", write_parquet="parquet" in requested_formats)
@@ -372,8 +364,19 @@ def build(
         attribute_migrations, output_dir, write_parquet="parquet" in requested_formats
     )
 
+    # Manifests list the checksums of their dataset's files, so they follow every data file.
+    if {"parquet", "duckdb"} & set(requested_formats):
+        write_manifest(output_dir, "countries", countries_schema, len(countries_data))
+        write_manifest(output_dir, "intblocks", intblocks_schema, len(intblocks_data))
+        write_manifest(output_dir, "blocktypes", blocktypes_schema, len(blocktypes_data))
+        write_manifest(output_dir, "memberships", get_memberships_schema(), len(memberships_data))
+
     write_datapackage(output_dir, get_dataset_version())
     write_dataset_card(output_dir, {"countries": len(countries_data), "intblocks": len(intblocks_data), "blocktypes": len(blocktypes_data)})
+    write_contract(output_dir, get_dataset_version())
+    typer.echo(f"✓ Saved contract: {output_dir / 'contract.json'}")
+    write_checksums(output_dir)
+    typer.echo(f"✓ Saved checksums: {output_dir / 'SHA256SUMS'}")
 
     typer.echo("\n✅ All datasets generated successfully!")
     typer.echo(f"📂 Output location: {output_dir}")

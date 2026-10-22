@@ -10,6 +10,7 @@ from pathlib import Path
 import yaml
 
 from internacia_builder import __version__
+from internacia_builder.contract import CONTRACT_FILE, contract_version, file_digest, verify_checksums
 from internacia_builder.manifest import get_dataset_version
 from internacia_builder.paths import project_root
 
@@ -24,6 +25,17 @@ def validate_package(root: Path, package: dict | None = None) -> None:
         path = root / resource["path"]
         if not path.resolve().is_relative_to(root.resolve()) or not path.is_file():
             raise ValueError(f"Unresolvable data package path: {resource['path']}")
+        digest = file_digest(path)
+        if resource.get("bytes") != digest["bytes"] or resource.get("hash") != f"sha256:{digest['sha256']}":
+            raise ValueError(f"Data package bytes/hash do not match {resource['path']}")
+
+
+def validate_bundle(root: Path) -> None:
+    """Validate the data package and ``SHA256SUMS`` of a complete release bundle."""
+    validate_package(root)
+    problems = verify_checksums(root)
+    if problems:
+        raise ValueError("; ".join(problems))
 
 
 def check_release_version(version: str, datasets: Path) -> None:
@@ -39,6 +51,12 @@ def check_release_version(version: str, datasets: Path) -> None:
     }
     for path in datasets.glob("*.manifest.json"):
         values[path.name] = json.loads(path.read_text())["version"]
+    contract_path = datasets / CONTRACT_FILE
+    contract = json.loads(contract_path.read_text()) if contract_path.is_file() else {}
+    values[CONTRACT_FILE] = contract.get("dataset_version", "missing")
+    values[f"{CONTRACT_FILE} contract_version"] = (
+        expected if contract.get("contract_version") == contract_version(expected) else contract.get("contract_version")
+    )
     if not list(datasets.glob("*.manifest.json")) or any(value != expected for value in values.values()):
         raise ValueError(f"Release {version} disagrees with source/artifact versions: {values}")
     changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -73,6 +91,7 @@ def prepare_huggingface_bundle(source: Path, destination: Path) -> None:
         raise ValueError("Hugging Face bundle requires all four primary tables")
     package["resources"] = selected
     (destination / "datapackage.json").write_text(json.dumps(package, indent=2) + "\n")
-    if (source / "README.md").is_file():
-        shutil.copy2(source / "README.md", destination / "README.md")
+    for name in ("README.md", CONTRACT_FILE):
+        if (source / name).is_file():
+            shutil.copy2(source / name, destination / name)
     validate_package(destination)

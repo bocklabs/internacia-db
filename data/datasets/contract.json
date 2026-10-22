@@ -1,0 +1,925 @@
+{
+  "contract_version": "3.0",
+  "dataset_version": "3.0.0",
+  "min_duckdb": "1.5.4",
+  "duckdb_storage_compatibility_version": "v1.0.0",
+  "enum_policy": "open",
+  "type_grammar": "internacia-logical-types/1",
+  "tables": [
+    {
+      "name": "countries",
+      "in_duckdb": true,
+      "primary_key": [
+        "code"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "da17844fae76a32e2d72a7c8e0b7af24ced6ba73ef1415d88bf56d8ab7b8bb4f",
+      "columns": [
+        {
+          "name": "code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "iso3code",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "capital_city",
+          "type": "struct<name:string,lng:float64,lat:float64>",
+          "nullable": true
+        },
+        {
+          "name": "region",
+          "type": "struct<id:string,value:string>",
+          "nullable": true
+        },
+        {
+          "name": "adminregion",
+          "type": "struct<id:string,value:string>",
+          "nullable": true
+        },
+        {
+          "name": "incomeLevel",
+          "type": "struct<id:string,value:string>",
+          "nullable": true
+        },
+        {
+          "name": "lendingType",
+          "type": "struct<id:string,value:string>",
+          "nullable": true
+        },
+        {
+          "name": "numeric_code",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "wikidata_id",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "geonames_id",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "ioc_code",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "fifa_code",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "fips_code",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "bbox",
+          "type": "struct<west:float64,east:float64,north:float64,south:float64>",
+          "nullable": true
+        },
+        {
+          "name": "official_name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "languages",
+          "type": "list<struct<code:string,name:string,official:boolean>>",
+          "nullable": true
+        },
+        {
+          "name": "currencies",
+          "type": "list<struct<code:string,name:string,symbol:string>>",
+          "nullable": true
+        },
+        {
+          "name": "un_member",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "un_status",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "independent",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "entity_type",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "code_status",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "recognition_status",
+          "type": "struct<status:string,un_member:boolean,notes:string>",
+          "nullable": true
+        },
+        {
+          "name": "parent_entity",
+          "type": "struct<code:string,name:string>",
+          "nullable": true
+        },
+        {
+          "name": "subregion",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "continents",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "borders",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "landlocked",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "tld",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "calling_codes",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "flag_emoji",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "car_side",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "writing_directions",
+          "type": "list<struct<id:string,primary:boolean>>",
+          "nullable": true
+        },
+        {
+          "name": "writing_systems",
+          "type": "list<struct<id:string,primary:boolean>>",
+          "nullable": true
+        },
+        {
+          "name": "dvd_region",
+          "type": "int32",
+          "nullable": true
+        },
+        {
+          "name": "broadcast_systems",
+          "type": "list<struct<id:string>>",
+          "nullable": true
+        },
+        {
+          "name": "legal_systems",
+          "type": "list<struct<id:string>>",
+          "nullable": true
+        },
+        {
+          "name": "rail_gauges",
+          "type": "list<struct<id:string,gauge_mm:float64,primary:boolean>>",
+          "nullable": true
+        },
+        {
+          "name": "start_of_week",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "demonyms",
+          "type": "struct<female:string,male:string>",
+          "nullable": true
+        },
+        {
+          "name": "m49_code",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "population",
+          "type": "struct<value:int64,year:int64,source:string,source_id:string>",
+          "nullable": true
+        },
+        {
+          "name": "area",
+          "type": "struct<value:float64,year:int64,source:string,source_id:string>",
+          "nullable": true
+        },
+        {
+          "name": "gini",
+          "type": "struct<value:float64,year:int64,source:string,source_id:string>",
+          "nullable": true
+        },
+        {
+          "name": "centroid",
+          "type": "struct<lat:float64,lng:float64>",
+          "nullable": true
+        },
+        {
+          "name": "timezones",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "timezone_status",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "native_names",
+          "type": "map<string,struct<official:string,common:string>>",
+          "nullable": true
+        },
+        {
+          "name": "other_names",
+          "type": "list<struct<id:string,name:string>>",
+          "nullable": true
+        },
+        {
+          "name": "common_names",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "provenance",
+          "type": "list<struct<field:string,source:string,url:string,retrieved_at:string,license:string>>",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "intblocks",
+      "in_duckdb": true,
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "blocktype[]"
+          ],
+          "references": {
+            "table": "blocktypes",
+            "columns": [
+              "id"
+            ]
+          }
+        }
+      ],
+      "schema_hash": "aa66550599e0342fa0117232375f7428bb94431f8174000933e7ae483e70c4aa",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "blocktype",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "languages",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "links",
+          "type": "list<struct<url:string,type:string>>",
+          "nullable": true
+        },
+        {
+          "name": "founded",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "geographic_scope",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "scope_category",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "regions",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "includes",
+          "type": "list<struct<id:string,name:string,type:string,status:string,joined:string,left:string,role:string,note:string>>",
+          "nullable": true
+        },
+        {
+          "name": "membership_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "membership_count_type",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "wikidata_id",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "legal_status",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "tags",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "topics",
+          "type": "list<struct<key:string,name:string>>",
+          "nullable": true
+        },
+        {
+          "name": "headquarters",
+          "type": "struct<city:string,country:string,coordinates:struct<lat:float64,lng:float64>>",
+          "nullable": true
+        },
+        {
+          "name": "acronyms",
+          "type": "list<struct<lang:string,value:string>>",
+          "nullable": true
+        },
+        {
+          "name": "partof",
+          "type": "list<string>",
+          "nullable": true
+        },
+        {
+          "name": "dissolved",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "predecessor",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "successor",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "active_period",
+          "type": "struct<start:string,end:string>",
+          "nullable": true
+        },
+        {
+          "name": "last_verified",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "other_names",
+          "type": "list<struct<id:string,name:string>>",
+          "nullable": true
+        },
+        {
+          "name": "provenance",
+          "type": "list<struct<field:string,source:string,url:string,retrieved_at:string,license:string>>",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "blocktypes",
+      "in_duckdb": true,
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "746aaa1c260dba43d1bc12a885baae302d4e62fac11b95e921805a3b89e044fa",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "other_names",
+          "type": "list<struct<lang:string,name:string>>",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "memberships",
+      "in_duckdb": true,
+      "primary_key": [
+        "intblock_id",
+        "country_code"
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "intblock_id"
+          ],
+          "references": {
+            "table": "intblocks",
+            "columns": [
+              "id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "country_code"
+          ],
+          "references": {
+            "table": "countries",
+            "columns": [
+              "code"
+            ]
+          },
+          "note": "Rows with include_type 'historical-country' may reference codes that are not in countries (e.g. SU)."
+        }
+      ],
+      "schema_hash": "1bdbd0d9427722d3ed3c23ee0a101ccc0e62c8eba9e65ae0000f441648b0d76c",
+      "columns": [
+        {
+          "name": "intblock_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "include_type",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "joined",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "left",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "_meta",
+      "in_duckdb": true,
+      "primary_key": [
+        "dataset"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "d7b14efdc9766648f4878f195610ff49343d34ad627675289364b647b93cb4e0",
+      "columns": [
+        {
+          "name": "dataset",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "build_date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "git_commit",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "row_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "schema_hash",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "data_license",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "contract_version",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "intblocks_aliases",
+      "in_duckdb": false,
+      "primary_key": [
+        "alias"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "338647c1daad3cf304265428f34c9f43a5c8177a5e9d0acfbdca24aa56ab6de6",
+      "columns": [
+        {
+          "name": "alias",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "target",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "since",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "note",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "countries_aliases",
+      "in_duckdb": false,
+      "primary_key": [
+        "alias"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "338647c1daad3cf304265428f34c9f43a5c8177a5e9d0acfbdca24aa56ab6de6",
+      "columns": [
+        {
+          "name": "alias",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "target",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "since",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "note",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "attribute_intblock_migrations",
+      "in_duckdb": false,
+      "primary_key": [
+        "retired_id"
+      ],
+      "foreign_keys": [],
+      "schema_hash": "a7e7c6ee66f0d9d8ed41272231720a297fa73e0a41bbe87509ad6ebbe2be90ec",
+      "columns": [
+        {
+          "name": "retired_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "country_field",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "country_value",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "country_value_id",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "disposition",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "vocab",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "vocab_id",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "since",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "note",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "table": "countries",
+      "column": "car_side",
+      "values": [
+        "left",
+        "right"
+      ],
+      "open": true
+    },
+    {
+      "table": "countries",
+      "column": "code_status",
+      "values": [
+        "official_iso3166_1",
+        "user_assigned",
+        "obsolete",
+        "exceptionally_reserved"
+      ],
+      "open": true
+    },
+    {
+      "table": "countries",
+      "column": "entity_type",
+      "values": [
+        "sovereign_state",
+        "dependent_territory",
+        "special_administrative_region",
+        "disputed_territory",
+        "historical_entity",
+        "supranational_grouping",
+        "statistical_area"
+      ],
+      "open": true
+    },
+    {
+      "table": "countries",
+      "column": "start_of_week",
+      "values": [
+        "monday",
+        "saturday",
+        "sunday"
+      ],
+      "open": true
+    },
+    {
+      "table": "countries",
+      "column": "timezone_status",
+      "values": [
+        "not_applicable"
+      ],
+      "open": true
+    },
+    {
+      "table": "countries",
+      "column": "un_status",
+      "values": [
+        "member",
+        "observer",
+        "non_member"
+      ],
+      "open": true
+    },
+    {
+      "table": "countries_aliases",
+      "column": "reason",
+      "values": [
+        "renamed",
+        "merged",
+        "disambiguated"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks",
+      "column": "geographic_scope",
+      "values": [
+        "global",
+        "regional",
+        "sub-regional",
+        "bilateral"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks",
+      "column": "includes[].status",
+      "values": [
+        "member",
+        "observer",
+        "associated",
+        "associated_observer",
+        "associate",
+        "associate_member",
+        "founding_member",
+        "former_member",
+        "participant",
+        "recipient",
+        "contributor",
+        "represented",
+        "funder",
+        "cooperating",
+        "partner",
+        "validation",
+        "extension"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks",
+      "column": "includes[].type",
+      "values": [
+        "country",
+        "organization",
+        "territory",
+        "historical-country"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks",
+      "column": "links[].type",
+      "values": [
+        "website",
+        "wikipedia",
+        "wikidata"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks",
+      "column": "membership_count_type",
+      "values": [
+        "countries",
+        "organizations",
+        "companies",
+        "individuals",
+        "mixed"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks",
+      "column": "scope_category",
+      "values": [
+        "igo",
+        "treaty_body",
+        "policy_forum",
+        "reference_enumeration"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks",
+      "column": "status",
+      "values": [
+        "formal",
+        "informal",
+        "de-facto",
+        "historical"
+      ],
+      "open": true
+    },
+    {
+      "table": "intblocks_aliases",
+      "column": "reason",
+      "values": [
+        "renamed",
+        "merged",
+        "disambiguated"
+      ],
+      "open": true
+    },
+    {
+      "table": "memberships",
+      "column": "include_type",
+      "values": [
+        "country",
+        "organization",
+        "territory",
+        "historical-country"
+      ],
+      "open": true
+    },
+    {
+      "table": "memberships",
+      "column": "status",
+      "values": [
+        "member",
+        "observer",
+        "associated",
+        "associated_observer",
+        "associate",
+        "associate_member",
+        "founding_member",
+        "former_member",
+        "participant",
+        "recipient",
+        "contributor",
+        "represented",
+        "funder",
+        "cooperating",
+        "partner",
+        "validation",
+        "extension"
+      ],
+      "open": true
+    }
+  ],
+  "deprecated": []
+}

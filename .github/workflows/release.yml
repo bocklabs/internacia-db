@@ -62,6 +62,11 @@ jobs:
             --version "${GITHUB_REF_NAME#v}" \
             --output ".release-datasets/migration.${GITHUB_REF_NAME}.json"
 
+      - name: Rewrite SHA256SUMS to cover every release asset
+        run: |
+          python scripts/write_checksums.py .release-datasets
+          python scripts/check_release_bundle.py .release-datasets --version "$GITHUB_REF_NAME"
+
       - name: Push to Hugging Face (optional)
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}

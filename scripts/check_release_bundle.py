@@ -3,7 +3,7 @@
 import argparse
 from pathlib import Path
 
-from internacia_builder.distribution import check_release_version, validate_package
+from internacia_builder.distribution import check_release_version, validate_bundle
 
 
 def main():
@@ -11,7 +11,7 @@ def main():
     parser.add_argument("directory", type=Path)
     parser.add_argument("--version")
     args = parser.parse_args()
-    validate_package(args.directory)
+    validate_bundle(args.directory)
     if args.version:
         check_release_version(args.version, args.directory)
     print("Release bundle OK")

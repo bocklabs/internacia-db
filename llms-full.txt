@@ -54,7 +54,8 @@ Do NOT read data/_legacy/ — obsolete pre-1.0 snapshots kept for historical ref
 - JSON Schema (source YAML): data/schemas/countries.schema.json, data/schemas/intblocks.schema.json
   - Each property includes a description field for agents and tooling
 - Build manifests: data/datasets/countries.manifest.json, intblocks.manifest.json, blocktypes.manifest.json
-  - Fields: version, build_date, git_commit, row_count, schema_hash, data_license
+  - Fields: version, build_date, git_commit, row_count, schema_hash, data_license, contract_version, files (sha256, bytes)
+- Consumer contract: data/datasets/contract.json (tables, columns, keys, open enums, contract_version, min_duckdb); checksums: data/datasets/SHA256SUMS
 - Parquet sidecars: data/datasets/{countries,intblocks,blocktypes}.meta.json
 - ID remaps: data/datasets/intblocks_aliases.json (and .parquet)
 - Country code remaps: data/datasets/countries_aliases.json

@@ -1,12 +1,12 @@
 ## 1. Contract and checksums (db-1.2)
-- [ ] 1.1 Canonical logical type grammar and `schema_hash` in `internacia_builder/schemas.py`
-- [ ] 1.2 Generate `contract.json` (tables, columns, keys, enums, `contract_version`, `min_duckdb`, storage compatibility)
-- [ ] 1.3 `contract_version` in manifests, `.meta.json` sidecars and DuckDB `_meta`
-- [ ] 1.4 Per-file `sha256` and `bytes` in manifests; `bytes`, `hash` and Table Schema in `datapackage.json`
-- [ ] 1.5 `SHA256SUMS` written by the build and re-written after the release migration file
-- [ ] 1.6 Explicit DuckDB `storage_compatibility_version`
-- [ ] 1.7 Checks: contract drift and checksum coverage in `check_generated_artifacts.py` / `check_release_bundle.py`; release gate compares `contract.json` version with the tag
-- [ ] 1.8 Docs: `docs/data-contract.md`, release asset list, CHANGELOG
+- [x] 1.1 Canonical logical type grammar and `schema_hash` in `internacia_builder/schemas.py`
+- [x] 1.2 Generate `contract.json` (tables, columns, keys, enums, `contract_version`, `min_duckdb`, storage compatibility)
+- [x] 1.3 `contract_version` in manifests, `.meta.json` sidecars and DuckDB `_meta`
+- [x] 1.4 Per-file `sha256` and `bytes` in manifests; `bytes`, `hash` and Table Schema in `datapackage.json`
+- [x] 1.5 `SHA256SUMS` written by the build and re-written after the release migration file
+- [x] 1.6 Explicit DuckDB `storage_compatibility_version`
+- [x] 1.7 Checks: contract drift and checksum coverage in `check_generated_artifacts.py` / `check_release_bundle.py`; release gate compares `contract.json` version with the tag
+- [x] 1.8 Docs: `docs/data-contract.md`, release asset list, CHANGELOG
 
 ## 2. Deterministic builds (db-1.3)
 - [ ] 2.1 Sorted inputs in `export.load_yaml_files`

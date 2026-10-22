@@ -1,9 +1,10 @@
 {
   "dataset": "memberships",
   "version": "3.0.0",
-  "build_date": "2026-10-21T17:08:23Z",
-  "git_commit": "cd96e13",
+  "build_date": "2026-10-21T21:24:52Z",
+  "git_commit": "0af1480",
   "row_count": 58694,
-  "schema_hash": "5b55cf565d70fa81",
-  "data_license": "CC-BY-4.0"
+  "schema_hash": "1bdbd0d9427722d3ed3c23ee0a101ccc0e62c8eba9e65ae0000f441648b0d76c",
+  "data_license": "CC-BY-4.0",
+  "contract_version": "3.0"
 }
