@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   re-checked from the roster-watch diff (OAS, BRICS, MERCOSUR, SCO, CIS, Commonwealth,
   African Union, CELAC, SAARC, PIF) were left in place where the official list supports
   them, with `last_verified` refreshed.
+- Tier-1 `last_verified` stamps for rosters that match an official list on 2026-10-22:
+  UN (193), EU (27), NATO (32), ASEAN (11, including Timor-Leste), OECD (38), G7 (7),
+  SADC (16) and the EAEU (5). The G20 roster adds the African Union (21 members).
+  CARICOM associate members are Anguilla, Bermuda, the British Virgin Islands, the
+  Cayman Islands, Curaçao, French Guiana, Martinique and the Turks and Caicos Islands
+  (`membership_count` 23). APEC and the OIC were left unchanged: their member pages
+  could not be retrieved.
 
 ## [3.1.0] - 2026-10-22
 

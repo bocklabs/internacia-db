@@ -40,6 +40,12 @@ includes:
   name: European Union
   type: organization
   status: member
+- id: AFUNION
+  name: African Union
+  type: organization
+  status: member
+  joined: '2023-09-09'
+  note: Admitted as a permanent member at the New Delhi summit on 9 September 2023
 - id: FR
   name: France
   type: country
@@ -92,7 +98,7 @@ includes:
   name: South Africa
   type: country
   status: member
-membership_count: 20
+membership_count: 21
 description: Group of finance ministers and central bank governors.
 tags:
 - G-20
@@ -127,7 +133,20 @@ other_names:
 - id: zh
   name: 二十國集團
 wikidata_id: Q19771
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Global Affairs Canada
+  retrieved_at: '2026-10-22'
+  url: https://www.international.gc.ca/world-monde/international_relations-relations_internationales/g20/index.aspx?lang=eng
+- field: includes
+  source: G20 South Africa
+  retrieved_at: '2026-10-22'
+  url: https://www.g20.org.za/about-g20/g20-members/
+- field: membership_count
+  source: Global Affairs Canada
+  retrieved_at: '2026-10-22'
+  url: https://www.international.gc.ca/world-monde/international_relations-relations_internationales/g20/index.aspx?lang=eng
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

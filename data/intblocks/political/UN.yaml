@@ -1008,7 +1008,16 @@ other_names:
   name: Организация Объединённых Наций
 - id: zh
   name: 联合国
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: United Nations
+  retrieved_at: '2026-10-22'
+  url: https://www.un.org/en/about-us/member-states
+- field: membership_count
+  source: United Nations
+  retrieved_at: '2026-10-22'
+  url: https://www.un.org/en/about-us/member-states
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
