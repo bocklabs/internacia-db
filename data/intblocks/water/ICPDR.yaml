@@ -150,7 +150,16 @@ other_names:
   name: Міжнародна комісія з охорони річки Дунай
 - id: zh
   name: 國際多瑙河保護委員會
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: International Commission for the Protection of the Danube River
+  retrieved_at: '2026-10-22'
+  url: https://www.icpdr.org/danube-basin/countries
+- field: membership_count
+  source: International Commission for the Protection of the Danube River
+  retrieved_at: '2026-10-22'
+  url: https://www.icpdr.org/danube-basin/countries
 - field: includes
   source: ICPDR contracting parties page
   retrieved_at: '2026-07-29'
