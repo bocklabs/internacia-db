@@ -183,16 +183,12 @@ other_names:
   name: Международная космическая станция
 - id: zh
   name: 国际空间站
-last_verified: '2026-07-30'
+last_verified: '2026-10-22'
 notes: The fifteen IGA signatories are the authoritative partner roster. European participation is coordinated collectively
   through ESA under the "European Partner" designation in the treaty, but each listed European state signed the IGA in its
   own right. Brazil participated in early programme planning via a bilateral NASA agreement but was never an IGA signatory
   and withdrew from ISS cooperation in 2015.
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-30'
@@ -232,3 +228,7 @@ provenance:
   source: official sources
   retrieved_at: '2026-07-30'
   url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/International_Space_Station/International_Space_Station_legal_framework
+- field: scope_category
+  source: U.S. Department of State — TIAS 12927, Agreement concerning Cooperation on the Civil International Space Station
+  retrieved_at: '2026-09-30'
+  url: https://www.state.gov/wp-content/uploads/2019/02/12927-Multilateral-Space-Space-Station-1.29.1998.pdf

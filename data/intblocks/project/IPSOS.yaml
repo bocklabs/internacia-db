@@ -207,12 +207,8 @@ notes: IPS is a standards ecosystem rather than a treaty-based organization; inc
   2021. Additional documented deployments include Australia, Brazil, Haiti, Indonesia, Malaysia, New Zealand, and Oman.
   European participants reflect continuing cross-border patient-summary infrastructure aligned with MyHealth@EU and CEN
   TS 17288. Major EHR vendors including Epic and MEDITECH announced IPS support from 2024.
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: official sources
   retrieved_at: '2026-07-29'
@@ -243,6 +239,10 @@ provenance:
   retrieved_at: '2026-07-29'
   url: https://hl7.org/fhir/uv/ips/
   license: CC BY 4.0
+- field: scope_category
+  source: International Patient Summary — JIC IPS Coordination Committee
+  retrieved_at: '2026-09-30'
+  url: https://international-patient-summary.net/cross-sdo-ips-collaboration/
 acronyms:
 - lang: en
   value: IPS

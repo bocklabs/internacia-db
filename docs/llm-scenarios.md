@@ -260,7 +260,12 @@ ORDER BY id
 LIMIT 20;
 ```
 
-## 12. Blocks by `scope_category` (igo / treaty_body / policy_forum / reference_enumeration)
+## 12. Blocks by `scope_category`
+
+The six entity kinds are `igo`, `treaty_body`, `policy_forum`,
+`reference_enumeration`, `intergovernmental_body`, and
+`non_state_organization`. The category does not establish country membership;
+join `memberships` only after checking the member status/roster semantics.
 
 DuckDB:
 

@@ -689,6 +689,9 @@ def check_hq_country(
     return issues
 
 
+ALIAS_REASONS = frozenset({"renamed", "merged", "disambiguated", "retired"})
+
+
 def validate_aliases(
     aliases: list[dict[str, Any]],
     known_ids: set[str],
@@ -707,12 +710,15 @@ def validate_aliases(
         alias = str(entry.get("alias") or "")
         target = str(entry.get("target") or "")
         reason = str(entry.get("reason") or "")
-        if not alias or not target:
+        if not alias or (not target and reason != "retired"):
             errors.append({
                 "issue_type": "ALIAS_INTEGRITY_ERROR",
                 "field": "aliases",
                 "current_value": f"alias={alias}, target={target}",
-                "suggested_action": "Alias entry must contain non-empty alias and target fields"
+                "suggested_action": (
+                    "Alias entry must contain non-empty alias and target fields "
+                    "(only reason 'retired' has no target)"
+                ),
             })
             continue
         if alias in seen_aliases:
@@ -723,13 +729,32 @@ def validate_aliases(
                 "suggested_action": f"Duplicate alias entry for '{alias}'"
             })
         seen_aliases.add(alias)
-        if reason not in {"renamed", "merged", "disambiguated"}:
+        if reason not in ALIAS_REASONS:
             errors.append({
                 "issue_type": "ALIAS_INTEGRITY_ERROR",
                 "field": "aliases",
                 "current_value": reason,
-                "suggested_action": f"Alias '{alias}': invalid reason '{reason}' (must be renamed, merged, or disambiguated)"
+                "suggested_action": (
+                    f"Alias '{alias}': invalid reason '{reason}' "
+                    "(must be renamed, merged, disambiguated, or retired)"
+                ),
             })
+        if reason == "retired":
+            if target:
+                errors.append({
+                    "issue_type": "ALIAS_INTEGRITY_ERROR",
+                    "field": "aliases",
+                    "current_value": target,
+                    "suggested_action": f"Retired alias '{alias}' must not have a target",
+                })
+            if alias in known_ids:
+                errors.append({
+                    "issue_type": "ALIAS_INTEGRITY_ERROR",
+                    "field": "aliases",
+                    "current_value": alias,
+                    "suggested_action": f"Retired alias '{alias}' is still a current intblock id",
+                })
+            continue
         if target not in known_ids:
             errors.append({
                 "issue_type": "ALIAS_INTEGRITY_ERROR",

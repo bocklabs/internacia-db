@@ -3,7 +3,7 @@ blocktype:
 - project
 - transport
 status: formal
-scope_category: reference_enumeration
+scope_category: policy_forum
 partof: BRI
 founded: '2025'
 geographic_scope: regional
@@ -77,12 +77,8 @@ notes: The three governments signed a trilateral agreement to proceed in June 20
   conversion planned in a second phase. Standard gauge (1,435 mm) applies in China and Russian gauge (1,520 mm) in
   Kyrgyzstan and Uzbekistan. Estimated cost was reported at US$4.7 billion in 2024, funded through Chinese concessional
   loans, multilateral development financing, and domestic contributions from Kyrgyzstan and Uzbekistan.
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
@@ -118,6 +114,10 @@ provenance:
   retrieved_at: '2026-07-29'
   url: https://www.wikidata.org/wiki/Q4178849
   license: CC0
+- field: scope_category
+  source: State Council of the People's Republic of China — CKU railway project commencement
+  retrieved_at: '2026-09-30'
+  url: https://english.www.gov.cn/news/202412/27/content_WS676eabb1c6d0868f4e8ee51f.html
 acronyms:
 - lang: en
   value: CKU

@@ -3,7 +3,7 @@ name: European Inland Fisheries and Aquaculture Advisory Commission
 blocktype:
 - food
 status: formal
-scope_category: igo
+scope_category: intergovernmental_body
 partof: FAO
 founded: '1957'
 active_period:
@@ -234,12 +234,8 @@ other_names:
   name: 欧洲内陆渔业与水产养殖咨询委员会
 wikidata_id: Q114965341
 notes: Established by FAO Council Resolution 2/26 (1957); first session held in Dublin in April 1960. Renamed from EIFAC to EIFAAC and statutes revised by FAO Council Resolution 3/140 (2010) after the 25th Session in Antalya (2008) proposed adding aquaculture to the name. Slovenia joined in January 2024 (38 members); Ukraine became the 39th member on 27 February 2026. Membership is open to FAO Members in the European Region and FAO Member Organizations.
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO EIFAAC; FAO Governing and Statutory Bodies
   retrieved_at: '2026-07-29'
@@ -299,3 +295,7 @@ provenance:
   source: FAO EIFAAC; Wikidata
   retrieved_at: '2026-07-29'
   url: https://www.fao.org/eifaac/about/en
+- field: scope_category
+  source: FAO — EIFAAC Governing and Statutory Bodies registry
+  retrieved_at: '2026-09-30'
+  url: https://www.fao.org/unfao/govbodies/gsb-subject-matter/statutory-bodies-details/en/c/125/

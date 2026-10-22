@@ -78,7 +78,7 @@ For consumption contracts and join keys, see [ai-consumers.md](ai-consumers.md).
 | `active_period` | object |  | yes | Operational period as \{start, end\} ISO date strings; end is absent for active entities. |
 | `headquarters` | object |  | yes | Seat of the organization as \{city, country, coordinates\{lat,lng\}\} with an alpha-2 country code. |
 | `geographic_scope` | string |  | yes | Coverage of the membership: 'global' or 'regional'. Values: `global`, `regional`, `sub-regional`, `bilateral`. |
-| `scope_category` | string |  | yes | Inclusion taxonomy: igo, treaty_body, policy_forum, or reference_enumeration. See docs/intblock-inclusion-policy.md. Values: `igo`, `treaty_body`, `policy_forum`, `reference_enumeration`. |
+| `scope_category` | string |  | yes | Entity-kind taxonomy: igo, treaty_body, policy_forum, reference_enumeration, intergovernmental_body, or non_state_organization. This classifies the record itself, not the role of entries in includes. See docs/intblock-inclusion-policy.md. Values: `igo`, `treaty_body`, `policy_forum`, `reference_enumeration`, `intergovernmental_body`, `non_state_organization`. |
 | `regions` | array |  | yes | Region labels covered by the entity (e.g. 'worldwide', 'europe', 'africa'). |
 | `partof` | any |  | yes | Parent organization id(s) for suborganizations (string or list in source; normalized to a list in exports). |
 | `suborganizations` | array |  | full JSON/YAML only | Child entities as \{id, name\} references to other intblock records. |
@@ -86,7 +86,7 @@ For consumption contracts and join keys, see [ai-consumers.md](ai-consumers.md).
 | `wikidata_id` | string |  | yes | Wikidata entity id (Q-number) for cross-referencing and entity linking. |
 | `membership_count` | integer |  | yes | Officially stated member count. Interpreted as country members unless membership_count_type says otherwise; compared against the includes roster by validation. |
 | `membership_count_type` | string |  | yes | Unit of membership_count. When absent, the count is interpreted as country members and is compared against the includes roster. Non-country counts (companies, individual experts, national governing bodies, etc.) are exempt from roster comparison but require provenance for membership_count. Values: `countries`, `organizations`, `companies`, `individuals`, `mixed`. |
-| `membership_applicability` | string |  | full JSON/YAML only | When not_applicable, an empty includes list is intentional (conceptual entities, acronyms, etc.) Values: `not_applicable`. |
+| `membership_applicability` | string |  | full JSON/YAML only | When not_applicable, an empty country/organization includes roster is intentional. The entity may still have institutional or individual members that this dataset does not model (e.g. NGOs), or have no separate member states (e.g. a subsidiary office or fund). Values: `not_applicable`. |
 | `founding_members` | array |  | full JSON/YAML only | Country codes of founding members (list). |
 | `last_verified` | string |  | yes | Date (YYYY-MM-DD) the record was last checked against official sources. |
 | `description` | string |  | yes | Short text summarizing what the entity is for |

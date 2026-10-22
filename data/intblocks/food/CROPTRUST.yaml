@@ -307,10 +307,6 @@ other_names:
 - id: zh
   name: 作物信托基金
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'
@@ -336,6 +332,10 @@ provenance:
   retrieved_at: '2026-07-29'
   url: https://www.wikidata.org/wiki/Q2004478
   license: CC0
+- field: scope_category
+  source: FAO — Agreement for the Establishment of the Global Crop Diversity Trust, Article 1 and Annex (Constitution)
+  retrieved_at: '2026-09-30'
+  url: https://www.fao.org/fileadmin/user_upload/legal/docs/034t-e.pdf
 acronyms:
 - lang: zh
   value: 全球農作物多樣性信託基金
@@ -348,4 +348,4 @@ headquarters:
   coordinates:
     lat: 50.720322192699385
     lng: 7.122884136901257
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'

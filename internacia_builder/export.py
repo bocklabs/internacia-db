@@ -41,7 +41,7 @@ def load_intblock_aliases(project_root: Path) -> list[dict[str, Any]]:
         aliases.append(
             {
                 "alias": str(entry.get("alias") or ""),
-                "target": str(entry.get("target") or ""),
+                "target": str(entry["target"]) if entry.get("target") else None,
                 "reason": str(entry.get("reason") or ""),
                 "since": str(entry.get("since") or ""),
                 "note": str(entry.get("note") or ""),

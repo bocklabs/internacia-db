@@ -6,14 +6,18 @@
 #
 # Fields:
 #   alias  - the retired/old id a consumer may still hold
-#   target - the current id it now maps to (must exist in the intblocks dataset)
-#   reason - renamed | merged | disambiguated
+#   target - the current id it now maps to (must exist in the intblocks dataset);
+#            omitted for reason: retired
+#   reason - renamed | merged | disambiguated | retired
 #   since  - the version that introduced the change
 #   note   - optional human context
 #
 # reason: disambiguated means the acronym was reassigned: the old id still
 # exists as a CURRENT id but now refers to a DIFFERENT entity, and the entity
 # that previously held it moved to `target`.
+#
+# reason: retired means the record was removed because it is out of scope and
+# has no successor; exports carry a null `target`.
 
 - alias: ASF
   target: FSA
@@ -66,3 +70,11 @@
   reason: merged
   since: 3.0.0
   note: Duplicate entity consolidated in UNASUR; retain this mapping for existing consumers.
+
+- alias: TELESUR
+  reason: retired
+  since: 3.1.0
+  note: >-
+    La Nueva Televisión del Sur C.A. is a Venezuelan commercial company, not an
+    international organization with member states; its seven country rows were
+    not memberships. No replacement id. See docs/retired-intblock-ids.md.

@@ -3,6 +3,7 @@ name: Hispanic America
 blocktype:
 - cultural
 status: informal
+scope_category: reference_enumeration
 geographic_scope: regional
 regions:
 - North America
@@ -95,7 +96,7 @@ membership_count: 18
 wikidata_id: Q653884
 description: Cultural and geographic region comprising the Spanish-speaking countries of the Americas, where Spanish is the main language—sometimes sharing official status with indigenous languages—and Latin Catholicism is the predominant religion. The 18 sovereign states span North America, Central America, the Caribbean, and South America.
 notes: This record reflects the 18 sovereign Spanish-speaking states listed in standard Hispanic America definitions (AR, BO, CL, CO, CR, CU, DO, EC, SV, GT, HN, MX, NI, PA, PY, PE, UY, VE). Puerto Rico and other dependent territories are excluded because they are not sovereign countries. Spain, Equatorial Guinea, and overseas Hispanic communities belong to the broader Hispanidad concept. Brazil and other Portuguese America are part of Latin America and Ibero-America but not Hispanic America.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 tags:
 - HISPAM
 - america
@@ -171,3 +172,7 @@ provenance:
   retrieved_at: '2026-07-12'
   url: https://en.wikipedia.org/wiki/Hispanic_America
   license: CC BY-SA 4.0
+- field: scope_category
+  source: "RAE/ASALE: Hispanoamerica as a geographic language-based grouping"
+  retrieved_at: "2026-09-30"
+  url: "https://www.rae.es/dpd/Hispanoam%C3%A9rica"

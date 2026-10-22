@@ -3,6 +3,7 @@ name: Slavic Europe
 blocktype:
 - cultural
 status: informal
+scope_category: reference_enumeration
 geographic_scope: regional
 regions:
 - Europe
@@ -83,7 +84,7 @@ membership_count: 13
 wikidata_id: Q1146457
 description: Geographic and cultural region in Europe where Slavic languages are predominant, traditionally divided into East Slavic (Belarus, Russia, Ukraine), West Slavic (Czechia, Poland, Slovakia), and South Slavic (Bosnia and Herzegovina, Bulgaria, Croatia, Montenegro, North Macedonia, Serbia, Slovenia) branches. Distinct from Pan-Slavism (a political ideology) and from the broader global Slavic diaspora; this record covers the thirteen sovereign European states commonly listed as Slavic countries.
 notes: This record reflects the thirteen-country core (BA, BG, BY, CZ, HR, ME, MK, PL, RU, RS, SI, SK, UA) common in Slavic Europe classifications. Broader definitions may include Slavic-majority regions within non-Slavic states (e.g. Sorbian areas in Germany) or Transnistria; Albania and the Baltic states are excluded despite geographic proximity. Distinct from Pan-Slavism, which denotes a political ideology rather than a territorial grouping.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 tags:
 - SLAVISPHERE
 - cultural
@@ -174,3 +175,7 @@ provenance:
   retrieved_at: '2026-07-12'
   url: https://it.wikipedia.org/wiki/Europa_slava
   license: CC BY-SA 4.0
+- field: scope_category
+  source: "Wei Liu, Comparative Journal of Slavic Studies: thirteen Slavic countries"
+  retrieved_at: "2026-09-30"
+  url: "https://www.degruyterbrill.com/document/doi/10.1515/cjss-2021-2003/html"

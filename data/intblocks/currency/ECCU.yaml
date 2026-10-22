@@ -87,7 +87,7 @@ description: Monetary union of eight Eastern Caribbean states and territories sh
 notes: Members are Antigua and Barbuda, Dominica, Grenada, St. Kitts and Nevis, St. Lucia, St. Vincent and the Grenadines,
   Anguilla and Montserrat. British Virgin Islands, an OECS associate member, uses the US dollar and is not part of the union.
   One of four regional currency unions worldwide. Before 1976 the EC dollar was pegged to the British pound at EC$4.80 = £1.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 tags:
 - ECCB
 - ECCU
@@ -131,10 +131,6 @@ other_names:
 - id: zh
   name: 東加勒比貨幣聯盟
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: description
   source: Wikipedia
   retrieved_at: '2026-07-12'
@@ -183,3 +179,7 @@ provenance:
   source: official sources
   retrieved_at: '2026-07-12'
   url: https://www.eccb-centralbank.org/
+- field: scope_category
+  source: Eastern Caribbean Central Bank — Currency
+  retrieved_at: '2026-09-30'
+  url: https://www.eccb-centralbank.org/currency

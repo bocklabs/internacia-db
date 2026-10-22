@@ -2,7 +2,7 @@ id: ECA
 blocktype:
 - wbgroup
 status: formal
-scope_category: igo
+scope_category: reference_enumeration
 links:
 - url: https://www.worldbank.org/en/region/eca
   type: website
@@ -163,3 +163,8 @@ provenance:
   source: World Bank
   retrieved_at: '2026-07-13'
   url: https://www.worldbank.org/en/region/eca
+- field: scope_category
+  source: World Bank — Country and Lending Groups
+  url: https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+  retrieved_at: '2026-10-22'
+last_verified: '2026-10-22'

@@ -47,5 +47,12 @@
     "reason": "merged",
     "since": "3.0.0",
     "note": "Duplicate entity consolidated in UNASUR; retain this mapping for existing consumers."
+  },
+  {
+    "alias": "TELESUR",
+    "target": null,
+    "reason": "retired",
+    "since": "3.1.0",
+    "note": "La Nueva Televisión del Sur C.A. is a Venezuelan commercial company, not an international organization with member states; its seven country rows were not memberships. No replacement id. See docs/retired-intblock-ids.md."
   }
 ]

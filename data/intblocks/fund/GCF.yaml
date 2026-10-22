@@ -150,7 +150,7 @@ topics:
   name: Climate Change
 wikidata_id: Q3075923
 notes: Has committed over USD 20 billion across 134 developing countries; largest provider of adaptation finance among climate funds; at least half of adaptation funding directed to LDCs, SIDS, and African States; launched regional offices in Africa, Eastern Europe/Central Asia/Middle East, Latin America and the Caribbean, and the Pacific in 2026.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 other_names:
 - id: ar
   name: صندوق المناخ الأخضر
@@ -167,10 +167,6 @@ other_names:
 - id: zh
   name: 綠色氣候基金
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-12'
@@ -213,3 +209,7 @@ provenance:
   source: official sources
   retrieved_at: '2026-07-12'
   url: https://www.greenclimate.fund/about
+- field: scope_category
+  source: Governing Instrument for the Green Climate Fund, paragraphs 4–8
+  retrieved_at: '2026-09-30'
+  url: https://www.greenclimate.fund/sites/default/files/document/governing-instrument.pdf

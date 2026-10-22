@@ -2,7 +2,7 @@ id: LDC
 blocktype:
 - wbgroup
 status: formal
-scope_category: igo
+scope_category: reference_enumeration
 name: 'Least developed countries: UN classification'
 includes:
 - id: AO
@@ -230,6 +230,10 @@ provenance:
   source: UN DESA (CDP Secretariat)
   retrieved_at: '2026-07-13'
   url: https://www.un.org/development/desa/dpad/least-developed-country-category/ldcs-ata-glance.html
+- field: scope_category
+  source: World Bank — Country and Lending Groups
+  url: https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+  retrieved_at: '2026-10-22'
 links:
 - url: https://www.un.org/development/desa/dpad/least-developed-country-category/ldcs-ata-glance.html
   type: website
@@ -269,3 +273,4 @@ acronyms:
   value: LDC
 - lang: de
   value: LDC
+last_verified: '2026-10-22'

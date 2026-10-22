@@ -4,7 +4,7 @@ blocktype:
 - economic
 - energy
 status: formal
-scope_category: policy_forum
+scope_category: treaty_body
 founded: '2005-06-29'
 geographic_scope: regional
 regions:
@@ -204,12 +204,8 @@ other_names:
   name: ペトロカリブ
 - id: ko
   name: 페트로카리베
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
-- field: scope_category
-  source: Internacia inclusion policy; classification from existing record evidence
-  retrieved_at: '2026-10-16'
-  url: https://github.com/datenoio/internacia-db/blob/main/docs/intblock-inclusion-policy.md
 - field: includes
   source: FAO / Petrocaribe 10-year report; Wikipedia; AS/COA
   retrieved_at: '2026-07-29'
@@ -253,3 +249,7 @@ provenance:
   retrieved_at: '2026-07-29'
   url: https://www.wikidata.org/wiki/Q1735573
   license: CC0
+- field: scope_category
+  source: Jamaica Information Service — PM Says PetroCaribe Agreement will Deepen Regional Ties
+  retrieved_at: '2026-09-30'
+  url: https://jis.gov.jm/pm-says-petrocaribe-agreement-will-deepen-regional-ties/
