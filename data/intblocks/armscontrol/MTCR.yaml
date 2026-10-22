@@ -156,19 +156,19 @@ includes:
 - id: CY
   name: Cyprus
   type: country
-  status: associated
+  status: cooperating
 - id: EE
   name: Estonia
   type: country
-  status: associated
+  status: cooperating
 - id: KZ
   name: Kazakhstan
   type: country
-  status: associated
+  status: cooperating
 - id: LV
   name: Latvia
   type: country
-  status: associated
+  status: cooperating
 founded: '1987'
 headquarters:
   city: Paris
@@ -189,7 +189,7 @@ official_documents:
 acronyms:
 - lang: en
   value: MTCR
-membership_count: 39
+membership_count: 35
 wikidata_id: Q1072120
 description: Multilateral export control regime governing the international transfer of missile and unmanned aerial vehicle
   technology. Established in April 1987 by the G7 countries, it is an informal political understanding among partner states—not
@@ -239,7 +239,16 @@ other_names:
   name: Режим контроля ракетных технологий
 - id: zh
   name: 飛彈科技管制建制
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Missile Technology Control Regime
+  retrieved_at: '2026-10-22'
+  url: https://www.mtcr.info/en/faq
+- field: membership_count
+  source: Missile Technology Control Regime
+  retrieved_at: '2026-10-22'
+  url: https://www.mtcr.info/en/faq
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

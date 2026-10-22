@@ -218,7 +218,16 @@ other_names:
   name: Договор по открытому небу
 - id: zh
   name: 開放天空條約
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: OSCE
+  retrieved_at: '2026-10-22'
+  url: https://www.osce.org/node/108324
+- field: membership_count
+  source: OSCE
+  retrieved_at: '2026-10-22'
+  url: https://www.osce.org/node/108324
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

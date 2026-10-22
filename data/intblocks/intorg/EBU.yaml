@@ -231,6 +231,10 @@ includes:
   name: Vatican City State
   type: country
   status: member
+- id: CA
+  name: Canada
+  type: country
+  status: member
 founded: '1950'
 headquarters:
   city: Geneva
@@ -268,7 +272,7 @@ regions:
 - Europe
 - North Africa
 - Middle East
-membership_count: 54
+membership_count: 55
 wikidata_id: Q166400
 description: The European Broadcasting Union is an international organization that is used to promote regional cooperation
   in the broadcasting sector.
@@ -302,7 +306,16 @@ other_names:
   name: Европейский вещательный союз
 - id: zh
   name: 歐洲廣播聯盟
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European Broadcasting Union
+  retrieved_at: '2026-10-22'
+  url: https://www.ebu.ch/about/members?type=active
+- field: membership_count
+  source: European Broadcasting Union
+  retrieved_at: '2026-10-22'
+  url: https://www.ebu.ch/about/members?type=active
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

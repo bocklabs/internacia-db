@@ -21,79 +21,71 @@ includes:
 - id: AR
   name: Argentina
   type: country
-  status: partner
+  status: member
 - id: AU
   name: Australia
   type: country
-  status: partner
+  status: member
 - id: BH
   name: Bahrain
   type: country
-  status: partner
+  status: member
 - id: BR
   name: Brazil
   type: country
-  status: partner
+  status: member
 - id: CO
   name: Colombia
   type: country
-  status: partner
+  status: member
 - id: EG
   name: Egypt, Arab Rep.
   type: country
-  status: partner
+  status: member
 - id: IL
   name: Israel
   type: country
-  status: partner
+  status: member
 - id: JP
   name: Japan
   type: country
-  status: partner
+  status: member
 - id: JO
   name: Jordan
   type: country
-  status: partner
+  status: member
 - id: KE
   name: Kenya
   type: country
-  status: partner
+  status: member
 - id: KW
   name: Kuwait
   type: country
-  status: partner
+  status: member
 - id: MA
   name: Morocco
   type: country
-  status: partner
+  status: member
 - id: NZ
   name: New Zealand
   type: country
-  status: partner
+  status: member
 - id: PK
   name: Pakistan
   type: country
-  status: partner
-- id: PE
-  name: Peru
-  type: country
-  status: partner
+  status: member
 - id: PH
   name: Philippines
   type: country
-  status: partner
+  status: member
 - id: QA
   name: Qatar
   type: country
-  status: partner
-- id: SA
-  name: Saudi Arabia
-  type: country
-  status: partner
+  status: member
 - id: KR
   name: Korea, Rep.
   type: country
-  status: partner
+  status: member
 - id: TW
   name: Taiwan
   type: country
@@ -102,17 +94,17 @@ includes:
 - id: TH
   name: Thailand
   type: country
-  status: partner
+  status: member
 - id: TN
   name: Tunisia
   type: country
-  status: partner
+  status: member
 - id: AF
   name: Afghanistan
   type: country
   status: former_member
   note: Revoked July 2022 after Taliban takeover
-membership_count: 23
+membership_count: 19
 wikidata_id: Q145560
 legal_status: US statutory designation
 description: United States statutory designation (22 U.S.C. § 2321k) for close allies outside NATO, conferring enhanced defense
@@ -146,7 +138,16 @@ other_names:
   name: Основной союзник вне НАТО
 - id: zh
   name: 主要非北約盟國
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: U.S. Department of State
+  retrieved_at: '2026-10-22'
+  url: https://www.state.gov/major-non-nato-ally-status/
+- field: membership_count
+  source: U.S. Department of State
+  retrieved_at: '2026-10-22'
+  url: https://www.state.gov/major-non-nato-ally-status/
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -141,7 +141,16 @@ other_names:
   name: Fondo para el Desarrollo de los Pueblos Indígenas de América Latina y el Caribe
 notes: Permanent observer to the UN General Assembly; Belgium, Portugal, and Spain listed as extraregional members per official
   member-state page.
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: FILAC
+  retrieved_at: '2026-10-22'
+  url: https://filac.org/estados-miembros/
+- field: membership_count
+  source: FILAC
+  retrieved_at: '2026-10-22'
+  url: https://filac.org/estados-miembros/
 - field: description
   source: official sources
   retrieved_at: '2026-06-15'

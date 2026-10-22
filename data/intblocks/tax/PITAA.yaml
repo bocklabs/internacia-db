@@ -123,7 +123,16 @@ notes: PITAA was initiated in May 2003 during a seminar in Tonga attended by eig
 other_names:
 - id: en
   name: Pacific Islands Tax Administrators Association
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Network of Tax Organizations
+  retrieved_at: '2026-10-22'
+  url: https://www.nto.tax/sites/default/files/resources/Factsheet%20%20PITAA.pdf
+- field: membership_count
+  source: Network of Tax Organizations
+  retrieved_at: '2026-10-22'
+  url: https://www.nto.tax/sites/default/files/resources/Factsheet%20%20PITAA.pdf
 - field: description
   source: PITAA official website
   retrieved_at: '2026-07-30'

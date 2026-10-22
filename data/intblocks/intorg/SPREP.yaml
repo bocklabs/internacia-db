@@ -183,7 +183,16 @@ other_names:
   name: Pacific Regional Environment Programme
 - id: zh
   name: 太平洋区域环境规划组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SPREP
+  retrieved_at: '2026-10-22'
+  url: https://www.sprep.org/about-us
+- field: membership_count
+  source: SPREP
+  retrieved_at: '2026-10-22'
+  url: https://www.sprep.org/about-us
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

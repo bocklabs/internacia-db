@@ -247,7 +247,16 @@ notes: CATA was established in 1978 by a decision of the Commonwealth Finance Mi
   Vice-Chairman, and 12 members elected by the General Meeting). Besides its yearly technical conference, CATA offers up to
   six training programmes each year for middle-level and senior tax managers. CATA is a member of the Network of Tax Organizations
   (NTO) and chairs the NTO Council for 2025–2026.
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Commonwealth Association of Tax Administrators
+  retrieved_at: '2026-10-22'
+  url: https://www.taxcompact.net/sites/default/files/resources/CATA%20Factsheet.pdf
+- field: membership_count
+  source: Commonwealth Association of Tax Administrators
+  retrieved_at: '2026-10-22'
+  url: https://www.taxcompact.net/sites/default/files/resources/CATA%20Factsheet.pdf
 - field: description
   source: NTO
   retrieved_at: '2026-06-15'
