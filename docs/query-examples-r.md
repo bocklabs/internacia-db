@@ -614,7 +614,7 @@ country_memberships(intblocks) |>
   arrange(joined)
 ```
 
-**Expected:** 12 rows (`BEACST`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`,
+**Expected:** 13 rows (`BEACST`, `COE`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`,
 `ICES`, `ISTC`, `JCPOA`, `NSS`, `OPENSKY`, `RAMSAR`).
 
 **Gotcha:** Current Parquet exports include `includes[].left` and `memberships.left`.
@@ -641,7 +641,7 @@ country_memberships(intblocks) |>
   arrange(departed)
 ```
 
-**Expected:** 3 rows (`ECHR`, `EUA`, `ICES`).
+**Expected:** 4 rows (`COE`, `ECHR`, `EUA`, `ICES`).
 
 ## Membership overlap and set logic
 

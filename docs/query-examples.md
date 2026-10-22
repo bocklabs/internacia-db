@@ -584,7 +584,7 @@ WHERE m.id = 'RU'
 ORDER BY m.joined NULLS LAST, i.name;
 ```
 
-**Expected:** 12 rows (`BEACST`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`, `ICES`,
+**Expected:** 13 rows (`BEACST`, `COE`, `DANUBECOM`, `EASTERNBLOC`, `ECHR`, `EUA`, `GRECO`, `ICES`,
 `ISTC`, `JCPOA`, `NSS`, `OPENSKY`, `RAMSAR`).
 
 **Gotcha:** Prefer `m.left` on DuckDB/Parquet `includes` or the `memberships.left` column.
@@ -615,17 +615,16 @@ WHERE m.id = 'RU'
 ORDER BY departed, organization;
 ```
 
-**Expected:** 3 rows:
+**Expected:** 4 rows:
 
 | id | organization | departed | note |
 |----|-------------|----------|------|
 | `EUA` | European University Association | `2022-03` | — |
+| `COE` | Council of Europe | `2022-03-16` | Ceased to be a member on 16 March 2022 under Committee of Ministers Resolution CM/Res(2022)2 |
 | `ECHR` | European Court of Human Rights | `2022-03-16` | — |
 | `ICES` | International Council for the Exploration of the Sea | `2025-12-09` | Suspended 30 March 2022; formal withdrawal later |
 
-**Gotcha:** Coverage is source-dependent — e.g. `COE` (Council of Europe) may still list
-Russia as `member` while child bodies like `ECHR` already mark `former_member`. Filter on
-`former_member` explicitly; do not infer departures from absence in active rosters.
+**Gotcha:** `COE` records the 16 March 2022 cessation as `former_member`, the same date as `ECHR`. Filter on `former_member` explicitly.
 
 Equivalent Python (JSONL.zst, no source YAML):
 
@@ -658,8 +657,8 @@ for line in lines:
                 }
             )
 
-assert len(rows) == 3
-assert {r["id"] for r in rows} == {"ECHR", "EUA", "ICES"}
+assert len(rows) == 4
+assert {r["id"] for r in rows} == {"COE", "ECHR", "EUA", "ICES"}
 ```
 
 ## Membership overlap and set logic
@@ -825,8 +824,8 @@ HAVING observer_count >= 5
 ORDER BY observer_count DESC, c.name;
 ```
 
-**Expected:** 19 rows — `MD` with 7 observer entries; `HU`, `IN`, `MY`, `TH`, `UA`, `US`
-with 6 each.
+**Expected:** 20 rows — `MD` and `US` with 7 observer entries; `HU`, `IN`, `JP`, `MY`, `TH`, `UA`
+with 6 each. `CA` is in the set at 5.
 
 ## Geography and membership
 
@@ -965,7 +964,8 @@ WHERE m.status = 'former_member'
 ORDER BY i.id, country_code;
 ```
 
-**Expected:** 195 rows — e.g. `CISSTAT` / `UA` (joined 1991, left 2014), `WESTERNBLOC` /
+**Expected:** 200 rows — e.g. `CISSTAT` / `UA` (joined 1991, left 2014), `COE` / `RU`
+(joined 1996-02-28, left 2022-03-16), `WESTERNBLOC` /
 `US` (joined 1947, left 1991).
 
 ## Edge cases and data quality
@@ -999,7 +999,7 @@ GROUP BY c.code, c.name
 ORDER BY c.code;
 ```
 
-**Expected:** 1 row — `VA` Vatican City (41 org affiliations).
+**Expected:** 1 row — `VA` Vatican City (73 org affiliations).
 
 ### Declared vs actual roster size
 
@@ -1020,7 +1020,7 @@ ORDER BY ABS(membership_count - len(includes)) DESC, id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 174 mismatches total; largest positive deltas are non-country memberships
+**Expected:** 20 displayed rows out of 177 mismatches total; largest positive deltas are non-country memberships
 counted in `membership_count` (e.g. `IGA`, `WNA`). Records where the count measures
 institutions, companies, or individuals rather than countries declare it via
 `membership_count_type` and are exempt from the roster-comparison validation rule.

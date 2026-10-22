@@ -247,7 +247,7 @@ official_documents:
   type: document
 - url: https://brics2023.gov.za/
   type: document
-last_verified: '2026-09-13'
+last_verified: '2026-10-22'
 provenance:
 - field: includes
   source: BRICS India 2026 Chairship
@@ -296,3 +296,11 @@ provenance:
   source: Wikipedia
   retrieved_at: '2026-07-30'
   url: https://en.wikipedia.org/wiki/BRICS
+- field: includes
+  source: Brazilian BRICS Presidency
+  retrieved_at: '2026-10-22'
+  url: https://brics.br/en/about-the-brics/frequently-asked-questions-about-the-brics
+- field: includes
+  source: BRICS Leaders Declaration, Rio de Janeiro
+  retrieved_at: '2026-10-22'
+  url: https://brics.br/en/documents/presidency-documents/250705-brics-leaders-declaration-en.pdf/@@download/file

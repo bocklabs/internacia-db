@@ -16,7 +16,7 @@ links:
   type: website
 - url: https://en.wikipedia.org/wiki/World_Trade_Organization
   type: wikipedia
-- url: https://www.wikidata.org/wiki/Q215524
+- url: https://www.wikidata.org/wiki/Q7825
   type: wikidata
 acronyms:
 - lang: en
@@ -36,7 +36,7 @@ headquarters:
     lat: 46.2242
     lng: 6.1494
 membership_count: 166
-wikidata_id: Q215524
+wikidata_id: Q7825
 legal_status: intergovernmental
 description: Intergovernmental organization that regulates and facilitates international trade. Established in 1995, succeeding
   the General Agreement on Tariffs and Trade (GATT). Provides framework for negotiating trade agreements and resolving disputes
@@ -60,7 +60,7 @@ other_names:
 - id: ar
   name: منظمة التجارة العالمية
 - id: de
-  name: Riaville
+  name: Welthandelsorganisation
 - id: en
   name: World Trade Organization
 - id: es
@@ -68,7 +68,7 @@ other_names:
 - id: fr
   name: Organisation mondiale du commerce
 - id: pt
-  name: Riaville
+  name: Organização Mundial do Comércio
 - id: ru
   name: Всемирная торговая организация
 - id: zh
@@ -742,7 +742,21 @@ includes:
   name: Zimbabwe
   type: country
   status: member
+last_verified: '2026-10-22'
 provenance:
+- field: wikidata_id
+  source: Wikidata
+  retrieved_at: '2026-10-22'
+  url: https://www.wikidata.org/wiki/Q7825
+  license: CC0
+- field: includes
+  source: World Trade Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.wto.org/english/thewto_e/whatis_e/tif_e/org6_e.htm
+- field: membership_count
+  source: World Trade Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.wto.org/english/thewto_e/whatis_e/tif_e/org6_e.htm
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

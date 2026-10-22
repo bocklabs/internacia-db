@@ -227,7 +227,7 @@ notes: >-
   Five Micronesian members briefly initiated withdrawal in February 2021; Kiribati withdrew in July 2022 and rejoined in
   February 2023. Associate members (American Samoa, Guam, Tokelau, Wallis and Futuna) participate under the 2005 Leaders
   Policy on Associate Membership; membership_count counts the 18 full members only.
-last_verified: '2026-07-29'
+last_verified: '2026-10-22'
 provenance:
 - field: includes
   source: official sources
@@ -271,3 +271,15 @@ provenance:
   source: official sources
   retrieved_at: '2026-07-29'
   url: http://austlii.edu.au/cgi-bin/viewdoc/au/other/dfat/treaties/ATNIF/2005/28.html
+- field: includes
+  source: Pacific Islands Forum Secretariat
+  retrieved_at: '2026-10-22'
+  url: https://forumsec.org/pacific-islands-forum
+- field: includes
+  source: Pacific Islands Forum Secretariat
+  retrieved_at: '2026-10-22'
+  url: https://forumsec.org/partnerships
+- field: includes
+  source: Fifty-Fifth Pacific Islands Forum Communiqué
+  retrieved_at: '2026-10-22'
+  url: https://forumsec.org/sites/default/files/2026-09/55PIFLM%20Communique.pdf

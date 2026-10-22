@@ -126,6 +126,7 @@ def test_ru_former_and_march_2022(pl, intblocks):
     ru = members.filter((pl.col("id") == "RU") & (pl.col("status") == "former_member"))
     assert set(ru["intblock_id"].to_list()) == {
         "BEACST",
+        "COE",
         "DANUBECOM",
         "EASTERNBLOC",
         "ECHR",
@@ -146,7 +147,7 @@ def test_ru_former_and_march_2022(pl, intblocks):
             | pl.col("note").str.contains("(?i)March 2022")
         )
     )
-    assert set(march["intblock_id"].to_list()) == {"ECHR", "EUA", "ICES"}
+    assert set(march["intblock_id"].to_list()) == {"COE", "ECHR", "EUA", "ICES"}
 
 
 def test_jaccard_nato_eu(pl, memberships):
