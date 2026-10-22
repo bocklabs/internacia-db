@@ -126,6 +126,7 @@ def test_ru_former_and_march_2022(pl, intblocks):
     ru = members.filter((pl.col("id") == "RU") & (pl.col("status") == "former_member"))
     assert set(ru["intblock_id"].to_list()) == {
         "BEACST",
+        "CBSS",
         "COE",
         "DANUBECOM",
         "EASTERNBLOC",

@@ -93,7 +93,16 @@ other_names:
   name: India-EFTA Trade and Economic Partnership Agreement
 - id: en
   name: TEPA
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European Free Trade Association
+  retrieved_at: '2026-10-22'
+  url: https://www.efta.int/trade-relations/free-trade-network/india
+- field: membership_count
+  source: European Free Trade Association
+  retrieved_at: '2026-10-22'
+  url: https://www.efta.int/trade-relations/free-trade-network/india
 - field: geographic_scope
   source: official sources
   retrieved_at: '2026-06-15'

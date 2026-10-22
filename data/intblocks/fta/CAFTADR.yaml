@@ -144,7 +144,16 @@ other_names:
     Dominicana
 - id: zh
   name: 中美洲自由貿易協定
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements/cafta-dr-dominican-republic-central-america-fta
+- field: membership_count
+  source: Office of the United States Trade Representative
+  retrieved_at: '2026-10-22'
+  url: https://ustr.gov/trade-agreements/free-trade-agreements/cafta-dr-dominican-republic-central-america-fta
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

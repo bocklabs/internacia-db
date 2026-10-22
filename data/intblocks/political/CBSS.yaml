@@ -41,7 +41,8 @@ includes:
 - id: RU
   name: Russian Federation
   type: country
-  status: member
+  status: former_member
+  left: '2022-05-17'
 - id: DE
   name: Germany
   type: country
@@ -78,7 +79,7 @@ acronyms:
   value: CBSS
 - lang: de
   value: CBSS
-membership_count: 12
+membership_count: 11
 wikidata_id: Q789769
 description: Intergovernmental organization.
 tags:
@@ -111,7 +112,20 @@ other_names:
   name: Совет государств Балтийского моря
 - id: zh
   name: 波罗的海国家理事会
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Council of the Baltic Sea States
+  retrieved_at: '2026-10-22'
+  url: https://cbss.org/about-us/member-states/
+- field: membership_count
+  source: Council of the Baltic Sea States
+  retrieved_at: '2026-10-22'
+  url: https://cbss.org/about-us/member-states/
+- field: includes
+  source: Council of the Baltic Sea States
+  retrieved_at: '2026-10-22'
+  url: https://cbss.org/about-us/history/
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -91,7 +91,16 @@ other_names:
   name: Международный экспериментальный термоядерный реактор
 - id: zh
   name: 国际热核聚变实验反应堆
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: ITER Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.iter.org/about/iter-members
+- field: membership_count
+  source: ITER Organization
+  retrieved_at: '2026-10-22'
+  url: https://www.iter.org/about/iter-members
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'
