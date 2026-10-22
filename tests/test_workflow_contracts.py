@@ -22,6 +22,9 @@ def test_committed_snapshot_is_checked_against_the_build_and_final_artifacts_are
     tests = next(i for i, command in enumerate(commands) if "pytest tests/" in command)
     assert build < committed and build < tests
     assert any("check_generated_artifacts.py --datasets-dir" in command for command in commands)
+    sdk = next(i for i, command in enumerate(commands) if "pytest tests/contract" in command)
+    assert build < sdk
+    assert config["env"]["INTERNACIA_SDK_REF"]
     assert "INTERNACIA_DATASETS_DIR" in config["env"]
     assert any("check_quality_report.py" in command for command in commands)
     assert any("check_release_bundle.py" in command for command in commands)

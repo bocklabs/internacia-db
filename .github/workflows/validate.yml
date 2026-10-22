@@ -48,6 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       INTERNACIA_DATASETS_DIR: ${{ github.workspace }}/.ci-datasets
+      # internacia-python ref whose tests/contract suite must pass on every build.
+      INTERNACIA_SDK_REF: main
     strategy:
       fail-fast: false
       matrix:
@@ -90,6 +92,14 @@ jobs:
 
       - name: Run tests against freshly built artifacts
         run: pytest tests/ --cov=internacia_builder --cov-report=term-missing
+
+      - name: Run the internacia SDK contract suite against the fresh build
+        if: matrix.python-version == '3.12'
+        run: |
+          sdk="$RUNNER_TEMP/internacia-python"
+          git clone --depth 1 --branch "$INTERNACIA_SDK_REF" https://github.com/datenoio/internacia-python "$sdk"
+          pip install "$sdk"
+          cd "$sdk" && INTERNACIA_CONTRACT_DB_PATH="$INTERNACIA_DATASETS_DIR/internacia.duckdb" pytest tests/contract -q
 
       - name: Check data dictionary drift
         run: python scripts/generate_data_dictionary.py --check

@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       INTERNACIA_DATASETS_DIR: ${{ github.workspace }}/.release-datasets
+      # internacia-python ref whose tests/contract suite must pass before publishing.
+      INTERNACIA_SDK_REF: main
     steps:
       - uses: actions/checkout@v7
         with:
@@ -38,6 +40,13 @@ jobs:
 
       - name: Run tests against the final release build
         run: pytest tests/ --cov=internacia_builder --cov-report=term-missing
+
+      - name: Run the internacia SDK contract suite against the release build
+        run: |
+          sdk="$RUNNER_TEMP/internacia-python"
+          git clone --depth 1 --branch "$INTERNACIA_SDK_REF" https://github.com/datenoio/internacia-python "$sdk"
+          pip install "$sdk"
+          cd "$sdk" && INTERNACIA_CONTRACT_DB_PATH="$INTERNACIA_DATASETS_DIR/internacia.duckdb" pytest tests/contract -q
 
       - name: Validate release content, version, and documentation
         run: |

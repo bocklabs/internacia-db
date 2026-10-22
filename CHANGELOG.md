@@ -14,16 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `dataquality/` is no longer committed; the quality report is a CI artifact (`validate.yml`), and
   the enrichment workflow no longer commits it.
 
-### Changed
-
-- Superseded reviews and plans (`REPOSITORY_REVIEW*.md`, `dev/internacia-db-review.md`,
-  `outputs/*.md`, `docs/improvement-plan.md`) moved to `docs/history/`, which the documentation
-  site does not publish.
-- All 29 completed OpenSpec changes are archived and their deltas applied to `openspec/specs/`;
-  the four tasks left open were closed (done, moved to issue #21, or won't do with rationale).
-
 ### Added
 
+- CI and the release workflow run the internacia SDK's portable `tests/contract` suite against
+  the freshly built `internacia.duckdb` (`INTERNACIA_SDK_REF`), so a change that breaks the SDK
+  fails here before it is released.
 - `internacia.duckdb` contains the alias and migration tables (`intblocks_aliases`,
   `countries_aliases`, `attribute_intblock_migrations`) and canonical views:
   `current_memberships` (not former, no `left` date, organization neither historical nor
@@ -42,6 +37,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `contract_version` in manifests, `.meta.json` sidecars and DuckDB `_meta` (additive column).
 
 ### Changed
+
+- Superseded reviews and plans (`REPOSITORY_REVIEW*.md`, `dev/internacia-db-review.md`,
+  `outputs/*.md`, `docs/improvement-plan.md`) moved to `docs/history/`, which the documentation
+  site does not publish.
+- All 29 completed OpenSpec changes are archived and their deltas applied to `openspec/specs/`;
+  the four tasks left open were closed (done, moved to issue #21, or won't do with rationale).
 
 - **Generated exports are no longer committed** (decision D3). `data/datasets/` keeps only the
   manifests, `contract.json`, `datapackage.json`, the dataset card and the alias JSON; Parquet,
