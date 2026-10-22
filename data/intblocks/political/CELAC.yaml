@@ -214,6 +214,15 @@ provenance:
   source: official sources
   retrieved_at: '2026-06-15'
   url: https://en.wikipedia.org/wiki/Community_of_Latin_American_and_Caribbean_States
+- field: includes
+  source: Colombian Pro Tempore Presidency of CELAC
+  retrieved_at: '2026-10-22'
+  url: https://www.cancilleria.gov.co/politica-exterior/mecanismos-de-concertacion-e-integracion-regionales/comunidad-de-estados-latinoamericanos-y-caribenos-celac
+- field: membership_count
+  source: Colombian Pro Tempore Presidency of CELAC
+  retrieved_at: '2026-10-22'
+  url: https://www.cancilleria.gov.co/politica-exterior/mecanismos-de-concertacion-e-integracion-regionales/comunidad-de-estados-latinoamericanos-y-caribenos-celac
+last_verified: '2026-10-22'
 other_names:
 - id: ar
   name: مجموعة دول أمريكا اللاتينية والكاريبي

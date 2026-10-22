@@ -179,6 +179,8 @@ includes:
   name: Morocco
   type: country
   status: member
+  joined: '2017-01-31'
+  note: Original admission in 1963; readmitted on 31 January 2017. The AU member-state list records the date as 1963/31 January 2017.
 - id: MZ
   name: Mozambique
   type: country
@@ -235,8 +237,8 @@ includes:
   name: Western Sahara
   type: country
   status: member
-  joined: '1982'
-  note: Sahrawi Arab Democratic Republic; admitted to the OAU in 1982, founding AU
+  joined: '1982-02-22'
+  note: Sahrawi Arab Democratic Republic; admitted to the OAU on 22 February 1982, founding AU
     member
 founded: '1999'
 headquarters:
@@ -340,10 +342,11 @@ provenance:
   retrieved_at: '2026-08-03'
   url: https://au.int/en/visit-au-headquarters
 - field: includes
-  source: official sources
-  retrieved_at: '2026-08-02'
+  source: African Union
+  retrieved_at: '2026-10-22'
   url: https://au.int/en/member_states/countryprofiles2
 - field: membership_count
-  source: official sources
-  retrieved_at: '2026-08-02'
+  source: African Union
+  retrieved_at: '2026-10-22'
   url: https://au.int/en/member_states/countryprofiles2
+last_verified: '2026-10-22'

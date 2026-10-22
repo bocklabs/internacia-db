@@ -308,6 +308,15 @@ provenance:
   source: official sources
   retrieved_at: '2026-06-15'
   url: https://en.wikipedia.org/wiki/Commonwealth_of_Nations
+- field: includes
+  source: Commonwealth Secretariat
+  retrieved_at: '2026-10-22'
+  url: https://thecommonwealth.org/our-member-countries
+- field: membership_count
+  source: Commonwealth Secretariat
+  retrieved_at: '2026-10-22'
+  url: https://thecommonwealth.org/our-member-countries
+last_verified: '2026-10-22'
 acronyms:
 - lang: ar
   value: كومنولث

@@ -56,6 +56,18 @@ includes:
   name: Belarus
   type: country
   status: member
+- id: AF
+  name: Afghanistan
+  type: country
+  status: observer
+  joined: '2012-06-07'
+  note: Observer under Heads of State Council Decision No. 6 of 7 June 2012. A 2025 decision to replace observer and dialogue-partner status with a single partner status had not entered into force as of March 2026.
+- id: MN
+  name: Mongolia
+  type: country
+  status: observer
+  joined: '2004-06-17'
+  note: Observer under Heads of State Council Decision No. 12 of 17 June 2004. Not a full member. The September 2026 heads-of-state meeting still referred to Mongolia as an observer state.
 founded: '2001'
 headquarters:
   city: Beijing
@@ -179,7 +191,16 @@ other_names:
   name: Шанхайская организация сотрудничества
 - id: zh
   name: 上海合作组织
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Shanghai Cooperation Organisation
+  retrieved_at: '2026-10-22'
+  url: https://eng.sectsco.org/20260306/2185663.html
+- field: membership_count
+  source: Shanghai Cooperation Organisation
+  retrieved_at: '2026-10-22'
+  url: https://eng.sectsco.org/20260901/2493609.html
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Roster corrections checked against official lists on 2026-10-22: WTO `wikidata_id` is
+  Q7825 (Q215524 is the village Riaville); Council of Europe records Russia as
+  `former_member` from 1996-02-28 to 2022-03-16 (`CM/Res(2022)2`) and `membership_count`
+  46; OPEC follows the member-countries page (12 current members, including the UAE, plus
+  Qatar, Indonesia, Ecuador and Angola as former members with end dates). Tier-1 rosters
+  re-checked from the roster-watch diff (OAS, BRICS, MERCOSUR, SCO, CIS, Commonwealth,
+  African Union, CELAC, SAARC, PIF) were left in place where the official list supports
+  them, with `last_verified` refreshed.
+
 ## [3.1.0] - 2026-10-22
 
 Snapshot: **256** countries, **1275** intblocks, **78** blocktypes. Planned as **3.1.0**:

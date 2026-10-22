@@ -100,7 +100,10 @@ includes:
 - id: RU
   name: Russian Federation
   type: country
-  status: member
+  status: former_member
+  joined: '1996-02-28'
+  left: '2022-03-16'
+  note: Ceased to be a member on 16 March 2022 under Committee of Ministers Resolution CM/Res(2022)2
 - id: DE
   name: Germany
   type: country
@@ -205,6 +208,27 @@ includes:
   name: Serbia
   type: country
   status: member
+- id: CA
+  name: Canada
+  type: country
+  status: observer
+- id: VA
+  name: Vatican City
+  type: country
+  status: observer
+  note: Listed by the Council of Europe as the Holy See
+- id: JP
+  name: Japan
+  type: country
+  status: observer
+- id: MX
+  name: Mexico
+  type: country
+  status: observer
+- id: US
+  name: United States
+  type: country
+  status: observer
 founded: '1949'
 headquarters:
   city: Palace of Europe
@@ -227,7 +251,8 @@ suborganizations:
   name: European Court of Human Rights
 - id: PACE
   name: Parliamentary Assembly of the Council of Europe
-membership_count: 47
+membership_count: 46
+last_verified: '2026-10-22'
 wikidata_id: Q8908
 legal_status: intergovernmental
 official_documents:
@@ -316,3 +341,15 @@ provenance:
   source: official sources
   retrieved_at: '2026-06-15'
   url: https://en.wikipedia.org/wiki/Council_of_Europe
+- field: includes
+  source: Council of Europe
+  retrieved_at: '2026-10-22'
+  url: https://www.coe.int/en/web/about-us/our-member-states
+- field: includes
+  source: Council of Europe
+  retrieved_at: '2026-10-22'
+  url: https://rm.coe.int/0900001680a5ed96
+- field: membership_count
+  source: Council of Europe
+  retrieved_at: '2026-10-22'
+  url: https://www.coe.int/en/web/about-us/our-member-states

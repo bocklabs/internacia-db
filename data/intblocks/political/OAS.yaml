@@ -269,3 +269,12 @@ provenance:
   source: official sources
   retrieved_at: '2026-08-03'
   url: https://www.oas.org/en/about/our_locations.asp
+- field: includes
+  source: Organization of American States
+  retrieved_at: '2026-10-22'
+  url: https://www.oas.org/en/member_states/default.asp
+- field: membership_count
+  source: Organization of American States
+  retrieved_at: '2026-10-22'
+  url: https://www.oas.org/en/member_states/default.asp
+last_verified: '2026-10-22'

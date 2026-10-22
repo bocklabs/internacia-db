@@ -135,6 +135,15 @@ provenance:
   source: official sources
   retrieved_at: '2026-08-02'
   url: https://cis.minsk.by/page/about
+- field: includes
+  source: CIS Executive Committee
+  retrieved_at: '2026-10-22'
+  url: https://cis.minsk.by/map
+- field: membership_count
+  source: CIS Executive Committee
+  retrieved_at: '2026-10-22'
+  url: https://cis.minsk.by/map
+last_verified: '2026-10-22'
 other_names:
 - id: ar
   name: رابطة الدول المستقلة

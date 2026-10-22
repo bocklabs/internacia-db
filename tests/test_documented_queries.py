@@ -207,7 +207,7 @@ def test_ru_former_member_march_2022(con):
         ORDER BY i.id
         """
     ).fetchall()
-    assert [row[0] for row in rows] == ["ECHR", "EUA", "ICES"]
+    assert [row[0] for row in rows] == ["COE", "ECHR", "EUA", "ICES"]
 
 
 def test_ru_former_members_only(con):
@@ -221,9 +221,10 @@ def test_ru_former_members_only(con):
         ORDER BY i.id
         """
     ).fetchall()
-    assert len(rows) == 12
+    assert len(rows) == 13
     assert {row[0] for row in rows} == {
         "BEACST",
+        "COE",
         "DANUBECOM",
         "EASTERNBLOC",
         "ECHR",
@@ -371,8 +372,8 @@ ADDITIONAL_RECIPES = [
         JOIN countries c ON c.code = m.id AND m.type = 'country'
         WHERE m.status='observer' GROUP BY c.code HAVING COUNT(*) >= 5 ORDER BY c.code
         """,
-        19,
-        {"IN", "TH", "UA"},
+        20,
+        {"CA", "IN", "TH", "UA"},
     ),
     (
         """
@@ -463,7 +464,7 @@ ADDITIONAL_RECIPES = [
         SELECT COUNT(*) FROM intblocks
         WHERE membership_count IS NOT NULL AND len(includes) > 0 AND membership_count != len(includes)
         """,
-        174,
+        177,
         set(),
     ),
     (
@@ -587,7 +588,7 @@ def test_former_members_with_join_and_left(con):
           AND m.joined IS NOT NULL
         """
     ).fetchone()[0]
-    assert count == 195
+    assert count == 200
 
 
 def test_world_bank_region_filter_uses_region_id(con):

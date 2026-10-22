@@ -65,7 +65,7 @@ includes:
   name: Bolivia
   type: country
   status: member
-  joined: '2024-07-08'
+  joined: '2024-08-07'
 - id: BR
   name: Brazil
   type: country
@@ -90,13 +90,13 @@ membership_count: 6
 wikidata_id: Q4264
 description: South American trade bloc and customs union established by the Treaty of Asunción (1991) and Protocol of Ouro
   Preto (1994). Free trade among founding members began in 1994; the customs union with a common external tariff took effect
-  on 1 January 1995. Bolivia became a full member in July 2024.
-notes: Venezuela remains a formal member but has been suspended since 1 December 2016 and does not participate in bloc decisions.
+  on 1 January 1995. Bolivia became a State Party on 7 August 2024.
+notes: Venezuela remains a State Party but has been suspended in all rights and obligations since the 5 August 2017 decision under the Protocol of Ushuaia, and does not participate in bloc decisions.
   Associate countries (Chile, Colombia, Ecuador, Guyana, Panama, Peru, and Suriname) have trade agreements with Mercosur but
   are not part of the customs union. Also known as Mercosur (Spanish) and Mercosul (Portuguese). Intra-bloc investment facilitation
   among a subset of members is a later instrument recorded as `PCFI` (Argentina, Brazil, and Uruguay in force; Paraguay approval
   sourced but deposit not sourced). The 1994 Protocol of Colonia never entered into force and is not a separate intblock.
-last_verified: '2026-07-12'
+last_verified: '2026-10-22'
 tags:
 - MERCOSUL
 - MERCOSUR
@@ -169,10 +169,17 @@ provenance:
   url: https://www.wikidata.org/wiki/Q4264
   license: CC0
 - field: includes
-  source: Wikipedia
-  retrieved_at: '2026-07-12'
-  url: https://en.wikipedia.org/wiki/MERCOSUR
-  license: CC BY-SA 4.0
+  source: MERCOSUR
+  retrieved_at: '2026-10-22'
+  url: https://www.mercosur.int/acerca-del-mercosur/paises
+- field: includes
+  source: MERCOSUR
+  retrieved_at: '2026-10-22'
+  url: https://www.mercosur.int/comunicado-conjunto-de-los-presidentes-de-los-estados-partes-del-mercosur
+- field: notes
+  source: MERCOSUR
+  retrieved_at: '2026-10-22'
+  url: https://www.mercosur.int/suspension-de-venezuela-en-el-mercosur
 - field: headquarters
   source: Wikidata
   retrieved_at: '2026-07-12'
