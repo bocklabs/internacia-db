@@ -120,3 +120,43 @@ jobs:
           generate_release_notes: true
           fail_on_unmatched_files: true
           files: .release-datasets/*
+
+      # internacia-python and internacia-api also poll for new releases daily; the dispatch only
+      # makes them react at once. It needs the internacia-bot App installed on both repositories.
+      - name: Check bot app secrets for downstream notification
+        id: bot
+        env:
+          CLIENT_ID: ${{ secrets.INTERNACIA_BOT_CLIENT_ID }}
+          PRIVATE_KEY: ${{ secrets.INTERNACIA_BOT_PRIVATE_KEY }}
+        run: |
+          if [ -n "$CLIENT_ID" ] && [ -n "$PRIVATE_KEY" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::internacia-bot secrets not set; downstream repositories pick up the release on their daily poll"
+          fi
+
+      - name: Mint token for downstream repositories
+        id: downstream-token
+        if: steps.bot.outputs.available == 'true'
+        continue-on-error: true
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.INTERNACIA_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.INTERNACIA_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: internacia-python,internacia-api
+          permission-contents: write
+
+      - name: Notify internacia-python and internacia-api
+        if: steps.downstream-token.outputs.token
+        env:
+          GH_TOKEN: ${{ steps.downstream-token.outputs.token }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          for repo in internacia-python internacia-api; do
+            gh api "repos/$OWNER/$repo/dispatches" \
+              -f event_type=internacia-db-release \
+              -f "client_payload[version]=${GITHUB_REF_NAME#v}" \
+              -f "client_payload[tag]=$GITHUB_REF_NAME" \
+              || echo "::warning::could not notify $repo; it will pick up the release on its daily poll"
+          done

@@ -1,0 +1,74 @@
+name: Tag release
+
+# Tags the merge commit of a release-train PR (branch release/next) as vX.Y.Z. The tag is pushed
+# with the internacia-bot App token because tags pushed with GITHUB_TOKEN do not start
+# release.yml. See docs/release-train.md.
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tag:
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.ref == 'release/next' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check bot app secrets
+        env:
+          CLIENT_ID: ${{ secrets.INTERNACIA_BOT_CLIENT_ID }}
+          PRIVATE_KEY: ${{ secrets.INTERNACIA_BOT_PRIVATE_KEY }}
+        run: |
+          if [ -z "$CLIENT_ID" ] || [ -z "$PRIVATE_KEY" ]; then
+            echo "::error::INTERNACIA_BOT_CLIENT_ID / INTERNACIA_BOT_PRIVATE_KEY are not set; tag the merge commit by hand (git tag -a vX.Y.Z && git push origin vX.Y.Z)."
+            exit 1
+          fi
+
+      - name: Mint bot app token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.INTERNACIA_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.INTERNACIA_BOT_PRIVATE_KEY }}
+          permission-contents: write
+
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Read the release version
+        id: version
+        run: |
+          version=$(python3 - <<'PY'
+          import re, tomllib
+          changelog = open("CHANGELOG.md", encoding="utf-8").read()
+          dated = re.findall(r"^## \[(\d+\.\d+\.\d+)\] - \d{4}-\d{2}-\d{2}", changelog, re.MULTILINE)
+          project = tomllib.load(open("pyproject.toml", "rb"))["project"]["version"]
+          if not dated or dated[0] != project:
+              raise SystemExit(f"CHANGELOG ({dated[:1]}) and pyproject.toml ({project}) disagree")
+          print(dated[0])
+          PY
+          )
+          if git rev-parse -q --verify "refs/tags/v$version" >/dev/null; then
+            echo "::error::tag v$version already exists"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Push the tag
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          git config user.name "internacia-bot[bot]"
+          git config user.email "internacia-bot[bot]@users.noreply.github.com"
+          git tag -a "v$VERSION" -m "Release v$VERSION"
+          git push origin "v$VERSION"
+          echo "Tagged v$VERSION; release.yml publishes it." >> "$GITHUB_STEP_SUMMARY"

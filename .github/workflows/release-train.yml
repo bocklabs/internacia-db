@@ -1,0 +1,125 @@
+name: Release train
+
+# Opens (or refreshes) a release pull request when the data changed since the last vX.Y.Z tag.
+# Merging it tags the merge commit (release-tag.yml), which runs release.yml.
+#
+# Needs the internacia-bot GitHub App (INTERNACIA_BOT_CLIENT_ID / INTERNACIA_BOT_PRIVATE_KEY):
+# pull requests opened with GITHUB_TOKEN do not run CI. Without the secrets the plan is still
+# written to the job summary. See docs/release-train.md.
+
+on:
+  schedule:
+    # 8th of each month at 07:00 UTC: a week after the monthly enrichment PR (1st)
+    - cron: '0 7 8 * *'
+  workflow_dispatch:
+    inputs:
+      level:
+        description: Release at least this level (auto = decided from the changes)
+        type: choice
+        options: [auto, patch, minor]
+        default: auto
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-train
+  cancel-in-progress: false
+
+jobs:
+  release-pr:
+    runs-on: ubuntu-latest
+    env:
+      LEVEL: ${{ inputs.level != 'auto' && inputs.level || '' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Plan the release
+        id: plan
+        run: |
+          set +e
+          python scripts/prepare_release.py ${LEVEL:+--level "$LEVEL"} --summary release-pr.md --diff release-diff.json
+          status=$?
+          set -e
+          cat release-pr.md >> "$GITHUB_STEP_SUMMARY"
+          case "$status" in
+            0) echo "release=true" >> "$GITHUB_OUTPUT" ;;
+            3) echo "release=false" >> "$GITHUB_OUTPUT" ;;
+            4) echo "::warning::MAJOR changes since the last release; release by hand (docs/versioning-policy.md)"
+               echo "release=false" >> "$GITHUB_OUTPUT" ;;
+            *) exit "$status" ;;
+          esac
+
+      - name: Upload the plan
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-plan
+          path: |
+            release-pr.md
+            release-diff.json
+          if-no-files-found: ignore
+          retention-days: 90
+
+      - name: Check bot app secrets
+        if: steps.plan.outputs.release == 'true'
+        env:
+          CLIENT_ID: ${{ secrets.INTERNACIA_BOT_CLIENT_ID }}
+          PRIVATE_KEY: ${{ secrets.INTERNACIA_BOT_PRIVATE_KEY }}
+        run: |
+          if [ -z "$CLIENT_ID" ] || [ -z "$PRIVATE_KEY" ]; then
+            echo "::error::INTERNACIA_BOT_CLIENT_ID / INTERNACIA_BOT_PRIVATE_KEY are not set; cannot open the release PR. The plan is in the job summary and the release-plan artifact."
+            exit 1
+          fi
+
+      - name: Mint bot app token
+        id: app-token
+        if: steps.plan.outputs.release == 'true'
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.INTERNACIA_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.INTERNACIA_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Write the version bump and rebuild descriptors
+        if: steps.plan.outputs.release == 'true'
+        run: python scripts/prepare_release.py --apply ${LEVEL:+--level "$LEVEL"}
+
+      - name: Open the release PR
+        id: cpr
+        if: steps.plan.outputs.release == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: release/next
+          commit-message: "release: v${{ steps.plan.outputs.version }}"
+          title: "Release v${{ steps.plan.outputs.version }}"
+          labels: release
+          body-path: release-pr.md
+          add-paths: |
+            CHANGELOG.md
+            CITATION.cff
+            pyproject.toml
+            uv.lock
+            internacia_builder/__init__.py
+            data/datasets
+
+      - name: Job summary
+        if: steps.cpr.outputs.pull-request-url
+        env:
+          OPERATION: ${{ steps.cpr.outputs.pull-request-operation }}
+          URL: ${{ steps.cpr.outputs.pull-request-url }}
+        run: |
+          echo "- Release PR ($OPERATION): $URL" >> "$GITHUB_STEP_SUMMARY"

@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
-"""Report recursive source/export contract changes against a named prior release."""
+"""Report recursive source/export contract changes against a named prior release.
+
+With --previous-ref the report also carries the record-level data diff (ids added, removed and
+changed, membership edges) from internacia_builder.release.
+"""
 from __future__ import annotations
 
 import argparse
 import json
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
 
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from internacia_builder.release import Snapshot, data_diff, extract_sources
 from internacia_builder.schemas import logical_type
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -166,13 +172,18 @@ def build_migration(previous_dir: Path | None, current_dir: Path, version: str, 
                 before = {}
             exports[name] = diff_schema(before, current) if available else diff_props({}, {})
     changed = any(d[k] for d in [*datasets.values(), *exports.values()] for k in ("added", "removed", "type_changed", "constraints_changed"))
+    data = None
+    if previous_ref:
+        with tempfile.TemporaryDirectory() as tmp:
+            before = Snapshot.load(extract_sources(ROOT, previous_ref, Path(tmp)))
+        data = data_diff(before, Snapshot.load(ROOT))
     return {
         "version": version, "schema_changed": changed if available else None,
         "baseline": {"ref": previous_ref, "commit": baseline_commit, "directory": str(previous_dir) if previous_dir else None,
                      "status": "partial" if available and missing else "available" if available else "unavailable",
                      "missing_contracts": missing},
         "note": "Recursive source and export schema differences; unavailable baselines do not establish compatibility",
-        "datasets": datasets, "exports": exports,
+        "datasets": datasets, "exports": exports, "data": data,
     }
 
 

@@ -52,14 +52,13 @@ hash. An unchanged hash alone does not establish source-schema compatibility.
 | `contract.json` | Tables, columns, types, keys, open enums, `contract_version`, `min_duckdb` |
 | `SHA256SUMS` | Checksums of every release asset |
 | `data/datasets/*.manifest.json` | `version`, `contract_version`, `schema_hash`, `row_count`, `git_commit`, per-file `sha256`/`bytes` |
-| `migration.vX.Y.Z.json` (Release asset) | Recursive source JSON Schema and exported Arrow differences against the identified previous release, generated on every release |
+| `migration.vX.Y.Z.json` (Release asset) | Recursive source JSON Schema and exported Arrow differences against the identified previous release, and (`data`) record ids added, removed and changed and membership edges added, removed and changed; generated on every release |
 | Alias JSON / Parquet | Id remaps across releases |
 | GitHub Release assets | Frozen Parquet/JSONL/DuckDB/CSV for that tag |
 
-There is **no** record-level `diff-vX.Y.Z.json` of added/removed ids yet. Until
-that ships, combine CHANGELOG + alias maps + `row_count`. CI compares manifests
-to `main` via `scripts/diff_countries_baseline.py` (internal; not a release
-asset).
+The record-level diff is the `data` section of `migration.vX.Y.Z.json`; the
+CHANGELOG entry of each release summarizes it. Combine it with the alias maps to
+follow renamed or merged ids.
 
 Migration reports include nested fields, array items, required fields, enums,
 and other constraints. `baseline.status` is `available`, `partial`, or
@@ -94,11 +93,14 @@ repository. Prefer:
 
 ## Git tags
 
-Maintainers tag `vX.Y.Z`. `.github/workflows/release.yml` rebuilds exports and
-attaches them as Release assets. The manifest `version` on a tagged build MUST
-match the git tag without the `v` prefix.
+PATCH and MINOR releases come from the [release train](release-train.md): a
+monthly pull request that bumps the version and is tagged `vX.Y.Z` when merged.
+`.github/workflows/release.yml` rebuilds exports and attaches them as Release
+assets. The manifest `version` on a tagged build MUST match the git tag without
+the `v` prefix.
 
-Before tagging, update the dated release entry in `CHANGELOG.md`, the version in
-`pyproject.toml`, `internacia_builder/__init__.py`, and `CITATION.cff` (`version`,
-`date-released`); rebuild and commit all exports. The release gate checks these
-versions against the tag and manifests.
+For a release by hand (MAJOR), run `python scripts/prepare_release.py --apply`
+or update the dated release entry in `CHANGELOG.md`, the version in
+`pyproject.toml`, `internacia_builder/__init__.py`, `uv.lock` and `CITATION.cff`
+(`version`, `date-released`) yourself, rebuild, commit the descriptors and tag.
+The release gate checks these versions against the tag and manifests.

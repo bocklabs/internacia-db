@@ -24,6 +24,7 @@ const sidebars: SidebarsConfig = {
         'when-to-use-internacia',
         'topic-taxonomy',
         'release-distribution',
+        'release-train',
       ],
     },
     {
