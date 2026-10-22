@@ -1,8 +1,8 @@
 {
   "dataset": "countries",
   "version": "3.1.0",
-  "build_date": "2026-10-22T11:26:42Z",
-  "git_commit": "930121d",
+  "build_date": "2026-10-22T11:35:26Z",
+  "git_commit": "dd7f3ca",
   "row_count": 256,
   "schema_hash": "da17844fae76a32e2d72a7c8e0b7af24ced6ba73ef1415d88bf56d8ab7b8bb4f",
   "data_license": "CC-BY-4.0",
@@ -40,7 +40,7 @@
     },
     {
       "path": "countries.meta.json",
-      "sha256": "8c87781975d326f7fd5d58f9b9a7f8a501801455b4ecb6443deebfcafd236ffe",
+      "sha256": "e0a9f4cf19158712933fad7d5153d3363a268a60ff5d878043022177b0369966",
       "bytes": 283
     },
     {

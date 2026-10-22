@@ -217,7 +217,16 @@ other_names:
   name: Европейский союз
 - id: zh
   name: 歐洲聯盟
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: European Union
+  retrieved_at: '2026-10-22'
+  url: https://european-union.europa.eu/principles-countries-history/eu-countries_en
+- field: membership_count
+  source: European Union
+  retrieved_at: '2026-10-22'
+  url: https://european-union.europa.eu/principles-countries-history/eu-countries_en
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -271,7 +271,16 @@ other_names:
   name: 北大西洋公約組織
 geographic_scope: regional
 wikidata_id: Q7184
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: NATO
+  retrieved_at: '2026-10-22'
+  url: https://www.nato.int/en/about-us/organization/nato-member-countries
+- field: membership_count
+  source: NATO
+  retrieved_at: '2026-10-22'
+  url: https://www.nato.int/en/about-us/organization/nato-member-countries
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-15'

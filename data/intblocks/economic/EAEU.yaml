@@ -108,7 +108,16 @@ other_names:
   name: Евразийский экономический союз
 - id: zh
   name: 欧亚经济联盟
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Eurasian Economic Commission
+  retrieved_at: '2026-10-22'
+  url: https://eec.eaeunion.org/en/comission/about/
+- field: membership_count
+  source: Eurasian Economic Commission
+  retrieved_at: '2026-10-22'
+  url: https://eec.eaeunion.org/en/comission/about/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

@@ -17,7 +17,7 @@ includes:
 - id: AI
   name: Anguilla
   type: country
-  status: member
+  status: associate_member
 - id: AG
   name: Antigua and Barbuda
   type: country
@@ -81,26 +81,33 @@ includes:
 - id: BM
   name: Bermuda
   type: country
-  status: member
+  status: associate_member
 - id: VG
   name: Virgin Islands, British
   type: country
-  status: member
+  status: associate_member
 - id: KY
   name: Cayman Islands
   type: country
-  status: member
+  status: associate_member
 - id: CW
   name: Curaçao
   type: country
-  status: member
+  status: associate_member
 - id: TC
   name: Turks and Caicos Islands
   type: country
-  status: member
-membership_count: 21
-description: International organization with 15 member states and 5 associate members
-  in the Caribbean region.
+  status: associate_member
+- id: GF
+  name: French Guiana
+  type: country
+  status: associate_member
+- id: MQ
+  name: Martinique
+  type: country
+  status: associate_member
+membership_count: 23
+description: Caribbean Community of 15 member states and 8 associate members.
 tags:
 - CARICOM
 - aid
@@ -144,7 +151,16 @@ other_names:
   name: Карибское сообщество
 - id: zh
   name: 加勒比共同體
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: CARICOM
+  retrieved_at: '2026-10-22'
+  url: https://caricom.org/member-states-and-associate-members/
+- field: membership_count
+  source: CARICOM
+  retrieved_at: '2026-10-22'
+  url: https://caricom.org/member-states-and-associate-members/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

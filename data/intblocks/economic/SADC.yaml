@@ -173,7 +173,16 @@ other_names:
   name: Сообщество развития Юга Африки
 - id: zh
   name: 南部非洲发展共同体
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: SADC
+  retrieved_at: '2026-10-22'
+  url: https://www.sadc.int/member-states
+- field: membership_count
+  source: SADC
+  retrieved_at: '2026-10-22'
+  url: https://www.sadc.int/member-states
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-15'

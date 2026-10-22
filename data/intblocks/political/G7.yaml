@@ -99,7 +99,16 @@ other_names:
 - id: zh
   name: 七大工業國組織
 wikidata_id: Q1764511
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Global Affairs Canada
+  retrieved_at: '2026-10-22'
+  url: https://www.international.gc.ca/world-monde/international_relations-relations_internationales/g7/index.aspx?lang=eng
+- field: membership_count
+  source: Global Affairs Canada
+  retrieved_at: '2026-10-22'
+  url: https://www.international.gc.ca/world-monde/international_relations-relations_internationales/g7/index.aspx?lang=eng
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
