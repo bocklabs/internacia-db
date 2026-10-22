@@ -37,7 +37,7 @@ countries = load_dataset("datenoio/internacia", "countries")
 ```
 
 Not uploaded: source YAML, compressed `.zst` variants, `internacia.duckdb`,
-migration diffs, and `_legacy/` snapshots. GitHub Release assets remain the
+and migration diffs. GitHub Release assets remain the
 full-fidelity channel; Hugging Face is the convenient query/loading channel.
 
 Note: the HF Data Studio viewer renders nested cells (structs, lists,

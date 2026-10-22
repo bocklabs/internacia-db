@@ -30,8 +30,8 @@ SKIP_DIR_NAMES = {
 }
 # Path prefixes (from repo root) that are generated, historical, or snapshots.
 SKIP_PATH_PREFIXES = {
-    "data/_legacy",
     "dev",
+    "docs/history",
     "openspec/changes/archive",
 }
 

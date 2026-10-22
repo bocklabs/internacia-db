@@ -80,9 +80,8 @@ workflow builds and typechecks the website on PRs.
 
 CI also runs `python scripts/builder.py analyze-quality` and **fails only on
 CRITICAL/IMPORTANT** findings; MEDIUM/LOW issues are advisory. The `dataquality/`
-report is regenerated on each run and uploaded as a workflow artifact — treat the
-CI artifact (or a fresh local run) as authoritative rather than any stale committed
-copy. Do not commit ad-hoc `dataquality/*_run/` directories.
+report is regenerated on each run and uploaded as a workflow artifact; it is not
+committed (`dataquality/` is ignored by git). Use the CI artifact or a fresh local run.
 
 Rule implementations live in a single shared layer
 (`internacia_builder/validate/country_rules.py`, `intblock_rules.py`,

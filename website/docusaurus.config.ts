@@ -52,6 +52,8 @@ const config: Config = {
           // Use the repo’s existing Markdown docs as the Docusaurus content source.
           // (We keep the scaffold’s default website/docs unused.)
           path: '../docs',
+          // Historical reviews and plans stay on GitHub only; their links are not maintained.
+          exclude: ['history/**'],
           routeBasePath: '/docs',
           editUrl: 'https://github.com/datenoio/internacia-db/edit/main/docs/',
         },

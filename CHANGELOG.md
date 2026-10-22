@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- `data/_legacy/` (pre-1.0 Airtable snapshots; history remains in git and Zenodo) and the unused
+  `data/datasets/schema_baseline/`.
+- `dataquality/` is no longer committed; the quality report is a CI artifact (`validate.yml`), and
+  the enrichment workflow no longer commits it.
+
+### Changed
+
+- Superseded reviews and plans (`REPOSITORY_REVIEW*.md`, `dev/internacia-db-review.md`,
+  `outputs/*.md`, `docs/improvement-plan.md`) moved to `docs/history/`, which the documentation
+  site does not publish.
+- All 29 completed OpenSpec changes are archived and their deltas applied to `openspec/specs/`;
+  the four tasks left open were closed (done, moved to issue #21, or won't do with rationale).
+
 ### Added
 
 - `internacia.duckdb` contains the alias and migration tables (`intblocks_aliases`,

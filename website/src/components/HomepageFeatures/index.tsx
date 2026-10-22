@@ -99,9 +99,9 @@ const sections: DocSection[] = [
         description: 'World Bank, Wikidata, and timezone refresh workflow.',
       },
       {
-        to: '/docs/improvement-plan',
-        label: 'Improvement plan',
-        description: 'Engineering backlog and quality workstreams.',
+        to: '/docs/data-contract',
+        label: 'Data contract',
+        description: 'Tables, keys, open enums, checksums, and versioning rules.',
       },
     ],
   },

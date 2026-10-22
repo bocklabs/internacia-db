@@ -83,7 +83,7 @@ Country provenance and intblock `last_verified` share a **12-month** advisory SL
   debt, not open product work.
 - Quality analyzer (`builder.py analyze-quality`) uses the same rule modules as
   the CLI validators; CI fails on CRITICAL/IMPORTANT.
-- [docs/improvement-plan.md](improvement-plan.md) and
+- [docs/history/improvement-plan.md](history/improvement-plan.md) and
   [docs/strategy-and-user-needs.md](strategy-and-user-needs.md) are **historical**
   planning snapshots — do not treat their gap lists as current.
 

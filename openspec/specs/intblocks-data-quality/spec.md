@@ -244,7 +244,7 @@ Topic keys on intblock records SHALL exist in the canonical catalog `data/schema
 
 ### Requirement: Membership list internal consistency
 
-Intblock membership data SHALL be internally consistent: an `includes` list SHALL NOT contain two entries with the same `id`, a populated `membership_count` SHALL match the number of `includes` entries within the tolerance configured in `data/schemas/intblocks_completeness.yaml`, and a record with `membership_applicability: not_applicable` SHALL NOT have a non-empty `includes` list. Violations SHALL be reported as `DUPLICATE_INCLUDE_ENTRY`, `MEMBERSHIP_COUNT_MISMATCH`, and `CONTRADICTORY_APPLICABILITY` respectively at MEDIUM priority.
+Intblock membership data SHALL be internally consistent: an `includes` list SHALL NOT contain two entries with the same `id`, a populated `membership_count` SHALL match the number of `includes` entries within the tolerance configured in `data/schemas/intblocks_completeness.yaml` unless the record declares a non-country `membership_count_type`, and a record with `membership_applicability: not_applicable` SHALL NOT have a non-empty `includes` list. Violations SHALL be reported as `DUPLICATE_INCLUDE_ENTRY`, `MEMBERSHIP_COUNT_MISMATCH`, and `CONTRADICTORY_APPLICABILITY` respectively at MEDIUM priority.
 
 #### Scenario: Duplicate include entry reported
 
@@ -253,8 +253,13 @@ Intblock membership data SHALL be internally consistent: an `includes` list SHAL
 
 #### Scenario: Membership count mismatch reported
 
-- **WHEN** an intblock has `membership_count: 10` and 13 `includes` entries with mismatch beyond the configured tolerance
+- **WHEN** an intblock has `membership_count: 10` and 13 `includes` entries with mismatch beyond the configured tolerance and no non-country `membership_count_type`
 - **THEN** validation reports a `MEMBERSHIP_COUNT_MISMATCH` issue
+
+#### Scenario: Non-country count exempt from roster comparison
+
+- **WHEN** an intblock declares `membership_count_type: companies` with `membership_count: 3000` and a short country `includes` list
+- **THEN** validation does not report a `MEMBERSHIP_COUNT_MISMATCH` issue
 
 #### Scenario: Contradictory applicability marker reported
 
@@ -522,4 +527,241 @@ The repository SHALL document in `docs/topic-taxonomy.md` the process for propos
 
 - **WHEN** a contributor needs to add a new topic key
 - **THEN** `docs/topic-taxonomy.md` describes the approval and alias-update steps
+
+### Requirement: High-value organization coverage from 2026-08 audit
+
+The intblocks dataset SHALL include records for the following bodies identified as verified coverage gaps: Codex Alimentarius Commission, Basel Committee on Banking Supervision, Court of Justice of the European Union, Inter-American Court of Human Rights, African Court on Human and Peoples' Rights, World Anti-Doping Agency, and the UN Secretariat. Each record SHALL meet the existing completeness gates and carry provenance for enriched fields.
+
+#### Scenario: Codex Alimentarius record exists
+
+- **WHEN** a consumer searches intblocks for the global food-standards body
+- **THEN** a `CODEX` record exists with its member roster and FAO/WHO parentage
+
+#### Scenario: Regional human-rights courts present
+
+- **WHEN** a consumer lists records in the `court/` category
+- **THEN** the Court of Justice of the EU, the Inter-American Court of Human Rights, and the African Court on Human and Peoples' Rights are present alongside ECHR
+
+#### Scenario: UN Secretariat completes principal organs
+
+- **WHEN** a consumer queries intblocks with `partof` containing `UN`
+- **THEN** a UN Secretariat record appears alongside UNGA, UNSC, and UNHRC
+
+### Requirement: Criminal court alias disambiguation
+
+The intblock alias map SHALL document that the International Criminal Court is stored under id `ICW`, distinguishing it from the cricket body stored under `ICC`.
+
+#### Scenario: Agent resolves ICC ambiguity
+
+- **WHEN** an agent looks up "ICC" via the aliases artifact
+- **THEN** it finds guidance that the criminal court is `ICW` and `ICC` is the International Cricket Council
+
+### Requirement: Intblock scope category
+
+Intblock records MAY include an optional `scope_category` field with values from a documented enum (`igo`, `treaty_body`, `policy_forum`, `reference_enumeration`) declared in `intblocks.schema.json`. The inclusion policy document SHALL define each category with examples.
+
+#### Scenario: Core IGO labeled
+
+- **WHEN** a consumer reads `data/intblocks/military/NATO.yaml` after labeling
+- **THEN** `scope_category` is `igo`
+
+#### Scenario: Reference enumeration labeled
+
+- **WHEN** a consumer filters intblocks where `scope_category = 'reference_enumeration'`
+- **THEN** DVD region records are included and NATO is excluded
+
+### Requirement: Intblock inclusion policy document
+
+The repository SHALL maintain `docs/intblock-inclusion-policy.md` stating what qualifies for an intblock record, how scope categories map to blocktypes, and how consumers should filter mixed corpora.
+
+#### Scenario: Policy answers forum vs IGO question
+
+- **WHEN** a reader asks whether Munich Security Conference belongs in the same filter as NATO
+- **THEN** the policy doc explains the scope_category distinction and recommended filters
+
+### Requirement: Membership count unit qualifier
+
+The intblock schema SHALL provide an optional `membership_count_type` field (enum: `countries`, `organizations`, `companies`, `individuals`, `mixed`) declaring the unit of `membership_count`. When absent, the count SHALL be interpreted as country members. Records declaring a non-country type SHALL carry a provenance entry for `membership_count`.
+
+#### Scenario: Consumer distinguishes count units
+
+- **WHEN** a consumer reads a record with `membership_count: 3000` and `membership_count_type: companies`
+- **THEN** the consumer can tell the count is not a country-member count
+
+#### Scenario: Non-country count requires provenance
+
+- **WHEN** a record declares a non-country `membership_count_type` without a `membership_count` provenance entry
+- **THEN** validation reports an issue
+
+### Requirement: Partof hierarchy semantic validation
+
+Validation SHALL flag intblock records whose `partof.id` references a target classified as a treaty or agreement (`legal_status: treaty` or blocktype includes `agreement`) rather than a parent organization.
+
+#### Scenario: EU partof EEA flagged
+
+- **WHEN** validation runs on `economic/EU.yaml` with `partof: EEA` before correction
+- **THEN** a hierarchy reversal finding is reported
+
+#### Scenario: WHO partof UN passes
+
+- **WHEN** validation runs on `unagency/WHO.yaml` with `partof: UN`
+- **THEN** no hierarchy reversal finding is reported
+
+### Requirement: UN specialized agency partof convention documented
+
+`docs/intblock-inclusion-policy.md` SHALL document whether UN specialized agencies link `partof` directly to `UN` or through intermediate bodies such as `ECOSOC`.
+
+#### Scenario: ILO convention documented
+
+- **WHEN** a maintainer edits UN agency hierarchy
+- **THEN** the policy doc states the chosen convention and lists affected agencies
+
+### Requirement: Wikidata identifier completeness with exclusions
+
+Every intblock record SHALL include a `wikidata_id` OR appear on a maintained exclusion list (`data/schemas/wikidata_exclusions.yaml`) documenting that no Wikidata item exists, with verification date and source. Validation SHALL fail on records missing both.
+
+#### Scenario: Excluded org passes validation
+
+- **WHEN** AFROSAIE lacks wikidata_id but is listed on the exclusion list with verified_at
+- **THEN** validation passes
+
+#### Scenario: Unlisted missing id fails
+
+- **WHEN** an intblock with a findable Wikidata item lacks wikidata_id and is not excluded
+- **THEN** validation reports a completeness error
+
+#### Scenario: Fixable backfill reduces exclusions
+
+- **WHEN** ACAO is backfilled with Q22686285
+- **THEN** it is removed from the exclusion list if present and validation requires wikidata_id
+
+### Requirement: Structural metadata enrichment from Wikidata
+
+For intblock records with a resolved `wikidata_id`, enrichment SHALL backfill `headquarters` (from headquarters location and coordinate claims) and `founded` (from the inception claim) when those fields are empty, recording a `provenance` entry for each filled field and never overwriting existing hand-curated values.
+
+#### Scenario: Headquarters filled from Wikidata
+
+- **WHEN** a record has a `wikidata_id`, an empty `headquarters`, and Wikidata exposes a headquarters location claim
+- **THEN** enrichment sets `headquarters` and adds a `provenance` entry with `field: headquarters` and `source: Wikidata`
+
+#### Scenario: Existing founded date preserved
+
+- **WHEN** a record already has a `founded` value
+- **THEN** enrichment does not overwrite it even if Wikidata exposes an inception claim
+
+### Requirement: Verification timestamp policy
+
+Records touched by enrichment or manual verification SHALL carry a `last_verified` ISO 8601 date, and `validate_intblocks.py` SHALL report `last_verified` coverage against a configurable threshold in `intblocks_completeness.yaml` in warn mode.
+
+#### Scenario: Enrichment stamps last_verified
+
+- **WHEN** `enrich_intblocks.py` updates any field on a record
+- **THEN** the record's `last_verified` is set to the run date
+
+#### Scenario: Low coverage warns without failing build
+
+- **WHEN** the share of records with a `last_verified` date is below the configured threshold with `mode: warn`
+- **THEN** validation emits a warning but does not fail the build
+
+### Requirement: Consistent scope reporting
+Standalone validation and quality analysis SHALL emit the same missing formal
+scope issue. Explicit historical identifiers SHALL be validated without treating
+them as current-country rows.
+
+#### Scenario: Missing formal scope
+- **WHEN** a formal record omits scope_category
+- **THEN** both validation and quality analysis report that omission
+
+#### Scenario: Unknown historical reference
+- **WHEN** a historical-country include references an unrecognized identifier
+- **THEN** validation reports an unresolved historical reference
+
+### Requirement: Honest enrichment dates
+Enrichment SHALL preserve untouched retrieval dates, refresh provider-backed
+values only from usable responses, and preserve declared observation precision.
+Updating metadata alone SHALL NOT imply membership-roster verification.
+
+#### Scenario: Provider failure
+- **WHEN** a provider returns no usable observation for an existing field
+- **THEN** its stored value and retrieval date remain unchanged
+
+#### Scenario: Year-only inception
+- **WHEN** Wikidata supplies a year-precision inception
+- **THEN** the authored date contains only the year and no fabricated month or day
+
+### Requirement: Duplicate-link classification
+
+The quality analyzer's duplicate-link check SHALL classify findings by link type and SHALL NOT treat country `tld` values as URLs. Expected shared domains and parent/child entity relationships SHALL be allowed, and the report SHALL distinguish "possible duplicate entity" from "shared external citation".
+
+#### Scenario: TLD not flagged as duplicate link
+
+- **WHEN** two country records share a top-level domain such as `.fr`
+- **THEN** the analyzer does not emit a `DUPLICATE_LINK` finding derived from a `tld` pseudo-URL
+
+#### Scenario: Shared citation classified separately from duplicate entity
+
+- **WHEN** two distinct organizations legitimately cite the same external source URL
+- **THEN** the finding is classified as a shared external citation rather than a possible duplicate entity
+
+### Requirement: Attribute partitions excluded from intblocks
+
+The intblocks dataset SHALL NOT contain records whose primary purpose is to encode a country attribute partition for DVD region, government form, legal system, rail gauge, television/broadcast system, traffic hand, writing direction, or writing system. Those classifications SHALL live on country records and/or vocab catalogs. Named geographic or set groupings MAY remain as intblocks with `scope_category: reference_enumeration`.
+
+#### Scenario: Traffichand directory removed
+
+- **WHEN** a consumer lists `data/intblocks/` after this change ships
+- **THEN** no `traffichand` category directory exists
+
+#### Scenario: Geographic reference enumeration retained
+
+- **WHEN** a consumer filters intblocks with `scope_category = 'reference_enumeration'`
+- **THEN** geographic groupings such as SIDS remain available and attribute-partition blocktypes do not
+
+#### Scenario: Blocktype taxonomy drops attribute types
+
+- **WHEN** `data/blocktypes/blocktypes.yaml` is read after retirement
+- **THEN** it does not define `dvdregion`, `govform`, `lawsystem`, `railgauge`, `teleregion`, `traffichand`, `writingdirection`, or `writingsystem`
+
+### Requirement: Government form not modeled as country org membership
+
+`govform` intblock records SHALL be retired from the intblocks corpus. Government-form typology SHALL NOT be reintroduced as intblock membership rosters. Optional vocab-only preservation of form definitions is permitted without country `includes` and without adding government-type fields to countries.
+
+#### Scenario: No govform includes after retirement
+
+- **WHEN** intblocks validation runs after this change
+- **THEN** no intblock file under a `govform` blocktype exists
+
+#### Scenario: Countries remain without government type field
+
+- **WHEN** `countries.schema.json` is inspected after this change
+- **THEN** it does not define government form / govform properties
+
+### Requirement: Audited roster accuracy
+
+Rosters of intblock records flagged by the 2026-08 external audit (`AFUNION`, `INTERPOL`, `CIS`, `UN`, `AIIB`, cricket `ICC`) SHALL match the membership published by the organization's official source at verification time, with `membership_count` equal to the current-member roster, correct `geographic_scope`, and membership status transitions (`former_member`, `associate_member`, `observer`, `left` dates) recorded instead of stale plain `member` entries. Each corrected field SHALL carry a provenance entry naming the official source.
+
+#### Scenario: African Union includes SADR
+
+- **WHEN** a consumer counts current members of `AFUNION`
+- **THEN** the result is 55 and includes `EH`
+
+#### Scenario: Interpol roster matches official count
+
+- **WHEN** a consumer counts current members of `INTERPOL`
+- **THEN** the result is 196 (matching the official member list, in which `FM` and `PW` are members and Aruba, Curaçao, and Sint Maarten appear as territory members), and `geographic_scope` is `global`
+
+#### Scenario: CIS withdrawals recorded
+
+- **WHEN** a consumer queries `CIS` includes for Georgia and Ukraine
+- **THEN** both carry `status: former_member` with a `left` date, and Turkmenistan carries an associate status
+
+#### Scenario: UN record is globally scoped with observers
+
+- **WHEN** a consumer reads `political/UN.yaml`
+- **THEN** `geographic_scope` is `global`, `PS` and `VA` appear with `status: observer`, and the member count remains 193
+
+#### Scenario: Membership count matches roster for audited records
+
+- **WHEN** validation compares `membership_count` to the includes roster for `AIIB` and cricket `ICC`
+- **THEN** the values agree within the configured tolerance
 

@@ -48,7 +48,6 @@ country = client.countries.get_by_code("US")
 print(country["name"])
 ```
 
-Do NOT read data/_legacy/ — obsolete pre-1.0 snapshots kept for historical reference only.
 
 ## Schemas and metadata
 

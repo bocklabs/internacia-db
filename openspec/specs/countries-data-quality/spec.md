@@ -222,3 +222,73 @@ Country and territory records that have a de-facto capital or seat of government
 - **WHEN** a record represents an uninhabited territory with no capital
 - **THEN** it is documented as an expected exclusion and does not count as an unexplained gap
 
+### Requirement: Quality analysis runs in CI
+
+Pull request CI SHALL run the dataset quality analyzer and publish its report as a workflow artifact. The step SHALL fail only when CRITICAL or IMPORTANT priority issues are present, with the failing threshold configurable.
+
+#### Scenario: Report published on every run
+
+- **WHEN** CI runs the quality analyzer on a pull request
+- **THEN** the analyzer report is available as a downloadable workflow artifact
+
+#### Scenario: Critical issue fails the build
+
+- **WHEN** the analyzer reports at least one CRITICAL issue
+- **THEN** the CI quality step fails
+
+#### Scenario: Low-priority issues do not fail the build
+
+- **WHEN** the analyzer reports only MEDIUM and LOW issues
+- **THEN** the CI quality step passes while still publishing the report
+
+### Requirement: Quality report freshness
+
+Checked-in quality reports under `dataquality/` SHALL be regenerated on release or published as CI artifacts rather than committed as stale copies. Any report that remains tracked SHALL have its header record counts validated against current source counts, and there SHALL NOT be parallel stale and fresh report directories.
+
+#### Scenario: Stale tracked report detected
+
+- **WHEN** a tracked quality report header count no longer matches the current source record count
+- **THEN** the freshness check reports the mismatch
+
+#### Scenario: No parallel report directories
+
+- **WHEN** the repository is inspected for quality reports
+- **THEN** there is a single canonical report location, not both a stale directory and a `fresh_run/` directory
+
+### Requirement: Attribute vocab id validation
+
+When present, country fields `writing_directions`, `writing_systems`, `broadcast_systems`, `legal_systems`, and `rail_gauges` SHALL use `id` values that exist in the corresponding `data/vocabs/` catalog. `dvd_region` SHALL be an integer in 1–6 when present. `car_side` SHALL remain restricted to `left` | `right`.
+
+#### Scenario: Unknown writing system id rejected
+
+- **WHEN** a country record sets `writing_systems: [{id: not_a_script}]`
+- **THEN** country validation reports a vocab resolution error
+
+#### Scenario: Invalid DVD region rejected
+
+- **WHEN** a country record sets `dvd_region: 9`
+- **THEN** country validation reports a range/schema error
+
+### Requirement: Attribute field list shape validation
+
+List-valued attribute fields SHALL be arrays of objects with a string `id`. At most one element MAY set `primary: true` within each list. Duplicate `id` values within a single field SHALL be rejected.
+
+#### Scenario: Two primaries rejected
+
+- **WHEN** `writing_directions` contains two entries with `primary: true`
+- **THEN** validation reports a primary-cardinality error
+
+#### Scenario: Duplicate id rejected
+
+- **WHEN** `legal_systems` lists `common_law` twice
+- **THEN** validation reports a duplicate-id error
+
+### Requirement: Attribute completeness warn mode
+
+Initial completeness configuration for the new attribute fields SHALL use `mode: warn` (not `error`) so incomplete historical intblock coverage does not block builds, while still surfacing coverage regressions.
+
+#### Scenario: Sparse legal_systems does not fail the build
+
+- **WHEN** many country records omit `legal_systems` after migration of incomplete lawsystem rosters
+- **THEN** completeness emits warnings within configured thresholds and does not fail validation in error mode
+

@@ -5,12 +5,17 @@ TBD - created by archiving change add-intblocks-validation. Update Purpose after
 ## Requirements
 ### Requirement: Intblocks validation before export
 
-The dataset builder SHALL run intblock validation before writing intblocks derived artifacts. Intblock validation logic SHALL be covered by automated tests.
+The dataset builder SHALL run intblock validation before writing intblocks derived artifacts by importing the validation module directly rather than subprocess invocation.
 
 #### Scenario: Build fails on intblock schema error
 
-- **WHEN** `scripts/builder.py build` runs and an intblock YAML file fails schema validation
+- **WHEN** the builder runs and an intblock YAML file fails schema validation
 - **THEN** the build exits with non-zero status and does not overwrite intblocks outputs
+
+#### Scenario: Validator importable in tests
+
+- **WHEN** pytest imports the intblocks validation module
+- **THEN** validation functions are callable without spawning a subprocess
 
 #### Scenario: Build succeeds when intblocks valid
 

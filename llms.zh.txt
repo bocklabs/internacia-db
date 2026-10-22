@@ -24,7 +24,6 @@
 - Python SDK: https://github.com/datenoio/internacia-python
 - REST API: https://github.com/datenoio/internacia-api (仅自托管；无公开托管实例)
 
-不要读取 data/_legacy/ — 1.0 之前的过时快照，仅供历史参考。
 
 ## Schema 与元数据
 

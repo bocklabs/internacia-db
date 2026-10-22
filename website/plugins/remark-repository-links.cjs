@@ -6,6 +6,7 @@ const path = require('node:path');
 module.exports = function remarkRepositoryLinks() {
   const root = path.resolve(__dirname, '../..');
   const docs = path.join(root, 'docs');
+  const excluded = path.join(docs, 'history');
   return (tree, file) => {
     function visit(node) {
       if ((node.type === 'link' || node.type === 'definition') &&
@@ -13,7 +14,8 @@ module.exports = function remarkRepositoryLinks() {
         const [target, fragment = ''] = node.url.split('#', 2);
         const resolved = path.resolve(path.dirname(file.path), target);
         const relative = path.relative(root, resolved);
-        const inDocs = resolved === docs || resolved.startsWith(docs + path.sep);
+        const inDocs = (resolved === docs || resolved.startsWith(docs + path.sep)) &&
+          resolved !== excluded && !resolved.startsWith(excluded + path.sep);
         if (!inDocs && !relative.startsWith('..') && fs.existsSync(resolved)) {
           const kind = fs.statSync(resolved).isDirectory() ? 'tree' : 'blob';
           const encoded = relative.split(path.sep).map(encodeURIComponent).join('/');
