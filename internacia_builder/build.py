@@ -78,81 +78,18 @@ from internacia_builder.schemas import (
     get_memberships_schema,
     schema_hash,  # noqa: F401  (re-exported for tests and the scripts/builder.py shim)
 )
-from internacia_builder.validate.completeness import (
-    is_null_intblock_field,
-    load_includes_status_catalog,
-)
 from internacia_builder.validate.countries import run_validation as run_countries_validation
-from internacia_builder.validate.country_rules import (
-    check_country_borders,
-    check_country_calling_codes,
-    check_country_capital_distance,
-    check_country_coordinates,
-    check_country_crosswalk_policy,
-    check_country_crosswalk_provenance,
-    check_country_crosswalk_uniqueness,
-    check_country_currency_codes,
-    check_country_duplicates,
-    check_country_entity_flags,
-    check_country_entity_status,
-    check_country_filename,
-    check_country_flag_emoji,
-    check_country_indicator_values,
-    check_country_indicator_years,
-    check_country_landlocked,
-    check_country_region_hierarchy,
-    check_country_schema,
-    check_country_text_encoding,
-    check_country_timezones,
-    check_country_tld,
-    check_country_whitespace,
-    check_provenance_count,
-    check_provenance_freshness,
-    check_provenance_integrity,
-    validate_completeness,
-    validate_official_iso_count,
-)
-from internacia_builder.validate.cross_rules import (
-    check_border_reciprocity,
-    check_border_resolution,
-    check_duplicate_acronyms,
-    check_duplicate_links,
-    check_duplicate_wikidata_ids,
-    check_historical_entity_members,
-    check_hq_coordinates,
-    check_hq_country,
-    check_include_name_mismatch,
-    check_org_refs,
-    check_parent_entity_refs,
-    check_partof_suborg_reciprocity,
-    check_successor_reciprocity,
-    load_border_reciprocity_allowlist,
-    validate_aliases,
-    validate_intblock_refs,
-    validate_partof_refs,
-)
-from internacia_builder.validate.intblock_rules import (
-    check_intblock_blocktypes,
-    check_intblock_chronology,
-    check_intblock_description_quality,
-    check_intblock_directory_alignment,
-    check_intblock_duplicates,
-    check_intblock_filename,
-    check_intblock_founding_members,
-    check_intblock_include_dates,
-    check_intblock_includes_contract,
-    check_intblock_last_verified,
-    check_intblock_lifecycle,
-    check_intblock_links,
-    check_intblock_membership_consistency,
-    check_intblock_schema,
-    check_intblock_scope_category,
-    check_intblock_text_encoding,
-    check_intblock_topics,
-    check_scope_coverage,
-)
-from internacia_builder.validate.intblocks import load_topic_aliases, load_topic_catalog
+from internacia_builder.validate.cross_rules import check_duplicate_links  # noqa: F401  (re-exported for tests)
 from internacia_builder.validate.intblocks import run_validation as run_intblocks_validation
+from internacia_builder.validate.registry import (
+    COUNTRIES,
+    COUNTRY_RULES,
+    INTBLOCK_RULES,
+    INTBLOCKS,
+    Rule,
+    load_context,
+    run_rules,
+)
 
 app = typer.Typer(help="Dataset builder for Internacia project")
 
@@ -477,354 +414,43 @@ def analyze_quality(
     if check_wikidata:
         typer.echo("  Wikidata validation: enabled (slow)")
 
-    schema_path_countries = project_root / "data" / "schemas" / "countries.schema.json"
-    completeness_path_countries = project_root / "data" / "schemas" / "countries_completeness.yaml"
-    schema_path_intblocks = project_root / "data" / "schemas" / "intblocks.schema.json"
-    completeness_path_intblocks = project_root / "data" / "schemas" / "intblocks_completeness.yaml"
-    blocktypes_path = blocktypes_source_path(project_root)
-    aliases_path = project_root / "data" / "intblocks_aliases.yaml"
-
     try:
-        schema_countries = json.loads(schema_path_countries.read_text(encoding="utf-8"))
-        completeness_cfg_countries = yaml.safe_load(completeness_path_countries.read_text(encoding="utf-8")) or {}
+        ctx = load_context(project_root, check_http=check_http, check_wikidata=check_wikidata)
     except Exception as e:
-        typer.echo(f"Error loading country schema/config: {e}", err=True)
+        typer.echo(f"Error loading schemas and rule configuration: {e}", err=True)
         raise typer.Exit(1) from e
+    country_records, intblock_records = ctx.countries.records, ctx.intblocks.records
+    completeness_cfg_intblocks = ctx.intblocks_cfg
+    total_records = ctx.countries.file_count + ctx.intblocks.file_count
+    typer.echo(f"  Found {ctx.countries.file_count} country files, {ctx.intblocks.file_count} intblock files\n")
 
-    try:
-        schema_intblocks = json.loads(schema_path_intblocks.read_text(encoding="utf-8"))
-        completeness_cfg_intblocks = yaml.safe_load(completeness_path_intblocks.read_text(encoding="utf-8")) or {}
-        includes_status_catalog = load_includes_status_catalog(project_root / "data" / "schemas")
-    except Exception as e:
-        typer.echo(f"Error loading intblock schema/config: {e}", err=True)
-        raise typer.Exit(1) from e
-
-    taxonomy = set()
-    if blocktypes_path.exists():
-        try:
-            bt_data = yaml.safe_load(blocktypes_path.read_text(encoding="utf-8")) or []
-            taxonomy = {str(b.get("id", "")) for b in bt_data if isinstance(b, dict)}
-        except Exception as e:
-            typer.echo(f"Warning: could not load blocktypes taxonomy: {e}", err=True)
-
-    aliases = []
-    if aliases_path.exists():
-        try:
-            aliases = yaml.safe_load(aliases_path.read_text(encoding="utf-8")) or []
-        except Exception as e:
-            typer.echo(f"Warning: could not load aliases: {e}", err=True)
-
-    topic_aliases = load_topic_aliases(project_root / "data" / "schemas" / "topic_aliases.yaml")
-    topic_catalog = load_topic_catalog(project_root / "data" / "schemas" / "topics.yaml")
-    countries_prov_cfg = completeness_cfg_countries.get("provenance") or {}
-    crosswalk_policy = yaml.safe_load(
-        (project_root / "data" / "schemas" / "country_crosswalk_exclusions.yaml").read_text(
-            encoding="utf-8"
-        )
-    ) or {}
-    intblocks_prov_cfg = (completeness_cfg_intblocks.get("fields") or {}).get("provenance") or {}
-    countries_prov_max_age = int(countries_prov_cfg.get("max_age_months") or 0)
-    intblocks_prov_max_age = int(intblocks_prov_cfg.get("max_age_months") or 0)
-    countries_prov_min_count = int(countries_prov_cfg.get("min_count") or 0)
-    intblocks_prov_min_count = int(intblocks_prov_cfg.get("min_count") or 0)
-    region_allowlist = {
-        str(x) for x in ((completeness_cfg_countries.get("region_hierarchy") or {}).get("allowlist") or [])
-    }
-    last_verified_max_age = int(
-        (completeness_cfg_intblocks.get("quality") or {}).get("last_verified_max_age_months") or 0
-    )
-
-    country_files = sorted(countries_dir.glob("*.yaml"))
-    intblock_files = sorted(intblocks_dir.rglob("*.yaml"))
-    typer.echo(f"  Found {len(country_files)} country files, {len(intblock_files)} intblock files\n")
-
-    country_records = []
-    country_rel_paths = []
     all_issues = []
-    records_with_issues = {}
-    total_records = 0
     parse_errors = 0
-
-    for path in tqdm(country_files, desc="Checking countries", unit="record", mininterval=1.0):
-        total_records += 1
-        rel_path = str(path.relative_to(project_root))
-        try:
-            with open(path, encoding="utf-8") as f:
-                record = yaml.safe_load(f)
-            if not record:
-                continue
-            country_records.append(record)
-            country_rel_paths.append(rel_path)
-
-            record_id = record.get("code", "unknown")
-            record_issues = []
-
-            record_issues.extend(check_country_schema(record, schema_countries))
-            record_issues.extend(check_country_borders(record))
-            record_issues.extend(check_country_indicator_years(record))
-            record_issues.extend(check_country_indicator_values(record))
-            record_issues.extend(check_country_whitespace(record))
-            record_issues.extend(check_country_entity_status(record))
-            record_issues.extend(check_country_entity_flags(record))
-            record_issues.extend(check_country_currency_codes(record))
-            record_issues.extend(check_country_coordinates(record))
-            record_issues.extend(check_country_filename(record, rel_path))
-            record_issues.extend(check_country_tld(record))
-            record_issues.extend(check_country_calling_codes(record))
-            record_issues.extend(check_country_timezones(record))
-            record_issues.extend(check_country_flag_emoji(record))
-            record_issues.extend(check_country_landlocked(record))
-            record_issues.extend(check_country_region_hierarchy(record, region_allowlist))
-            record_issues.extend(check_country_capital_distance(record, completeness_cfg_countries))
-            record_issues.extend(check_country_text_encoding(record))
-            record_issues.extend(check_provenance_integrity(record))
-            record_issues.extend(check_country_crosswalk_provenance(record))
-            if countries_prov_max_age:
-                record_issues.extend(check_provenance_freshness(record, max_age_months=countries_prov_max_age))
-            if countries_prov_min_count:
-                record_issues.extend(check_provenance_count(record, min_count=countries_prov_min_count))
-
-            for issue in record_issues:
-                issue["file_path"] = rel_path
-                issue["record_id"] = record_id
-                issue["priority"] = get_priority_level(issue["issue_type"], issue)
-
-            all_issues.extend(record_issues)
-            if record_issues:
-                records_with_issues[record_id] = {
-                    "file_path": rel_path,
-                    "issues": record_issues,
-                }
-        except Exception as e:
+    for dataset in (ctx.countries, ctx.intblocks):
+        for rel_path, error in dataset.errors:
             all_issues.append({
                 "issue_type": "SCHEMA_ERROR",
                 "field": "(root)",
-                "current_value": str(e),
-                "suggested_action": f"YAML parse error: {e}",
+                "current_value": error,
+                "suggested_action": error,
                 "file_path": rel_path,
-                "record_id": path.stem,
-                "priority": "CRITICAL"
+                "record_id": Path(rel_path).stem,
+                "priority": get_priority_level("SCHEMA_ERROR"),
             })
-            records_with_issues[path.stem] = {
-                "file_path": rel_path,
-                "issues": [all_issues[-1]]
-            }
             parse_errors += 1
 
-    country_issue_count = len(all_issues)
+    issue_counts = {COUNTRIES: 0, INTBLOCKS: 0, "cross-record": 0}
+    rules = [rule for rule in (*COUNTRY_RULES, *INTBLOCK_RULES) if rule.enabled(ctx)]
+    with tqdm(total=len(rules), desc="Running rules", unit="rule") as bar:
 
-    intblock_records = []
-    intblock_rel_paths = []
-    known_country_codes = {str(r.get("code")) for r in country_records if r.get("code")}
+        def advance(rule: Rule) -> None:
+            bar.set_postfix_str(f"{rule.dataset}: {rule.name}")
+            bar.update(1)
 
-    for path in tqdm(intblock_files, desc="Checking intblocks", unit="record", mininterval=1.0):
-        total_records += 1
-        rel_path = str(path.relative_to(project_root))
-        try:
-            with open(path, encoding="utf-8") as f:
-                record = yaml.safe_load(f)
-            if not record:
-                continue
-            intblock_records.append(record)
-            intblock_rel_paths.append(rel_path)
-
-            record_id = record.get("id", "unknown")
-            record_issues = []
-
-            record_issues.extend(check_intblock_schema(record, schema_intblocks))
-            record_issues.extend(check_intblock_scope_category(record))
-            record_issues.extend(check_intblock_blocktypes(record, taxonomy))
-            record_issues.extend(check_intblock_filename(record, rel_path))
-            record_issues.extend(check_intblock_directory_alignment(record, rel_path))
-            record_issues.extend(check_intblock_topics(record, topic_aliases, topic_catalog))
-            record_issues.extend(check_intblock_lifecycle(record))
-            record_issues.extend(check_intblock_chronology(record))
-            record_issues.extend(check_intblock_include_dates(record))
-            record_issues.extend(check_intblock_founding_members(record, known_country_codes))
-            record_issues.extend(check_intblock_membership_consistency(record, completeness_cfg_intblocks))
-            record_issues.extend(check_intblock_description_quality(record))
-            record_issues.extend(check_intblock_text_encoding(record))
-            if last_verified_max_age:
-                record_issues.extend(
-                    check_intblock_last_verified(record, max_age_months=last_verified_max_age)
-                )
-            record_issues.extend(
-                check_intblock_includes_contract(record, completeness_cfg_intblocks, includes_status_catalog)
-            )
-            record_issues.extend(check_intblock_links(record, check_http, check_wikidata))
-            record_issues.extend(check_provenance_integrity(record))
-            if intblocks_prov_max_age:
-                record_issues.extend(check_provenance_freshness(record, max_age_months=intblocks_prov_max_age))
-            if intblocks_prov_min_count:
-                record_issues.extend(check_provenance_count(record, min_count=intblocks_prov_min_count))
-
-            for issue in record_issues:
-                issue["file_path"] = rel_path
-                issue["record_id"] = record_id
-                issue["priority"] = get_priority_level(issue["issue_type"], issue)
-
-            all_issues.extend(record_issues)
-            if record_issues:
-                records_with_issues[record_id] = {
-                    "file_path": rel_path,
-                    "issues": record_issues,
-                }
-        except Exception as e:
-            all_issues.append({
-                "issue_type": "SCHEMA_ERROR",
-                "field": "(root)",
-                "current_value": str(e),
-                "suggested_action": f"YAML parse error: {e}",
-                "file_path": rel_path,
-                "record_id": path.stem,
-                "priority": "CRITICAL"
-            })
-            records_with_issues[path.stem] = {
-                "file_path": rel_path,
-                "issues": [all_issues[-1]]
-            }
-            parse_errors += 1
-
-    intblock_issue_count = len(all_issues) - country_issue_count
-
-    references_cfg = completeness_cfg_intblocks.get("references") or {}
-    alias_names = {str(a.get("alias") or "") for a in aliases if isinstance(a, dict)} - {""}
-    all_rel_paths = country_rel_paths + intblock_rel_paths
-    all_records = country_records + intblock_records
-    country_codes = known_country_codes
-    countries_by_code = {str(r.get("code")): r for r in country_records if r.get("code")}
-
-    cross_checks = [
-        ("country duplicate identifiers", lambda: check_country_duplicates(country_records, country_rel_paths)),
-        (
-            "country crosswalk uniqueness",
-            lambda: check_country_crosswalk_uniqueness(country_records, country_rel_paths),
-        ),
-        (
-            "country crosswalk policy",
-            lambda: check_country_crosswalk_policy(
-                country_records, country_rel_paths, crosswalk_policy
-            ),
-        ),
-        ("official ISO count", lambda: validate_official_iso_count(country_records)),
-        ("country completeness", lambda: validate_completeness(country_records, completeness_cfg_countries)),
-        ("intblock duplicate ids", lambda: check_intblock_duplicates(intblock_records, intblock_rel_paths)),
-        ("partof references", lambda: validate_partof_refs(intblock_records, intblock_rel_paths)),
-        (
-            "alias integrity",
-            lambda: validate_aliases(aliases, {str(r.get("id", "")) for r in intblock_records if r.get("id")}),
-        ),
-        (
-            "intblock completeness",
-            lambda: validate_completeness(
-                intblock_records,
-                completeness_cfg_intblocks,
-                null_checker=is_null_intblock_field,
-                attach_field_priority=True,
-            ),
-        ),
-        (
-            "country include resolution",
-            lambda: validate_intblock_refs(
-                countries_dir, intblock_records, intblock_rel_paths, completeness_cfg_countries
-            ),
-        ),
-        ("duplicate links", lambda: check_duplicate_links(all_rel_paths, all_records)),
-        ("border resolution", lambda: check_border_resolution(country_records, country_rel_paths)),
-        (
-            "border reciprocity",
-            lambda: check_border_reciprocity(
-                country_records,
-                country_rel_paths,
-                load_border_reciprocity_allowlist(completeness_cfg_countries),
-            ),
-        ),
-        (
-            "organizational references",
-            lambda: check_org_refs(
-                intblock_records,
-                intblock_rel_paths,
-                alias_names,
-                {str(x) for x in (references_cfg.get("org_ref_allowlist") or [])},
-            ),
-        ),
-        (
-            "headquarters countries",
-            lambda: check_hq_country(
-                intblock_records,
-                intblock_rel_paths,
-                country_codes,
-                set(completeness_cfg_countries.get("special_entity_allowlist") or []),
-            ),
-        ),
-        (
-            "wikidata id uniqueness",
-            lambda: check_duplicate_wikidata_ids(
-                all_rel_paths,
-                all_records,
-                {str(x) for x in (references_cfg.get("wikidata_duplicate_allowlist") or [])},
-            ),
-        ),
-        (
-            "include display names",
-            lambda: check_include_name_mismatch(
-                intblock_records,
-                intblock_rel_paths,
-                countries_by_code,
-            ),
-        ),
-        (
-            "parent entity references",
-            lambda: check_parent_entity_refs(country_records, country_rel_paths),
-        ),
-        (
-            "lineage reciprocity",
-            lambda: check_successor_reciprocity(intblock_records, intblock_rel_paths),
-        ),
-        (
-            "partof/suborganization reciprocity",
-            lambda: check_partof_suborg_reciprocity(intblock_records, intblock_rel_paths),
-        ),
-        (
-            "acronym uniqueness",
-            lambda: check_duplicate_acronyms(
-                intblock_records,
-                intblock_rel_paths,
-                {str(x) for x in (references_cfg.get("acronym_duplicate_allowlist") or [])},
-            ),
-        ),
-        (
-            "headquarters coordinates",
-            lambda: check_hq_coordinates(
-                intblock_records,
-                intblock_rel_paths,
-                countries_by_code,
-                completeness_cfg_intblocks,
-            ),
-        ),
-        (
-            "historical entity members",
-            lambda: check_historical_entity_members(
-                intblock_records,
-                intblock_rel_paths,
-                countries_by_code,
-            ),
-        ),
-    ]
-
-    cross_issues = []
-    cross_issues.extend(check_scope_coverage(intblock_records, completeness_cfg_intblocks))
-    with tqdm(cross_checks, desc="Cross-record checks", unit="check") as bar:
-        for label, check in bar:
-            bar.set_postfix_str(label)
-            cross_issues.extend(check())
-
-    for issue in cross_issues:
-        issue.setdefault("file_path", "cross-record")
-        issue.setdefault("record_id", "cross-record")
-        issue["priority"] = get_priority_level(issue["issue_type"], issue)
-
-    all_issues.extend(cross_issues)
+        for rule, issue in run_rules(rules, ctx, on_rule=advance):
+            issue["priority"] = get_priority_level(issue["issue_type"], issue)
+            issue_counts["cross-record" if rule.cross else rule.dataset] += 1
+            all_issues.append(issue)
 
     for issue in all_issues:
         rec_id = issue.get("record_id", "unknown")
@@ -972,14 +598,17 @@ def analyze_quality(
     clean_pct = (clean_records / total_records * 100) if total_records else 0.0
 
     typer.echo(f"\n✅ Quality analysis completed in {elapsed:.1f}s")
-    typer.echo(f"  Records analyzed: {total_records} ({len(country_files)} countries, {len(intblock_files)} intblocks)")
+    typer.echo(
+        f"  Records analyzed: {total_records} "
+        f"({ctx.countries.file_count} countries, {ctx.intblocks.file_count} intblocks)"
+    )
     if parse_errors:
         typer.echo(f"  ⚠️  YAML parse errors: {parse_errors}")
     typer.echo(f"  Records with issues: {len(records_with_issues)} ({clean_records} clean, {clean_pct:.1f}%)")
     typer.echo(f"  Total issues found: {len(all_issues)}")
-    typer.echo(f"    from country checks: {country_issue_count}")
-    typer.echo(f"    from intblock checks: {intblock_issue_count}")
-    typer.echo(f"    from cross-record checks: {len(cross_issues)}")
+    typer.echo(f"    from country checks: {issue_counts[COUNTRIES]}")
+    typer.echo(f"    from intblock checks: {issue_counts[INTBLOCKS]}")
+    typer.echo(f"    from cross-record checks: {issue_counts['cross-record']}")
 
     typer.echo("\nPriority breakdown:")
     for p in ["CRITICAL", "IMPORTANT", "MEDIUM", "LOW"]:

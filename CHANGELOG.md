@@ -83,6 +83,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `internacia.duckdb` is written with an explicit `storage_compatibility_version` (`v1.0.0`, the
   format already in use).
 - Country crosswalks now use curated official-source snapshots with field-level provenance and machine-readable eligibility exceptions (`data/schemas/country_crosswalk_sources.yaml`, `data/schemas/country_crosswalk_exclusions.yaml`): GeoNames covers all 249 current ISO records, IOC covers 206 mapped NOCs, FIFA covers 207 mapped Member Associations, and FIPS remains explicitly legacy-only. Columnar schemas are unchanged; populated values grow from about 118 per field to 206–251.
+- The validators and `analyze-quality` run one rule registry
+  (`internacia_builder/validate/registry.py`, issue #21). `analyze-quality` now also reports
+  invalid attribute fields, missing intblock `wikidata_id` and `partof` targets that are treaties,
+  and files crosswalk and attribute-migration issues as IMPORTANT, so the quality gate fails on
+  every validator error. `validate_intblocks.py` now warns about intblock provenance integrity and
+  freshness. On the current data neither output changes.
+- `validate_countries.py` and `validate_intblocks.py` run about 4–5 times faster (YAML is parsed
+  with libyaml when available, and each file once).
 
 ### Fixed
 
