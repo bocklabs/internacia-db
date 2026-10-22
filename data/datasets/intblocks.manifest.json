@@ -1,12 +1,12 @@
 {
   "dataset": "intblocks",
-  "version": "3.0.0",
-  "build_date": "2026-10-22T10:15:36Z",
-  "git_commit": "942e39f",
+  "version": "3.1.0",
+  "build_date": "2026-10-22T11:10:51Z",
+  "git_commit": "fd2287e",
   "row_count": 1275,
   "schema_hash": "aa66550599e0342fa0117232375f7428bb94431f8174000933e7ae483e70c4aa",
   "data_license": "CC-BY-4.0",
-  "contract_version": "3.0",
+  "contract_version": "3.1",
   "files": [
     {
       "path": "intblocks-lite.csv.zst",
@@ -40,7 +40,7 @@
     },
     {
       "path": "intblocks.meta.json",
-      "sha256": "d1dec27718651fe85a1ceb4d5807da79eb1c400a7ee4d054b5522034cfbbd8cb",
+      "sha256": "d4ed8c5e274bd0d555e5e22da9921dd01f958fe126991dedefb015ad9372c206",
       "bytes": 284
     },
     {

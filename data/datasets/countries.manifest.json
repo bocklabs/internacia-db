@@ -1,12 +1,12 @@
 {
   "dataset": "countries",
-  "version": "3.0.0",
-  "build_date": "2026-10-22T10:15:36Z",
-  "git_commit": "942e39f",
+  "version": "3.1.0",
+  "build_date": "2026-10-22T11:10:51Z",
+  "git_commit": "fd2287e",
   "row_count": 256,
   "schema_hash": "da17844fae76a32e2d72a7c8e0b7af24ced6ba73ef1415d88bf56d8ab7b8bb4f",
   "data_license": "CC-BY-4.0",
-  "contract_version": "3.0",
+  "contract_version": "3.1",
   "files": [
     {
       "path": "countries-lite.csv.zst",
@@ -40,7 +40,7 @@
     },
     {
       "path": "countries.meta.json",
-      "sha256": "6afa596a831ccac7b19d3508ba0eeae47efbf210d90fe15d6058b2f6ea98d7ba",
+      "sha256": "8a25b7415da4bce3cd704f1b9cdf7fe10b95a0bcf440f054ed9d8cf5a07b1f9f",
       "bytes": 283
     },
     {
