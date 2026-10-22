@@ -82,7 +82,16 @@ other_names:
   name: Ядерный клуб
 - id: zh
   name: 核武器擁有國列表
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: United States Department of State
+  retrieved_at: '2026-10-22'
+  url: https://2017-2021.state.gov/joint-statement-by-the-foreign-ministers-of-china-france-russia-the-united-kingdom-and-the-united-states-on-the-fiftieth-anniversary-of-the-treaty-on-the-non-proliferation-of-nuclear-weapons/
+- field: membership_count
+  source: United States Department of State
+  retrieved_at: '2026-10-22'
+  url: https://2017-2021.state.gov/joint-statement-by-the-foreign-ministers-of-china-france-russia-the-united-kingdom-and-the-united-states-on-the-fiftieth-anniversary-of-the-treaty-on-the-non-proliferation-of-nuclear-weapons/
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

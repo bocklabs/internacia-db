@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-22 for the NPT nuclear-weapon states (China, France, Russia, the United Kingdom and the United States).
 - `last_verified` set to 2026-10-22 for the Sava Commission (Bosnia and Herzegovina, Croatia, Serbia and Slovenia; Montenegro shares the basin and is not a party) and the SEECP (13 participants, including Kosovo).
 - `last_verified` set to 2026-10-22 for the ICPDR (14 contracting parties plus the EU) and CICOS (Cameroon, the Central African Republic, Congo, the Democratic Republic of the Congo, Gabon and Angola).
 - `last_verified` set to 2026-10-22 for the Niger Basin Authority (9), the Lake Chad Basin Commission (6 members and 3 observers), and the Australia FTAs with India, the United Kingdom and the United Arab Emirates.
