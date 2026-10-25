@@ -854,7 +854,16 @@ acronyms:
   value: 国际电联
 - lang: zh
   value: 国际电信联盟
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: International Telecommunication Union
+  retrieved_at: '2026-10-25'
+  url: https://www.itu.int/en/ITU-R/terrestrial/fmd/pages/administrations_members.aspx
+- field: membership_count
+  source: International Telecommunication Union
+  retrieved_at: '2026-10-25'
+  url: https://www.itu.int/en/ITU-R/terrestrial/fmd/pages/administrations_members.aspx
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-07-15'

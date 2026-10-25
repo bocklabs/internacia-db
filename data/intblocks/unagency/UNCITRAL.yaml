@@ -350,7 +350,16 @@ notes: UNCITRAL is a subsidiary body of the UN General Assembly with up to 70 Me
   six-year terms; membership rotates and is structured by geographic region. Non-member States may attend
   Commission and working-group sessions as observers. Includes lists the 68 members published by UNCITRAL
   as of 2026-07-16 (authorized composition is 70; vacant seats omitted).
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United Nations Commission on International Trade Law
+  retrieved_at: '2026-10-25'
+  url: https://uncitral.un.org/sites/default/files/2511964e_uncitral_report_advance_0.pdf
+- field: membership_count
+  source: United Nations Commission on International Trade Law
+  retrieved_at: '2026-10-25'
+  url: https://uncitral.un.org/sites/default/files/2511964e_uncitral_report_advance_0.pdf
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-16'
