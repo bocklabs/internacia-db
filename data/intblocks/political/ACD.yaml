@@ -203,7 +203,16 @@ other_names:
   name: Диалог о сотрудничестве в Азии
 - id: zh
   name: 亚洲合作对话
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Asia Cooperation Dialogue
+  retrieved_at: '2026-10-25'
+  url: https://www.acd-dialogue.org/about-acd.html
+- field: membership_count
+  source: Asia Cooperation Dialogue
+  retrieved_at: '2026-10-25'
+  url: https://www.acd-dialogue.org/about-acd.html
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'
