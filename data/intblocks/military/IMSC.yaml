@@ -107,7 +107,16 @@ other_names:
   name: International Maritime Security Construct
 - id: en
   name: IMSC
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: International Maritime Security Construct
+  retrieved_at: '2026-10-25'
+  url: https://www.centcom.mil/MEDIA/NEWS-ARTICLES/News-Article-View/Article/3692107/international-maritime-security-construct-holds-change-of-command/
+- field: membership_count
+  source: International Maritime Security Construct
+  retrieved_at: '2026-10-25'
+  url: https://www.centcom.mil/MEDIA/NEWS-ARTICLES/News-Article-View/Article/3692107/international-maritime-security-construct-holds-change-of-command/
 - field: legal_status
   source: official sources
   retrieved_at: '2026-06-15'
