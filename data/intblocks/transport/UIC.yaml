@@ -174,10 +174,6 @@ includes:
   name: Hungary
   type: country
   status: member
-- id: ID
-  name: Indonesia
-  type: country
-  status: member
 - id: IE
   name: Ireland
   type: country
@@ -274,20 +270,12 @@ includes:
   name: Philippines
   type: country
   status: member
-- id: PK
-  name: Pakistan
-  type: country
-  status: member
 - id: PL
   name: Poland
   type: country
   status: member
 - id: PT
   name: Portugal
-  type: country
-  status: member
-- id: QA
-  name: Qatar
   type: country
   status: member
 - id: RO
@@ -366,7 +354,23 @@ includes:
   name: South Africa
   type: country
   status: member
-membership_count: 83
+- id: BF
+  name: Burkina Faso
+  type: country
+  status: member
+- id: LY
+  name: Libya
+  type: country
+  status: member
+- id: MX
+  name: Mexico
+  type: country
+  status: member
+- id: NE
+  name: Niger
+  type: country
+  status: member
+membership_count: 84
 wikidata_id: Q388314
 legal_status: industry_association
 description: International rail transport industry body headquartered in Paris, promoting rail transport worldwide and developing
@@ -412,7 +416,16 @@ other_names:
   name: Международный союз железных дорог
 - id: zh
   name: 國際鐵路聯盟
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: International Union of Railways
+  retrieved_at: '2026-10-25'
+  url: https://uic.org/IMG/pdf/uic_work_programme_2026-2028_final.pdf
+- field: membership_count
+  source: International Union of Railways
+  retrieved_at: '2026-10-25'
+  url: https://uic.org/IMG/pdf/uic_work_programme_2026-2028_final.pdf
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

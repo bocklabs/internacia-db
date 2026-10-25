@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for BSEC (13 members and 14 observers) and the UIC (84 countries in the January 2026 work programme; Indonesia, Pakistan and Qatar drop out, and Burkina Faso, Libya, Mexico and Niger are added).
 - `last_verified` set to 2026-10-25 for WATAF (15 member administrations) and the Arms Trade Treaty (118 states parties as of 26 February 2026).
 - `last_verified` set to 2026-10-25 for IICA (34 member states, plus the observers and associated Spain named on the country page), GICNT (77 partner nations and 4 observers), the Warsaw Pact (the eight UN-registered parties, all former), and PEPFAR (Barbados and Suriname replace Benin; the United States stays the funder).
 - `last_verified` set to 2026-10-25 for CEN-SAD (25 members) and the United Nations Command (Korea added; Germany is a former medical contributor and has not returned; `membership_count` 18).
