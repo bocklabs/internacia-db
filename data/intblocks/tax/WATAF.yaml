@@ -116,7 +116,16 @@ other_names:
   name: Forum des Administrations Fiscales d'Afrique de l'Ouest
 - id: pt
   name: Fórum da Administração Fiscal da África Ocidental
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: West African Tax Administration Forum
+  retrieved_at: '2026-10-25'
+  url: https://wataf-tax.org/member-countries/
+- field: membership_count
+  source: West African Tax Administration Forum
+  retrieved_at: '2026-10-25'
+  url: https://wataf-tax.org/member-countries/
 - field: description
   source: WATAF official website
   retrieved_at: '2026-06-15'
