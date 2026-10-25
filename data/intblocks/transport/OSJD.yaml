@@ -193,7 +193,16 @@ other_names:
   name: Организация сотрудничества железных дорог
 - id: zh
   name: 铁路合作组织
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Organisation for Co-operation between Railways
+  retrieved_at: '2026-10-25'
+  url: https://en.osjd.org/api/media/resources/5044?action=download
+- field: membership_count
+  source: Organisation for Co-operation between Railways
+  retrieved_at: '2026-10-25'
+  url: https://en.osjd.org/api/media/resources/5044?action=download
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

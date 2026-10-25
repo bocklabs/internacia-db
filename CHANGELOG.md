@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for the OSJD (30 member countries as of 1 September 2026).
 - `last_verified` set to 2026-10-25 for the IOC of UNESCO (153 member states as of 25 March 2026).
 - `last_verified` set to 2026-10-25 for the IPU (184 member parliaments). Antigua and Barbuda, Barbados, Dominica, Eritrea, Grenada, Kiribati, Saint Kitts and Nevis, Solomon Islands, Sudan and the United States are not on the list.
 - `last_verified` set to 2026-10-25 for the ITU (194 member states) and UNCITRAL (68 current members as of 7 July 2025).
