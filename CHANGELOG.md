@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for the IPU (184 member parliaments). Antigua and Barbuda, Barbados, Dominica, Eritrea, Grenada, Kiribati, Saint Kitts and Nevis, Solomon Islands, Sudan and the United States are not on the list.
 - `last_verified` set to 2026-10-25 for the ITU (194 member states) and UNCITRAL (68 current members as of 7 July 2025).
 - `last_verified` set to 2026-10-25 for UNESCO (194 member states and 12 associate members as of 1 January 2026; Israel withdrew effective 31 December 2018) and the IPCC (195 member countries).
 - `last_verified` set to 2026-10-25 for FAO (193 member nations, the European Union, and associate members the Faroe Islands and Tokelau; the Cook Islands are a member nation; Nicaragua is a former member) and the IMO (176 member states and associate members the Faroe Islands, Hong Kong and Macao).
