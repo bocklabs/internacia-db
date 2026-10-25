@@ -84,7 +84,16 @@ notes: EARAF brings together the Commissioners General of the EAC partner states
 other_names:
 - id: en
   name: East African Revenue Authorities Forum
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: East African Community
+  retrieved_at: '2026-10-25'
+  url: https://www.eac.int/eac-partner-states
+- field: membership_count
+  source: East African Community
+  retrieved_at: '2026-10-25'
+  url: https://www.eac.int/eac-partner-states
 - field: description
   source: Kenya Revenue Authority
   retrieved_at: '2026-06-15'

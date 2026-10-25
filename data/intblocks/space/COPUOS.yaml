@@ -505,7 +505,16 @@ other_names:
   name: Комитет по использованию космического пространства в мирных целях
 - id: zh
   name: 联合国和平利用外层空间委员会
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United Nations Office for Outer Space Affairs
+  retrieved_at: '2026-10-25'
+  url: https://www.unoosa.org/oosa/en/ourwork/copuos/members/evolution.html
+- field: membership_count
+  source: United Nations Office for Outer Space Affairs
+  retrieved_at: '2026-10-25'
+  url: https://www.unoosa.org/oosa/en/ourwork/copuos/members/evolution.html
 - field: includes
   source: official sources
   retrieved_at: '2026-07-30'
