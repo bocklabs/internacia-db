@@ -155,11 +155,13 @@ description: Regional federation that promotes chemistry in Asia and the Pacific
   Comprises 32 chemical societies from countries and territories across the Asia-Pacific
   region, representing individual qualified chemists dedicated to advancing chemistry.
 legal_status: non-governmental
-notes: Member societies include chemical societies from Australia, Bangladesh, Brunei,
+notes: The member-societies page names chemical societies in Australia, Bangladesh, Brunei,
   Cambodia, China, Hong Kong, India, Indonesia, Iraq, Israel, Japan, Jordan, Korea,
-  Kuwait, Malaysia, Mongolia, Myanmar, Nepal, New Zealand, Pakistan, Philippines,
-  Russia, Saudi Arabia, Singapore, Sri Lanka, Taiwan, Thailand, Timor-Leste, Turkey,
-  and Vietnam.
+  Kuwait, Malaysia, Mongolia, Myanmar, Nepal, New Zealand, Pakistan, Papua New Guinea,
+  the Philippines, Russia, Saudi Arabia, Singapore, Sri Lanka, Taiwan, Thailand,
+  Timor-Leste, Turkey, and Vietnam. India has two societies. The Chemical Society of
+  the South Pacific has no single country code. The federation describes itself as
+  32 societies.
 tags:
 - FACS
 - chemistry
@@ -178,7 +180,16 @@ other_names:
 - id: zh
   name: 亚洲化学学会联合会
 wikidata_id: Q56063191
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Federation of Asian Chemical Societies
+  retrieved_at: '2026-10-25'
+  url: https://facs.website/facs-member-societies/
+- field: membership_count
+  source: Federation of Asian Chemical Societies
+  retrieved_at: '2026-10-25'
+  url: https://facs.website/facs-member-societies/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
