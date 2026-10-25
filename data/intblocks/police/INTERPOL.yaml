@@ -1045,7 +1045,16 @@ other_names:
 - id: zh
   name: 國際刑警組織
 wikidata_id: Q8475
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: INTERPOL
+  retrieved_at: '2026-10-25'
+  url: https://www.interpol.int/en/Who-we-are/Member-countries
+- field: membership_count
+  source: INTERPOL
+  retrieved_at: '2026-10-25'
+  url: https://www.interpol.int/en/Who-we-are/Member-countries
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
