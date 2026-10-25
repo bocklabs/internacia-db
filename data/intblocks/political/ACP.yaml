@@ -67,6 +67,10 @@ includes:
   name: Côte d'Ivoire
   type: country
   status: member
+- id: CK
+  name: Cook Islands
+  type: country
+  status: member
 - id: CM
   name: Cameroon
   type: country
@@ -89,10 +93,6 @@ includes:
   status: member
 - id: DO
   name: Dominican Republic
-  type: country
-  status: member
-- id: EG
-  name: Egypt
   type: country
   status: member
 - id: ER
@@ -211,10 +211,6 @@ includes:
   name: Namibia
   type: country
   status: member
-- id: NC
-  name: New Caledonia
-  type: country
-  status: member
 - id: NE
   name: Niger
   type: country
@@ -227,8 +223,8 @@ includes:
   name: Nauru
   type: country
   status: member
-- id: PF
-  name: French Polynesia
+- id: NU
+  name: Niue
   type: country
   status: member
 - id: PG
@@ -269,10 +265,6 @@ includes:
   status: member
 - id: SR
   name: Suriname
-  type: country
-  status: member
-- id: SS
-  name: South Sudan
   type: country
   status: member
 - id: ST
@@ -339,7 +331,7 @@ includes:
   name: Zimbabwe
   type: country
   status: member
-membership_count: 81
+membership_count: 79
 founded: '1975'
 geographic_scope: regional
 regions:
@@ -379,7 +371,16 @@ topics:
 - key: regional_cooperation
   name: Regional Cooperation
 wikidata_id: Q294278
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Organisation of African, Caribbean and Pacific States
+  retrieved_at: '2026-10-25'
+  url: https://www.oacps.org/wp-content/uploads/2025/10/oacps-2022-25-strategic-plan-becoming-a-centre-of-excellence.pdf
+- field: membership_count
+  source: Organisation of African, Caribbean and Pacific States
+  retrieved_at: '2026-10-25'
+  url: https://www.oacps.org/wp-content/uploads/2025/10/oacps-2022-25-strategic-plan-becoming-a-centre-of-excellence.pdf
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

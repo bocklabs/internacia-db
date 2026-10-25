@@ -22,10 +22,6 @@ includes:
   name: Afghanistan
   type: country
   status: member
-- id: AM
-  name: Armenia
-  type: country
-  status: member
 - id: AZ
   name: Azerbaijan
   type: country
@@ -36,10 +32,6 @@ includes:
   status: member
 - id: BH
   name: Bahrain
-  type: country
-  status: member
-- id: BN
-  name: Brunei Darussalam
   type: country
   status: member
 - id: BT
@@ -54,16 +46,8 @@ includes:
   name: Cyprus
   type: country
   status: member
-- id: GE
-  name: Georgia
-  type: country
-  status: member
 - id: ID
   name: Indonesia
-  type: country
-  status: member
-- id: IL
-  name: Israel
   type: country
   status: member
 - id: IN
@@ -82,16 +66,16 @@ includes:
   name: Jordan
   type: country
   status: member
-- id: JP
-  name: Japan
-  type: country
-  status: member
 - id: KG
   name: Kyrgyzstan
   type: country
   status: member
 - id: KH
   name: Cambodia
+  type: country
+  status: member
+- id: KI
+  name: Kiribati
   type: country
   status: member
 - id: KP
@@ -120,10 +104,6 @@ includes:
   status: member
 - id: LK
   name: Sri Lanka
-  type: country
-  status: member
-- id: MM
-  name: Myanmar
   type: country
   status: member
 - id: MN
@@ -158,6 +138,10 @@ includes:
   name: Palestine, State of
   type: country
   status: member
+- id: PW
+  name: Palau
+  type: country
+  status: member
 - id: QA
   name: Qatar
   type: country
@@ -168,10 +152,6 @@ includes:
   status: member
 - id: SA
   name: Saudi Arabia
-  type: country
-  status: member
-- id: SG
-  name: Singapore
   type: country
   status: member
 - id: SY
@@ -190,8 +170,8 @@ includes:
   name: Timor-Leste
   type: country
   status: member
-- id: TM
-  name: Turkmenistan
+- id: TO
+  name: Tonga
   type: country
   status: member
 - id: TR
@@ -210,7 +190,63 @@ includes:
   name: Yemen
   type: country
   status: member
-membership_count: 49
+- id: AU
+  name: Australia
+  type: country
+  status: observer
+- id: BY
+  name: Belarus
+  type: country
+  status: observer
+- id: FJ
+  name: Fiji
+  type: country
+  status: observer
+- id: FM
+  name: Micronesia, Fed. Sts.
+  type: country
+  status: observer
+- id: JP
+  name: Japan
+  type: country
+  status: observer
+- id: MH
+  name: Marshall Islands
+  type: country
+  status: observer
+- id: NR
+  name: Nauru
+  type: country
+  status: observer
+- id: NZ
+  name: New Zealand
+  type: country
+  status: observer
+- id: PG
+  name: Papua New Guinea
+  type: country
+  status: observer
+- id: SB
+  name: Solomon Islands
+  type: country
+  status: observer
+- id: TM
+  name: Turkmenistan
+  type: country
+  status: observer
+- id: TV
+  name: Tuvalu
+  type: country
+  status: observer
+- id: VU
+  name: Vanuatu
+  type: country
+  status: observer
+- id: WS
+  name: Samoa
+  type: country
+  status: observer
+membership_count: 44
 description: Parliamentary assembly.
 tags:
 - APA
@@ -233,7 +269,16 @@ other_names:
 - id: zh
   name: 亚洲议会大会
 wikidata_id: Q16944864
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Asian Parliamentary Assembly
+  retrieved_at: '2026-10-25'
+  url: https://www.asianparliament.org/member-parliaments/
+- field: membership_count
+  source: Asian Parliamentary Assembly
+  retrieved_at: '2026-10-25'
+  url: https://www.asianparliament.org/member-parliaments/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

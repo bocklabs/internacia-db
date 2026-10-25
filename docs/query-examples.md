@@ -824,8 +824,8 @@ HAVING observer_count >= 5
 ORDER BY observer_count DESC, c.name;
 ```
 
-**Expected:** 30 rows — `JP` and `US` with 8 observer entries; `FR`, `HU`, `MD` and `MY` with 7;
-`CA`, `CH`, `CN`, `DE`, `EG`, `ID`, `IL`, `IN`, `PL`, `RU`, `TH` and `UA` with 6; `AT` is among those with 5.
+**Expected:** 33 rows — `JP` with 9 observer entries and `US` with 8; `FR`, `HU`, `MD` and `MY` with 7;
+`CA`, `CH`, `CN`, `DE`, `EG`, `ID`, `IL`, `IN`, `PL`, `RU`, `TH` and `UA` with 6; `AM`, `AT`, `AU`, `AZ`, `BY`, `CZ`, `GE`, `GR`, `IT`, `KR`, `NO`, `PH`, `PT`, `TM` and `TR` with 5.
 
 ## Geography and membership
 
@@ -1020,7 +1020,7 @@ ORDER BY ABS(membership_count - len(includes)) DESC, id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 190 mismatches total; largest positive deltas are non-country memberships
+**Expected:** 20 displayed rows out of 191 mismatches total; largest positive deltas are non-country memberships
 counted in `membership_count` (e.g. `IGA`, `WNA`). Records where the count measures
 institutions, companies, or individuals rather than countries declare it via
 `membership_count_type` and are exempt from the roster-comparison validation rule.
@@ -1046,7 +1046,7 @@ ORDER BY i.id, m.id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 1543 mismatches total (advisory); examples include `CD` labeled
+**Expected:** 20 displayed rows out of 1542 mismatches total (advisory); examples include `CD` labeled
 "Congo, The Democratic Republic of the" vs canonical "Congo, Dem. Rep.".
 
 **Gotcha:** Mismatches are **not errors** — always join on `includes[].id`, never on
