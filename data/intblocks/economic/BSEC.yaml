@@ -168,7 +168,16 @@ other_names:
   name: Организация черноморского экономического сотрудничества
 - id: zh
   name: 黑海经济合作组织
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Ministry of Foreign Affairs of Romania
+  retrieved_at: '2026-10-25'
+  url: https://www.mae.ro/en/node/51355
+- field: membership_count
+  source: Ministry of Foreign Affairs of Romania
+  retrieved_at: '2026-10-25'
+  url: https://www.mae.ro/en/node/51355
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
