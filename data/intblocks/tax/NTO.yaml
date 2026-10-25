@@ -101,7 +101,16 @@ other_names:
 - id: fr
   name: Réseau des Organisations Fiscales
 wikidata_id: Q130417119
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Network of Tax Organizations
+  retrieved_at: '2026-10-25'
+  url: https://www.nto.tax/sites/default/files/resources/2024%20%20NTO%20Practical%20%20Guide.pdf
+- field: membership_count
+  source: Network of Tax Organizations
+  retrieved_at: '2026-10-25'
+  url: https://www.nto.tax/sites/default/files/resources/2024%20%20NTO%20Practical%20%20Guide.pdf
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-15'
