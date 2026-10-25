@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for WOAH (183 members, including Curaçao, Liechtenstein, New Caledonia and Chinese Taipei), INTOSAI (194 country full members; the European Court of Auditors is the additional supranational full member) and IFAD (180 member states).
 - `last_verified` set to 2026-10-25 for INTERPOL (196 member countries), the OACPS (79 members; Egypt, New Caledonia, French Polynesia and South Sudan are not on the annex, and the Cook Islands and Niue are), the Asian Parliamentary Assembly (44 member parliaments and 14 observer parliaments), IDLO (39 member states and the OPEC Fund, as of December 2025), UNIDROIT (65 member states) and the GEF (186 participants as of 13 April 2026; the Cook Islands, Niue, Palestine and Kosovo are added, and Cyprus, Iceland, Oman, Saudi Arabia, Singapore and the United Arab Emirates are not on the list).
 - `last_verified` set to 2026-10-25 for SCOR (32 national committees; `membership_count` 32) and the ACS (25 members and 10 associates; Turks and Caicos is not a current associate).
 - `last_verified` set to 2026-10-25 for the IMU (83 members and associate members Bangladesh, Mongolia and Paraguay; `membership_count` 85).
