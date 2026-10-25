@@ -54,6 +54,10 @@ includes:
   name: Sao Tome and Principe
   type: country
   status: member
+- id: RW
+  name: Rwanda
+  type: country
+  status: member
 founded: '1983'
 headquarters:
   city: Malabo
@@ -70,7 +74,7 @@ acronyms:
   value: CEEAC
 - lang: de
   value: CEEAC
-membership_count: 10
+membership_count: 11
 wikidata_id: Q189966
 description: Customs union.
 tags:
@@ -113,7 +117,16 @@ other_names:
   name: Экономическое сообщество стран Центральной Африки
 - id: zh
   name: 中部非洲国家经济共同体
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Economic Community of Central African States
+  retrieved_at: '2026-10-25'
+  url: https://www.ceeac-eccas.in/fr/etats-membres
+- field: membership_count
+  source: Economic Community of Central African States
+  retrieved_at: '2026-10-25'
+  url: https://www.ceeac-eccas.in/fr/etats-membres
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'

@@ -112,7 +112,16 @@ other_names:
   name: Information Fusion Centre – Indian Ocean Region
 - id: en
   name: IFC-IOR
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Information Fusion Centre – Indian Ocean Region
+  retrieved_at: '2026-10-25'
+  url: https://ifcior.indiannavy.gov.in/about_us
+- field: membership_count
+  source: Information Fusion Centre – Indian Ocean Region
+  retrieved_at: '2026-10-25'
+  url: https://ifcior.indiannavy.gov.in/about_us
 - field: legal_status
   source: official sources
   retrieved_at: '2026-06-15'
