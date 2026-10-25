@@ -465,7 +465,7 @@ ADDITIONAL_RECIPES = [
         SELECT COUNT(*) FROM intblocks
         WHERE membership_count IS NOT NULL AND len(includes) > 0 AND membership_count != len(includes)
         """,
-        188,
+        189,
         set(),
     ),
     (
@@ -475,7 +475,7 @@ ADDITIONAL_RECIPES = [
         WHERE m.type='country' AND m.name IS NOT NULL AND m.name != c.name
           AND NOT list_contains(c.common_names, m.name)
         """,
-        1544,
+        1543,
         set(),
     ),
     (

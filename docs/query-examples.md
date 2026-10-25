@@ -1020,7 +1020,7 @@ ORDER BY ABS(membership_count - len(includes)) DESC, id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 188 mismatches total; largest positive deltas are non-country memberships
+**Expected:** 20 displayed rows out of 189 mismatches total; largest positive deltas are non-country memberships
 counted in `membership_count` (e.g. `IGA`, `WNA`). Records where the count measures
 institutions, companies, or individuals rather than countries declare it via
 `membership_count_type` and are exempt from the roster-comparison validation rule.
@@ -1046,7 +1046,7 @@ ORDER BY i.id, m.id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 1544 mismatches total (advisory); examples include `CD` labeled
+**Expected:** 20 displayed rows out of 1543 mismatches total (advisory); examples include `CD` labeled
 "Congo, The Democratic Republic of the" vs canonical "Congo, Dem. Rep.".
 
 **Gotcha:** Mismatches are **not errors** — always join on `includes[].id`, never on

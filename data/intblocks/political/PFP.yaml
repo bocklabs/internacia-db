@@ -36,7 +36,8 @@ includes:
 - id: FI
   name: Finland
   type: country
-  status: member
+  status: former_member
+  left: '2023-04-04'
 - id: GE
   name: Georgia
   type: country
@@ -72,7 +73,8 @@ includes:
 - id: SE
   name: Sweden
   type: country
-  status: member
+  status: former_member
+  left: '2024-03-07'
 - id: CH
   name: Switzerland
   type: country
@@ -93,10 +95,10 @@ includes:
   name: Uzbekistan
   type: country
   status: member
-membership_count: 20
-description: North Atlantic Treaty Organization (NATO) program aimed at creating trust
-  and cooperation between the member states of NATO and other states mostly in Europe,
-  including post-Soviet states; 18 states are members.
+membership_count: 18
+description: NATO programme of practical bilateral cooperation with Euro-Atlantic
+  partners. NATO lists 16 partner countries. Belarus and Russia remain signatories,
+  with practical cooperation suspended. Finland and Sweden left when they joined NATO.
 tags:
 - PFP
 - cooperation
@@ -132,7 +134,20 @@ other_names:
   name: Партнёрство ради мира
 - id: zh
   name: 和平伙伴关系计划
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: NATO
+  retrieved_at: '2026-10-25'
+  url: https://www.nato.int/en/what-we-do/partnerships-and-cooperation/natos-partnerships
+- field: membership_count
+  source: NATO
+  retrieved_at: '2026-10-25'
+  url: https://www.nato.int/en/what-we-do/partnerships-and-cooperation/natos-partnerships
+- field: description
+  source: NATO
+  retrieved_at: '2026-10-25'
+  url: https://www.nato.int/en/what-we-do/partnerships-and-cooperation/natos-partnerships
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

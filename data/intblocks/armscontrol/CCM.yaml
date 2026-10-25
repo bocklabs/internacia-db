@@ -512,7 +512,16 @@ notes: 'As of June 2026, 112 states are parties. Lithuania withdrew on 6 March 2
   Angola, Central African Republic, Cyprus, Democratic Republic of the Congo, Djibouti, Haiti, Indonesia, Jamaica, Kenya,
   Liberia, Tanzania, and Uganda. Major non-parties include Brazil, China, India, Israel, Pakistan, Russia, and the United
   States.'
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Convention on Cluster Munitions
+  retrieved_at: '2026-10-25'
+  url: https://www.clusterconvention.org/states-parties/
+- field: membership_count
+  source: Convention on Cluster Munitions
+  retrieved_at: '2026-10-25'
+  url: https://www.clusterconvention.org/states-parties/
 - field: description
   source: Wikipedia
   retrieved_at: '2026-06-14'

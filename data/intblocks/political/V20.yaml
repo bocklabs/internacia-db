@@ -335,7 +335,16 @@ topics:
   name: Climate Change
 - key: finance
   name: Finance
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: CVF-V20
+  retrieved_at: '2026-10-25'
+  url: https://cvfv20.org/
+- field: membership_count
+  source: CVF-V20
+  retrieved_at: '2026-10-25'
+  url: https://cvfv20.org/
 - field: includes
   source: official sources
   retrieved_at: '2026-07-14'

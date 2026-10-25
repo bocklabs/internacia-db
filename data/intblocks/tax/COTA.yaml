@@ -31,7 +31,7 @@ legal_status: intergovernmental
 partof: NTO
 secretariat:
   location: Georgetown, Guyana
-membership_count: 21
+membership_count: 24
 description: Regional intergovernmental organisation of national tax administrations from CARICOM member states and associate
   members, established in 1971 to promote regional tax cooperation and harmonisation. Operates under the auspices of the CARICOM
   Secretariat and provides a forum for capacity building, sharing best practices, and technical cooperation among Caribbean
@@ -135,10 +135,22 @@ includes:
   name: Turks and Caicos Islands
   type: country
   status: member
-- id: SX
-  name: St. Maarten
+- id: CW
+  name: Curaçao
   type: country
-  status: associated
+  status: member
+- id: GF
+  name: French Guiana
+  type: country
+  status: member
+- id: MQ
+  name: Martinique
+  type: country
+  status: member
+- id: SX
+  name: Sint Maarten
+  type: country
+  status: member
 notes: COTA was established in 1971 when its Constitution was ratified at a meeting of Caribbean tax administration heads
   in Saint Lucia; the Constitution was approved by CARICOM finance ministers in October 1972. Governance comprises a biennial
   General Assembly and an Executive Council (President plus five members). The Secretariat is administered through the CARICOM
@@ -149,7 +161,16 @@ other_names:
   name: Caribbean Organisation of Tax Administrators
 - id: nl
   name: Caribbean Organisation of Tax Administrators
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Caribbean Community
+  retrieved_at: '2026-10-25'
+  url: https://caricom.org/caricom-tax-administrators-meet-in-july/
+- field: membership_count
+  source: Caribbean Community
+  retrieved_at: '2026-10-25'
+  url: https://caricom.org/caricom-tax-administrators-meet-in-july/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-15'
