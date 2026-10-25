@@ -245,7 +245,7 @@ includes:
 - id: MN
   name: Mongolia
   type: country
-  status: member
+  status: associate_member
 - id: MX
   name: Mexico
   type: country
@@ -370,7 +370,11 @@ includes:
   name: South Africa
   type: country
   status: member
-membership_count: 84
+- id: PY
+  name: Paraguay
+  type: country
+  status: associate_member
+membership_count: 85
 geographic_scope: global
 regions:
 - worldwide
@@ -411,7 +415,16 @@ other_names:
 - id: zh
   name: 国际数学联盟
 wikidata_id: Q828490
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: International Mathematical Union
+  retrieved_at: '2026-10-25'
+  url: https://www.mathunion.org/membership/imu-members?sort_by=title
+- field: membership_count
+  source: International Mathematical Union
+  retrieved_at: '2026-10-25'
+  url: https://www.mathunion.org/membership/imu-members?sort_by=title
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
