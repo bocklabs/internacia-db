@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for SCOR (32 national committees; `membership_count` 32) and the ACS (25 members and 10 associates; Turks and Caicos is not a current associate).
 - `last_verified` set to 2026-10-25 for the IMU (83 members and associate members Bangladesh, Mongolia and Paraguay; `membership_count` 85).
 - `last_verified` set to 2026-10-25 for BSEC (13 members and 14 observers) and the UIC (84 countries in the January 2026 work programme; Indonesia, Pakistan and Qatar drop out, and Burkina Faso, Libya, Mexico and Niger are added).
 - `last_verified` set to 2026-10-25 for WATAF (15 member administrations) and the Arms Trade Treaty (118 states parties as of 26 February 2026).

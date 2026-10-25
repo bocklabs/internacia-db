@@ -117,23 +117,43 @@ includes:
 - id: AW
   name: Aruba
   type: country
-  status: member
+  status: associate
 - id: CW
   name: Curaçao
   type: country
-  status: member
+  status: associate
+- id: FR
+  name: France
+  type: country
+  status: associate
+- id: GP
+  name: Guadeloupe
+  type: country
+  status: associate
+- id: VG
+  name: British Virgin Islands
+  type: country
+  status: associate
+- id: MQ
+  name: Martinique
+  type: country
+  status: associate
+- id: NL
+  name: Netherlands
+  type: country
+  status: associate
 - id: MF
   name: Saint Martin
   type: country
-  status: member
+  status: associate
 - id: SX
   name: Sint Maarten
   type: country
-  status: member
-- id: TC
-  name: Turks and Caicos Islands
+  status: associate
+- id: MS
+  name: Montserrat
   type: country
-  status: member
+  status: associate
 founded: '1994'
 headquarters:
   city: Port of Spain
@@ -141,7 +161,7 @@ headquarters:
   coordinates:
     lat: 10.666666666667
     lng: -61.516666666667
-membership_count: 30
+membership_count: 35
 wikidata_id: Q1147937
 description: Regional intergovernmental organization.
 tags:
@@ -175,7 +195,16 @@ other_names:
   name: Ассоциация карибских государств
 - id: zh
   name: 加勒比国家联盟
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Association of Caribbean States
+  retrieved_at: '2026-10-25'
+  url: https://www.acs-aec.org/en/about-us/our-membership
+- field: membership_count
+  source: Association of Caribbean States
+  retrieved_at: '2026-10-25'
+  url: https://www.acs-aec.org/en/about-us/our-membership
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'
