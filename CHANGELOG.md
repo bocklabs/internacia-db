@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for the ITU (194 member states) and UNCITRAL (68 current members as of 7 July 2025).
 - `last_verified` set to 2026-10-25 for UNESCO (194 member states and 12 associate members as of 1 January 2026; Israel withdrew effective 31 December 2018) and the IPCC (195 member countries).
 - `last_verified` set to 2026-10-25 for FAO (193 member nations, the European Union, and associate members the Faroe Islands and Tokelau; the Cook Islands are a member nation; Nicaragua is a former member) and the IMO (176 member states and associate members the Faroe Islands, Hong Kong and Macao).
 - `last_verified` set to 2026-10-25 for WOAH (183 members, including Curaçao, Liechtenstein, New Caledonia and Chinese Taipei), INTOSAI (194 country full members; the European Court of Auditors is the additional supranational full member) and IFAD (180 member states).

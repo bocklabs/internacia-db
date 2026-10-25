@@ -1,8 +1,8 @@
 {
   "dataset": "intblocks",
   "version": "3.1.0",
-  "build_date": "2026-10-25T08:24:08Z",
-  "git_commit": "fa5e33e",
+  "build_date": "2026-10-25T08:39:17Z",
+  "git_commit": "bc75c13",
   "row_count": 1275,
   "schema_hash": "aa66550599e0342fa0117232375f7428bb94431f8174000933e7ae483e70c4aa",
   "data_license": "CC-BY-4.0",
@@ -25,33 +25,33 @@
     },
     {
       "path": "intblocks.json.zst",
-      "sha256": "e7047f333a0df9ad604a191028d03275bb7e0d6c9f1d0e92b5355e2c4b1dc53b",
-      "bytes": 777994
+      "sha256": "6f7f01820074ce324cfeab6ad1d14416caa9670f5974a36fd4d7e12b770607f7",
+      "bytes": 778083
     },
     {
       "path": "intblocks.jsonl",
-      "sha256": "eb62b358866d9ee52d34c384da1f935b2ea5242c86dd6d17dd279325c863d254",
-      "bytes": 9897299
+      "sha256": "38e0d1161e29d764712584595f956fefe22ae61c41a1e6a2baf694e1aa80a111",
+      "bytes": 9898189
     },
     {
       "path": "intblocks.jsonl.zst",
-      "sha256": "722f95deeff757d27cb2e0d6694fc97f4ad8fcf697f909defdcf49c342e9fc88",
-      "bytes": 750181
+      "sha256": "cff4d3cd8231f95cc84a02b034336e3fd3951651daba28f85610429f4bcc9977",
+      "bytes": 750266
     },
     {
       "path": "intblocks.meta.json",
-      "sha256": "2928da71bee7d449a1e9c9fe72b32ae8e0e662a5972826fa8a6fdcad989eea1a",
+      "sha256": "afcbfa7e900c9f2d6253920bb9b3291a181ceb294a1a2884b959e560036e5191",
       "bytes": 284
     },
     {
       "path": "intblocks.parquet",
-      "sha256": "a2d54afe337d31aa7fa0e07bdef6fa382fdcbf21748374fbe00fee672687b5ef",
-      "bytes": 697571
+      "sha256": "693e0521b5bdb22c1a79317de107587b99f7d9065c4a62b2a4df755914805866",
+      "bytes": 697641
     },
     {
       "path": "intblocks.yaml.zst",
-      "sha256": "24e21699d3c692151caa84d7c7bfab6bdde1c141543beee0f3b76f48eae4a0e4",
-      "bytes": 764959
+      "sha256": "090481777217944407c2e99a3fc13472487a6e298fe93934afb90bcbeda7d9ab",
+      "bytes": 765075
     }
   ]
 }
