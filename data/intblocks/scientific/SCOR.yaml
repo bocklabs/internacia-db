@@ -154,7 +154,7 @@ includes:
   name: United States
   type: country
   status: member
-membership_count: 33
+membership_count: 32
 membership_count_type: organizations
 geographic_scope: global
 regions:
@@ -191,7 +191,16 @@ other_names:
 - id: fr
   name: Comité scientifique pour la recherche océanique
 wikidata_id: Q3459298
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Scientific Committee on Oceanic Research
+  retrieved_at: '2026-10-25'
+  url: https://scor-int.org/scor/committees/
+- field: membership_count
+  source: Scientific Committee on Oceanic Research
+  retrieved_at: '2026-10-25'
+  url: https://scor-int.org/scor/committees/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
