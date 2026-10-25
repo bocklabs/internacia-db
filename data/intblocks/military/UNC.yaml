@@ -45,8 +45,7 @@ includes:
 - id: DE
   name: Germany
   type: country
-  status: member
-  joined: '2024-08-02'
+  status: former_member
 - id: GR
   name: Greece
   type: country
@@ -91,6 +90,10 @@ includes:
   name: United States
   type: country
   status: member
+- id: KR
+  name: Korea, Rep.
+  type: country
+  status: member
 membership_count: 18
 legal_status: intergovernmental
 description: Multinational military command established in 1950 to support South Korea during the Korean War and to uphold
@@ -120,7 +123,16 @@ other_names:
 - id: en
   name: United Nations Command
 wikidata_id: Q482864
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United Nations Command
+  retrieved_at: '2026-10-25'
+  url: https://www.unc.mil/History/Post-1953-Evolution-of-UNC/
+- field: membership_count
+  source: United Nations Command
+  retrieved_at: '2026-10-25'
+  url: https://www.unc.mil/History/Post-1953-Evolution-of-UNC/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
