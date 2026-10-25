@@ -43,7 +43,7 @@ acronyms:
   value: OIÉ
 - lang: de
   value: WOAH
-membership_count: 194
+membership_count: 183
 wikidata_id: Q1058594
 geographic_scope: global
 legal_status: intergovernmental
@@ -92,10 +92,6 @@ includes:
   status: member
 - id: AF
   name: Afghanistan
-  type: country
-  status: member
-- id: AG
-  name: Antigua and Barbuda
   type: country
   status: member
 - id: AL
@@ -218,10 +214,6 @@ includes:
   name: Cote d'Ivoire
   type: country
   status: member
-- id: CK
-  name: Cook Islands
-  type: country
-  status: member
 - id: CL
   name: Chile
   type: country
@@ -250,6 +242,10 @@ includes:
   name: Cape Verde
   type: country
   status: member
+- id: CW
+  name: Curaçao
+  type: country
+  status: member
 - id: CY
   name: Cyprus
   type: country
@@ -268,10 +264,6 @@ includes:
   status: member
 - id: DK
   name: Denmark
-  type: country
-  status: member
-- id: DM
-  name: Dominica
   type: country
   status: member
 - id: DO
@@ -328,10 +320,6 @@ includes:
   status: member
 - id: GB
   name: United Kingdom
-  type: country
-  status: member
-- id: GD
-  name: Grenada
   type: country
   status: member
 - id: GE
@@ -442,16 +430,8 @@ includes:
   name: Cambodia
   type: country
   status: member
-- id: KI
-  name: Kiribati
-  type: country
-  status: member
 - id: KM
   name: Comoros
-  type: country
-  status: member
-- id: KN
-  name: St. Kitts and Nevis
   type: country
   status: member
 - id: KP
@@ -480,6 +460,10 @@ includes:
   status: member
 - id: LC
   name: St. Lucia
+  type: country
+  status: member
+- id: LI
+  name: Liechtenstein
   type: country
   status: member
 - id: LK
@@ -514,10 +498,6 @@ includes:
   name: Morocco
   type: country
   status: member
-- id: MC
-  name: Monaco
-  type: country
-  status: member
 - id: MD
   name: Moldova
   type: country
@@ -528,10 +508,6 @@ includes:
   status: member
 - id: MG
   name: Madagascar
-  type: country
-  status: member
-- id: MH
-  name: Marshall Islands
   type: country
   status: member
 - id: MK
@@ -586,6 +562,10 @@ includes:
   name: Namibia
   type: country
   status: member
+- id: NC
+  name: New Caledonia
+  type: country
+  status: member
 - id: NE
   name: Niger
   type: country
@@ -608,14 +588,6 @@ includes:
   status: member
 - id: NP
   name: Nepal
-  type: country
-  status: member
-- id: NR
-  name: Nauru
-  type: country
-  status: member
-- id: NU
-  name: Niue
   type: country
   status: member
 - id: NZ
@@ -654,10 +626,6 @@ includes:
   name: Portugal
   type: country
   status: member
-- id: PW
-  name: Palau
-  type: country
-  status: member
 - id: PY
   name: Paraguay
   type: country
@@ -684,10 +652,6 @@ includes:
   status: member
 - id: SA
   name: Saudi Arabia
-  type: country
-  status: member
-- id: SB
-  name: Solomon Islands
   type: country
   status: member
 - id: SC
@@ -782,10 +746,6 @@ includes:
   name: Tunisia
   type: country
   status: member
-- id: TO
-  name: Tonga
-  type: country
-  status: member
 - id: TR
   name: Turkey
   type: country
@@ -794,8 +754,8 @@ includes:
   name: Trinidad and Tobago
   type: country
   status: member
-- id: TV
-  name: Tuvalu
+- id: TW
+  name: Taiwan
   type: country
   status: member
 - id: TZ
@@ -838,10 +798,6 @@ includes:
   name: Vanuatu
   type: country
   status: member
-- id: WS
-  name: Samoa
-  type: country
-  status: member
 - id: YE
   name: Yemen, Rep.
   type: country
@@ -858,7 +814,16 @@ includes:
   name: Zimbabwe
   type: country
   status: member
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: World Organisation for Animal Health
+  retrieved_at: '2026-10-25'
+  url: https://www.woah.org/en/who-we-are/members/
+- field: membership_count
+  source: World Organisation for Animal Health
+  retrieved_at: '2026-10-25'
+  url: https://www.woah.org/en/who-we-are/members/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
