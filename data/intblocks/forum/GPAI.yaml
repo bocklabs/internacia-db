@@ -231,7 +231,16 @@ tags:
 topics:
 - key: technology
   name: Technology
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: OECD.AI
+  retrieved_at: '2026-10-25'
+  url: https://oecd.ai/en/about/about-gpai
+- field: membership_count
+  source: OECD.AI
+  retrieved_at: '2026-10-25'
+  url: https://oecd.ai/en/about/about-gpai
 - field: legal_status
   source: official sources
   retrieved_at: '2026-06-15'
