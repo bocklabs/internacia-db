@@ -918,8 +918,8 @@ WHERE predecessor IS NOT NULL OR successor IS NOT NULL
 ORDER BY id;
 ```
 
-**Expected:** 25 rows — includes `BRIC` → `BRICS`, `G7` ↔ `G8`, `GATT` → `WTO`, `NAFTA`
-→ `USMCA`.
+**Expected:** 27 rows — includes `BRIC` → `BRICS`, `G7` ↔ `G8`, `GATT` → `WTO`, `NAFTA`
+→ `USMCA`, `RIOGROUP` → `CELAC`.
 
 ### Dissolved organizations that still carry rosters
 
@@ -930,7 +930,7 @@ WHERE dissolved IS NOT NULL AND len(includes) > 0
 ORDER BY dissolved, name;
 ```
 
-**Expected:** 33 rows — includes `WARSAWPACT`, `SEATO`, `G8`, `WESTERNBLOC`.
+**Expected:** 34 rows — includes `WARSAWPACT`, `SEATO`, `G8`, `WESTERNBLOC`, `RIOGROUP`.
 
 ### UN agency hierarchy (two-level `partof`)
 
@@ -1020,7 +1020,7 @@ ORDER BY ABS(membership_count - len(includes)) DESC, id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 193 mismatches total; largest positive deltas are non-country memberships
+**Expected:** 20 displayed rows out of 192 mismatches total; largest positive deltas are non-country memberships
 counted in `membership_count` (e.g. `IGA`, `WNA`). Records where the count measures
 institutions, companies, or individuals rather than countries declare it via
 `membership_count_type` and are exempt from the roster-comparison validation rule.
@@ -1294,7 +1294,7 @@ WHERE predecessor IS NOT NULL OR successor IS NOT NULL
 ORDER BY id;
 ```
 
-**Expected:** 25 rows.
+**Expected:** 27 rows.
 
 ## Cookbook coverage (parity policy)
 

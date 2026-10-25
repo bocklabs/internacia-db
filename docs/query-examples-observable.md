@@ -561,7 +561,7 @@ const succession = await db.query(`
 `);
 ```
 
-**Expected:** 25 rows — e.g. `BRIC` → `BRICS`, `GATT` → `WTO`, `NAFTA` → `USMCA`.
+**Expected:** 27 rows — e.g. `BRIC` → `BRICS`, `GATT` → `WTO`, `NAFTA` → `USMCA`, `RIOGROUP` → `CELAC`.
 
 ---
 

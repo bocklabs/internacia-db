@@ -91,17 +91,13 @@ includes:
 - id: KI
   name: Kiribati
   type: country
-  status: member
+  status: associate_member
 - id: NC
   name: New Caledonia
   type: country
   status: member
 - id: NZ
   name: New Zealand
-  type: country
-  status: member
-- id: NU
-  name: Niue
   type: country
   status: member
 - id: PG
@@ -127,13 +123,23 @@ includes:
 - id: TV
   name: Tuvalu
   type: country
-  status: member
+  status: associate_member
 - id: VU
   name: Vanuatu
   type: country
   status: member
 wikidata_id: Q180344
+last_verified: '2026-10-25'
+notes: The March 2026 statutes name 11 ordinary members. Kiribati and Tuvalu are associate members. Niue is not a member.
 provenance:
+- field: includes
+  source: Oceania Football Confederation
+  retrieved_at: '2026-10-25'
+  url: https://www.oceaniafootball.com/cms/wp-content/uploads/2026/03/OFC-Statutes-March-2026-ENG.pdf
+- field: membership_count
+  source: Oceania Football Confederation
+  retrieved_at: '2026-10-25'
+  url: https://www.oceaniafootball.com/32nd-ofc-ordinary-congress-commences-in-vancouver-canada/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

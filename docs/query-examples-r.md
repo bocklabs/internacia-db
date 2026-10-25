@@ -758,7 +758,7 @@ intblocks |>
   arrange(id)
 ```
 
-**Expected:** 25 rows.
+**Expected:** 27 rows.
 
 ### Former members with join and departure dates
 

@@ -767,7 +767,7 @@ jaccard = round(len(nato & eu) / len(nato | eu), 2)
 )
 ```
 
-**Expected:** 25 rows.
+**Expected:** 27 rows.
 
 ### Former members with join and departure dates
 
