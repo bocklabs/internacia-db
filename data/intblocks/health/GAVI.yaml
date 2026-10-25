@@ -25,7 +25,7 @@ acronyms:
   value: GAVI
 - lang: en
   value: Gavi
-membership_count: 53
+membership_count: 56
 legal_status: public-private partnership
 description: Public-private global health partnership focused on increasing equitable and sustainable use of vaccines in low-income
   countries.
@@ -262,8 +262,29 @@ includes:
   name: Comoros
   type: country
   status: member
+- id: AO
+  name: Angola
+  type: country
+  status: member
+- id: MZ
+  name: Mozambique
+  type: country
+  status: member
+- id: TL
+  name: Timor-Leste
+  type: country
+  status: member
 wikidata_id: Q688592
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Gavi, the Vaccine Alliance
+  retrieved_at: '2026-10-25'
+  url: https://www.gavi.org/partner-countries/programmatic-policies/eligibility-policy
+- field: membership_count
+  source: Gavi, the Vaccine Alliance
+  retrieved_at: '2026-10-25'
+  url: https://www.gavi.org/partner-countries/programmatic-policies/eligibility-policy
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

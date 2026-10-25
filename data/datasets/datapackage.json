@@ -343,8 +343,8 @@
       "format": "csv",
       "mediatype": "text/csv",
       "compression": "zstd",
-      "bytes": 177940,
-      "hash": "sha256:cd011e3b7ad96ebe417d2e53012fff45ac1fb430eb93d2f4c69d8182fdad988b"
+      "bytes": 177964,
+      "hash": "sha256:8815e146de6e7cb7de1ebd665c50c8edf0ee9bca7b0e1d44e2972df93237dd45"
     },
     {
       "name": "intblocks-lite-csv",
@@ -353,8 +353,8 @@
       "format": "csv",
       "mediatype": "text/csv",
       "compression": "zstd",
-      "bytes": 34383,
-      "hash": "sha256:31fbbe0fffc87a3e6343657a9f22d456c0585bceded318bfbc80395b36b08fc3"
+      "bytes": 34381,
+      "hash": "sha256:36fdb047f2864ef807ad50eb0781047070c09562293621084796251daf15c4d5"
     },
     {
       "name": "intblocks-parquet",
@@ -362,8 +362,8 @@
       "path": "intblocks.parquet",
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
-      "bytes": 695373,
-      "hash": "sha256:ce66e116ed5b35239ae62bdd268e476210aec32e6d12a06e2a37e3e38363481d",
+      "bytes": 695704,
+      "hash": "sha256:80c830a5077a75d1d3ba340c64413746d8d64561d4a0caf68ababb95eefd345c",
       "schema": {
         "fields": [
           {
@@ -493,8 +493,8 @@
       "path": "intblocks-lite.parquet",
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
-      "bytes": 41259,
-      "hash": "sha256:ff0bf738bd0a06929228a7f83a2ded8914697a884be55ba5e3e66f7a762f6263",
+      "bytes": 41255,
+      "hash": "sha256:49ee3fd8d9e7fad78dd02f0b6f6816ee5e57bef0c4ea78286580c1a0999addc1",
       "schema": {
         "fields": [
           {
@@ -543,8 +543,8 @@
       "format": "json",
       "mediatype": "application/json",
       "compression": "zstd",
-      "bytes": 775655,
-      "hash": "sha256:baac04b51f299656874e53559df21c3a2e9f5ef76207c806f6afe0f3296c71f9"
+      "bytes": 776186,
+      "hash": "sha256:4e533919b2a6f5d8e96ec2d55d1de658cd0e2e6d03819b6634147fb3f123e2bf"
     },
     {
       "name": "intblocks-jsonl",
@@ -552,8 +552,8 @@
       "path": "intblocks.jsonl",
       "format": "jsonl",
       "mediatype": "application/x-ndjson",
-      "bytes": 9895211,
-      "hash": "sha256:9576dd77474528f52ea4a96c47cb1172dabb4a1b105095b3ceb0b439a4d70a25"
+      "bytes": 9902467,
+      "hash": "sha256:78bd72f2c64a53389764e4b7ad31bfcc59d30f071d986dcf8e6f9b8254a7401a"
     },
     {
       "name": "blocktypes-parquet",
@@ -593,8 +593,8 @@
       "format": "csv",
       "mediatype": "text/csv",
       "compression": "zstd",
-      "bytes": 155921,
-      "hash": "sha256:6932345b8d4e19247ab5d51b85b22ed2d119718f549e1e716113be64df1f9eaa"
+      "bytes": 155926,
+      "hash": "sha256:fd04390e50349d36b6ad74e4923b2df66ee1c8fe5e30d72b0c121cef1caa3dd2"
     },
     {
       "name": "memberships-parquet",
@@ -602,8 +602,8 @@
       "path": "memberships.parquet",
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
-      "bytes": 97878,
-      "hash": "sha256:edb5a93521a2836d829a8e3c91f7eab9a34371f809f18434dd3117b04ae06454",
+      "bytes": 97884,
+      "hash": "sha256:2be3e6136e3a00ee7a7177e4bd44969d9e2b90f3ca2641521db04db508757496",
       "schema": {
         "fields": [
           {

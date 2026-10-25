@@ -160,7 +160,16 @@ regions:
 other_names:
 - id: en
   name: Pacific Area Standards Congress
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Pacific Area Standards Congress
+  retrieved_at: '2026-10-25'
+  url: https://pascnet.org/pasc-members
+- field: membership_count
+  source: Pacific Area Standards Congress
+  retrieved_at: '2026-10-25'
+  url: https://pascnet.org/pasc-members
 - field: includes
   source: official sources
   retrieved_at: '2026-07-30'

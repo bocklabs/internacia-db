@@ -155,7 +155,16 @@ other_names:
   name: 亚太税务管理与研究组织
 - id: ja
   name: アジア太平洋税務管理研究グループ
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Study Group on Asia-Pacific Tax Administration and Research
+  retrieved_at: '2026-10-25'
+  url: https://sgatar.org/public/about/
+- field: membership_count
+  source: Study Group on Asia-Pacific Tax Administration and Research
+  retrieved_at: '2026-10-25'
+  url: https://sgatar.org/public/about/
 - field: description
   source: SGATAR official website
   retrieved_at: '2026-07-30'

@@ -516,7 +516,16 @@ other_names:
 notes: Serbia (since 1 January 2013) and Syria (since 1 June 2018) are suspended from
   Member States rights because of lapsed annual financial contributions but remain
   on the official membership roll.
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: International Hydrographic Organization
+  retrieved_at: '2026-10-25'
+  url: https://iho.int/uploads/user/pubs/periodical/P5YEARBOOK_ANNUAIRE.pdf
+- field: membership_count
+  source: International Hydrographic Organization
+  retrieved_at: '2026-10-25'
+  url: https://iho.int/uploads/user/pubs/periodical/P5YEARBOOK_ANNUAIRE.pdf
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

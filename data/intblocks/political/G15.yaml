@@ -8,7 +8,7 @@ languages:
 links:
 - url: https://en.wikipedia.org/wiki/Group_of_15
   type: wikipedia
-name: G15
+name: Group of 15
 includes:
 - id: AR
   name: Argentina
@@ -86,7 +86,8 @@ headquarters:
     lat: 46.2
     lng: 6.15
 membership_count: 17
-description: Gaming keyboard model from 2005.
+description: Summit-level group of developing countries established in 1989 to
+  foster cooperation on trade, investment and technology. It has 17 members.
 tags:
 - G15
 - cooperation
@@ -102,7 +103,7 @@ other_names:
 - id: ar
   name: مجموعة ال 15
 - id: de
-  name: Logitech G15
+  name: Gruppe der 15
 - id: en
   name: Group of 15
 - id: es
@@ -110,11 +111,28 @@ other_names:
 - id: fr
   name: Groupe des quinze
 - id: ru
-  name: Logitech G15
+  name: Группа 15
 - id: zh
   name: 十五國集團
-wikidata_id: Q17861491
+wikidata_id: Q971612
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Permanent Mission of Sri Lanka to the United Nations in Geneva
+  retrieved_at: '2026-10-25'
+  url: https://www.lankamission.org/trade-development/g-15-urged-unctad-to-concentrate-on-advancing-new-and-pragmatic-policy-responses-in-addressing-multi-faceted-challenges-in-developing-countries
+- field: membership_count
+  source: Permanent Mission of Sri Lanka to the United Nations in Geneva
+  retrieved_at: '2026-10-25'
+  url: https://www.lankamission.org/trade-development/g-15-urged-unctad-to-concentrate-on-advancing-new-and-pragmatic-policy-responses-in-addressing-multi-faceted-challenges-in-developing-countries
+- field: description
+  source: Permanent Mission of Sri Lanka to the United Nations in Geneva
+  retrieved_at: '2026-10-25'
+  url: https://www.lankamission.org/trade-development/g-15-urged-unctad-to-concentrate-on-advancing-new-and-pragmatic-policy-responses-in-addressing-multi-faceted-challenges-in-developing-countries
+- field: wikidata_id
+  source: Wikidata
+  retrieved_at: '2026-10-25'
+  url: https://www.wikidata.org/wiki/Q971612
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

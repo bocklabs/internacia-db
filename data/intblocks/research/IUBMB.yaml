@@ -344,7 +344,16 @@ topics:
   name: Technology
 membership_count: 76
 wikidata_id: Q902765
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: International Union of Biochemistry and Molecular Biology
+  retrieved_at: '2026-10-25'
+  url: https://iubmb.org/about-iubmb/adhering-bodies/
+- field: membership_count
+  source: International Union of Biochemistry and Molecular Biology
+  retrieved_at: '2026-10-25'
+  url: https://iubmb.org/about-iubmb/adhering-bodies/
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

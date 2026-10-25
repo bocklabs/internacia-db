@@ -172,7 +172,16 @@ includes:
   name: Uganda
   type: country
   status: member
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Africa Rice Center
+  retrieved_at: '2026-10-25'
+  url: https://www.africarice.org/who-we-are/member-countries
+- field: membership_count
+  source: Africa Rice Center
+  retrieved_at: '2026-10-25'
+  url: https://www.africarice.org/who-we-are/member-countries
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-13'

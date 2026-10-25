@@ -243,7 +243,16 @@ topics:
   name: Regional Cooperation
 wikidata_id: Q43079362
 founded: '1964'
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United Nations Department for General Assembly and Conference Management
+  retrieved_at: '2026-10-25'
+  url: https://www.un.org/dgacm/content/regional-groups
+- field: membership_count
+  source: United Nations Department for General Assembly and Conference Management
+  retrieved_at: '2026-10-25'
+  url: https://www.un.org/dgacm/content/regional-groups
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-30'

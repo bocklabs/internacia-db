@@ -198,7 +198,16 @@ other_names:
 - id: zh
   name: 伊斯兰国家税务当局协会
 wikidata_id: Q111950606
+last_verified: '2026-10-22'
 provenance:
+- field: includes
+  source: Network of Tax Organizations
+  retrieved_at: '2026-10-22'
+  url: https://www.taxcompact.net/sites/default/files/resources/ATAIC%20Factsheet.pdf
+- field: membership_count
+  source: Network of Tax Organizations
+  retrieved_at: '2026-10-22'
+  url: https://www.taxcompact.net/sites/default/files/resources/ATAIC%20Factsheet.pdf
 - field: description
   source: ATAIC official website
   retrieved_at: '2026-06-15'
