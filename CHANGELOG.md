@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for CEN-SAD (25 members) and the United Nations Command (Korea added; Germany is a former medical contributor and has not returned; `membership_count` 18).
 - `last_verified` set to 2026-10-25 for ECCAS (Rwanda added; 11 members), the Network of Tax Organizations (10 member organisations), and IFC-IOR (15 liaison-officer countries).
 - `last_verified` set to 2026-10-25 for COPUOS (110 members in the 2025 UN list), EARAF (the eight EAC partner states), and IMSC (12 nations named by IMSC public affairs). AfCFTA signatories replace Eritrea with Western Sahara (54).
 - `last_verified` set to 2026-10-25 for 14 rosters (and 2026-10-22 for ATAIC). Exact matches: SGATAR (19), the UN African Group (54), the UN Asia-Pacific Group (55), WEOG (29), the Cluster Munitions Convention (112 states parties; Lithuania withdrew 6 March 2025), the IHO (104, including Panama), PASC (27), IUBMB (76), AfricaRice (28), and the V20 (the same 74 members as the CVF). Corrections: Gavi adds Angola, Mozambique and Timor-Leste (56 eligible countries in 2026); COTA adds Curaçao, French Guiana and Martinique and records Sint Maarten as a member (24); Partnership for Peace records Finland and Sweden as former members on NATO accession (`membership_count` 18, with Belarus and Russia still signatories and cooperation suspended); the Group of 15 record is the 17-country forum, not the Logitech keyboard.

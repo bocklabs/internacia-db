@@ -151,7 +151,16 @@ other_names:
   name: Comunidade dos Estados do Sahel-Saara
 - id: zh
   name: 薩赫爾—撒哈拉國家共同體
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Community of Sahel-Saharan States
+  retrieved_at: '2026-10-25'
+  url: https://www.censad.int/
+- field: membership_count
+  source: Community of Sahel-Saharan States
+  retrieved_at: '2026-10-25'
+  url: https://www.censad.int/
 - field: scope_category
   source: Internacia inclusion policy; classification from existing record evidence
   retrieved_at: '2026-10-16'
