@@ -179,7 +179,7 @@ includes:
 - id: CK
   name: Cook Islands
   type: country
-  status: associated
+  status: member
 - id: CR
   name: Costa Rica
   type: country
@@ -272,6 +272,10 @@ includes:
   name: Finland
   type: country
   status: member
+- id: FO
+  name: Faeroe Islands
+  type: country
+  status: associated
 - id: FR
   name: France
   type: country
@@ -519,7 +523,7 @@ includes:
 - id: NI
   name: Nicaragua
   type: country
-  status: member
+  status: former_member
 - id: NE
   name: Niger
   type: country
@@ -840,7 +844,17 @@ other_names:
   name: Продовольственная и сельскохозяйственная организация ООН
 - id: zh
   name: 联合国粮食及农业组织
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Food and Agriculture Organization of the United Nations
+  retrieved_at: '2026-10-25'
+  url: https://www.fao.org/governing-bodies/conference
+- field: membership_count
+  source: Food and Agriculture Organization of the United Nations
+  retrieved_at: '2026-10-25'
+  url: https://www.fao.org/legal/home/Membership-of-FAO/en
+
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
