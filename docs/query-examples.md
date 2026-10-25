@@ -1046,7 +1046,7 @@ ORDER BY i.id, m.id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 1512 mismatches total (advisory); examples include `CD` labeled
+**Expected:** 20 displayed rows out of 1498 mismatches total (advisory); examples include `CD` labeled
 "Congo, The Democratic Republic of the" vs canonical "Congo, Dem. Rep.".
 
 **Gotcha:** Mismatches are **not errors** — always join on `includes[].id`, never on
