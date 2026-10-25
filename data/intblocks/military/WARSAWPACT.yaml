@@ -108,7 +108,16 @@ other_names:
   name: Организация Варшавского договора
 - id: zh
   name: 华沙条约组织
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United Nations Treaty Series
+  retrieved_at: '2026-10-25'
+  url: https://treaties.un.org/pages/showDetails.aspx?objid=08000002801488a3
+- field: membership_count
+  source: United Nations Treaty Series
+  retrieved_at: '2026-10-25'
+  url: https://treaties.un.org/pages/showDetails.aspx?objid=08000002801488a3
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'

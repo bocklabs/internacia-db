@@ -19,7 +19,7 @@ legal_status: government_program
 headquarters:
   city: Washington D.C.
   country: US
-membership_count: 55
+membership_count: 56
 notes: Bilateral U.S. government global health program with partner countries rather than a multilateral
   membership organization.
 wikidata_id: Q1191982
@@ -51,8 +51,12 @@ includes:
   name: Burundi
   type: country
   status: partner
-- id: BJ
-  name: Benin
+- id: BB
+  name: Barbados
+  type: country
+  status: partner
+- id: SR
+  name: Suriname
   type: country
   status: partner
 - id: BR
@@ -259,7 +263,16 @@ includes:
   name: Zimbabwe
   type: country
   status: partner
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United States Department of State
+  retrieved_at: '2026-10-25'
+  url: https://2021-2025.state.gov/pepfar-supported-countries-and-regions/
+- field: membership_count
+  source: United States Department of State
+  retrieved_at: '2026-10-25'
+  url: https://2021-2025.state.gov/pepfar-supported-countries-and-regions/
 - field: legal_status
   source: official sources
   retrieved_at: '2026-06-15'

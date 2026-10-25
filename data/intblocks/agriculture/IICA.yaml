@@ -31,7 +31,7 @@ acronyms:
   value: IICA
 - lang: en
   value: IAICA
-membership_count: 34
+membership_count: 35
 wikidata_id: Q3152323
 legal_status: intergovernmental
 recognition_status: Specialized agency of the Inter-American System
@@ -198,7 +198,96 @@ includes:
   name: Venezuela, Bolivarian Republic of
   type: country
   status: member
+- id: AT
+  name: Austria
+  type: country
+  status: observer
+- id: BE
+  name: Belgium
+  type: country
+  status: observer
+- id: CZ
+  name: Czech Republic
+  type: country
+  status: observer
+- id: EG
+  name: Egypt, Arab Rep.
+  type: country
+  status: observer
+- id: FR
+  name: France
+  type: country
+  status: observer
+- id: DE
+  name: Germany
+  type: country
+  status: observer
+- id: IT
+  name: Italy
+  type: country
+  status: observer
+- id: HU
+  name: Hungary
+  type: country
+  status: observer
+- id: IL
+  name: Israel
+  type: country
+  status: observer
+- id: JP
+  name: Japan
+  type: country
+  status: observer
+- id: CN
+  name: China
+  type: country
+  status: observer
+- id: PL
+  name: Poland
+  type: country
+  status: observer
+- id: PT
+  name: Portugal
+  type: country
+  status: observer
+- id: TR
+  name: Türkiye
+  type: country
+  status: observer
+- id: KR
+  name: Korea, Rep.
+  type: country
+  status: observer
+- id: RO
+  name: Romania
+  type: country
+  status: observer
+- id: RU
+  name: Russian Federation
+  type: country
+  status: observer
+- id: NL
+  name: Netherlands
+  type: country
+  status: observer
+- id: EU
+  name: European Union
+  type: organization
+  status: observer
+- id: ES
+  name: Spain
+  type: country
+  status: associated
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Inter-American Institute for Cooperation on Agriculture
+  retrieved_at: '2026-10-25'
+  url: https://iica.int/en/countries/
+- field: membership_count
+  source: Inter-American Institute for Cooperation on Agriculture
+  retrieved_at: '2026-10-25'
+  url: https://iica.int/en/countries/
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
