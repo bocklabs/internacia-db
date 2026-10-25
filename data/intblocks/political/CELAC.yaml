@@ -6,6 +6,7 @@ blocktype:
 status: formal
 scope_category: igo
 founded: '2011-12-03'
+predecessor: RIOGROUP
 geographic_scope: regional
 regions:
 - Latin America and the Caribbean
@@ -191,6 +192,10 @@ topics:
   name: Regional Cooperation
 wikidata_id: Q1045401
 provenance:
+- field: predecessor
+  source: ASEAN Secretariat
+  retrieved_at: '2026-10-25'
+  url: https://asean.org/wp-content/uploads/2023/07/Overview-of-ASEAN-CELAC-Relations-as-of-July-2023.pdf
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

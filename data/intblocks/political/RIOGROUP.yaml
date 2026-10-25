@@ -1,7 +1,7 @@
 id: RIOGROUP
 blocktype:
 - political
-status: formal
+status: historical
 scope_category: igo
 links:
 - url: https://en.wikipedia.org/wiki/Rio_Group
@@ -13,96 +13,102 @@ includes:
 - id: MX
   name: Mexico
   type: country
-  status: member
+  status: former_member
 - id: BR
   name: Brazil
   type: country
-  status: member
+  status: former_member
 - id: BO
   name: Bolivia, Plurinational State of
   type: country
-  status: member
+  status: former_member
 - id: AR
   name: Argentina
   type: country
-  status: member
+  status: former_member
 - id: BZ
   name: Belize
   type: country
-  status: member
+  status: former_member
 - id: CL
   name: Chile
   type: country
-  status: member
+  status: former_member
 - id: CO
   name: Colombia
   type: country
-  status: member
+  status: former_member
 - id: CR
   name: Costa Rica
   type: country
-  status: member
+  status: former_member
 - id: CU
   name: Cuba
   type: country
-  status: member
+  status: former_member
 - id: DO
   name: Dominican Republic
   type: country
-  status: member
+  status: former_member
 - id: EC
   name: Ecuador
   type: country
-  status: member
+  status: former_member
 - id: SV
   name: El Salvador
   type: country
-  status: member
+  status: former_member
 - id: GT
   name: Guatemala
   type: country
-  status: member
+  status: former_member
 - id: GY
   name: Guyana
   type: country
-  status: member
+  status: former_member
 - id: HT
   name: Haiti
   type: country
-  status: member
+  status: former_member
 - id: HN
   name: Honduras
   type: country
-  status: member
+  status: former_member
 - id: JM
   name: Jamaica
   type: country
-  status: member
+  status: former_member
 - id: NI
   name: Nicaragua
   type: country
-  status: member
+  status: former_member
 - id: PA
   name: Panama
   type: country
-  status: member
+  status: former_member
 - id: PY
   name: Paraguay
   type: country
-  status: member
+  status: former_member
 - id: PE
   name: Peru
   type: country
-  status: member
+  status: former_member
 - id: UY
   name: Uruguay
   type: country
-  status: member
+  status: former_member
 - id: VE
   name: Venezuela
   type: country
-  status: member
+  status: former_member
+- id: SR
+  name: Suriname
+  type: country
+  status: former_member
 founded: '1986'
+dissolved: '2011-12-03'
+successor: CELAC
 headquarters:
   city: Paraguay
   country: PY
@@ -112,7 +118,7 @@ headquarters:
 geographic_scope: regional
 regions:
 - Latin America and the Caribbean
-membership_count: 23
+membership_count: 24
 wikidata_id: Q943105
 description: International forum focused on political for political cooperation.
 tags:
@@ -144,7 +150,17 @@ other_names:
   name: Группа Рио
 - id: zh
   name: 里约集团
+last_verified: '2026-10-25'
+notes: The 29 September 2011 UN statement names 24 Rio Group members, including Suriname and Jamaica speaking for CARICOM. CELAC succeeded the Rio Group on 3 December 2011.
 provenance:
+- field: includes
+  source: United Nations General Assembly
+  retrieved_at: '2026-10-25'
+  url: https://www.un.org/en/ga/fifth/66/Statements/000%20Organization%20of%20Work/C5_66_0m_ST_2011_09_29_Org_of_Work_%20Chile%20(Rio%20Group).pdf
+- field: membership_count
+  source: United Nations General Assembly
+  retrieved_at: '2026-10-25'
+  url: https://www.un.org/en/ga/fifth/66/Statements/000%20Organization%20of%20Work/C5_66_0m_ST_2011_09_29_Org_of_Work_%20Chile%20(Rio%20Group).pdf
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-13'
