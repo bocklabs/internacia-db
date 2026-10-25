@@ -74,7 +74,16 @@ acronyms:
   value: G5
 - lang: en
   value: G5S
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Mauritanian News Agency
+  retrieved_at: '2026-10-25'
+  url: https://ami.mr/en/archives/12844
+- field: membership_count
+  source: Mauritanian News Agency
+  retrieved_at: '2026-10-25'
+  url: https://ami.mr/en/archives/12844
 - field: description
   source: Wikidata
   retrieved_at: '2026-06-15'
