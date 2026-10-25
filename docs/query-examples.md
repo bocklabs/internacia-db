@@ -824,8 +824,8 @@ HAVING observer_count >= 5
 ORDER BY observer_count DESC, c.name;
 ```
 
-**Expected:** 33 rows — `JP` with 9 observer entries and `US` with 8; `FR`, `HU`, `MD` and `MY` with 7;
-`CA`, `CH`, `CN`, `DE`, `EG`, `ID`, `IL`, `IN`, `PL`, `RU`, `TH` and `UA` with 6; `AM`, `AT`, `AU`, `AZ`, `BY`, `CZ`, `GE`, `GR`, `IT`, `KR`, `NO`, `PH`, `PT`, `TM` and `TR` with 5.
+**Expected:** 34 rows — `JP` with 9 observer entries and `US` with 8; `FR`, `HU`, `MD` and `MY` with 7;
+`CA`, `CH`, `CN`, `DE`, `EG`, `ID`, `IL`, `IN`, `PL`, `RU`, `TH` and `UA` with 6; `AM`, `AT`, `AU`, `AZ`, `BY`, `CZ`, `GE`, `GR`, `IT`, `KR`, `NO`, `PH`, `PT`, `TM`, `TR` and `VA` with 5.
 
 ## Geography and membership
 
@@ -1046,7 +1046,7 @@ ORDER BY i.id, m.id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 1542 mismatches total (advisory); examples include `CD` labeled
+**Expected:** 20 displayed rows out of 1512 mismatches total (advisory); examples include `CD` labeled
 "Congo, The Democratic Republic of the" vs canonical "Congo, Dem. Rep.".
 
 **Gotcha:** Mismatches are **not errors** — always join on `includes[].id`, never on

@@ -316,7 +316,16 @@ notes: Fifty-four UN Member States serve three-year terms on ECOSOC, elected ann
   equitable geographic distribution (14 African, 11 Asia-Pacific, 6 Eastern European, 10 Latin American and Caribbean,
   13 Western European and other). Includes lists the 54 members serving during calendar year 2026 (terms 2024–2026,
   2025–2027, and 2026–2028).
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: UN Dag Hammarskjöld Library
+  retrieved_at: '2026-10-25'
+  url: https://research.un.org/en/unmembers/ecosocmembers
+- field: membership_count
+  source: UN Dag Hammarskjöld Library
+  retrieved_at: '2026-10-25'
+  url: https://research.un.org/en/unmembers/ecosocmembers
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-30'

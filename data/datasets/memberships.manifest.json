@@ -1,27 +1,27 @@
 {
   "dataset": "memberships",
   "version": "3.1.0",
-  "build_date": "2026-10-25T09:33:47Z",
-  "git_commit": "64537d8",
-  "row_count": 59344,
+  "build_date": "2026-10-25T09:46:38Z",
+  "git_commit": "53fa1f2",
+  "row_count": 59335,
   "schema_hash": "1bdbd0d9427722d3ed3c23ee0a101ccc0e62c8eba9e65ae0000f441648b0d76c",
   "data_license": "CC-BY-4.0",
   "contract_version": "3.1",
   "files": [
     {
       "path": "memberships.csv.zst",
-      "sha256": "94cc6204c667faccc064d9d5c08f27a86c4f66d7da62b927611e842c9b2726da",
-      "bytes": 155699
+      "sha256": "f90e9d23e1a55bacdd43044ecafc925fc878b508db178f086eb946e73c5daa09",
+      "bytes": 155739
     },
     {
       "path": "memberships.meta.json",
-      "sha256": "389e15b41867990a4d347d91e7e888cc55709a6693a71913d0fb4afbf1d95434",
+      "sha256": "d8e1e2bfc537859a4849e752f21cd4a67b4958ae2ca0d2146fc0a108d069587d",
       "bytes": 287
     },
     {
       "path": "memberships.parquet",
-      "sha256": "d009680ca3dcb7bb9caacaf8206d778b7f39c627b4ea833e98ad34ede93f5426",
-      "bytes": 98352
+      "sha256": "2277d8bafdc956d990bf0d56edbcb4ac907ba20c383f22a2ab0b1182d24046a0",
+      "bytes": 98438
     }
   ]
 }
