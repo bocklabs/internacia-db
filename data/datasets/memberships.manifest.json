@@ -1,8 +1,8 @@
 {
   "dataset": "memberships",
   "version": "3.1.0",
-  "build_date": "2026-10-25T06:05:57Z",
-  "git_commit": "942c5f9",
+  "build_date": "2026-10-25T06:31:47Z",
+  "git_commit": "f9c348e",
   "row_count": 59629,
   "schema_hash": "1bdbd0d9427722d3ed3c23ee0a101ccc0e62c8eba9e65ae0000f441648b0d76c",
   "data_license": "CC-BY-4.0",
@@ -15,7 +15,7 @@
     },
     {
       "path": "memberships.meta.json",
-      "sha256": "920a1d1a75dd3a47e5f18cc349070c724c9a514640be15d2e4a1e8667923dc94",
+      "sha256": "afaa59e97731ff95addfa7d6b0145d3326bdb856e3b2b3c6d0024f682e360296",
       "bytes": 287
     },
     {

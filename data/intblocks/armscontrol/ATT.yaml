@@ -528,7 +528,16 @@ topics:
   name: Arms Control
 - key: law
   name: Law
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Arms Trade Treaty Secretariat
+  retrieved_at: '2026-10-25'
+  url: https://old.thearmstradetreaty.org/hyper-images/file/List%20of%20ATT%20States%20Parties%20(alphabetical%20order)(February%202026)/List%20of%20ATT%20States%20Parties%20(alphabetical%20order)(February%202026).pdf
+- field: membership_count
+  source: Arms Trade Treaty Secretariat
+  retrieved_at: '2026-10-25'
+  url: https://old.thearmstradetreaty.org/hyper-images/file/List%20of%20ATT%20States%20Parties%20(alphabetical%20order)(February%202026)/List%20of%20ATT%20States%20Parties%20(alphabetical%20order)(February%202026).pdf
 - field: includes
   source: United Nations Treaty Collection
   retrieved_at: '2026-06-14'

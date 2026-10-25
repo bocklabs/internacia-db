@@ -362,8 +362,8 @@
       "path": "intblocks.parquet",
       "format": "parquet",
       "mediatype": "application/vnd.apache.parquet",
-      "bytes": 696366,
-      "hash": "sha256:f8d23d7ac87d60fa93261e3de3470dba3bcbd47568d20081542aacc7e7885ef7",
+      "bytes": 696502,
+      "hash": "sha256:905a9f52cadd4b56f4c87ae34c24da44740a86d5fe7ea5525021716c75c4db73",
       "schema": {
         "fields": [
           {
@@ -543,8 +543,8 @@
       "format": "json",
       "mediatype": "application/json",
       "compression": "zstd",
-      "bytes": 776763,
-      "hash": "sha256:160da70fe39827e959793138e58482c9e0c2fd3c9e78794afa84ed8b968721e0"
+      "bytes": 776963,
+      "hash": "sha256:8cfcce80683fa33cd77162e859f8f2bbd0efacacaff904344c1bc5aedeeed838"
     },
     {
       "name": "intblocks-jsonl",
@@ -552,8 +552,8 @@
       "path": "intblocks.jsonl",
       "format": "jsonl",
       "mediatype": "application/x-ndjson",
-      "bytes": 9909844,
-      "hash": "sha256:21857b419e35c6809448cd97de85f06aada674d17796bfedf4b7e72967c27529"
+      "bytes": 9910864,
+      "hash": "sha256:fb0805655d1287a749c808ea821528262058836fbbdd408e52b83437349996ee"
     },
     {
       "name": "blocktypes-parquet",
