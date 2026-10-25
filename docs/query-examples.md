@@ -530,7 +530,7 @@ WHERE b.un_members_in_roster > u.n * 0.5
 ORDER BY pct_un_members DESC, b.name;
 ```
 
-**Expected:** 57 rows — 34 missing the US only (e.g. `CBD`, `UNCLOS`), 9 missing China
+**Expected:** 58 rows — 35 missing the US only (e.g. `CBD`, `UNCLOS`, `BBNJ`), 9 missing China
 only (`EGMONTGROUP`, `IAU_UNIV`), 14 missing both (`NAM`, `ICW`, `APMINEBANCONVENTION`).
 
 Filter to a single exclusion pattern:
@@ -555,7 +555,7 @@ WHERE b.un_members_in_roster > u.n * 0.5
   AND NOT b.has_usa;
 ```
 
-**Expected:** 9, 33, and 14 rows respectively.
+**Expected:** 9, 35, and 14 rows respectively.
 
 **Gotcha:** Use `countries.un_member` as the denominator, not the `UN` intblock roster
 (193 entries). Some high-coverage records are informal groupings (`LMY`, `PERIPHCOUNT`) —
