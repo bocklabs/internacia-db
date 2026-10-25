@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for ISO (177 national standards bodies: 135 member bodies, 38 correspondent members and 4 subscriber members; Congo, Liberia, Samoa, Sao Tome and Principe and Tonga are added, and Guinea and Mozambique are not on the members page), UNCTAD (195 members, adding the Holy See and the State of Palestine), UN Tourism (161 member states, including Saint Kitts and Nevis from 1 January 2026; associate members Aruba, Hong Kong, Macao and Puerto Rico; observers the Holy See and Palestine), the Security Council (the 2026 elected members replace the 2024 set), ECOSOC (the 54 members for 2026 match) and the Human Rights Council (the 47 members for 2026 match).
 - `last_verified` set to 2026-10-25 for the Asia Cooperation Dialogue (35 member countries, including Palestine).
 - `last_verified` set to 2026-10-25 for the OSJD (30 member countries as of 1 September 2026).
 - `last_verified` set to 2026-10-25 for the IOC of UNESCO (153 member states as of 25 March 2026).

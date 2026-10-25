@@ -373,7 +373,7 @@ ADDITIONAL_RECIPES = [
         JOIN countries c ON c.code = m.id AND m.type = 'country'
         WHERE m.status='observer' GROUP BY c.code HAVING COUNT(*) >= 5 ORDER BY c.code
         """,
-        33,
+        34,
         {"CA", "IN", "TH", "UA"},
     ),
     (
@@ -475,7 +475,7 @@ ADDITIONAL_RECIPES = [
         WHERE m.type='country' AND m.name IS NOT NULL AND m.name != c.name
           AND NOT list_contains(c.common_names, m.name)
         """,
-        1542,
+        1512,
         set(),
     ),
     (

@@ -30,64 +30,64 @@ headquarters:
     lng: -73.968
 membership_count: 15
 includes:
+- id: BH
+  name: Bahrain
+  type: country
+  status: member
+- id: CD
+  name: Congo, Dem. Rep.
+  type: country
+  status: member
 - id: CN
   name: China
+  type: country
+  status: member
+- id: CO
+  name: Colombia
+  type: country
+  status: member
+- id: DK
+  name: Denmark
   type: country
   status: member
 - id: FR
   name: France
   type: country
   status: member
-- id: RU
-  name: Russian Federation
-  type: country
-  status: member
 - id: GB
   name: United Kingdom
   type: country
   status: member
+- id: GR
+  name: Greece
+  type: country
+  status: member
+- id: LR
+  name: Liberia
+  type: country
+  status: member
+- id: LV
+  name: Latvia
+  type: country
+  status: member
+- id: PA
+  name: Panama
+  type: country
+  status: member
+- id: PK
+  name: Pakistan
+  type: country
+  status: member
+- id: RU
+  name: Russian Federation
+  type: country
+  status: member
+- id: SO
+  name: Somalia
+  type: country
+  status: member
 - id: US
   name: United States
-  type: country
-  status: member
-- id: DZ
-  name: Algeria
-  type: country
-  status: member
-- id: EC
-  name: Ecuador
-  type: country
-  status: member
-- id: GY
-  name: Guyana
-  type: country
-  status: member
-- id: JP
-  name: Japan
-  type: country
-  status: member
-- id: MT
-  name: Malta
-  type: country
-  status: member
-- id: MZ
-  name: Mozambique
-  type: country
-  status: member
-- id: KR
-  name: Korea, Republic of
-  type: country
-  status: member
-- id: SL
-  name: Sierra Leone
-  type: country
-  status: member
-- id: SI
-  name: Slovenia
-  type: country
-  status: member
-- id: CH
-  name: Switzerland
   type: country
   status: member
 wikidata_id: Q37470
@@ -145,7 +145,17 @@ acronyms:
   value: CSNU
 - lang: pt
   value: UNSC
+notes: The Council has five permanent members and ten elected members. For 2026 the elected members are Bahrain and Colombia and the Democratic Republic of the Congo and Latvia and Liberia, through 2027, and Denmark, Greece, Pakistan, Panama and Somalia, through 2026.
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United Nations Security Council
+  retrieved_at: '2026-10-25'
+  url: https://main.un.org/securitycouncil/en/content/current-members
+- field: membership_count
+  source: United Nations Security Council
+  retrieved_at: '2026-10-25'
+  url: https://main.un.org/securitycouncil/en/content/current-members
 - field: other_names
   source: Wikidata
   retrieved_at: '2026-06-15'

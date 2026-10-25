@@ -115,7 +115,7 @@ includes:
 - id: BI
   name: Burundi
   type: country
-  status: observer
+  status: member
 - id: BJ
   name: Benin
   type: country
@@ -127,7 +127,7 @@ includes:
 - id: BO
   name: Bolivia
   type: country
-  status: observer
+  status: member
 - id: BR
   name: Brazil
   type: country
@@ -135,7 +135,7 @@ includes:
 - id: BS
   name: Bahamas, The
   type: country
-  status: observer
+  status: member
 - id: BT
   name: Bhutan
   type: country
@@ -151,13 +151,17 @@ includes:
 - id: BZ
   name: Belize
   type: country
-  status: observer
+  status: associate_member
 - id: CA
   name: Canada
   type: country
   status: member
 - id: CD
   name: Congo, Dem. Rep.
+  type: country
+  status: member
+- id: CG
+  name: Congo, Rep.
   type: country
   status: member
 - id: CH
@@ -284,10 +288,6 @@ includes:
   name: Gambia, The
   type: country
   status: observer
-- id: GN
-  name: Guinea
-  type: country
-  status: observer
 - id: GR
   name: Greece
   type: country
@@ -295,7 +295,7 @@ includes:
 - id: GT
   name: Guatemala
   type: country
-  status: observer
+  status: member
 - id: GY
   name: Guyana
   type: country
@@ -315,7 +315,7 @@ includes:
 - id: HT
   name: Haiti
   type: country
-  status: observer
+  status: member
 - id: HU
   name: Hungary
   type: country
@@ -375,7 +375,7 @@ includes:
 - id: KH
   name: Cambodia
   type: country
-  status: observer
+  status: member
 - id: KN
   name: St. Kitts and Nevis
   type: country
@@ -412,6 +412,10 @@ includes:
   name: Sri Lanka
   type: country
   status: member
+- id: LR
+  name: Liberia
+  type: country
+  status: observer
 - id: LS
   name: Lesotho
   type: country
@@ -447,13 +451,13 @@ includes:
 - id: ME
   name: Montenegro
   type: country
-  status: observer
+  status: member
 - id: MG
   name: Madagascar
   type: country
   status: observer
 - id: MK
-  name: Macedonia, FYR
+  name: North Macedonia
   type: country
   status: member
 - id: ML
@@ -496,10 +500,6 @@ includes:
   name: Malaysia
   type: country
   status: member
-- id: MZ
-  name: Mozambique
-  type: country
-  status: observer
 - id: NA
   name: Namibia
   type: country
@@ -631,13 +631,17 @@ includes:
 - id: SO
   name: Somalia
   type: country
-  status: observer
+  status: member
 - id: SR
   name: Suriname
   type: country
   status: observer
 - id: SS
   name: South Sudan
+  type: country
+  status: observer
+- id: ST
+  name: Sao Tome and Principe
   type: country
   status: observer
 - id: SV
@@ -649,9 +653,9 @@ includes:
   type: country
   status: member
 - id: SZ
-  name: Swaziland
+  name: Eswatini
   type: country
-  status: observer
+  status: member
 - id: TD
   name: Chad
   type: country
@@ -676,8 +680,12 @@ includes:
   name: Tunisia
   type: country
   status: member
+- id: TO
+  name: Tonga
+  type: country
+  status: associate_member
 - id: TR
-  name: Turkey
+  name: Türkiye
   type: country
   status: member
 - id: TT
@@ -711,7 +719,7 @@ includes:
 - id: VC
   name: St. Vincent and the Grenadines
   type: country
-  status: associate_member
+  status: observer
 - id: VE
   name: Venezuela, RB
   type: country
@@ -723,7 +731,11 @@ includes:
 - id: VU
   name: Vanuatu
   type: country
-  status: member
+  status: observer
+- id: WS
+  name: Samoa
+  type: country
+  status: observer
 - id: YE
   name: Yemen, Rep.
   type: country
@@ -735,14 +747,14 @@ includes:
 - id: ZM
   name: Zambia
   type: country
-  status: observer
+  status: member
 - id: ZW
   name: Zimbabwe
   type: country
   status: member
-membership_count: 174
+membership_count: 177
 legal_status: non-governmental
-notes: ISO national members are standards bodies, not governments directly; each member body represents one country. Membership tiers are mapped as member (member body, voting rights), observer (correspondent member), and associate_member (subscriber member). List verified against ISO member roster as reflected on Wikipedia (2026); 174 countries with assigned membership class.
+notes: ISO national members are standards bodies, not governments directly; each member body represents one country. Membership tiers are mapped as member (member body), observer (correspondent member), and associate_member (subscriber member). The 25 October 2026 members page lists 177 bodies, of which 135 are member bodies, 38 are correspondent members and 4 are subscriber members.
 description: Independent, non-governmental international standard development organization composed of representatives from national standards organizations. ISO develops and publishes international standards covering technology, manufacturing, food safety, transport, agriculture, healthcare, and related fields.
 tags:
 - ISO
@@ -773,7 +785,16 @@ other_names:
 - id: zh
   name: 國際標準化組織
 wikidata_id: Q15028
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: International Organization for Standardization
+  retrieved_at: '2026-10-25'
+  url: https://www.iso.org/about/members
+- field: membership_count
+  source: International Organization for Standardization
+  retrieved_at: '2026-10-25'
+  url: https://www.iso.org/about/members
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-30'

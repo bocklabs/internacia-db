@@ -260,9 +260,18 @@ acronyms:
 notes: Forty-seven UN Member States serve three-year terms on the Council, elected by the General Assembly
   under equitable geographic distribution (13 African, 13 Asia-Pacific, 6 Eastern European, 8 Latin American
   and Caribbean, 7 Western European and other). Members may not seek immediate re-election after two consecutive
-  terms. Membership cycle begins 1 January each year. Includes lists the 47 members serving as of 2026-07-16
+  terms. Membership cycle begins 1 January each year. Includes lists the 47 members serving as of 2026-10-25
   (terms 2024–2026, 2025–2027, and 2026–2028).
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: UN Dag Hammarskjöld Library
+  retrieved_at: '2026-10-25'
+  url: https://research.un.org/en/unmembers/hrcmembers
+- field: membership_count
+  source: UN Dag Hammarskjöld Library
+  retrieved_at: '2026-10-25'
+  url: https://research.un.org/en/unmembers/hrcmembers
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-07-16'
