@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for IICA (34 member states, plus the observers and associated Spain named on the country page), GICNT (77 partner nations and 4 observers), the Warsaw Pact (the eight UN-registered parties, all former), and PEPFAR (Barbados and Suriname replace Benin; the United States stays the funder).
 - `last_verified` set to 2026-10-25 for CEN-SAD (25 members) and the United Nations Command (Korea added; Germany is a former medical contributor and has not returned; `membership_count` 18).
 - `last_verified` set to 2026-10-25 for ECCAS (Rwanda added; 11 members), the Network of Tax Organizations (10 member organisations), and IFC-IOR (15 liaison-officer countries).
 - `last_verified` set to 2026-10-25 for COPUOS (110 members in the 2025 UN list), EARAF (the eight EAC partner states), and IMSC (12 nations named by IMSC public affairs). AfCFTA signatories replace Eritrea with Western Sahara (54).

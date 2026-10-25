@@ -395,7 +395,16 @@ other_names:
   name: Iniciativa global para combatir el terrorismo nuclear
 - id: ru
   name: Глобальная инициатива по борьбе с ядерным терроризмом
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: United States Department of State
+  retrieved_at: '2026-10-25'
+  url: https://www.state.gov/bureau-of-international-security-and-nonproliferation/releases/2025/01/global-initiative-current-partner-nations
+- field: membership_count
+  source: United States Department of State
+  retrieved_at: '2026-10-25'
+  url: https://www.state.gov/bureau-of-international-security-and-nonproliferation/releases/2025/01/global-initiative-current-partner-nations
 - field: includes
   source: U.S. Department of State
   retrieved_at: '2026-06-14'
