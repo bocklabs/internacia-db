@@ -43,10 +43,6 @@ includes:
   name: Bulgaria
   type: country
   status: member
-- id: BY
-  name: Belarus
-  type: country
-  status: member
 - id: CH
   name: Switzerland
   type: country
@@ -139,14 +135,6 @@ includes:
   name: Montenegro
   type: country
   status: member
-- id: MK
-  name: Macedonia, FYR
-  type: country
-  status: member
-- id: MT
-  name: Malta
-  type: country
-  status: member
 - id: NL
   name: Netherlands
   type: country
@@ -165,6 +153,10 @@ includes:
   status: member
 - id: RO
   name: Romania
+  type: country
+  status: member
+- id: RS
+  name: Serbia
   type: country
   status: member
 - id: RU
@@ -191,19 +183,19 @@ includes:
   name: Ukraine
   type: country
   status: member
-membership_count: 60
+membership_count: 52
 membership_count_type: organizations
 geographic_scope: regional
 regions:
 - Europe
-description: Professional society that promotes mathematics in Europe. Comprises approximately
-  60 national mathematical societies across Europe, representing mathematicians from
-  European countries.
+description: Professional society that promotes mathematics in Europe. Comprises 52
+  full corporate members, national mathematical societies representing mathematicians
+  from European countries.
 legal_status: non-governmental
-notes: Full corporate members are national mathematical societies; about 60 societies
-  represent 42 European countries and territories. Several countries have multiple
-  member societies (e.g. Belgium, France, Italy, Norway, Romania, Russia, Spain, and
-  the United Kingdom). Affiliate member of the International Mathematical Union.
+notes: The full corporate-member list names 52 societies in 40 countries. France, Italy,
+  and the United Kingdom have three societies, Spain has four, and Germany, Russia,
+  and Slovenia have two. Kosovo is a member. Belarus, Malta, and North Macedonia are
+  not on the list. Affiliate member of the International Mathematical Union.
 tags:
 - EMS
 - mathematics
@@ -234,7 +226,16 @@ other_names:
 - id: zh
   name: 歐洲數學學會
 wikidata_id: Q1376788
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: European Mathematical Society
+  retrieved_at: '2026-10-25'
+  url: https://euromathsoc.org/corporate-members/full
+- field: membership_count
+  source: European Mathematical Society
+  retrieved_at: '2026-10-25'
+  url: https://euromathsoc.org/corporate-members/full
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'

@@ -530,8 +530,8 @@ WHERE b.un_members_in_roster > u.n * 0.5
 ORDER BY pct_un_members DESC, b.name;
 ```
 
-**Expected:** 58 rows — 35 missing the US only (e.g. `CBD`, `UNCLOS`, `BBNJ`), 9 missing China
-only (`EGMONTGROUP`, `IAU_UNIV`), 14 missing both (`NAM`, `ICW`, `APMINEBANCONVENTION`).
+**Expected:** 59 rows — 35 missing the US only (e.g. `CBD`, `UNCLOS`, `BBNJ`), 9 missing China
+only (`EGMONTGROUP`, `IAU_UNIV`), 15 missing both (`NAM`, `ICW`, `APMINEBANCONVENTION`).
 
 Filter to a single exclusion pattern:
 
@@ -1046,7 +1046,7 @@ ORDER BY i.id, m.id
 LIMIT 20;
 ```
 
-**Expected:** 20 displayed rows out of 1498 mismatches total (advisory); examples include `CD` labeled
+**Expected:** 20 displayed rows out of 1486 mismatches total (advisory); examples include `CD` labeled
 "Congo, The Democratic Republic of the" vs canonical "Congo, Dem. Rep.".
 
 **Gotcha:** Mismatches are **not errors** — always join on `includes[].id`, never on

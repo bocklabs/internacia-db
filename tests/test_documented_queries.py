@@ -274,7 +274,7 @@ ORDER BY b.id
     [
         (
             "(NOT b.has_china OR NOT b.has_usa)",
-            58,
+            59,
             {"CBD", "NAM", "EGMONTGROUP", "APMINEBANCONVENTION"},
         ),
         (
@@ -289,7 +289,7 @@ ORDER BY b.id
         ),
         (
             "NOT b.has_china AND NOT b.has_usa",
-            14,
+            15,
             {"NAM", "ICW", "APMINEBANCONVENTION"},
         ),
     ],
@@ -475,7 +475,7 @@ ADDITIONAL_RECIPES = [
         WHERE m.type='country' AND m.name IS NOT NULL AND m.name != c.name
           AND NOT list_contains(c.common_names, m.name)
         """,
-        1498,
+        1486,
         set(),
     ),
     (

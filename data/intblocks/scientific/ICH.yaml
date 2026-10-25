@@ -152,12 +152,20 @@ includes:
   name: Nigeria
   type: country
   status: member
+- id: NZ
+  name: New Zealand
+  type: country
+  status: observer
 - id: PE
   name: Peru
   type: country
   status: observer
 - id: PH
   name: Philippines
+  type: country
+  status: observer
+- id: PK
+  name: Pakistan
   type: country
   status: observer
 - id: PY
@@ -225,7 +233,7 @@ description: International organization that harmonizes technical requirements f
 legal_status: non-governmental
 recognition_status: ICH Association registered as a non-profit legal entity under
   Swiss law in 2015; 25 Members (regulatory authorities and industry associations)
-  and 41 Observers as of November 2025
+  and 41 Observers as of June 2026
 secretariat:
   location: Geneva, Switzerland
   organization: ICH Secretariat
@@ -237,8 +245,9 @@ notes: Comprises 25 Members and 41 Observers as of November 2025. Members includ
   is held by associations rather than sovereign states. Observer roster also includes
   IFPMA, WHO, regional harmonisation initiatives (APEC, ASEAN, EAC, GHC, PANDRH, SADC),
   and international organisations (CIOMS, EDQM, IPEC, PIC/S, USP, Gates Foundation,
-  APIC). NAFDAC (Nigeria) and SAHPRA (South Africa) joined as Members at the 51st
-  ICH Assembly in Singapore, November 2025.
+  APIC). The June 2026 overview names Medsafe (New Zealand) and DRAP (Pakistan)
+  among the legislative observers. NAFDAC (Nigeria) and SAHPRA (South Africa) joined
+  as Members at the 51st ICH Assembly in Singapore, November 2025.
 tags:
 - ICH
 - pharmaceuticals
@@ -271,7 +280,16 @@ other_names:
 - id: zh
   name: 國際醫藥法規協和會
 wikidata_id: Q1666462
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: ICH
+  retrieved_at: '2026-10-25'
+  url: https://admin.ich.org/sites/default/files/2026-06/OverviewOfICH_2026_0603.pdf
+- field: membership_count
+  source: ICH
+  retrieved_at: '2026-10-25'
+  url: https://admin.ich.org/sites/default/files/2026-06/OverviewOfICH_2026_0603.pdf
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
