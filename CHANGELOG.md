@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `last_verified` set to 2026-10-25 for the Global Health Security Agenda (71 countries on the membership page; international and non-government organizations on that page are not country rows).
 - `last_verified` set to 2026-10-25 for the WMO (188 state parties in the US depositary list, including Grenada from 18 October 2026, plus French Polynesia, New Caledonia, Hong Kong, Macao and Curaçao; Curaçao and Sint Maarten are one member, and British Caribbean Territories is the uncoded sixth territory member) and the G5 Sahel (the five former members named in the 6 December 2023 Mauritania-Chad communique).
 - `last_verified` set to 2026-10-25 for the BBNJ Agreement (104 parties in the UN Treaty Collection, including the European Union; signatories that have not ratified, accepted, approved or acceded are not parties, and the United States remains a signatory only).
 - `last_verified` set to 2026-10-25 for the Global Partnership on Artificial Intelligence (46 member countries and the European Union, including Malta and Saudi Arabia; the fifteen founding members are unchanged).
