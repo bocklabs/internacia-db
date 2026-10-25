@@ -688,7 +688,16 @@ other_names:
 - id: zh
   name: 政府間海洋學委員會
 wikidata_id: Q1666085
+last_verified: '2026-10-25'
 provenance:
+- field: includes
+  source: Intergovernmental Oceanographic Commission of UNESCO
+  retrieved_at: '2026-10-25'
+  url: https://www.oceanexpert.org/index.php/downloadFile/63309
+- field: membership_count
+  source: Intergovernmental Oceanographic Commission of UNESCO
+  retrieved_at: '2026-10-25'
+  url: https://www.oceanexpert.org/index.php/downloadFile/63309
 - field: wikidata_id
   source: Wikidata
   retrieved_at: '2026-06-13'
